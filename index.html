@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dexton-Livvy — Client Design Reviews</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark:   #111318;
+    --mid:    #23262F;
+    --border: #E4E4E7;
+    --gray:   #6B7280;
+    --light:  #F9F9F8;
+    --white:  #FFFFFF;
+    --accent: #2563EB;
+    --accent-lt: #EEF2FF;
+    --green:  #16A34A;
+    --green-lt: #F0FDF4;
+  }
+  body { background: var(--light); font-family: 'Inter', sans-serif; color: var(--dark); min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* HEADER */
+  header {
+    background: var(--dark); padding: 2.5rem;
+    display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;
+  }
+  .brand { color: white; }
+  .brand-name { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 0.2rem; }
+  .brand-sub { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+  .header-note { font-size: 0.78rem; color: rgba(255,255,255,0.3); text-align: right; }
+
+  /* MAIN */
+  main { flex: 1; padding: 2.5rem; max-width: 1100px; }
+
+  .page-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .page-sub { font-size: 0.9rem; color: var(--gray); margin-bottom: 2rem; }
+
+  /* CLIENT GRID */
+  .client-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+
+  .client-card {
+    background: var(--white); border: 1.5px solid var(--border);
+    padding: 1.8rem; display: flex; flex-direction: column; gap: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit;
+  }
+  .client-card:hover { border-color: #93C5FD; box-shadow: 0 4px 20px rgba(37,99,235,0.08); }
+
+  .client-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .client-initial {
+    width: 44px; height: 44px; background: var(--dark); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; font-weight: 700; letter-spacing: 0.02em; flex-shrink: 0;
+  }
+  .client-status {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+  }
+  .status-pending { background: #FEF3C7; color: #92400E; }
+  .status-selected { background: var(--green-lt); color: var(--green); }
+  .status-active { background: var(--accent-lt); color: var(--accent); }
+
+  .client-name { font-size: 1rem; font-weight: 700; line-height: 1.3; }
+  .client-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.65; }
+  .client-meta { display: flex; gap: 1.5rem; padding-top: 0.8rem; border-top: 1px solid var(--border); }
+  .client-meta-item { font-size: 0.78rem; color: var(--gray); }
+  .client-meta-item strong { display: block; color: var(--dark); font-weight: 600; font-size: 0.82rem; }
+  .client-cta {
+    background: var(--dark); color: white; padding: 0.65rem;
+    font-size: 0.82rem; font-weight: 600; text-align: center;
+    display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+    transition: background 0.2s;
+  }
+  .client-card:hover .client-cta { background: var(--accent); }
+
+  /* ADD CLIENT CARD */
+  .add-card {
+    border: 1.5px dashed var(--border); padding: 1.8rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.8rem; text-align: center; min-height: 200px; cursor: default;
+  }
+  .add-icon { font-size: 2rem; opacity: 0.25; }
+  .add-label { font-size: 0.88rem; color: var(--gray); }
+
+  /* FOOTER */
+  footer { padding: 1.5rem 2.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { font-size: 0.78rem; color: var(--gray); }
+  .footer-right { font-size: 0.75rem; color: #D1D5DB; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-name">Dexton-Livvy LLC</div>
+    <div class="brand-sub">Client Design Review Portal</div>
+  </div>
+  <div class="header-note">Internal use · Add a client folder for each new engagement</div>
+</header>
+
+<main>
+  <div class="page-title">Active Client Reviews</div>
+  <p class="page-sub">Each card links to a client's design review page. Share the client's direct URL — they do not see this index.</p>
+
+  <div class="client-grid">
+
+    <!-- CO-LAB HAUS -->
+    <a class="client-card" href="colab-haus/index.html">
+      <div class="client-card-top">
+        <div class="client-initial">CLH</div>
+        <span class="client-status status-pending">Awaiting Selection</span>
+      </div>
+      <div>
+        <div class="client-name">Co-Lab Haus</div>
+        <p class="client-desc">Strategic advisory &amp; project management firm led by April N. Richardson, Esq. Three design concepts prepared for review.</p>
+      </div>
+      <div class="client-meta">
+        <div class="client-meta-item"><strong>Options</strong>3 Concepts</div>
+        <div class="client-meta-item"><strong>Prepared</strong>April 2026</div>
+        <div class="client-meta-item"><strong>Stage</strong>Design Selection</div>
+      </div>
+      <div class="client-cta">Open Review Page →</div>
+    </a>
+
+    <!-- PLACEHOLDER: ADD NEW CLIENT -->
+    <div class="add-card">
+      <div class="add-icon">＋</div>
+      <div class="add-label">Add a new client folder here<br>and link it from this index</div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span class="footer-left">Dexton-Livvy LLC · dsaxon@dexton-livvy.com · dexton-livvy.com</span>
+  <span class="footer-right">Internal index — do not share this URL with clients</span>
+</footer>
+
+</body>
+</html>

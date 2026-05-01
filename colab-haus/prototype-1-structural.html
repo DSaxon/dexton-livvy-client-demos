@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Co-Lab Haus — Prototype 1: Structural</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black:  #111111;
+    --dark:   #1A1A1A;
+    --card:   #222222;
+    --gold:   #C8A96E;
+    --gold-lt:#E0C898;
+    --white:  #F5F4F0;
+    --gray:   #999999;
+    --border: #333333;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'Inter', sans-serif; font-weight: 300; line-height: 1.7; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 3rem;
+    background: rgba(17,17,17,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.15rem; letter-spacing: 0.08em; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 0.55rem 1.4rem; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+  .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 3rem 5rem; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(17,17,17,0.97) 0%, rgba(17,17,17,0.85) 55%, rgba(17,17,17,0.6) 100%);
+    z-index: 1;
+  }
+  .hero-bg-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center; opacity: 0.45;
+  }
+  .hero-grid-line, .hero-eyebrow, .hero h1, .hero-sub, .hero-actions, .hero-scroll {
+    z-index: 2; position: relative;
+  }
+  .hero-grid-line {
+    position: absolute; top: 0; left: 3rem; width: 1px; height: 100%; background: var(--border); opacity: 0.6;
+  }
+  .hero-grid-line:nth-child(2) { left: calc(3rem + 33.33%); }
+  .hero-grid-line:nth-child(3) { left: calc(3rem + 66.66%); }
+  .hero-eyebrow {
+    position: relative; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.8rem;
+  }
+  .hero-eyebrow::before { content: '—  '; }
+  .hero h1 {
+    position: relative; font-family: 'Playfair Display', serif; font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 600; line-height: 1.1; max-width: 900px; margin-bottom: 2rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    position: relative; font-size: 1.05rem; color: var(--gray); max-width: 580px;
+    margin-bottom: 3rem; line-height: 1.8;
+  }
+  .hero-actions { position: relative; display: flex; gap: 1.2rem; align-items: center; }
+  .btn-primary {
+    background: var(--gold); color: var(--black); padding: 1rem 2.4rem;
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; border: none; transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-lt); }
+  .btn-ghost {
+    background: transparent; color: var(--white); padding: 1rem 2.4rem;
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-family: 'Inter', sans-serif; cursor: pointer; border: 1px solid var(--border); transition: border-color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--white); }
+  .hero-scroll {
+    position: absolute; right: 3rem; bottom: 5rem; writing-mode: vertical-lr;
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray);
+  }
+
+  /* SECTION BASE */
+  section { padding: 7rem 3rem; }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::after { content: ''; flex: 0 0 40px; height: 1px; background: var(--gold); opacity: 0.5; }
+  h2.section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 600; line-height: 1.2; margin-bottom: 1.5rem;
+  }
+  .section-body { color: var(--gray); font-size: 1rem; line-height: 1.85; max-width: 600px; }
+
+  /* INTRO BAND */
+  .intro-band {
+    background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 3rem; display: grid; grid-template-columns: repeat(3,1fr); gap: 0;
+  }
+  .intro-stat { padding: 1.5rem 2.5rem; border-right: 1px solid var(--border); }
+  .intro-stat:last-child { border-right: none; }
+  .intro-stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
+  .intro-stat-lbl { font-size: 0.82rem; color: var(--gray); letter-spacing: 0.05em; }
+
+  /* SERVICES */
+  .services { background: var(--black); }
+  .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); margin-top: 4rem; }
+  .service-card { background: var(--dark); padding: 2.5rem; transition: background 0.2s; }
+  .service-card:hover { background: #2a2a2a; }
+  .service-num { font-size: 0.72rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 1.2rem; }
+  .service-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 1rem; line-height: 1.3; }
+  .service-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.75; }
+  .services-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; }
+  .services-tagline { font-size: 1rem; color: var(--gray); line-height: 1.8; max-width: 420px; }
+
+  /* PROJECTS */
+  .projects { background: var(--dark); border-top: 1px solid var(--border); }
+  .projects-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 4rem; }
+  .project-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+  .project-card { background: var(--card); overflow: hidden; }
+  .project-visual {
+    height: 280px; display: flex; align-items: flex-end; padding: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .project-visual.mill {
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 100%),
+      url('https://picsum.photos/seed/millnorth/800/600') center/cover no-repeat;
+  }
+  .project-visual.savor {
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 100%),
+      url('https://picsum.photos/seed/savorfood/800/600') center/cover no-repeat;
+  }
+  .project-visual::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+  }
+  .project-tag {
+    position: relative; z-index: 1; font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold); background: rgba(0,0,0,0.5);
+    padding: 0.35rem 0.8rem; border: 1px solid rgba(200,169,110,0.4);
+  }
+  .project-body { padding: 2rem 2.5rem 2.5rem; }
+  .project-location { font-size: 0.75rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.6rem; }
+  .project-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 1rem; line-height: 1.2; }
+  .project-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.75; margin-bottom: 1.5rem; }
+  .project-meta { display: flex; gap: 2rem; }
+  .project-meta-item { font-size: 0.78rem; color: var(--gray); }
+  .project-meta-item strong { display: block; color: var(--white); font-weight: 500; margin-bottom: 0.2rem; font-size: 0.85rem; }
+
+  /* LEADERSHIP */
+  .leadership { background: var(--black); }
+  .leadership-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; align-items: start; margin-top: 4rem; }
+  .leader-visual {
+    background: linear-gradient(to top, rgba(17,17,17,0.8) 0%, rgba(17,17,17,0.1) 60%),
+      url('https://picsum.photos/seed/exec-leader/500/700') center/cover no-repeat;
+    aspect-ratio: 3/4; display: flex; align-items: flex-end; padding: 1.5rem;
+    border: 1px solid var(--border);
+  }
+  .leader-visual-label { font-size: 0.72rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; }
+  .leader-name { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.4rem; }
+  .leader-title { font-size: 0.85rem; color: var(--gold); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .leader-bio { font-size: 0.93rem; color: var(--gray); line-height: 1.85; margin-bottom: 2rem; }
+  .leader-divider { width: 40px; height: 1px; background: var(--gold); margin-bottom: 2rem; }
+  .leader-highlights { display: flex; flex-direction: column; gap: 0.8rem; }
+  .leader-highlight { font-size: 0.85rem; color: var(--gray); padding-left: 1.2rem; border-left: 1px solid var(--gold); line-height: 1.6; }
+
+  /* CTA */
+  .cta-section {
+    background: var(--dark); border-top: 1px solid var(--border); text-align: center; padding: 8rem 3rem;
+  }
+  .cta-section .section-label { justify-content: center; }
+  .cta-section .section-label::after { display: none; }
+  .cta-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,4vw,3.5rem); margin-bottom: 1.5rem; }
+  .cta-section p { color: var(--gray); max-width: 520px; margin: 0 auto 2.5rem; font-size: 1rem; line-height: 1.8; }
+  .cta-actions { display: flex; justify-content: center; gap: 1.2rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--black); border-top: 1px solid var(--border);
+    padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--white); }
+  .footer-logo span { color: var(--gold); }
+  .footer-note { font-size: 0.78rem; color: var(--gray); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 0.78rem; color: var(--gray); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Co<span>-</span>Lab Haus</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+  </ul>
+  <button class="nav-cta">Engage Us</button>
+</nav>
+
+<section class="hero">
+  <img class="hero-bg-img" src="https://picsum.photos/seed/colabhaus-hero/1600/900" alt="">
+  <div class="hero-grid-line"></div>
+  <div class="hero-grid-line"></div>
+  <div class="hero-grid-line"></div>
+  <div class="hero-eyebrow">Strategic Advisory &amp; Project Management</div>
+  <h1>Structure. Alignment.<br><em>Execution.</em></h1>
+  <p class="hero-sub">Co-Lab Haus structures and moves projects that require coordination across organizations, sectors, and stakeholders.</p>
+  <div class="hero-actions">
+    <button class="btn-primary">Engage Co-Lab Haus</button>
+    <button class="btn-ghost">View Our Work</button>
+  </div>
+  <span class="hero-scroll">Scroll to explore</span>
+</section>
+
+<div class="intro-band">
+  <div class="intro-stat">
+    <div class="intro-stat-num">20+</div>
+    <div class="intro-stat-lbl">Years in law, business &amp; real estate</div>
+  </div>
+  <div class="intro-stat">
+    <div class="intro-stat-num">3</div>
+    <div class="intro-stat-lbl">Sectors: government · corporate · nonprofit</div>
+  </div>
+  <div class="intro-stat">
+    <div class="intro-stat-num">$3.9M+</div>
+    <div class="intro-stat-lbl">Projects structured and delivered</div>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Structured work.<br>Coordinated execution.</h2>
+    </div>
+    <p class="services-tagline">We provide strategic advisory, project management, and cross-sector consulting for government agencies, corporations, and nonprofits — wherever alignment is required and no single party operates in isolation.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-title">Project Structuring &amp; Strategy</div>
+      <p class="service-desc">Define the project, the structure, and the path to execution. We shape the concept, identify the right parties, and establish a framework that can move forward.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-title">Partnership Development &amp; Alignment</div>
+      <p class="service-desc">Align the right stakeholders across organizations and sectors. We facilitate coordination, define roles, and ensure clarity across all parties involved.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-title">Project Management &amp; Execution</div>
+      <p class="service-desc">Keep the work moving from concept through execution. We coordinate timelines, track progress, and address breakdowns across stakeholders.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-title">Legal &amp; Structural Support</div>
+      <p class="service-desc">Embed legal thinking into how the work is structured. We advise on agreements, define relationships, identify risk, and can serve as outside legal counsel.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-title">Business Development Support</div>
+      <p class="service-desc">Position organizations for the right opportunities. We align capabilities with project needs and support engagement in institutional and government contracting environments.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-title">Change Management &amp; Transition</div>
+      <p class="service-desc">Support implementation during periods of change. We ensure alignment across teams and partners so that transitions hold and move forward.</p>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <div class="projects-intro">
+    <div>
+      <div class="section-label">Our Work</div>
+      <h2 class="section-title">Projects that<br>moved forward.</h2>
+    </div>
+    <p class="section-body">Co-Lab Haus brings demonstrated experience in complex, multi-stakeholder projects — from economic development and real estate to food entrepreneurship and community-based initiatives.</p>
+  </div>
+  <div class="project-cards">
+    <div class="project-card">
+      <div class="project-visual mill">
+        <span class="project-tag">Economic Development</span>
+      </div>
+      <div class="project-body">
+        <div class="project-location">Baltimore, MD · West North Avenue</div>
+        <div class="project-name">The Mill on North</div>
+        <p class="project-desc">West Baltimore's first food hall — a $3.9M mixed-use development in the Coppin Heights neighborhood converting a former lumber yard into a 7,800 sq. ft. food hall with six minority-owned vendors and 65 mixed-income apartments above. Recipient of the 2025 Excellence in Economic Development Award.</p>
+        <div class="project-meta">
+          <div class="project-meta-item"><strong>Role</strong>Project Consultant</div>
+          <div class="project-meta-item"><strong>Opened</strong>April 2025</div>
+          <div class="project-meta-item"><strong>Investment</strong>$3.9M</div>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-visual savor">
+        <span class="project-tag">Food Entrepreneurship</span>
+      </div>
+      <div class="project-body">
+        <div class="project-location">Brentwood, MD · Prince George's County</div>
+        <div class="project-name">Savor Food Hall</div>
+        <p class="project-desc">Founded as Prince George's County's first food hall and one of the first African American-run food halls in the United States. An 8,500 sq. ft. incubator space housing nine vendors in a USDA-designated food desert — including April Richardson's DC Sweet Potato Cake Café.</p>
+        <div class="project-meta">
+          <div class="project-meta-item"><strong>Role</strong>Founder &amp; Operator</div>
+          <div class="project-meta-item"><strong>Opened</strong>October 2019</div>
+          <div class="project-meta-item"><strong>Size</strong>8,500 sq. ft.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="leadership" id="leadership">
+  <div class="section-label">Leadership</div>
+  <h2 class="section-title">The person<br>behind the work.</h2>
+  <div class="leadership-inner">
+    <div class="leader-visual">
+      <span class="leader-visual-label">April N. Richardson, Esq.</span>
+    </div>
+    <div>
+      <div class="leader-name">April N. Richardson, Esq.</div>
+      <div class="leader-title">Founder · Attorney · Operator</div>
+      <p class="leader-bio">April operates at the intersection of business, law, and execution. With over two decades as a Business and Real Estate Attorney and more than 15 years as a Food Entrepreneur, she brings practical experience that extends beyond advisory and into the work itself.</p>
+      <p class="leader-bio">Her background began in law enforcement as a White Collar Crimes Investigator and Prosecutor at the local and federal level — work that required precision, discretion, and the ability to move through high-stakes environments.</p>
+      <div class="leader-divider"></div>
+      <div class="leader-highlights">
+        <div class="leader-highlight">Founder, The Private Practice Law Group — advising hundreds of businesses from early-stage to established organizations</div>
+        <div class="leader-highlight">Owner, Baked In Baltimore &amp; DC Sweet Potato Cake — distributed through Starbucks, Nordstrom, Wegmans, Safeway, and QVC</div>
+        <div class="leader-highlight">Developer of the first Black-owned food hall in the United States; leading additional development projects nationally</div>
+        <div class="leader-highlight">White Collar Crimes Investigator and Prosecutor; trained alongside the Secret Service and FBI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="section-label">Get Started</div>
+  <h2>Ready to move<br>the work forward?</h2>
+  <p>Co-Lab Haus meets projects where they are. Whether you're at early concept or need execution support, we engage where it matters.</p>
+  <div class="cta-actions">
+    <button class="btn-primary">Engage Co-Lab Haus</button>
+    <button class="btn-ghost">Download Capability Statement</button>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Co<span>-</span>Lab Haus</span>
+  <span class="footer-note">Strategic Advisory · Project Management · Cross-Sector Consulting</span>
+  <div class="footer-links">
+    <a href="#">NAICS: 541611, 541618, 541690, 541110</a>
+  </div>
+</footer>
+
+</body>
+</html>
