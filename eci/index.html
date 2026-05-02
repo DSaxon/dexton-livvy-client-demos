@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECI — Website Design Review</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark:     #111318; --mid: #23262F; --border: #E4E4E7;
+    --gray:     #6B7280; --light: #F9F9F8; --white: #FFFFFF;
+    --accent:   #2563EB; --accent-lt: #EEF2FF;
+    --red:      #CC2929; --red-lt: #FEF2F2;
+    --blue-eci: #3A84D0; --blue-eci-lt: #EFF6FF;
+  }
+  body { background: var(--light); font-family: 'Inter', sans-serif; color: var(--dark); line-height: 1.6; }
+
+  .topbar { background: var(--dark); color: white; padding: 0 2.5rem; height: 52px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .topbar-brand { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; opacity: 0.9; }
+  .topbar-brand span { opacity: 0.45; font-weight: 400; margin: 0 0.5rem; }
+  .topbar-note { font-size: 0.75rem; opacity: 0.45; }
+
+  .header { background: var(--white); border-bottom: 1px solid var(--border); padding: 3rem 2.5rem 2.5rem; }
+  .header-inner { max-width: 900px; }
+  .header-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--blue-eci-lt); color: var(--blue-eci); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 0.9rem; margin-bottom: 1.2rem; }
+  .header-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--blue-eci); border-radius: 50%; }
+  .header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.2; }
+  .header p { color: var(--gray); font-size: 0.97rem; max-width: 600px; line-height: 1.75; margin-bottom: 1.5rem; }
+  .header-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .header-meta-item { font-size: 0.82rem; color: var(--gray); }
+  .header-meta-item strong { color: var(--dark); font-weight: 600; display: block; font-size: 0.88rem; }
+
+  .instructions { background: var(--accent-lt); border: 1px solid #BFDBFE; padding: 1rem 2.5rem; display: flex; align-items: center; gap: 1rem; }
+  .instructions-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .instructions p { font-size: 0.88rem; color: #1E40AF; line-height: 1.6; }
+  .instructions p strong { font-weight: 600; }
+
+  /* MAIN LAYOUT */
+  .content { padding: 2.5rem; max-width: 1400px; display: grid; grid-template-columns: 1fr 340px; gap: 2rem; align-items: start; }
+
+  /* MAIN PREVIEW CARD */
+  .main-card { background: var(--white); border: 1.5px solid var(--border); }
+  .main-card.selected { border-color: var(--accent); box-shadow: 0 4px 24px rgba(37,99,235,0.12); }
+
+  .preview-window { position: relative; overflow: hidden; background: #0c1018; height: 480px; cursor: pointer; border-bottom: 1.5px solid var(--border); }
+  .preview-window:hover .preview-overlay { opacity: 1; }
+  .preview-scaler { position: absolute; top: 0; left: 0; width: 1440px; height: 900px; transform-origin: 0 0; pointer-events: none; }
+  .preview-scaler iframe { width: 1440px; height: 900px; border: none; display: block; }
+  .preview-overlay { position: absolute; inset: 0; background: rgba(37,99,235,0.1); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; }
+  .preview-overlay-btn { background: var(--accent); color: white; padding: 0.75rem 1.6rem; font-size: 0.88rem; font-weight: 600; border: none; cursor: pointer; font-family: 'Inter', sans-serif; }
+
+  .main-card-body { padding: 2rem; }
+  .main-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; gap: 1rem; }
+  .main-card-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .main-card-sub { font-size: 0.88rem; color: var(--gray); line-height: 1.7; }
+  .main-card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 1.2rem 0; }
+  .tag { font-size: 0.72rem; font-weight: 500; padding: 0.25rem 0.65rem; background: var(--light); border: 1px solid var(--border); color: var(--gray); }
+  .tag.eci { background: var(--blue-eci-lt); border-color: #BFDBFE; color: var(--blue-eci); }
+  .main-card-actions { display: flex; gap: 0.8rem; }
+  .btn-primary { flex: 1; background: var(--dark); color: white; padding: 0.8rem; font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600; border: none; cursor: pointer; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--mid); }
+  .btn-primary svg { width: 14px; height: 14px; fill: white; }
+  .btn-approve { padding: 0.8rem 1.4rem; background: white; color: var(--dark); font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600; border: 1.5px solid var(--border); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .btn-approve:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-approve.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .sidebar-card { background: var(--white); border: 1.5px solid var(--border); padding: 1.5rem; }
+  .sidebar-card-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); }
+
+  /* BLOG LINKS */
+  .blog-list { display: flex; flex-direction: column; gap: 0; }
+  .blog-item { display: flex; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: background 0.15s; align-items: flex-start; }
+  .blog-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .blog-item:hover .blog-item-title { color: var(--accent); }
+  .blog-item-img { width: 52px; height: 40px; object-fit: cover; flex-shrink: 0; background: var(--light); border: 1px solid var(--border); }
+  .blog-item-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue-eci); margin-bottom: 0.2rem; }
+  .blog-item-title { font-size: 0.83rem; font-weight: 600; line-height: 1.4; color: var(--dark); transition: color 0.15s; }
+
+  /* SPEC LIST */
+  .spec-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .spec-item { display: flex; justify-content: space-between; font-size: 0.82rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
+  .spec-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .spec-key { color: var(--gray); }
+  .spec-val { font-weight: 600; color: var(--dark); text-align: right; }
+
+  /* APPROVAL PANEL */
+  .approval-panel { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: var(--dark); color: white; padding: 1rem 2.5rem; display: flex; align-items: center; justify-content: space-between; transform: translateY(100%); transition: transform 0.3s ease; border-top: 3px solid var(--accent); }
+  .approval-panel.visible { transform: translateY(0); }
+  .approval-text { font-size: 0.92rem; }
+  .approval-text strong { color: #93C5FD; }
+  .approval-note { font-size: 0.78rem; color: rgba(255,255,255,0.45); max-width: 400px; line-height: 1.5; margin-top: 0.3rem; }
+  .btn-clear { background: none; border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); padding: 0.5rem 1rem; font-family: 'Inter', sans-serif; font-size: 0.8rem; cursor: pointer; }
+  .btn-clear:hover { border-color: white; color: white; }
+
+  .footer { padding: 2rem 2.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+  .footer-left { font-size: 0.8rem; color: var(--gray); }
+  .footer-left strong { color: var(--dark); }
+  .footer-right { font-size: 0.78rem; color: #D1D5DB; }
+
+  @media (max-width: 900px) {
+    .content { grid-template-columns: 1fr; }
+    .preview-window { height: 280px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-brand">Dexton-Livvy LLC <span>·</span> Client Design Review</span>
+  <span class="topbar-note">For review purposes only — not a final product</span>
+</div>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">Website Design Review</div>
+    <h1>eConsultants, Inc. — Proposed Website Design</h1>
+    <p>Below is the proposed website design for ECI, built around your GRC and cybersecurity consulting practice. Preview the full site and the supporting blog section, then use <strong>Approve This Design</strong> to confirm you'd like to move forward.</p>
+    <div class="header-meta">
+      <div class="header-meta-item"><strong>Client</strong>eConsultants, Inc. (ECI)</div>
+      <div class="header-meta-item"><strong>Prepared by</strong>Dexton-Livvy LLC</div>
+      <div class="header-meta-item"><strong>Design</strong>1 Concept</div>
+      <div class="header-meta-item"><strong>Status</strong>Awaiting Approval</div>
+    </div>
+  </div>
+</div>
+
+<div class="instructions">
+  <span class="instructions-icon">👆</span>
+  <p><strong>How to review:</strong> Click the preview below to open the full website in a new tab — scroll through it like a real site. Use the sidebar to preview the blog pages. When ready, click <strong>"Approve This Design"</strong> and screenshot the confirmation bar to share your approval.</p>
+</div>
+
+<div class="content">
+
+  <!-- MAIN PREVIEW -->
+  <div class="main-card" id="mainCard">
+    <div class="preview-window" onclick="window.open('prototype-2-parallax.html','_blank')">
+      <div class="preview-scaler" id="previewScaler">
+        <iframe src="prototype-2-parallax.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="preview-overlay">
+        <button class="preview-overlay-btn">Open Full Preview ↗</button>
+      </div>
+    </div>
+    <div class="main-card-body">
+      <div class="main-card-top">
+        <div>
+          <div class="main-card-title">Dark Executive — GRC &amp; Cybersecurity</div>
+          <div class="main-card-sub">A professional dark-themed site built around ECI's GRC, FedRAMP, FISMA, CMMC, and ISO 27001 practice. Features an animated hero, services grid, certifications showcase, and integrated blog.</div>
+        </div>
+      </div>
+      <div class="main-card-tags">
+        <span class="tag eci">Dark Theme</span>
+        <span class="tag eci">Animated Hero</span>
+        <span class="tag eci">GRC Focused</span>
+        <span class="tag">Blog Included</span>
+        <span class="tag">Certifications</span>
+        <span class="tag">Mobile Ready</span>
+      </div>
+      <div class="main-card-actions">
+        <a class="btn-primary" href="prototype-2-parallax.html" target="_blank">
+          <svg viewBox="0 0 16 16"><path d="M6 2H2v12h12v-4h-2v2H4V4h2V2zm4 0v2h2l-6 6 1.5 1.5L14 5.5V8h2V2h-6z"/></svg>
+          View Full Website Preview
+        </a>
+        <button class="btn-approve" id="approveBtn" onclick="approveDesign()">Approve This Design</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Blog Pages (3 included)</div>
+      <div class="blog-list">
+        <a class="blog-item" href="blog-cmmc-2.html" target="_blank">
+          <img class="blog-item-img" src="images/blog-cmmc.png" alt="CMMC">
+          <div>
+            <div class="blog-item-label">CMMC</div>
+            <div class="blog-item-title">CMMC 2.0 Compliance Guide for Defense Contractors</div>
+          </div>
+        </a>
+        <a class="blog-item" href="blog-fedramp-rev5.html" target="_blank">
+          <img class="blog-item-img" src="images/blog-fedramp.jpg" alt="FedRAMP">
+          <div>
+            <div class="blog-item-label">FedRAMP</div>
+            <div class="blog-item-title">FedRAMP Rev 5 — What's New and What It Means</div>
+          </div>
+        </a>
+        <a class="blog-item" href="blog-nist-csf-2.html" target="_blank">
+          <img class="blog-item-img" src="images/blog-nist.png" alt="NIST">
+          <div>
+            <div class="blog-item-label">NIST CSF</div>
+            <div class="blog-item-title">NIST CSF 2.0 — A Practical Overview</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Design Specs</div>
+      <div class="spec-list">
+        <div class="spec-item"><span class="spec-key">Style</span><span class="spec-val">Dark / Executive</span></div>
+        <div class="spec-item"><span class="spec-key">Primary color</span><span class="spec-val">Deep Navy #090C12</span></div>
+        <div class="spec-item"><span class="spec-key">Accent color</span><span class="spec-val">ECI Blue #3A84D0</span></div>
+        <div class="spec-item"><span class="spec-key">Alert color</span><span class="spec-val">Red #CC2929</span></div>
+        <div class="spec-item"><span class="spec-key">Fonts</span><span class="spec-val">Hanken Grotesk + Inter</span></div>
+        <div class="spec-item"><span class="spec-key">Pages included</span><span class="spec-val">Home + Blog (4 pages)</span></div>
+        <div class="spec-item"><span class="spec-key">Mobile ready</span><span class="spec-val">Yes</span></div>
+      </div>
+    </div>
+
+    <div class="sidebar-card" style="background:#F9FAFB;">
+      <div class="sidebar-card-title">Next Steps</div>
+      <div style="font-size:0.85rem;color:#6B7280;line-height:1.75;display:flex;flex-direction:column;gap:0.6rem;">
+        <div>① Approve this design direction</div>
+        <div>② Provide final copy &amp; logo files</div>
+        <div>③ We build remaining pages</div>
+        <div>④ Review &amp; launch</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-left">Prepared for <strong>eConsultants, Inc.</strong> by <strong>Dexton-Livvy LLC</strong> · Business Management Solutions</div>
+  <div class="footer-right">dsaxon@dexton-livvy.com · dexton-livvy.com</div>
+</div>
+
+<!-- APPROVAL PANEL -->
+<div class="approval-panel" id="approvalPanel">
+  <div>
+    <div class="approval-text">✓ Design approved: <strong>ECI — Dark Executive, GRC &amp; Cybersecurity</strong></div>
+    <div class="approval-note">Screenshot this bar or reply to your proposal email with your approval to move forward.</div>
+  </div>
+  <button class="btn-clear" onclick="clearApproval()">Clear</button>
+</div>
+
+<script>
+  // Scale iframe to fit preview window
+  function scalePreview() {
+    const window_w = document.querySelector('.preview-window').offsetWidth;
+    const scale = window_w / 1440;
+    const scaler = document.getElementById('previewScaler');
+    scaler.style.transform = `scale(${scale})`;
+    document.querySelector('.preview-window').style.height = (900 * scale) + 'px';
+  }
+  scalePreview();
+  window.addEventListener('resize', scalePreview);
+
+  function approveDesign() {
+    const btn = document.getElementById('approveBtn');
+    const card = document.getElementById('mainCard');
+    if (btn.classList.contains('active')) { clearApproval(); return; }
+    btn.classList.add('active'); btn.textContent = '✓ Approved';
+    card.classList.add('selected');
+    document.getElementById('approvalPanel').classList.add('visible');
+  }
+  function clearApproval() {
+    document.getElementById('approveBtn').classList.remove('active');
+    document.getElementById('approveBtn').textContent = 'Approve This Design';
+    document.getElementById('mainCard').classList.remove('selected');
+    document.getElementById('approvalPanel').classList.remove('visible');
+  }
+</script>
+
+</body>
+</html>
