@@ -11,8 +11,8 @@
     --black:  #111111;
     --dark:   #1A1A1A;
     --card:   #222222;
-    --gold:   #C8A96E;
-    --gold-lt:#E0C898;
+    --gold:   #9B6FD4;
+    --gold-lt:#C4A8E8;
     --white:  #F5F4F0;
     --gray:   #999999;
     --border: #333333;
@@ -48,7 +48,7 @@
   }
   .hero-bg-img {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; object-position: center; opacity: 0.45;
+    object-fit: cover; object-position: center 30%; opacity: 0.45;
   }
   .hero-grid-line, .hero-eyebrow, .hero h1, .hero-sub, .hero-actions, .hero-scroll {
     z-index: 2; position: relative;
@@ -62,7 +62,7 @@
     position: relative; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 1.8rem;
   }
-  .hero-eyebrow::before { content: '—  '; }
+  .hero-eyebrow::before { content: ''; }
   .hero h1 {
     position: relative; font-family: 'Playfair Display', serif; font-size: clamp(3rem, 6vw, 5.5rem);
     font-weight: 600; line-height: 1.1; max-width: 900px; margin-bottom: 2rem;
@@ -115,7 +115,7 @@
 
   /* SERVICES */
   .services { background: var(--black); }
-  .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); margin-top: 4rem; }
+  .services-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--border); margin-top: 4rem; }
   .service-card { background: var(--dark); padding: 2.5rem; transition: background 0.2s; }
   .service-card:hover { background: #2a2a2a; }
   .service-num { font-size: 0.72rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 1.2rem; }
@@ -135,11 +135,11 @@
   }
   .project-visual.mill {
     background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 100%),
-      url('https://picsum.photos/seed/millnorth/800/600') center/cover no-repeat;
+      url('mill-on-north.jpg') center/cover no-repeat;
   }
   .project-visual.savor {
     background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 100%),
-      url('https://picsum.photos/seed/savorfood/800/600') center/cover no-repeat;
+      url('savor-food-hall.jpg') center/cover no-repeat;
   }
   .project-visual::after {
     content: ''; position: absolute; inset: 0;
@@ -163,7 +163,7 @@
   .leadership-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; align-items: start; margin-top: 4rem; }
   .leader-visual {
     background: linear-gradient(to top, rgba(17,17,17,0.8) 0%, rgba(17,17,17,0.1) 60%),
-      url('https://picsum.photos/seed/exec-leader/500/700') center/cover no-repeat;
+      url('april-richardson.jpg') top center/cover no-repeat;
     aspect-ratio: 3/4; display: flex; align-items: flex-end; padding: 1.5rem;
     border: 1px solid var(--border);
   }
@@ -175,6 +175,27 @@
   .leader-highlights { display: flex; flex-direction: column; gap: 0.8rem; }
   .leader-highlight { font-size: 0.85rem; color: var(--gray); padding-left: 1.2rem; border-left: 1px solid var(--gold); line-height: 1.6; }
 
+  /* TEAM GRID */
+  .team-divider { width: 100%; height: 1px; background: var(--border); margin: 5rem 0 3.5rem; }
+  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
+  .team-card { background: var(--dark); padding: 0; overflow: hidden; }
+  .team-photo {
+    width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top;
+    display: block; filter: grayscale(20%);
+  }
+  .team-photo-placeholder {
+    width: 100%; aspect-ratio: 3/4;
+    background: var(--card);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .team-photo-initials {
+    font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--border); letter-spacing: 0.05em;
+  }
+  .team-info { padding: 1.5rem 1.8rem 2rem; }
+  .team-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.3rem; }
+  .team-role { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .team-bio { font-size: 0.82rem; color: var(--gray); line-height: 1.75; }
+
   /* CTA */
   .cta-section {
     background: var(--dark); border-top: 1px solid var(--border); text-align: center; padding: 8rem 3rem;
@@ -184,6 +205,32 @@
   .cta-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,4vw,3.5rem); margin-bottom: 1.5rem; }
   .cta-section p { color: var(--gray); max-width: 520px; margin: 0 auto 2.5rem; font-size: 1rem; line-height: 1.8; }
   .cta-actions { display: flex; justify-content: center; gap: 1.2rem; }
+
+  /* CONTACT */
+  .contact-section { background: var(--black); border-top: 1px solid var(--border); }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-top: 4rem; }
+  .contact-intro p { font-size: 0.95rem; color: var(--gray); line-height: 1.85; margin-bottom: 1.5rem; }
+  .contact-detail { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 2.5rem; }
+  .contact-detail-item { font-size: 0.85rem; color: var(--gray); }
+  .contact-detail-item a { color: var(--gold); text-decoration: none; }
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-group label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--dark); border: 1px solid var(--border); color: var(--white);
+    padding: 0.85rem 1rem; font-family: 'Inter', sans-serif; font-size: 0.88rem;
+    font-weight: 300; outline: none; transition: border-color 0.2s; resize: none;
+    appearance: none;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: #555; }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--gold); }
+  .form-group textarea { height: 130px; }
 
   /* FOOTER */
   footer {
@@ -206,19 +253,19 @@
     <li><a href="#projects">Projects</a></li>
     <li><a href="#leadership">Leadership</a></li>
   </ul>
-  <button class="nav-cta">Engage Us</button>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Engage Us</button>
 </nav>
 
 <section class="hero">
-  <img class="hero-bg-img" src="https://picsum.photos/seed/colabhaus-hero/1600/900" alt="">
+  <img class="hero-bg-img" src="mill-exterior.jpg" alt="">
   <div class="hero-grid-line"></div>
   <div class="hero-grid-line"></div>
   <div class="hero-grid-line"></div>
   <div class="hero-eyebrow">Strategic Advisory &amp; Project Management</div>
-  <h1>Structure. Alignment.<br><em>Execution.</em></h1>
+  <h1>Collaboration. Strategy.<br><em>Execution.</em></h1>
   <p class="hero-sub">Co-Lab Haus structures and moves projects that require coordination across organizations, sectors, and stakeholders.</p>
   <div class="hero-actions">
-    <button class="btn-primary">Engage Co-Lab Haus</button>
+    <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Engage Co-Lab Haus</button>
     <button class="btn-ghost">View Our Work</button>
   </div>
   <span class="hero-scroll">Scroll to explore</span>
@@ -245,38 +292,58 @@
       <div class="section-label">What We Do</div>
       <h2 class="section-title">Structured work.<br>Coordinated execution.</h2>
     </div>
-    <p class="services-tagline">We provide strategic advisory, project management, and cross-sector consulting for government agencies, corporations, and nonprofits — wherever alignment is required and no single party operates in isolation.</p>
+    <p class="services-tagline">We provide strategic advisory, project management, and cross-sector consulting for government agencies, corporations, and nonprofits. We engage wherever alignment is required and no single party operates in isolation.</p>
   </div>
   <div class="services-grid">
     <div class="service-card">
       <div class="service-num">01</div>
-      <div class="service-title">Project Structuring &amp; Strategy</div>
-      <p class="service-desc">Define the project, the structure, and the path to execution. We shape the concept, identify the right parties, and establish a framework that can move forward.</p>
+      <div class="service-title">Opportunity Analysis, Ideation &amp; Research</div>
+      <p class="service-desc">We assess the opportunity and develop informed direction before a project is defined. This includes research, evaluating constraints and feasibility, identifying gaps, and exploring alternative approaches. We test assumptions and develop concepts that can be translated into viable projects so resources are committed with clarity.</p>
     </div>
     <div class="service-card">
       <div class="service-num">02</div>
-      <div class="service-title">Partnership Development &amp; Alignment</div>
-      <p class="service-desc">Align the right stakeholders across organizations and sectors. We facilitate coordination, define roles, and ensure clarity across all parties involved.</p>
+      <div class="service-title">Project Structuring &amp; Strategy</div>
+      <p class="service-desc">We define the project in a way that allows it to move. This includes selecting the appropriate model, identifying required stakeholders, and outlining a clear path to execution. The goal is a defined approach that can be implemented across multiple parties.</p>
     </div>
     <div class="service-card">
       <div class="service-num">03</div>
-      <div class="service-title">Project Management &amp; Execution</div>
-      <p class="service-desc">Keep the work moving from concept through execution. We coordinate timelines, track progress, and address breakdowns across stakeholders.</p>
+      <div class="service-title">Partnership Development &amp; Alignment</div>
+      <p class="service-desc">We bring the right parties together and establish alignment across them. This includes defining roles, setting expectations, and establishing decision-making protocols. The focus is reducing ambiguity so coordination remains consistent as the project progresses.</p>
     </div>
     <div class="service-card">
       <div class="service-num">04</div>
-      <div class="service-title">Legal &amp; Structural Support</div>
-      <p class="service-desc">Embed legal thinking into how the work is structured. We advise on agreements, define relationships, identify risk, and can serve as outside legal counsel.</p>
+      <div class="service-title">Project Management &amp; Execution</div>
+      <p class="service-desc">We manage the project from concept through delivery. This includes coordinating timelines, tracking obligations across stakeholders, and addressing breakdowns as they arise. The work is focused on maintaining progress in environments where responsibility is shared.</p>
     </div>
     <div class="service-card">
       <div class="service-num">05</div>
-      <div class="service-title">Business Development Support</div>
-      <p class="service-desc">Position organizations for the right opportunities. We align capabilities with project needs and support engagement in institutional and government contracting environments.</p>
+      <div class="service-title">Legal &amp; Structural Support</div>
+      <p class="service-desc">We incorporate legal strategy into how the project is organized and executed. This includes advising on agreements, defining relationships, and identifying risk early. We support drafting, negotiation, and enforcement as needed to ensure clarity and accountability among all parties.</p>
     </div>
     <div class="service-card">
       <div class="service-num">06</div>
+      <div class="service-title">Business Development Support</div>
+      <p class="service-desc">We position organizations to pursue and secure the right opportunities. This includes aligning capabilities with project requirements and supporting engagement in institutional and government contracting environments where compliance and readiness are required.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">07</div>
       <div class="service-title">Change Management &amp; Transition</div>
-      <p class="service-desc">Support implementation during periods of change. We ensure alignment across teams and partners so that transitions hold and move forward.</p>
+      <p class="service-desc">We support implementation during periods of transition. This includes maintaining alignment across teams and partners, stabilizing operations, and ensuring that new processes are adopted and followed.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">08</div>
+      <div class="service-title">Owner's Representative</div>
+      <p class="service-desc">We act on behalf of ownership to protect the vision, capital, and execution of the project. This includes overseeing third parties, holding vendors and partners accountable to scope, budget, and timeline, and ensuring that decisions align with project objectives.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">09</div>
+      <div class="service-title">Financial Oversight &amp; Capital Coordination</div>
+      <p class="service-desc">We oversee the financial aspects of the project and coordinate with financial professionals to ensure alignment between reporting, performance, and decision-making. This includes reviewing financial outputs, identifying inconsistencies or exposure, and ensuring capital is used in accordance with project objectives.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">10</div>
+      <div class="service-title">Operational Systems &amp; SOP Development</div>
+      <p class="service-desc">We develop the operational framework required to run the project effectively. This includes defining workflows, establishing standard operating procedures, and creating systems that govern day-to-day execution. The focus is consistency, accountability, and the ability to operate without disruption.</p>
     </div>
   </div>
 </section>
@@ -287,7 +354,7 @@
       <div class="section-label">Our Work</div>
       <h2 class="section-title">Projects that<br>moved forward.</h2>
     </div>
-    <p class="section-body">Co-Lab Haus brings demonstrated experience in complex, multi-stakeholder projects — from economic development and real estate to food entrepreneurship and community-based initiatives.</p>
+    <p class="section-body">Co-Lab Haus brings demonstrated experience in complex, multi-stakeholder projects spanning economic development and real estate, food entrepreneurship, and community-based initiatives.</p>
   </div>
   <div class="project-cards">
     <div class="project-card">
@@ -297,11 +364,11 @@
       <div class="project-body">
         <div class="project-location">Baltimore, MD · West North Avenue</div>
         <div class="project-name">The Mill on North</div>
-        <p class="project-desc">West Baltimore's first food hall — a $3.9M mixed-use development in the Coppin Heights neighborhood converting a former lumber yard into a 7,800 sq. ft. food hall with six minority-owned vendors and 65 mixed-income apartments above. Recipient of the 2025 Excellence in Economic Development Award.</p>
+        <p class="project-desc">West Baltimore's first food hall. A mixed-use development in the Coppin Heights neighborhood converting a former lumber yard into a 7,800 sq. ft. food hall with six minority-owned vendors and 65 mixed-income apartments above. Recipient of the 2025 Excellence in Economic Development Award.</p>
         <div class="project-meta">
-          <div class="project-meta-item"><strong>Role</strong>Project Consultant</div>
+          <div class="project-meta-item"><strong>Role</strong>Owner's Rep, Co-Developer</div>
           <div class="project-meta-item"><strong>Opened</strong>April 2025</div>
-          <div class="project-meta-item"><strong>Investment</strong>$3.9M</div>
+          <div class="project-meta-item"><strong>Budget</strong>$5 Million</div>
         </div>
       </div>
     </div>
@@ -312,11 +379,12 @@
       <div class="project-body">
         <div class="project-location">Brentwood, MD · Prince George's County</div>
         <div class="project-name">Savor Food Hall</div>
-        <p class="project-desc">Founded as Prince George's County's first food hall and one of the first African American-run food halls in the United States. An 8,500 sq. ft. incubator space housing nine vendors in a USDA-designated food desert — including April Richardson's DC Sweet Potato Cake Café.</p>
+        <p class="project-desc">Founded as Prince George's County's first food hall and one of the first African American-run food halls in the United States. An 8,500 sq. ft. incubator space housing nine vendors in a USDA-designated food desert, including April Richardson's DC Sweet Potato Cake Café.</p>
         <div class="project-meta">
-          <div class="project-meta-item"><strong>Role</strong>Founder &amp; Operator</div>
+          <div class="project-meta-item"><strong>Role</strong>Owner, Creator, &amp; Co-Developer</div>
           <div class="project-meta-item"><strong>Opened</strong>October 2019</div>
           <div class="project-meta-item"><strong>Size</strong>8,500 sq. ft.</div>
+          <div class="project-meta-item"><strong>Construction Cost</strong>$3 Million</div>
         </div>
       </div>
     </div>
@@ -325,7 +393,7 @@
 
 <section class="leadership" id="leadership">
   <div class="section-label">Leadership</div>
-  <h2 class="section-title">The person<br>behind the work.</h2>
+  <h2 class="section-title">The team<br>behind the work.</h2>
   <div class="leadership-inner">
     <div class="leader-visual">
       <span class="leader-visual-label">April N. Richardson, Esq.</span>
@@ -334,15 +402,65 @@
       <div class="leader-name">April N. Richardson, Esq.</div>
       <div class="leader-title">Founder · Attorney · Operator</div>
       <p class="leader-bio">April operates at the intersection of business, law, and execution. With over two decades as a Business and Real Estate Attorney and more than 15 years as a Food Entrepreneur, she brings practical experience that extends beyond advisory and into the work itself.</p>
-      <p class="leader-bio">Her background began in law enforcement as a White Collar Crimes Investigator and Prosecutor at the local and federal level — work that required precision, discretion, and the ability to move through high-stakes environments.</p>
+      <p class="leader-bio">Her background began in law enforcement as a White Collar Crimes Investigator and Prosecutor at the local and federal level, where precision, discretion, and the ability to move through high-stakes environments were required.</p>
       <div class="leader-divider"></div>
       <div class="leader-highlights">
-        <div class="leader-highlight">Founder, The Private Practice Law Group — advising hundreds of businesses from early-stage to established organizations</div>
-        <div class="leader-highlight">Owner, Baked In Baltimore &amp; DC Sweet Potato Cake — distributed through Starbucks, Nordstrom, Wegmans, Safeway, and QVC</div>
+        <div class="leader-highlight">Founder of The Private Practice Law Group, advising hundreds of businesses from early-stage to established organizations</div>
+        <div class="leader-highlight">Owner of Baked In Baltimore and DC Sweet Potato Cake, distributed through Starbucks, Nordstrom, Wegmans, Safeway, and QVC</div>
         <div class="leader-highlight">Developer of the first Black-owned food hall in the United States; leading additional development projects nationally</div>
         <div class="leader-highlight">White Collar Crimes Investigator and Prosecutor; trained alongside the Secret Service and FBI</div>
       </div>
     </div>
+  </div>
+
+  <div class="team-divider"></div>
+
+  <div class="team-grid">
+
+    <div class="team-card">
+      <div class="team-photo-placeholder">
+        <span class="team-photo-initials">DS</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">D. Saxon</div>
+        <div class="team-role">Title Placeholder</div>
+        <p class="team-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo-placeholder">
+        <span class="team-photo-initials">KR</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">K. Ransom</div>
+        <div class="team-role">Title Placeholder</div>
+        <p class="team-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo-placeholder">
+        <span class="team-photo-initials">MC</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">M. Candies</div>
+        <div class="team-role">Title Placeholder</div>
+        <p class="team-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo-placeholder">
+        <span class="team-photo-initials">MT</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">M. Thomas</div>
+        <div class="team-role">Title Placeholder</div>
+        <p class="team-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -351,8 +469,55 @@
   <h2>Ready to move<br>the work forward?</h2>
   <p>Co-Lab Haus meets projects where they are. Whether you're at early concept or need execution support, we engage where it matters.</p>
   <div class="cta-actions">
-    <button class="btn-primary">Engage Co-Lab Haus</button>
+    <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Engage Co-Lab Haus</button>
     <button class="btn-ghost">Download Capability Statement</button>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="section-label">Contact</div>
+  <h2 class="section-title">Let's start the<br>conversation.</h2>
+  <div class="contact-inner">
+    <div class="contact-intro">
+      <p>Whether you have a project taking shape, an opportunity you're evaluating, or simply want to understand how Co-Lab Haus can engage, reach out and we'll respond directly.</p>
+      <p>All inquiries are reviewed by April Richardson personally.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-item">Email: <a href="mailto:info@colabhaus.com">info@colabhaus.com</a></div>
+        <div class="contact-detail-item">Based in the Washington, DC Metro Area</div>
+        <div class="contact-detail-item">Serving clients nationally</div>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-name">Full Name</label>
+          <input type="text" id="cf-name" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email Address</label>
+          <input type="email" id="cf-email" placeholder="your@email.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cf-org">Organization</label>
+        <input type="text" id="cf-org" placeholder="Company or organization (optional)">
+      </div>
+      <div class="form-group">
+        <label for="cf-type">Type of Inquiry</label>
+        <select id="cf-type">
+          <option value="" disabled selected>Select one</option>
+          <option>Project Consultation</option>
+          <option>Partnership or Collaboration</option>
+          <option>Legal Advisory</option>
+          <option>General Inquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cf-message">Brief Project Description</label>
+        <textarea id="cf-message" placeholder="Tell us where you are and what you're trying to move forward."></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="align-self: flex-start; cursor: pointer;">Send Message</button>
+    </form>
   </div>
 </section>
 
