@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Flourish Collective — Website Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --crimson:#7D1A1A; --gold:#C9A443; --gold-lt:#E2C06E;
+  --cream:#FAF6F0; --text:#1F0E06; --text-md:#5A3A28;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Lato',sans-serif;
+}
+body{font-family:var(--sans);background:var(--crimson);color:#fff;min-height:100vh;display:flex;flex-direction:column;}
+header{padding:56px 80px 40px;text-align:center;position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;top:-150px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,164,67,.1) 0%,transparent 65%);pointer-events:none;}
+.logo-wrap{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:24px;}
+.logo-wrap span{font-family:var(--serif);font-size:1.4rem;color:var(--gold);font-weight:400;letter-spacing:.02em;}
+.header-label{font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(201,164,67,.5);margin-bottom:16px;}
+header h1{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;color:#fff;line-height:1.2;margin-bottom:12px;}
+header h1 em{color:var(--gold);font-style:italic;}
+header p{font-size:.96rem;color:rgba(255,255,255,.55);max-width:500px;margin:0 auto;line-height:1.7;}
+.rule{width:80px;height:1px;background:rgba(201,164,67,.25);margin:32px auto 0;}
+
+main{flex:1;padding:48px 80px 80px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1400px;margin:0 auto;width:100%;}
+
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(201,164,67,.15);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.card:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(0,0,0,.3);border-color:rgba(201,164,67,.35);}
+.card-preview{height:220px;overflow:hidden;position:relative;}
+.card-preview img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .4s;}
+.card:hover .card-preview img{transform:scale(1.03);}
+.card-preview-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 60%);}
+.concept-num{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,164,67,.7);margin-bottom:4px;}
+
+/* Concept color accents */
+.card-1 .card-preview{background:#7D1A1A;}
+.card-2 .card-preview{background:#3D6438;}
+.card-3 .card-preview{background:#0D0605;}
+.accent-1{background:#7D1A1A;}
+.accent-2{background:#3D6438;}
+.accent-3{background:#0D0605;}
+
+.card-body{flex:1;padding:28px 28px 24px;}
+.card-body h2{font-family:var(--serif);font-size:1.4rem;font-weight:400;color:#fff;margin-bottom:8px;line-height:1.2;}
+.concept-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:14px;}
+.card-body p{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:20px;}
+.palette{display:flex;gap:6px;margin-bottom:20px;}
+.swatch{width:24px;height:24px;border-radius:50%;}
+.card-footer{padding:0 28px 28px;}
+.view-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:.75rem 1.2rem;background:var(--gold);color:var(--crimson);text-decoration:none;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;transition:background .2s;}
+.view-btn:hover{background:var(--gold-lt);}
+.view-btn svg{flex-shrink:0;}
+
+.section-divider{margin:0 80px;height:1px;background:rgba(201,164,67,.1);}
+
+footer{text-align:center;padding:32px 80px;font-size:.78rem;color:rgba(255,255,255,.2);font-family:var(--serif);font-style:italic;}
+
+@media(max-width:960px){
+  header{padding:40px 24px 32px;}
+  main{grid-template-columns:1fr;padding:32px 24px 64px;gap:20px;}
+  .section-divider,.rule{margin-left:24px;margin-right:24px;}
+  footer{padding:24px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <svg width="52" height="52" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="20" fill="#7D1A1A" stroke="#C9A443" stroke-width="2.5"/><line x1="22" y1="33" x2="22" y2="17" stroke="#C9A443" stroke-width="1.6" stroke-linecap="round"/><polyline points="19,21 22,17 25,21" fill="none" stroke="#C9A443" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 25 C19 23 16 20 14 18 C17 20 20 23 22 24" stroke="#C9A443" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M22 25 C25 23 28 20 30 18 C27 20 24 23 22 24" stroke="#C9A443" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M22 29 C18 27 15 24 13 22 C16 24 19 27 22 28" stroke="#C9A443" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M22 29 C26 27 29 24 31 22 C28 24 25 27 22 28" stroke="#C9A443" stroke-width="1.4" fill="none" stroke-linecap="round"/><line x1="22" y1="10" x2="22" y2="8" stroke="#C9A443" stroke-width="1.3" stroke-linecap="round"/><line x1="17" y1="11.5" x2="15.5" y2="10" stroke="#C9A443" stroke-width="1.3" stroke-linecap="round"/><line x1="27" y1="11.5" x2="28.5" y2="10" stroke="#C9A443" stroke-width="1.3" stroke-linecap="round"/></svg>
+    <span>The Flourish Collective</span>
+  </div>
+  <div class="header-label">Prepared by Dexton-Livvy LLC</div>
+  <h1>Website <em>Concept Designs</em></h1>
+  <p>Three distinct visual directions for your review. Each uses the same content and structure — only the design language changes.</p>
+  <div class="rule"></div>
+</header>
+
+<main>
+
+  <!-- CONCEPT 1 -->
+  <div class="card card-1">
+    <div class="card-preview accent-1">
+      <img src="building.jpeg" alt="Concept 1 Preview">
+      <div class="card-preview-overlay">
+        <div class="concept-num">Concept 01</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h2>Heritage &amp; Warmth</h2>
+      <div class="concept-tag">Elegant · Established · Community-Rooted</div>
+      <p>Deep crimson and gold throughout. Serif typography creates an authoritative, established feel. Warm and dignified — built around the brand's existing colors. Best for: signaling permanence and institutional trust.</p>
+      <div class="palette">
+        <div class="swatch" style="background:#7D1A1A;border:1px solid rgba(255,255,255,.15);" title="Deep Crimson"></div>
+        <div class="swatch" style="background:#C9A443;" title="Gold"></div>
+        <div class="swatch" style="background:#FAF6F0;border:1px solid rgba(255,255,255,.15);" title="Warm Cream"></div>
+        <div class="swatch" style="background:#7A9B76;" title="Sage"></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="concept-1.html" class="view-btn">View Concept 1 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#7D1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+
+  <!-- CONCEPT 2 -->
+  <div class="card card-2">
+    <div class="card-preview accent-2">
+      <img src="building.jpeg" alt="Concept 2 Preview">
+      <div class="card-preview-overlay">
+        <div class="concept-num">Concept 02</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h2>Sage &amp; Bloom</h2>
+      <div class="concept-tag">Fresh · Welcoming · Family-Forward</div>
+      <p>Light sage green and white with rounded cards and a clean, approachable feel. Emphasizes growth and nature. Best for: attracting families, creating an inviting first impression, and conveying warmth and accessibility.</p>
+      <div class="palette">
+        <div class="swatch" style="background:#3D6438;" title="Deep Sage"></div>
+        <div class="swatch" style="background:#C9A443;" title="Gold"></div>
+        <div class="swatch" style="background:#EBF3E8;border:1px solid rgba(255,255,255,.15);" title="Light Sage"></div>
+        <div class="swatch" style="background:#FDFAF5;border:1px solid rgba(255,255,255,.15);" title="Cream"></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="concept-2.html" class="view-btn">View Concept 2 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#7D1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+
+  <!-- CONCEPT 3 -->
+  <div class="card card-3">
+    <div class="card-preview accent-3">
+      <img src="building.jpeg" alt="Concept 3 Preview">
+      <div class="card-preview-overlay">
+        <div class="concept-num">Concept 03</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h2>The Forge</h2>
+      <div class="concept-tag">Bold · Urban · Visionary</div>
+      <p>Deep near-black background with gold as the primary accent. Editorial typography creates a dramatic, forward-thinking feel. Best for: signaling ambition, urban revitalization energy, and a premium community experience.</p>
+      <div class="palette">
+        <div class="swatch" style="background:#0D0605;border:1px solid rgba(255,255,255,.2);" title="Near Black"></div>
+        <div class="swatch" style="background:#C9A443;" title="Gold"></div>
+        <div class="swatch" style="background:#8B1A1A;" title="Crimson"></div>
+        <div class="swatch" style="background:#F5ECD7;border:1px solid rgba(255,255,255,.15);" title="Warm White"></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="concept-3.html" class="view-btn">View Concept 3 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#7D1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+
+</main>
+
+<footer>All three concepts use the same content structure — programs, membership tiers, The Space, and the growth roadmap. Prepared by Dexton-Livvy LLC &nbsp;·&nbsp; dexton-livvy.com</footer>
+
+</body>
+</html>

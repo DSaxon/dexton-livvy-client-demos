@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Flourish Collective — Concept 1: Heritage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --crimson:#7D1A1A; --crimson-lt:#9B2E2E;
+  --gold:#C9A443; --gold-lt:#E2C06E;
+  --cream:#FAF6F0; --cream-md:#F0E8DC;
+  --sage:#7A9B76; --sage-lt:#D6E8D3;
+  --text:#1F0E06; --text-md:#5A3A28; --text-lt:#8B6B55;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Lato',sans-serif;
+}
+body{font-family:var(--sans);color:var(--text);background:var(--cream);line-height:1.6;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--crimson);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 56px;height:72px;box-shadow:0 2px 24px rgba(0,0,0,.3);}
+.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.nav-wordmark{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--gold);line-height:1.2;}
+.nav-wordmark small{display:block;font-size:.65rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:rgba(201,164,67,.55);font-family:var(--sans);}
+.nav-links{list-style:none;display:flex;align-items:center;gap:32px;}
+.nav-links a{text-decoration:none;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);transition:color .2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links .cta{background:var(--gold);color:var(--crimson)!important;padding:.4rem 1.1rem;border-radius:3px;transition:background .2s!important;}
+.nav-links .cta:hover{background:var(--gold-lt);}
+
+/* HERO */
+.hero{min-height:100vh;padding-top:72px;display:grid;grid-template-columns:1fr 1fr;background:var(--crimson);}
+.hero-content{padding:80px 60px 80px 80px;display:flex;flex-direction:column;justify-content:center;}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;display:flex;align-items:center;gap:14px;}
+.eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);}
+.hero h1{font-family:var(--serif);font-size:clamp(2.6rem,4vw,4rem);line-height:1.1;color:#fff;margin-bottom:18px;font-weight:400;}
+.hero h1 em{color:var(--gold);font-style:italic;}
+.hero-tag{font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--gold);margin-bottom:24px;letter-spacing:.03em;}
+.hero-desc{font-size:.98rem;color:rgba(255,255,255,.72);line-height:1.8;max-width:460px;margin-bottom:44px;}
+.ctas{display:flex;gap:16px;flex-wrap:wrap;}
+.btn-p{background:var(--gold);color:var(--crimson);padding:.85rem 2rem;border-radius:3px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;transition:background .2s,transform .15s;display:inline-block;}
+.btn-p:hover{background:var(--gold-lt);transform:translateY(-1px);}
+.btn-o{border:1.5px solid rgba(201,164,67,.45);color:var(--gold);padding:.85rem 2rem;border-radius:3px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;transition:border-color .2s;display:inline-block;}
+.btn-o:hover{border-color:var(--gold-lt);}
+.hero-visual{position:relative;overflow:hidden;}
+.hero-visual img{width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.8;}
+.hero-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--crimson) 0%,transparent 35%);}
+.hero-badge{position:absolute;bottom:40px;right:40px;z-index:2;background:var(--gold);color:var(--crimson);padding:18px 22px;border-radius:3px;text-align:center;}
+.hero-badge strong{display:block;font-size:1.5rem;font-family:var(--serif);font-weight:700;line-height:1;}
+.hero-badge span{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700;font-family:var(--sans);margin-top:4px;display:block;}
+
+/* STATS */
+.stats{background:var(--cream-md);display:grid;grid-template-columns:repeat(4,1fr);}
+.stat{text-align:center;padding:44px 24px;border-right:1px solid rgba(125,26,26,.1);}
+.stat:last-child{border-right:none;}
+.stat strong{display:block;font-family:var(--serif);font-size:3.2rem;font-weight:400;color:var(--crimson);line-height:1;}
+.stat label{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-lt);margin-top:8px;display:block;}
+
+/* SECTIONS */
+section{padding:100px 80px;}
+.sec-label{font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.sec-label::before{content:'';width:28px;height:1px;background:var(--gold);}
+.sec-label.center{justify-content:center;}
+.sec-label.center::before{display:none;}
+h2.sec-title{font-family:var(--serif);font-size:clamp(1.9rem,3vw,2.8rem);font-weight:400;color:var(--text);margin-bottom:18px;line-height:1.2;}
+h2.sec-title.inv{color:#fff;}
+.sec-lead{font-size:1.02rem;color:var(--text-md);max-width:620px;margin-bottom:60px;line-height:1.8;}
+.sec-lead.inv{color:rgba(255,255,255,.68);}
+.gold-rule{width:56px;height:2px;background:var(--gold);margin:24px 0;}
+
+/* MISSION */
+.mission{background:var(--cream);}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.mission-text p{margin-bottom:20px;color:var(--text-md);line-height:1.85;}
+.pullquote{background:var(--crimson);border-radius:4px;padding:52px;position:relative;overflow:hidden;}
+.pullquote::before{content:'\201C';font-family:var(--serif);font-size:9rem;line-height:.8;color:rgba(201,164,67,.12);position:absolute;top:-4px;left:16px;font-style:italic;}
+.pullquote blockquote{font-family:var(--serif);font-size:1.35rem;font-weight:400;font-style:italic;color:#fff;line-height:1.6;position:relative;z-index:1;}
+.pullquote cite{display:block;margin-top:20px;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-style:normal;font-family:var(--sans);position:relative;z-index:1;}
+
+/* PIPELINE */
+.pipeline{background:var(--crimson);}
+.pipe-grid{display:grid;grid-template-columns:1fr 60px 1fr;align-items:center;gap:0;}
+.phase{background:rgba(255,255,255,.06);border:1px solid rgba(201,164,67,.18);border-radius:4px;padding:48px;position:relative;overflow:hidden;}
+.phase::after{content:attr(data-n);font-family:var(--serif);font-size:7rem;font-weight:400;color:rgba(201,164,67,.06);position:absolute;top:-16px;right:16px;line-height:1;}
+.phase-badge{display:inline-block;background:var(--gold);color:var(--crimson);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.28rem .8rem;border-radius:100px;margin-bottom:14px;}
+.phase h3{font-family:var(--serif);font-size:2rem;color:#fff;margin-bottom:14px;font-weight:400;}
+.phase p{color:rgba(255,255,255,.68);line-height:1.8;}
+.pipe-arrow{display:flex;align-items:center;justify-content:center;}
+
+/* TRACKS */
+.tracks{background:var(--cream);}
+.tracks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+.track{background:#fff;border:1px solid var(--cream-md);border-radius:4px;padding:40px;transition:box-shadow .2s,transform .15s;}
+.track:hover{box-shadow:0 8px 32px rgba(125,26,26,.09);transform:translateY(-2px);}
+.track-ico{width:50px;height:50px;background:var(--sage-lt);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:18px;}
+.track h3{font-family:var(--serif);font-size:1.35rem;color:var(--crimson);margin-bottom:6px;font-weight:600;}
+.track-theme{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.levels{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.levels li{display:grid;grid-template-columns:78px 1fr;gap:10px;align-items:start;padding:10px;background:var(--cream);border-radius:3px;}
+.lvl{font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.22rem .55rem;border-radius:100px;text-align:center;white-space:nowrap;}
+.lvl-k{background:#D6E8D3;color:#2D5A2A;}
+.lvl-t{background:#FFF0CC;color:#7A5A00;}
+.lvl-a{background:#F5D6D6;color:#7D1A1A;}
+.levels span{font-size:.86rem;color:var(--text-md);line-height:1.55;}
+
+/* MEMBERSHIP */
+.membership{background:var(--cream-md);}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.tier{background:#fff;border-radius:4px;padding:40px;border-top:4px solid var(--crimson);transition:box-shadow .2s;}
+.tier:hover{box-shadow:0 8px 32px rgba(125,26,26,.1);}
+.tier.featured{background:var(--crimson);border-top-color:var(--gold);}
+.tier-ico{font-size:2rem;margin-bottom:14px;}
+.tier-tag{display:inline-block;background:var(--gold);color:var(--crimson);font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .7rem;border-radius:100px;margin-bottom:14px;}
+.tier h3{font-family:var(--serif);font-size:1.35rem;margin-bottom:12px;font-weight:600;color:var(--crimson);}
+.tier.featured h3{color:var(--gold);}
+.tier p{font-size:.9rem;color:var(--text-md);line-height:1.75;}
+.tier.featured p{color:rgba(255,255,255,.72);}
+
+/* SPACE */
+.space{background:var(--crimson);}
+.space-img{width:100%;height:420px;border-radius:6px;overflow:hidden;margin-bottom:56px;}
+.space-img img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+.zones{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.zone{background:rgba(255,255,255,.05);border:1px solid rgba(201,164,67,.18);border-radius:4px;padding:28px;text-align:center;}
+.zone-ico{font-size:2rem;margin-bottom:12px;}
+.zone h3{font-family:var(--serif);font-size:1.15rem;color:var(--gold);margin-bottom:10px;font-weight:600;}
+.zone p{font-size:.86rem;color:rgba(255,255,255,.62);line-height:1.65;}
+
+/* ROADMAP */
+.roadmap{background:var(--cream);}
+.road-row{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;position:relative;}
+.road-row::before{content:'';position:absolute;top:35px;left:calc(16.6% + 4px);right:calc(16.6% + 4px);height:2px;background:linear-gradient(to right,var(--gold),var(--gold));z-index:0;}
+.road-step{text-align:center;position:relative;z-index:1;}
+.road-dot{width:70px;height:70px;border-radius:50%;background:var(--crimson);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:var(--serif);font-size:1.5rem;color:var(--gold);font-weight:400;}
+.road-step h3{font-family:var(--serif);font-size:1.2rem;color:var(--crimson);margin-bottom:10px;font-weight:600;}
+.road-step p{font-size:.88rem;color:var(--text-md);line-height:1.7;}
+
+/* GLUE */
+.glue{background:var(--sage-lt);}
+.glue-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.glue-card{background:#fff;border-radius:4px;padding:28px;}
+.glue-ico{font-size:1.8rem;margin-bottom:12px;}
+.glue-card h3{font-family:var(--serif);font-size:1.05rem;color:var(--crimson);margin-bottom:8px;font-weight:600;}
+.glue-card p{font-size:.84rem;color:var(--text-md);line-height:1.65;}
+
+/* JOIN */
+.join{background:var(--text);text-align:center;padding:120px 80px;position:relative;overflow:hidden;}
+.join::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(201,164,67,.08) 0%,transparent 65%);}
+.join h2{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.6rem);color:#fff;margin-bottom:18px;font-weight:400;position:relative;z-index:1;}
+.join h2 em{color:var(--gold);font-style:italic;}
+.join p{color:rgba(255,255,255,.58);font-size:1rem;margin-bottom:48px;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.8;position:relative;z-index:1;}
+.join .ctas{justify-content:center;position:relative;z-index:1;}
+
+/* FOOTER */
+footer{background:var(--crimson);padding:56px 80px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;border-top:1px solid rgba(201,164,67,.15);}
+.foot-brand{display:flex;align-items:center;gap:14px;}
+.foot-name{font-family:var(--serif);font-size:1.1rem;color:var(--gold);font-weight:600;}
+.foot-tag{font-size:.74rem;font-family:var(--serif);font-style:italic;color:rgba(201,164,67,.5);margin-top:4px;}
+.foot-links{display:flex;gap:28px;}
+.foot-links a{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+.foot-links a:hover{color:var(--gold);}
+.foot-copy{grid-column:1/-1;text-align:center;font-size:.76rem;color:rgba(255,255,255,.22);border-top:1px solid rgba(255,255,255,.07);padding-top:24px;margin-top:8px;}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  section,footer,nav.stats{padding:64px 24px;}
+  .stats{padding:0;}
+  .stat{padding:32px 16px;}
+  .hero{grid-template-columns:1fr;}
+  .hero-visual{min-height:280px;}
+  .hero-content{padding:60px 24px;}
+  .mission-grid,.pipe-grid,.tracks-grid,.tiers,.zones,.road-row,.glue-grid{grid-template-columns:1fr;}
+  .pipe-arrow{transform:rotate(90deg);padding:8px 0;}
+  .road-row::before{display:none;}
+  footer{grid-template-columns:1fr;padding:40px 24px;}
+  .join{padding:80px 24px;}
+  .stats{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <svg width="40" height="40" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="20" fill="#7D1A1A" stroke="#C9A443" stroke-width="2.5"/><line x1="22" y1="33" x2="22" y2="17" stroke="#C9A443" stroke-width="1.6" stroke-linecap="round"/><polyline points="19,21 22,17 25,21" fill="none" stroke="#C9A443" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 25 C19 23 16 20 14 18 C17 20 20 23 22 24" stroke="#C9A443" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M22 25 C25 23 28 20 30 18 C27 20 24 23 22 24" stroke="#C9A443" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M22 29 C18 27 15 24 13 22 C16 24 19 27 22 28" stroke="#C9A443" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M22 29 C26 27 29 24 31 22 C28 24 25 27 22 28" stroke="#C9A443" stroke-width="1.4" fill="none" stroke-linecap="round"/><line x1="22" y1="10" x2="22" y2="8" stroke="#C9A443" stroke-width="1.3" stroke-linecap="round"/><line x1="17" y1="11.5" x2="15.5" y2="10" stroke="#C9A443" stroke-width="1.3" stroke-linecap="round"/><line x1="27" y1="11.5" x2="28.5" y2="10" stroke="#C9A443" stroke-width="1.3" stroke-linecap="round"/><line x1="14" y1="15" x2="12" y2="14" stroke="#C9A443" stroke-width="1.3" stroke-linecap="round"/><line x1="30" y1="15" x2="32" y2="14" stroke="#C9A443" stroke-width="1.3" stroke-linecap="round"/></svg>
+    <div class="nav-wordmark">The Flourish Collective<small>Cultivating Potential. Strengthening Community.</small></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#membership">Membership</a></li>
+    <li><a href="#space">The Space</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#join" class="cta">Join Us →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">Est. 2026 &nbsp;·&nbsp; Washington, DC Metro Area</div>
+    <h1>Where Communities<br>Come to <em>Flourish</em></h1>
+    <p class="hero-tag">Cultivating Potential. Strengthening Community.</p>
+    <p class="hero-desc">A high-energy hub built for active growth — combining the warmth of a neighborhood gathering place with the resources of a professional enrichment center. This is where your family comes to truly thrive.</p>
+    <div class="ctas">
+      <a href="#join" class="btn-p">Join the Collective</a>
+      <a href="#programs" class="btn-o">Explore Programs</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="building.jpeg" alt="The Flourish Collective Anchor Building">
+    <div class="hero-badge"><strong>Phase 0</strong><span>Now Enrolling</span></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><strong>3</strong><label>Age Track Levels</label></div>
+  <div class="stat"><strong>4+</strong><label>Program Pillars</label></div>
+  <div class="stat"><strong>2</strong><label>Membership Tiers</label></div>
+  <div class="stat"><strong>∞</strong><label>Momentum Credits</label></div>
+</div>
+
+<!-- MISSION -->
+<section class="mission" id="about">
+  <div class="mission-grid">
+    <div class="mission-text">
+      <div class="sec-label">Our Mission</div>
+      <h2 class="sec-title">More Than a<br>Community Center</h2>
+      <div class="gold-rule"></div>
+      <p>While most community centers focus on just providing a space, we've built a high-energy hub designed for active growth — combining the warmth of a neighborhood gathering place with the resources of a professional enrichment center.</p>
+      <p>Our goal is to move past "getting by" and help our members actually flourish — through skill-sharing, collaborative programs, and a support network built for momentum.</p>
+      <p style="margin-top:36px;"><a href="#join" class="btn-p">Become a Member</a></p>
+    </div>
+    <div class="pullquote">
+      <blockquote>"This is where the community comes to truly thrive — not just survive."</blockquote>
+      <cite>— The Flourish Collective</cite>
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section class="pipeline" id="programs">
+  <div class="sec-label" style="color:var(--gold)">Program Strategy</div>
+  <h2 class="sec-title inv">The Two-Phase Pipeline</h2>
+  <p class="sec-lead inv">Every member follows a structured journey from foundational learning to community leadership.</p>
+  <div class="pipe-grid">
+    <div class="phase" data-n="01">
+      <div class="phase-badge">Phase 1</div>
+      <h3>Cultivate</h3>
+      <p>Foundation-building through vetted, expert-led workshops. We focus on setting the brand standard, establishing professional curriculum, and identifying potential member-leaders who will carry the community forward.</p>
+    </div>
+    <div class="pipe-arrow">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M8 20 H32 M24 12 L32 20 L24 28" stroke="#C9A443" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="phase" data-n="02">
+      <div class="phase-badge">Phase 2</div>
+      <h3>Collaborate</h3>
+      <p>Transitioning to a peer-led ecosystem where Phase 1 graduates lead workshops, circles, and skill-shares under the Collective's umbrella — ensuring quality control while fostering true community ownership.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRACKS -->
+<section class="tracks" id="tracks">
+  <div class="sec-label">Family Programming</div>
+  <h2 class="sec-title">Concurrent Track Learning</h2>
+  <p class="sec-lead">The entire family grows simultaneously. By covering the same theme at age-appropriate levels, we create a shared language — removing the childcare barrier and strengthening the household unit.</p>
+  <div class="tracks-grid">
+    <div class="track">
+      <div class="track-ico">🎬</div>
+      <h3>The Narrative Lab</h3>
+      <div class="track-theme">Media &amp; Communication</div>
+      <ul class="levels">
+        <li><span class="lvl lvl-k">Children</span><span>Animation Station — Story arcs through stop-motion</span></li>
+        <li><span class="lvl lvl-t">Teens</span><span>Content Creator Hub — Video editing, lighting &amp; digital ethics</span></li>
+        <li><span class="lvl lvl-a">Adults</span><span>The Legacy Project — Documenting family history &amp; presentations</span></li>
+      </ul>
+    </div>
+    <div class="track">
+      <div class="track-ico">🌱</div>
+      <h3>Green Wealth</h3>
+      <div class="track-theme">Sustainability &amp; Finance</div>
+      <ul class="levels">
+        <li><span class="lvl lvl-k">Children</span><span>Gardening basics and where food comes from</span></li>
+        <li><span class="lvl lvl-t">Teens</span><span>Urban farming and sustainability practices</span></li>
+        <li><span class="lvl lvl-a">Adults</span><span>Financial literacy and sustainable living</span></li>
+      </ul>
+    </div>
+    <div class="track">
+      <div class="track-ico">🔧</div>
+      <h3>Modern Craft</h3>
+      <div class="track-theme">Making &amp; Design</div>
+      <ul class="levels">
+        <li><span class="lvl lvl-k">Children</span><span>Basic 3D building and hands-on construction</span></li>
+        <li><span class="lvl lvl-t">Teens</span><span>CAD fundamentals and 3D printing</span></li>
+        <li><span class="lvl lvl-a">Adults</span><span>Professional DIY, design &amp; fabrication</span></li>
+      </ul>
+    </div>
+    <div class="track">
+      <div class="track-ico">🧠</div>
+      <h3>Resilience Hub</h3>
+      <div class="track-theme">Wellness &amp; Leadership</div>
+      <ul class="levels">
+        <li><span class="lvl lvl-k">Children</span><span>Emotional intelligence and mindfulness</span></li>
+        <li><span class="lvl lvl-t">Teens</span><span>Stress management and peer leadership</span></li>
+        <li><span class="lvl lvl-a">Adults</span><span>Executive wellness and leadership development</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="membership" id="membership">
+  <div class="sec-label">Financial Philosophy</div>
+  <h2 class="sec-title">Ownership Over Consumption</h2>
+  <p class="sec-lead">Members aren't just customers — they are stakeholders. Everyone is a resource and you get out what you put in.</p>
+  <div class="tiers">
+    <div class="tier">
+      <div class="tier-ico">⭐</div>
+      <div class="tier-tag">Sustainer Tier</div>
+      <h3>The Supporter</h3>
+      <p>Fixed monthly dues for those who want to support the Collective financially. Full access to all programming and community events.</p>
+    </div>
+    <div class="tier featured">
+      <div class="tier-ico">🤝</div>
+      <div class="tier-tag">Co-op Tier</div>
+      <h3>The Contributor</h3>
+      <p>Reduced dues plus sweat equity. Contribute time to operations, childcare, or maintenance — become an integral part of what makes the Collective run.</p>
+    </div>
+    <div class="tier">
+      <div class="tier-ico">🏆</div>
+      <div class="tier-tag">Momentum Ledger</div>
+      <h3>The Catalyst</h3>
+      <p>A credit-based rewards system for members who teach, mentor, or volunteer. Credits are redeemable for premium workshops and materials.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPACE -->
+<section class="space" id="space">
+  <div class="sec-label" style="color:var(--gold)">The Vision</div>
+  <h2 class="sec-title inv">Our Anchor Building</h2>
+  <p class="sec-lead inv">A revitalized brick industrial space blending professional resources with organic warmth — where diverse families and their communities connect and thrive together.</p>
+  <div class="space-img"><img src="building.jpeg" alt="The Flourish Collective Building Rendering"></div>
+  <div class="zones">
+    <div class="zone"><div class="zone-ico">☀️</div><h3>The Sunroom</h3><p>A bright, glass-walled social hub and café — the welcoming heart of the Collective where families gather between tracks.</p></div>
+    <div class="zone"><div class="zone-ico">⚡</div><h3>The Forge</h3><p>A high-tech makerspace and digital media lab featuring podcast studios, 3D printers, and professional content equipment.</p></div>
+    <div class="zone"><div class="zone-ico">🌿</div><h3>The Nursery</h3><p>A lush, multi-level indoor/outdoor garden overflowing with life — for agriculture, play, and restoration.</p></div>
+    <div class="zone"><div class="zone-ico">🏛️</div><h3>The Commons</h3><p>Large modular rooms designed for concurrent family track programming — flexible, community-owned spaces.</p></div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap" id="roadmap">
+  <div class="sec-label">Growth Strategy</div>
+  <h2 class="sec-title">The Phased Growth Map</h2>
+  <p class="sec-lead">We're building toward permanence — but starting where the community already is.</p>
+  <div class="road-row">
+    <div class="road-step">
+      <div class="road-dot">0</div>
+      <h3>The Pop-Up Collective</h3>
+      <p>A "Center without Walls." Using parks, libraries, and rented studios to build the member base without overhead. <strong>This is now.</strong></p>
+    </div>
+    <div class="road-step">
+      <div class="road-dot">1</div>
+      <h3>The Nodal Center</h3>
+      <p>A hybrid model with a residential home base for smaller circles, while renting specialized professional spaces for Build and Create tracks.</p>
+    </div>
+    <div class="road-step">
+      <div class="road-dot">2</div>
+      <h3>The Anchor Building</h3>
+      <p>A dedicated brick-and-mortar facility with The Sunroom, The Forge, The Nursery, and The Commons — our permanent home.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL GLUE -->
+<section class="glue" id="community">
+  <div class="sec-label">Community &amp; Connection</div>
+  <h2 class="sec-title">The Social Glue</h2>
+  <p class="sec-lead">To balance the work, the Collective provides unstructured fun where the goal isn't curriculum — it's community.</p>
+  <div class="glue-grid">
+    <div class="glue-card"><div class="glue-ico">✨</div><h3>Golden Hour Socials</h3><p>A 30-minute transition between track blocks with music, snacks, and a "Connection Prompt" to spark conversations between families.</p></div>
+    <div class="glue-card"><div class="glue-ico">🔓</div><h3>Open Lab / Free Play</h3><p>Scheduled times where the Makerspace and Media Studios are open for unstructured experimentation — no teachers, just families creating together.</p></div>
+    <div class="glue-card"><div class="glue-ico">🍽️</div><h3>Community Feasts</h3><p>Monthly potlucks where members share a meal and celebrate the Momentum Milestones achieved by the collective.</p></div>
+    <div class="glue-card"><div class="glue-ico">🌅</div><h3>Sun-Riser Saturdays</h3><p>Casual weekend mornings with coffee for adults and lawn games for kids — no learning required, just community.</p></div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="join" id="join">
+  <div class="sec-label center">Get Started</div>
+  <h2>Ready to <em>Flourish</em>?</h2>
+  <p>Join a growing community of families, creators, and changemakers who believe that where you come from doesn't limit where you can go.</p>
+  <div class="ctas">
+    <a href="#" class="btn-p">Apply for Membership</a>
+    <a href="#" class="btn-o">Attend a Free Event</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">
+    <svg width="36" height="36" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="20" fill="#7D1A1A" stroke="#C9A443" stroke-width="2.5"/><line x1="22" y1="33" x2="22" y2="17" stroke="#C9A443" stroke-width="1.6" stroke-linecap="round"/><polyline points="19,21 22,17 25,21" fill="none" stroke="#C9A443" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 25 C19 23 16 20 14 18 C17 20 20 23 22 24" stroke="#C9A443" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M22 25 C25 23 28 20 30 18 C27 20 24 23 22 24" stroke="#C9A443" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+    <div><div class="foot-name">The Flourish Collective</div><div class="foot-tag">"Cultivating Potential. Strengthening Community."</div></div>
+  </div>
+  <nav class="foot-links">
+    <a href="#programs">Programs</a>
+    <a href="#membership">Membership</a>
+    <a href="#space">The Space</a>
+    <a href="#join">Join Us</a>
+  </nav>
+  <div class="foot-copy">© 2026 The Flourish Collective. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
