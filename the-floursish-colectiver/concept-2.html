@@ -179,6 +179,14 @@ footer{background:#1A2B18;padding:56px 80px;display:grid;grid-template-columns:1
 .foot-links a:hover{color:var(--gold);}
 .foot-copy{grid-column:1/-1;text-align:center;font-size:.76rem;color:rgba(255,255,255,.2);border-top:1px solid rgba(255,255,255,.06);padding-top:24px;margin-top:8px;}
 
+
+/* ─── PHOTOS ─── */
+.track-photo{height:180px;overflow:hidden;margin:-36px -36px 20px;border-radius:20px 20px 0 0;position:relative;}
+.track-photo img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.track:hover .track-photo img{transform:scale(1.04);}
+.glue-photo{height:140px;overflow:hidden;margin:-28px -28px 18px;border-radius:18px 18px 0 0;}
+.glue-photo img{width:100%;height:100%;object-fit:cover;}
+
 @media(max-width:960px){
   nav{padding:0 20px;}
   .nav-links{display:none;}
@@ -259,7 +267,7 @@ footer{background:#1A2B18;padding:56px 80px;display:grid;grid-template-columns:1
       <p style="margin-top:36px;"><a href="#join" class="btn-p">Become a Member</a></p>
     </div>
     <div class="mission-vis">
-      <div class="mission-img-wrap"><img src="building.jpeg" alt="The Flourish Collective Building"></div>
+      <div class="mission-img-wrap"><img src="https://images.unsplash.com/photo-1758272133803-1cbb513689ca?w=800&q=80" alt="The Flourish Collective community" loading="lazy"></div>
       <div class="mission-badge"><strong>2026</strong><span>Founding Year</span></div>
     </div>
   </div>
@@ -294,6 +302,7 @@ footer{background:#1A2B18;padding:56px 80px;display:grid;grid-template-columns:1
   <p class="sec-lead">The entire family grows simultaneously. Same theme, age-appropriate levels — removing the childcare barrier and creating a shared language at home.</p>
   <div class="tracks-grid">
     <div class="track">
+      <div class="track-photo"><img src="https://images.unsplash.com/photo-1772971919868-6aaaa5c5afb1?w=600&q=80" alt="Media production and digital content creation" loading="lazy"></div>
       <div class="track-ico">🎬</div>
       <h3>The Narrative Lab</h3>
       <div class="track-theme">Media &amp; Communication</div>
@@ -304,6 +313,7 @@ footer{background:#1A2B18;padding:56px 80px;display:grid;grid-template-columns:1
       </ul>
     </div>
     <div class="track">
+      <div class="track-photo"><img src="https://images.unsplash.com/photo-1701186598427-5eb8f1717d2a?w=600&q=80" alt="Indoor garden and green growing" loading="lazy"></div>
       <div class="track-ico">🌱</div>
       <h3>Green Wealth</h3>
       <div class="track-theme">Sustainability &amp; Finance</div>
@@ -314,6 +324,7 @@ footer{background:#1A2B18;padding:56px 80px;display:grid;grid-template-columns:1
       </ul>
     </div>
     <div class="track">
+      <div class="track-photo"><img src="https://images.unsplash.com/photo-1775519686045-cfd36ca0accc?w=600&q=80" alt="Making, fabrication and hands-on craft" loading="lazy"></div>
       <div class="track-ico">🔧</div>
       <h3>Modern Craft</h3>
       <div class="track-theme">Making &amp; Design</div>
@@ -324,6 +335,7 @@ footer{background:#1A2B18;padding:56px 80px;display:grid;grid-template-columns:1
       </ul>
     </div>
     <div class="track">
+      <div class="track-photo"><img src="https://images.unsplash.com/photo-1757085242641-d829ddde7191?w=600&q=80" alt="Community workshop and wellness activity" loading="lazy"></div>
       <div class="track-ico">🧠</div>
       <h3>Resilience Hub</h3>
       <div class="track-theme">Wellness &amp; Leadership</div>
@@ -410,10 +422,10 @@ footer{background:#1A2B18;padding:56px 80px;display:grid;grid-template-columns:1
   <h2 class="sec-title">The Social Glue</h2>
   <p class="sec-lead">Balancing the work with unstructured fun — where the goal isn't curriculum, it's community.</p>
   <div class="glue-grid">
-    <div class="glue-card"><div class="glue-ico">✨</div><h3>Golden Hour Socials</h3><p>30-minute transitions between track blocks with music, snacks, and a "Connection Prompt" to spark conversations between families.</p></div>
-    <div class="glue-card"><div class="glue-ico">🔓</div><h3>Open Lab / Free Play</h3><p>Scheduled times when the Makerspace and Media Studios open for unstructured experimentation — no teachers, just families creating together.</p></div>
-    <div class="glue-card"><div class="glue-ico">🍽️</div><h3>Community Feasts</h3><p>Monthly potlucks where members share a meal and celebrate the Momentum Milestones achieved by the collective.</p></div>
-    <div class="glue-card"><div class="glue-ico">🌅</div><h3>Sun-Riser Saturdays</h3><p>Casual weekend mornings with coffee for adults and lawn games for kids — no learning required, just community.</p></div>
+    <div class="glue-card"><div class="glue-photo"><img src="https://images.unsplash.com/photo-1758272133803-1cbb513689ca?w=400&q=80" alt="Community social gathering" loading="lazy"></div><div class="glue-ico">✨</div><h3>Golden Hour Socials</h3><p>30-minute transitions between track blocks with music, snacks, and a "Connection Prompt" to spark conversations between families.</p></div>
+    <div class="glue-card"><div class="glue-photo"><img src="https://images.unsplash.com/photo-1775519686045-cfd36ca0accc?w=400&q=80" alt="Open makerspace free exploration" loading="lazy"></div><div class="glue-ico">🔓</div><h3>Open Lab / Free Play</h3><p>Scheduled times when the Makerspace and Media Studios open for unstructured experimentation — no teachers, just families creating together.</p></div>
+    <div class="glue-card"><div class="glue-photo"><img src="https://images.unsplash.com/photo-1658868539391-8284d7d0078d?w=400&q=80" alt="Community feast and shared dining" loading="lazy"></div><div class="glue-ico">🍽️</div><h3>Community Feasts</h3><p>Monthly potlucks where members share a meal and celebrate the Momentum Milestones achieved by the collective.</p></div>
+    <div class="glue-card"><div class="glue-photo"><img src="https://images.unsplash.com/photo-1757085242641-d829ddde7191?w=400&q=80" alt="Casual community morning activity" loading="lazy"></div><div class="glue-ico">🌅</div><h3>Sun-Riser Saturdays</h3><p>Casual weekend mornings with coffee for adults and lawn games for kids — no learning required, just community.</p></div>
   </div>
 </section>
 
