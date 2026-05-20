@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kanjia Kroma — Website Design Options</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark:   #111318; --mid: #23262F; --border: #E4E4E7;
+    --gray:   #6B7280; --light: #F9F9F8; --white: #FFFFFF;
+    --accent: #2563EB; --accent-lt: #EEF2FF;
+  }
+  body { background: var(--light); font-family: 'Inter', sans-serif; color: var(--dark); line-height: 1.6; }
+  .topbar { background: var(--dark); color: white; padding: 0 2.5rem; height: 52px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .topbar-brand { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; opacity: 0.9; }
+  .topbar-brand span { opacity: 0.45; font-weight: 400; margin: 0 0.5rem; }
+  .topbar-note { font-size: 0.75rem; opacity: 0.45; }
+  .header { background: var(--white); border-bottom: 1px solid var(--border); padding: 3rem 2.5rem 2.5rem; }
+  .header-inner { max-width: 900px; }
+  .header-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent-lt); color: var(--accent); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 0.9rem; margin-bottom: 1.2rem; }
+  .header-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+  .header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.2; }
+  .header p { color: var(--gray); font-size: 0.97rem; max-width: 580px; line-height: 1.75; margin-bottom: 1.5rem; }
+  .header-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .header-meta-item { font-size: 0.82rem; color: var(--gray); }
+  .header-meta-item strong { color: var(--dark); font-weight: 600; display: block; font-size: 0.88rem; }
+  .instructions { background: var(--accent-lt); border: 1px solid #BFDBFE; padding: 1rem 2.5rem; display: flex; align-items: center; gap: 1rem; }
+  .instructions-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .instructions p { font-size: 0.88rem; color: #1E40AF; line-height: 1.6; }
+  .instructions p strong { font-weight: 600; }
+  .grid { padding: 2.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem; max-width: 1400px; }
+  .card { background: var(--white); border: 1.5px solid var(--border); display: flex; flex-direction: column; transition: border-color 0.2s, box-shadow 0.2s; }
+  .card:hover { border-color: #A5B4FC; box-shadow: 0 4px 24px rgba(37,99,235,0.08); }
+  .card.selected { border-color: var(--accent); box-shadow: 0 4px 24px rgba(37,99,235,0.15); }
+  .preview-window { position: relative; overflow: hidden; background: #E5E7EB; height: 260px; cursor: pointer; border-bottom: 1.5px solid var(--border); }
+  .preview-window:hover .preview-overlay { opacity: 1; }
+  .preview-scaler { position: absolute; top: 0; left: 0; width: 1440px; height: 900px; transform-origin: 0 0; transform: scale(0.2847); pointer-events: none; }
+  .preview-scaler iframe { width: 1440px; height: 900px; border: none; display: block; }
+  .preview-overlay { position: absolute; inset: 0; background: rgba(37,99,235,0.12); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; }
+  .preview-overlay-btn { background: var(--accent); color: white; padding: 0.65rem 1.4rem; font-size: 0.82rem; font-weight: 600; border: none; cursor: pointer; font-family: 'Inter', sans-serif; }
+  .card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+  .card-num { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+  .card-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .card-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.7; flex: 1; margin-bottom: 1.2rem; }
+  .card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+  .tag { font-size: 0.72rem; font-weight: 500; padding: 0.25rem 0.65rem; background: var(--light); border: 1px solid var(--border); color: var(--gray); }
+  .card-actions { display: flex; gap: 0.6rem; }
+  .btn-preview { flex: 1; background: var(--dark); color: white; padding: 0.7rem; font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; border: none; cursor: pointer; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.4rem; transition: background 0.2s; }
+  .btn-preview:hover { background: var(--mid); }
+  .btn-preview svg { width: 13px; height: 13px; fill: white; }
+  .btn-select { padding: 0.7rem 1rem; background: white; color: var(--dark); font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; border: 1.5px solid var(--border); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .btn-select:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-select.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .selection-panel { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: var(--dark); color: white; padding: 1rem 2.5rem; display: flex; align-items: center; justify-content: space-between; transform: translateY(100%); transition: transform 0.3s ease; border-top: 3px solid var(--accent); }
+  .selection-panel.visible { transform: translateY(0); }
+  .selection-text { font-size: 0.92rem; }
+  .selection-text strong { color: #93C5FD; }
+  .selection-note { font-size: 0.78rem; color: rgba(255,255,255,0.45); max-width: 400px; line-height: 1.5; margin-top: 0.3rem; }
+  .btn-clear { background: none; border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); padding: 0.5rem 1rem; font-family: 'Inter', sans-serif; font-size: 0.8rem; cursor: pointer; }
+  .btn-clear:hover { border-color: white; color: white; }
+  .footer { padding: 2rem 2.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+  .footer-left { font-size: 0.8rem; color: var(--gray); }
+  .footer-left strong { color: var(--dark); }
+  .footer-right { font-size: 0.78rem; color: #D1D5DB; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-brand">Dexton-Livvy LLC <span>·</span> Client Design Review</span>
+  <span class="topbar-note">For review purposes only — not a final product</span>
+</div>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">Website Design Review</div>
+    <h1>Kanjia Kroma — Choose Your Direction</h1>
+    <p>Below are 3 distinct website design concepts prepared for your review. Each brings a different look, feel, and positioning for your conflict resolution practice. Click <strong>View Full Preview</strong> on any option to see the full design, then use <strong>Select This Option</strong> to mark your preference.</p>
+    <div class="header-meta">
+      <div class="header-meta-item"><strong>Client</strong>Kanjia Kroma</div>
+      <div class="header-meta-item"><strong>Prepared by</strong>Dexton-Livvy LLC</div>
+      <div class="header-meta-item"><strong>Options</strong>3 Concepts</div>
+      <div class="header-meta-item"><strong>Status</strong>Awaiting Selection</div>
+    </div>
+  </div>
+</div>
+
+<div class="instructions">
+  <span class="instructions-icon">👆</span>
+  <p><strong>How to review:</strong> Click anywhere on a design preview to open the full version in a new tab. Scroll through it like a real website. When you've found the direction you prefer, click <strong>"Select This Option"</strong> — then screenshot or note your selection and share it back with us.</p>
+</div>
+
+<div class="grid">
+
+  <!-- OPTION 01 -->
+  <div class="card" id="card-1">
+    <div class="preview-window" onclick="window.open('kanjia-concept-1.html','_blank')">
+      <div class="preview-scaler">
+        <iframe src="kanjia-concept-1.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="preview-overlay">
+        <button class="preview-overlay-btn">Open Full Preview ↗</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-num">Option 01</div>
+      <div class="card-name">The Strategist</div>
+      <p class="card-desc">Corporate authority. Navy, teal, and gold with bold serif headings. Positions Kanjia as a trusted senior advisor — structured, results-driven, and credentialed.</p>
+      <div class="card-tags">
+        <span class="tag">Corporate</span>
+        <span class="tag">Navy + Gold</span>
+        <span class="tag">DM Serif</span>
+        <span class="tag">Professional</span>
+      </div>
+      <div class="card-actions">
+        <a class="btn-preview" href="kanjia-concept-1.html" target="_blank">
+          <svg viewBox="0 0 16 16"><path d="M6 2H2v12h12v-4h-2v2H4V4h2V2zm4 0v2h2l-6 6 1.5 1.5L14 5.5V8h2V2h-6z"/></svg>
+          View Full Preview
+        </a>
+        <button class="btn-select" onclick="selectOption(1, 'The Strategist')">Select This</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION 02 -->
+  <div class="card" id="card-2">
+    <div class="preview-window" onclick="window.open('kanjia-concept-2.html','_blank')">
+      <div class="preview-scaler">
+        <iframe src="kanjia-concept-2.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="preview-overlay">
+        <button class="preview-overlay-btn">Open Full Preview ↗</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-num">Option 02</div>
+      <div class="card-name">The Mediator</div>
+      <p class="card-desc">Warm and human-centered. Sage green, cream, and terracotta with elegant serif type. Feels like a trusted coach — approachable, empathetic, relationship-focused.</p>
+      <div class="card-tags">
+        <span class="tag">Warm</span>
+        <span class="tag">Sage + Terracotta</span>
+        <span class="tag">Playfair Display</span>
+        <span class="tag">Coaching Feel</span>
+      </div>
+      <div class="card-actions">
+        <a class="btn-preview" href="kanjia-concept-2.html" target="_blank">
+          <svg viewBox="0 0 16 16"><path d="M6 2H2v12h12v-4h-2v2H4V4h2V2zm4 0v2h2l-6 6 1.5 1.5L14 5.5V8h2V2h-6z"/></svg>
+          View Full Preview
+        </a>
+        <button class="btn-select" onclick="selectOption(2, 'The Mediator')">Select This</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION 03 -->
+  <div class="card" id="card-3">
+    <div class="preview-window" onclick="window.open('kanjia-concept-3.html','_blank')">
+      <div class="preview-scaler">
+        <iframe src="kanjia-concept-3.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="preview-overlay">
+        <button class="preview-overlay-btn">Open Full Preview ↗</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-num">Option 03</div>
+      <div class="card-name">The Disruptor</div>
+      <p class="card-desc">Bold dark mode with electric teal and amber. Positions Kanjia as a modern thought leader — data-forward, high-contrast, and unapologetically different.</p>
+      <div class="card-tags">
+        <span class="tag">Dark Mode</span>
+        <span class="tag">Black + Teal</span>
+        <span class="tag">Space Grotesk</span>
+        <span class="tag">Modern Bold</span>
+      </div>
+      <div class="card-actions">
+        <a class="btn-preview" href="kanjia-concept-3.html" target="_blank">
+          <svg viewBox="0 0 16 16"><path d="M6 2H2v12h12v-4h-2v2H4V4h2V2zm4 0v2h2l-6 6 1.5 1.5L14 5.5V8h2V2h-6z"/></svg>
+          View Full Preview
+        </a>
+        <button class="btn-select" onclick="selectOption(3, 'The Disruptor')">Select This</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="footer-left">Prepared for <strong>Kanjia Kroma</strong> by <strong>Dexton-Livvy LLC</strong> · Business Management Solutions</div>
+  <div class="footer-right">dsaxon@dexton-livvy.com · dexton-livvy.com</div>
+</div>
+
+<div class="selection-panel" id="selectionPanel">
+  <div>
+    <div class="selection-text">You selected: <strong id="selectionLabel"></strong></div>
+    <div class="selection-note">Screenshot this page or reply to your proposal email with your selection to move forward.</div>
+  </div>
+  <button class="btn-clear" onclick="clearSelection()">Clear Selection</button>
+</div>
+
+<script>
+  let selected = null;
+  function selectOption(num, label) {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('.btn-select').forEach(b => { b.classList.remove('active'); b.textContent = 'Select This'; });
+    if (selected === num) { selected = null; document.getElementById('selectionPanel').classList.remove('visible'); return; }
+    selected = num;
+    document.getElementById('card-' + num).classList.add('selected');
+    const btn = document.getElementById('card-' + num).querySelector('.btn-select');
+    btn.classList.add('active'); btn.textContent = '✓ Selected';
+    document.getElementById('selectionLabel').textContent = 'Option 0' + num + ' — ' + label;
+    document.getElementById('selectionPanel').classList.add('visible');
+  }
+  function clearSelection() {
+    selected = null;
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('.btn-select').forEach(b => { b.classList.remove('active'); b.textContent = 'Select This'; });
+    document.getElementById('selectionPanel').classList.remove('visible');
+  }
+</script>
+
+</body>
+</html>

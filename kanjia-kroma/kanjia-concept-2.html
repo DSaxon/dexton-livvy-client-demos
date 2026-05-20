@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kanjia Kroma — Conflict Resolution Services | Concept 2: The Mediator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage:    #4A7C59;
+      --sage-lt: #6FA882;
+      --cream:   #F7F3EE;
+      --warm:    #EDE8E0;
+      --terra:   #C4704F;
+      --char:    #2C2C2C;
+      --mid:     #7A8B7F;
+      --white:   #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; color: var(--char); background: var(--white); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%; height: 74px;
+      background: var(--white);
+      border-bottom: 1px solid var(--warm);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; color: var(--char); letter-spacing: 0.01em;
+    }
+    .nav-logo em { color: var(--sage); font-style: normal; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--mid); text-decoration: none; font-size: 0.9rem; font-weight: 400; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--sage); }
+    .nav-cta {
+      background: var(--terra); color: var(--white);
+      padding: 0.6rem 1.5rem; border-radius: 30px;
+      text-decoration: none; font-size: 0.875rem; font-weight: 700;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #b0623f; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      padding-top: 74px;
+    }
+    .hero-left {
+      background: var(--cream);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 5rem 5rem 8%;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 2rem;
+    }
+    .hero-tag::before {
+      content: ''; display: block;
+      width: 28px; height: 2px; background: var(--sage);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      color: var(--char); line-height: 1.25; margin-bottom: 1.5rem;
+    }
+    .hero h1 em { color: var(--sage); font-style: italic; }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--mid); line-height: 1.8;
+      max-width: 440px; margin-bottom: 3rem; font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .btn-terra {
+      background: var(--terra); color: var(--white);
+      padding: 0.9rem 2rem; border-radius: 30px;
+      text-decoration: none; font-weight: 700; font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .btn-terra:hover { background: #b0623f; }
+    .btn-link {
+      color: var(--char); font-weight: 700; font-size: 0.9rem;
+      text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+      transition: color 0.2s;
+    }
+    .btn-link:hover { color: var(--sage); }
+    .btn-link::after { content: '→'; }
+    .hero-right {
+      background: var(--sage);
+      background-image: linear-gradient(160deg, rgba(74,124,89,0.7) 0%, rgba(44,44,44,0.4) 100%),
+                        url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80') center/cover no-repeat;
+    }
+    .hero-quote {
+      position: absolute; bottom: 3rem; left: 50%;
+      transform: translateX(-50%);
+      background: var(--white); padding: 1.5rem 2rem; border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      width: 90%; max-width: 340px; font-style: italic;
+      font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--char);
+    }
+    .hero-right { position: relative; overflow: hidden; min-height: 500px; }
+
+    /* VALUES STRIP */
+    .values {
+      background: var(--char);
+      display: flex; justify-content: center;
+    }
+    .value-item {
+      flex: 1; max-width: 300px; text-align: center;
+      padding: 2.5rem 2rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .value-item:last-child { border-right: none; }
+    .value-icon { font-size: 1.8rem; margin-bottom: 0.75rem; display: block; }
+    .value-item h4 { font-family: 'Playfair Display', serif; color: var(--white); margin-bottom: 0.4rem; font-size: 1.05rem; }
+    .value-item p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+    /* SECTION */
+    section { padding: 6rem 8%; }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 1rem;
+    }
+    .section-tag::before {
+      content: ''; display: block;
+      width: 28px; height: 2px; background: var(--sage);
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      color: var(--char); line-height: 1.3; margin-bottom: 1.25rem;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--mid); line-height: 1.85;
+      font-weight: 300; max-width: 580px;
+    }
+
+    /* APPROACH */
+    .approach { background: var(--cream); }
+    .approach-inner { max-width: 1100px; margin: 0 auto; }
+    .approach-header { margin-bottom: 4rem; }
+    .approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .approach-img {
+      width: 100%; height: 520px; object-fit: cover; border-radius: 6px;
+    }
+    .approach-steps { display: flex; flex-direction: column; gap: 0; }
+    .astep {
+      display: flex; gap: 1.5rem; padding: 1.5rem 0;
+      border-bottom: 1px solid var(--warm);
+    }
+    .astep:last-child { border-bottom: none; }
+    .astep-num {
+      width: 40px; height: 40px; min-width: 40px;
+      background: var(--sage); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem; color: var(--white);
+    }
+    .astep h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--char); margin-bottom: 0.35rem; }
+    .astep p { font-size: 0.9rem; color: var(--mid); line-height: 1.7; }
+
+    /* SERVICES */
+    .services-wrap { background: var(--white); }
+    .services-inner { max-width: 1100px; margin: 0 auto; }
+    .services-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 4rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .svc-card {
+      background: var(--cream); border-radius: 8px;
+      padding: 2rem 1.75rem;
+      transition: transform 0.2s;
+    }
+    .svc-card:hover { transform: translateY(-4px); }
+    .svc-icon { font-size: 2rem; margin-bottom: 1.25rem; display: block; }
+    .svc-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--char); margin-bottom: 0.75rem; }
+    .svc-card p { font-size: 0.9rem; color: var(--mid); line-height: 1.75; margin-bottom: 1.25rem; }
+    .svc-link { color: var(--terra); font-weight: 700; font-size: 0.85rem; text-decoration: none; }
+    .svc-link:hover { text-decoration: underline; }
+
+    /* STORY */
+    .story {
+      background: var(--sage);
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .story-img {
+      width: 100%; height: 100%; min-height: 400px; object-fit: cover;
+    }
+    .story-text {
+      padding: 5rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .story-text .section-tag { color: rgba(255,255,255,0.6); }
+    .story-text .section-tag::before { background: rgba(255,255,255,0.4); }
+    .story-text .section-title { color: var(--white); }
+    .story-text p { font-size: 1rem; color: rgba(255,255,255,0.75); line-height: 1.85; margin-bottom: 1.25rem; font-weight: 300; }
+    .story-cred {
+      display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.5rem;
+    }
+    .cred-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.9rem; color: rgba(255,255,255,0.85); font-weight: 700;
+    }
+    .cred-item::before { content: '✓'; color: var(--cream); font-size: 1rem; }
+
+    /* TESTIMONIAL */
+    .testi { background: var(--cream); padding: 6rem 8%; }
+    .testi-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .testi-quote {
+      font-family: 'Playfair Display', serif; font-size: 1.6rem;
+      color: var(--char); line-height: 1.55; font-style: italic; margin-bottom: 2rem;
+    }
+    .testi-quote::before { content: '\201C'; color: var(--sage); font-size: 4rem; line-height: 0; vertical-align: -0.6em; margin-right: 0.2em; }
+    .testi-author { font-weight: 700; color: var(--sage); font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* CTA */
+    .cta { background: var(--white); text-align: center; padding: 7rem 8%; }
+    .cta-inner { max-width: 580px; margin: 0 auto; }
+    .cta .section-title { margin-bottom: 1rem; }
+    .cta p { color: var(--mid); line-height: 1.8; margin-bottom: 2.5rem; font-weight: 300; }
+    .cta-form { display: flex; gap: 0; max-width: 420px; margin: 0 auto; }
+    .cta-form input {
+      flex: 1; padding: 0.85rem 1.25rem; border: 1px solid var(--warm);
+      border-right: none; border-radius: 30px 0 0 30px; font-family: 'Lato', sans-serif;
+      font-size: 0.9rem; outline: none; background: var(--cream);
+    }
+    .cta-form button {
+      background: var(--terra); color: var(--white); border: none;
+      padding: 0.85rem 1.5rem; border-radius: 0 30px 30px 0;
+      cursor: pointer; font-weight: 700; font-size: 0.875rem;
+      font-family: 'Lato', sans-serif; transition: background 0.2s;
+    }
+    .cta-form button:hover { background: #b0623f; }
+
+    /* FOOTER */
+    footer {
+      background: var(--char);
+      padding: 4rem 8% 2.5rem;
+    }
+    .footer-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 2rem; flex-wrap: wrap; gap: 2rem;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--white); margin-bottom: 0.5rem; }
+    .footer-logo em { color: var(--sage); font-style: normal; }
+    .footer-tagline { color: rgba(255,255,255,0.45); font-size: 0.85rem; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+
+    /* CONCEPT LABEL */
+    .concept-label {
+      position: fixed; bottom: 20px; right: 20px; z-index: 999;
+      background: var(--terra); color: var(--white);
+      padding: 0.5rem 1rem; border-radius: 30px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 4rem 6%; }
+      .approach-grid { grid-template-columns: 1fr; }
+      .services-header { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .story { grid-template-columns: 1fr; }
+      .story-img { height: 300px; }
+      .values { flex-direction: column; align-items: center; }
+      .value-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); width: 100%; max-width: 100%; }
+      .value-item:last-child { border-bottom: none; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="concept-label">CONCEPT 2 — THE MEDIATOR</div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Kanjia <em>Kroma</em></div>
+    <ul class="nav-links">
+      <li><a href="#approach">Our Approach</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#story">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <span class="hero-tag">Conflict Resolution Services</span>
+      <h1>Where Difficult<br>Conversations Become<br><em>Lasting Resolutions</em></h1>
+      <p class="hero-sub">Kanjia Kroma helps organizations move through conflict with grace, clarity, and mutual respect — building stronger relationships in the process.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-terra">Book a Discovery Call</a>
+        <a href="#approach" class="btn-link">See how it works</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-quote">
+        "The goal is not to win the argument. The goal is to find a way forward together."
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <div class="values">
+    <div class="value-item">
+      <span class="value-icon">🌿</span>
+      <h4>Empathy First</h4>
+      <p>Every conversation begins with deep listening — no assumptions, no judgment.</p>
+    </div>
+    <div class="value-item">
+      <span class="value-icon">⚖️</span>
+      <h4>Structured Fairness</h4>
+      <p>A clear process ensures everyone feels heard, respected, and represented.</p>
+    </div>
+    <div class="value-item">
+      <span class="value-icon">🌱</span>
+      <h4>Lasting Growth</h4>
+      <p>We don't just resolve today's conflict. We prevent tomorrow's.</p>
+    </div>
+  </div>
+
+  <!-- APPROACH -->
+  <section class="approach" id="approach">
+    <div class="approach-inner">
+      <div class="approach-header">
+        <span class="section-tag">Our Process</span>
+        <h2 class="section-title">Five Steps to Real Resolution</h2>
+        <p class="section-sub">Conflict resolution is not about picking sides. It's about uncovering what's underneath, and building a bridge to what's next.</p>
+      </div>
+      <div class="approach-grid">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80" alt="Team in conversation" class="approach-img" />
+        <div class="approach-steps">
+          <div class="astep">
+            <div class="astep-num">1</div>
+            <div>
+              <h4>Create a Safe Space</h4>
+              <p>Neutral setting, clear ground rules, and the assurance that every voice matters.</p>
+            </div>
+          </div>
+          <div class="astep">
+            <div class="astep-num">2</div>
+            <div>
+              <h4>Listen Actively</h4>
+              <p>Full presence, no interruptions, and genuine curiosity about each person's experience.</p>
+            </div>
+          </div>
+          <div class="astep">
+            <div class="astep-num">3</div>
+            <div>
+              <h4>Identify the Real Issue</h4>
+              <p>Peel back the surface disagreement to find the root cause driving the conflict.</p>
+            </div>
+          </div>
+          <div class="astep">
+            <div class="astep-num">4</div>
+            <div>
+              <h4>Develop Solutions Together</h4>
+              <p>Co-create options that serve everyone's core needs — not forced compromise.</p>
+            </div>
+          </div>
+          <div class="astep">
+            <div class="astep-num">5</div>
+            <div>
+              <h4>Agree and Follow Up</h4>
+              <p>A written plan with clear owners, timelines, and a scheduled check-in to make it stick.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services-wrap" id="services">
+    <div class="services-inner">
+      <div class="services-header">
+        <div>
+          <span class="section-tag">Services</span>
+          <h2 class="section-title">How We Can Help</h2>
+        </div>
+        <p class="section-sub">Whether you're in the middle of a conflict right now or want to build a culture that handles it better, we have a path for you.</p>
+      </div>
+      <div class="services-grid">
+        <div class="svc-card">
+          <span class="svc-icon">🤝</span>
+          <h3>Mediation Sessions</h3>
+          <p>Facilitated, confidential conversations that help all parties reach a genuine, workable resolution.</p>
+          <a href="#contact" class="svc-link">Learn more</a>
+        </div>
+        <div class="svc-card">
+          <span class="svc-icon">🎓</span>
+          <h3>Team Workshops</h3>
+          <p>Interactive training that gives your team the language, skills, and confidence to handle conflict constructively.</p>
+          <a href="#contact" class="svc-link">Learn more</a>
+        </div>
+        <div class="svc-card">
+          <span class="svc-icon">🏢</span>
+          <h3>Organizational Consulting</h3>
+          <p>A deep-dive assessment of your culture, structures, and patterns — and a roadmap to reduce recurring conflict.</p>
+          <a href="#contact" class="svc-link">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY / ABOUT -->
+  <div class="story" id="story">
+    <img class="story-img" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80" alt="Kanjia Kroma" />
+    <div class="story-text">
+      <span class="section-tag">About Kanjia</span>
+      <h2 class="section-title" style="color:var(--white);">Built on the Belief That Every Conflict Has a Way Through</h2>
+      <p>Kanjia Kroma has spent her career in the space between people — helping organizations navigate the conversations they've been avoiding, and come out stronger for having had them.</p>
+      <p>Her approach is structured but human, direct but deeply empathetic. She brings a calm presence to charged situations and a genuine belief that most conflicts, when handled with skill and care, become turning points.</p>
+      <div class="story-cred">
+        <span class="cred-item">Certified Professional Mediator</span>
+        <span class="cred-item">Executive & Leadership Coach</span>
+        <span class="cred-item">Workplace Conflict Specialist</span>
+        <span class="cred-item">AMA-Trained Facilitator</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIAL -->
+  <div class="testi">
+    <div class="testi-inner">
+      <p class="testi-quote">Kanjia helped our leadership team have a conversation we had been avoiding for two years. Within three sessions, we had a plan everyone could live with and a much healthier culture.</p>
+      <p class="testi-author">Executive Director &nbsp;|&nbsp; DC-Based Nonprofit</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="cta-inner">
+      <span class="section-tag" style="display:inline-flex;margin:0 auto 1rem;">Start Here</span>
+      <h2 class="section-title">You Don't Have to Manage Conflict Alone</h2>
+      <p>Drop your email and we'll reach out to schedule a free 30-minute conversation. No pressure, no pitch — just listening.</p>
+      <form class="cta-form" onsubmit="return false;">
+        <input type="email" placeholder="Your email address" />
+        <button type="submit">Let's Talk</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Kanjia <em>Kroma</em></div>
+        <p class="footer-tagline">Conflict Resolution Services &nbsp;|&nbsp; Washington, DC</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#approach">Our Process</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#story">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Kanjia Kroma. All rights reserved.</p>
+      <p>info@kanjiakroma.com</p>
+    </div>
+  </footer>
+
+</body>
+</html>

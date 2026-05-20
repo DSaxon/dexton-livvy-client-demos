@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kanjia Kroma — Conflict Resolution Services | Concept 1: The Strategist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:  #1A2E4A;
+      --teal:  #2A9D8F;
+      --gold:  #E9C46A;
+      --light: #F0F5FB;
+      --mid:   #D6E4F0;
+      --white: #ffffff;
+      --text:  #1A2E4A;
+      --muted: #5A6F87;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 72px;
+      background: rgba(26, 46, 74, 0.96);
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--white); letter-spacing: 0.02em; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--teal); color: var(--white);
+      padding: 0.55rem 1.4rem; border-radius: 4px;
+      text-decoration: none; font-size: 0.875rem; font-weight: 600;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #238a7d; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, rgba(26,46,74,0.92) 0%, rgba(26,46,74,0.75) 60%),
+                  url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80') center/cover no-repeat;
+      display: flex; align-items: center; padding: 0 5%;
+    }
+    .hero-inner { max-width: 760px; padding-top: 72px; }
+    .hero-eyebrow {
+      display: inline-block; background: var(--teal);
+      color: var(--white); font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.4rem 1rem; border-radius: 2px; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      color: var(--white); line-height: 1.15; margin-bottom: 1.5rem;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p {
+      font-size: 1.15rem; color: rgba(255,255,255,0.85);
+      line-height: 1.75; max-width: 580px; margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--navy);
+      padding: 0.9rem 2rem; border-radius: 4px; text-decoration: none;
+      font-weight: 700; font-size: 0.95rem; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #d4af57; }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.5); color: var(--white);
+      padding: 0.9rem 2rem; border-radius: 4px; text-decoration: none;
+      font-weight: 600; font-size: 0.95rem; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* STATS STRIP */
+    .stats {
+      background: var(--navy);
+      display: flex; justify-content: center; gap: 0;
+    }
+    .stat {
+      flex: 1; max-width: 280px; text-align: center;
+      padding: 2.5rem 2rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.8rem; color: var(--gold); display: block; margin-bottom: 0.35rem;
+    }
+    .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.65); letter-spacing: 0.05em; text-transform: uppercase; }
+
+    /* SECTION BASE */
+    section { padding: 6rem 5%; }
+    .section-eyebrow {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      color: var(--navy); line-height: 1.2; margin-bottom: 1.25rem;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 600px;
+    }
+    .section-header { margin-bottom: 3.5rem; }
+
+    /* ABOUT */
+    .about { background: var(--light); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; max-width: 1200px; margin: 0 auto; }
+    .about-img {
+      width: 100%; height: 480px; object-fit: cover; border-radius: 4px;
+      box-shadow: 0 24px 60px rgba(26,46,74,0.15);
+    }
+    .about-text .section-sub { max-width: 100%; margin-bottom: 2rem; }
+    .about-text p { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+    .about-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--navy); color: var(--white);
+      padding: 0.6rem 1.2rem; border-radius: 4px;
+      font-size: 0.85rem; font-weight: 600;
+    }
+    .about-badge::before { content: '✓'; color: var(--gold); font-weight: 700; }
+
+    /* SERVICES */
+    .services { background: var(--white); }
+    .services-inner { max-width: 1200px; margin: 0 auto; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .service-card {
+      border: 1px solid var(--mid); border-radius: 6px;
+      padding: 2.5rem 2rem; transition: box-shadow 0.25s, border-color 0.25s;
+    }
+    .service-card:hover { box-shadow: 0 12px 40px rgba(26,46,74,0.1); border-color: var(--teal); }
+    .service-icon {
+      width: 52px; height: 52px; background: var(--teal);
+      border-radius: 4px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.5rem;
+    }
+    .service-card h3 {
+      font-family: 'DM Serif Display', serif; font-size: 1.3rem;
+      color: var(--navy); margin-bottom: 0.75rem;
+    }
+    .service-card p { font-size: 0.95rem; color: var(--muted); line-height: 1.75; }
+
+    /* PROCESS */
+    .process { background: var(--navy); }
+    .process .section-eyebrow { color: var(--gold); }
+    .process .section-title { color: var(--white); }
+    .process .section-sub { color: rgba(255,255,255,0.7); }
+    .process-inner { max-width: 1200px; margin: 0 auto; }
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 2rem; align-items: start; padding: 2.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3rem; color: var(--gold); line-height: 1;
+      padding-top: 0.2rem;
+    }
+    .step h3 {
+      font-family: 'DM Serif Display', serif; font-size: 1.4rem;
+      color: var(--white); margin-bottom: 0.6rem;
+    }
+    .step p { font-size: 0.975rem; color: rgba(255,255,255,0.65); line-height: 1.8; }
+
+    /* TESTIMONIAL */
+    .testimonial { background: var(--teal); padding: 5rem 5%; text-align: center; }
+    .testimonial blockquote {
+      font-family: 'DM Serif Display', serif; font-size: clamp(1.4rem, 3vw, 2rem);
+      color: var(--white); line-height: 1.5; max-width: 800px; margin: 0 auto 1.5rem;
+      font-style: italic;
+    }
+    .testimonial cite { font-size: 0.9rem; color: rgba(255,255,255,0.8); font-style: normal; font-weight: 600; }
+
+    /* CTA */
+    .cta {
+      background: var(--light); text-align: center; padding: 6rem 5%;
+    }
+    .cta .section-title { margin: 0 auto 1rem; }
+    .cta .section-sub { margin: 0 auto 2.5rem; text-align: center; }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-navy {
+      background: var(--navy); color: var(--white);
+      padding: 0.9rem 2.2rem; border-radius: 4px; text-decoration: none;
+      font-weight: 700; font-size: 0.95rem; transition: background 0.2s;
+    }
+    .btn-navy:hover { background: #12203a; }
+    .btn-teal {
+      background: var(--teal); color: var(--white);
+      padding: 0.9rem 2.2rem; border-radius: 4px; text-decoration: none;
+      font-weight: 700; font-size: 0.95rem; transition: background 0.2s;
+    }
+    .btn-teal:hover { background: #238a7d; }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,0.6);
+      padding: 3rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    footer .logo { font-family: 'DM Serif Display', serif; color: var(--white); font-size: 1.1rem; }
+    footer .logo span { color: var(--gold); }
+    footer p { font-size: 0.85rem; }
+
+    /* CONCEPT LABEL */
+    .concept-label {
+      position: fixed; bottom: 20px; right: 20px; z-index: 999;
+      background: var(--gold); color: var(--navy);
+      padding: 0.5rem 1rem; border-radius: 4px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .stats { flex-direction: column; align-items: center; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 100%; }
+      .stat:last-child { border-bottom: none; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="concept-label">CONCEPT 1 — THE STRATEGIST</div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Kanjia <span>Kroma</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Our Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Schedule a Call</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Conflict Resolution Services</span>
+      <h1>Turn <em>Tension</em> Into<br>Your Greatest Asset</h1>
+      <p>Kanjia Kroma helps organizations navigate workplace conflict with clarity, structure, and lasting resolution — so your people can get back to what matters.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Schedule a Consultation</a>
+        <a href="#process" class="btn-outline">See Our Process</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num">500+</span>
+      <span class="stat-label">Disputes Resolved</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">15+</span>
+      <span class="stat-label">Years of Practice</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">94%</span>
+      <span class="stat-label">Resolution Rate</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">80+</span>
+      <span class="stat-label">Organizations Served</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-grid">
+      <img class="about-img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80" alt="Kanjia Kroma" />
+      <div class="about-text">
+        <p class="section-eyebrow">About Kanjia Kroma</p>
+        <h2 class="section-title">Conflict Is Inevitable. Letting It Fester Is a Choice.</h2>
+        <p class="section-sub">Kanjia Kroma brings a structured, human-centered approach to organizational conflict — one that gets to the root of the issue rather than papering over it.</p>
+        <p>With deep expertise in workplace mediation, team dynamics, and leadership development, Kanjia has helped companies across industries move from gridlock to growth.</p>
+        <p>The work is not just about resolving today's conflict. It's about building the systems, skills, and culture that prevent tomorrow's.</p>
+        <br />
+        <div style="display:flex; gap: 0.75rem; flex-wrap: wrap;">
+          <span class="about-badge">Certified Mediator</span>
+          <span class="about-badge">Executive Coach</span>
+          <span class="about-badge">Workplace Trainer</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-inner">
+      <div class="section-header">
+        <p class="section-eyebrow">What We Do</p>
+        <h2 class="section-title">Three Ways We Work With You</h2>
+        <p class="section-sub">Whether you're managing a single dispute or building an organization-wide resolution culture, we meet you where you are.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🤝</div>
+          <h3>Mediation & Dispute Resolution</h3>
+          <p>Facilitated sessions that bring all parties to a shared understanding. We guide the conversation so everyone leaves with clarity, dignity, and a workable path forward.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎯</div>
+          <h3>Conflict Resolution Training</h3>
+          <p>Workshops and coaching programs that equip your managers and teams to recognize, de-escalate, and resolve conflict before it becomes a crisis.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📋</div>
+          <h3>Organizational Consulting</h3>
+          <p>A deeper engagement to diagnose the structural and cultural conditions that create recurring conflict — and build the systems to prevent it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="process-inner">
+      <div class="section-header">
+        <p class="section-eyebrow">Our Framework</p>
+        <h2 class="section-title">The Five-Step Resolution Process</h2>
+        <p class="section-sub">A proven, structured approach built on the AMA framework — adapted for the complexity of real organizations and real people.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div>
+            <h3>Create a Safe Space</h3>
+            <p>Before anything else, all parties need to feel safe speaking openly. We establish ground rules, choose neutral settings, and ensure every voice enters the room on equal footing.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div>
+            <h3>Listen Actively and Without Judgment</h3>
+            <p>Most conflicts escalate because people feel unheard. We slow the conversation down, ensure each party is truly listened to, and surface what's actually being said beneath the surface.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div>
+            <h3>Identify the Underlying Issue</h3>
+            <p>The stated problem is rarely the real problem. We peel back the layers to find the root cause — separating people from positions and interests from demands.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <div>
+            <h3>Develop Mutually Beneficial Solutions</h3>
+            <p>With the real issue visible, we co-create solutions that work for everyone — not forced compromises, but integrative agreements that expand what's possible.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">05</span>
+          <div>
+            <h3>Agree on a Plan and Follow Up</h3>
+            <p>A conversation without accountability is just a wish. We formalize agreements in writing, assign owners, and schedule follow-up to make sure resolution sticks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <div class="testimonial">
+    <blockquote>"Kanjia didn't just help us resolve the conflict. She helped us understand why it kept happening — and gave us the tools to stop it."</blockquote>
+    <cite>— HR Director, Washington DC Nonprofit</cite>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <p class="section-eyebrow" style="text-align:center;">Get Started</p>
+    <h2 class="section-title" style="max-width:600px; margin:0 auto 1rem;">Ready to Resolve What's Holding Your Team Back?</h2>
+    <p class="section-sub" style="text-align:center; margin:0 auto 2.5rem;">Schedule a free 30-minute discovery call. We'll listen, ask the right questions, and tell you exactly how we can help.</p>
+    <div class="cta-actions">
+      <a href="mailto:info@kanjiakroma.com" class="btn-navy">Schedule a Free Call</a>
+      <a href="#services" class="btn-teal">View All Services</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="logo">Kanjia <span>Kroma</span></div>
+      <p style="margin-top:0.4rem;">Conflict Resolution Services &nbsp;|&nbsp; Washington, DC</p>
+    </div>
+    <p>&copy; 2026 Kanjia Kroma. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
