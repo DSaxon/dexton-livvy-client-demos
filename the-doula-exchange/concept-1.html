@@ -29,7 +29,8 @@
 
   /* COVER */
   .cover {
-    background: var(--crimson-dk);
+    background: linear-gradient(rgba(92,0,26,0.82), rgba(92,0,26,0.92)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+    background-color: var(--crimson-dk);
     min-height: 100vh;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
@@ -269,9 +270,52 @@
   .packing-list li { font-size: 0.83rem; color: var(--mid); padding: 0.3rem 0; border-bottom: 1px solid var(--light-rule); }
   .packing-list li::before { content: '□ '; color: var(--gold-bright); }
 
+  /* DESTINATION PHOTO STRIPS */
+  .country-photo-strip {
+    height: 210px;
+    background-size: cover; background-position: center;
+    position: relative;
+  }
+  .country-photo-strip::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 35%, var(--cream) 100%);
+  }
+
+  /* BANNER & DAY CARD PHOTOS */
+  .banner-photo {
+    margin-left: auto; flex-shrink: 0;
+    width: 180px; height: 80px;
+    object-fit: cover; opacity: 0.7;
+    display: none;
+  }
+  @media (min-width: 600px) { .banner-photo { display: block; } }
+
+  .day-photo {
+    float: right; margin: 0 0 0.8rem 1.2rem;
+    width: 150px; height: 100px;
+    object-fit: cover; opacity: 0.88;
+  }
+
+  /* PRINT BUTTON */
+  .print-float {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+    background: var(--gold-bright); color: var(--crimson-dk);
+    border: none; cursor: pointer;
+    padding: 0.8rem 1.4rem;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    font-family: 'Inter', sans-serif;
+    transition: background 0.2s, transform 0.15s;
+    display: flex; align-items: center; gap: 0.45rem;
+  }
+  .print-float:hover { background: var(--crimson); color: white; transform: translateY(-2px); }
+
   @media print {
-    .concept-label, nav { display: none; }
-    .cover { min-height: auto; padding: 3rem; }
+    .concept-label, nav, .print-float { display: none; }
+    .cover { min-height: auto; padding: 3rem; background-image: none !important; }
+    .banner-photo, .day-photo { display: none !important; }
+    .day-card { page-break-inside: avoid; }
+    .days-grid { page-break-before: auto; }
   }
 </style>
 </head>
@@ -368,6 +412,7 @@
     <p>June 13 – 22, 2026 &nbsp;·&nbsp; EuroStars Hotel &nbsp;·&nbsp; 9 Nights</p>
   </div>
 </div>
+<div class="country-photo-strip" style="background-image:url('https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=1400&q=80')"></div>
 
 <div class="days-grid">
 
@@ -411,6 +456,7 @@
       <span class="day-title">Tuk Tuk · Yellow Boat · Tram Tour</span>
     </div>
     <div class="day-card-body">
+      <img class="day-photo" src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=300&h=200&q=80" alt="Lisbon tuk tuk tour" loading="lazy">
       <ul class="timeline">
         <li class="timeline-item"><span class="timeline-time">MORNING</span><span class="timeline-event">Breakfast at hotel</span></li>
         <li class="timeline-item"><span class="timeline-time">8:00 AM</span><span class="timeline-event">Transport pick-up by tour</span></li>
@@ -453,6 +499,7 @@
       <span class="day-title">Full Day Coastal Excursion</span>
     </div>
     <div class="day-card-body">
+      <img class="day-photo" src="https://images.unsplash.com/photo-1548707309-dcebeab9ea9b?auto=format&fit=crop&w=300&h=200&q=80" alt="Sintra Palace, Portugal" loading="lazy">
       <ul class="timeline">
         <li class="timeline-item"><span class="timeline-time">MORNING</span><span class="timeline-event">Breakfast · Tour transport pick-up</span></li>
         <li class="timeline-item"><span class="timeline-time">8:00 AM</span><span class="timeline-event"><strong>Sintra & Cascais Private Tour</strong> — Full day, 8 hours<br><span class="timeline-note">Palace tickets included · Coastal viewpoints · Lunch included</span></span></li>
@@ -497,6 +544,7 @@
     <p>June 22 – 28, 2026 &nbsp;·&nbsp; Riad Awa Spa &nbsp;·&nbsp; 6 Nights</p>
   </div>
 </div>
+<div class="country-photo-strip" style="background-image:url('https://images.unsplash.com/photo-1548693566-07c9c7f4b2c7?auto=format&fit=crop&w=1400&q=80')"></div>
 
 <div class="days-grid">
 
@@ -526,6 +574,7 @@
       <span class="day-title">Sunrise Hot Air Balloon · Full Spa Day</span>
     </div>
     <div class="day-card-body">
+      <img class="day-photo" src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=300&h=200&q=80" alt="Hot air balloon sunrise" loading="lazy">
       <ul class="timeline">
         <li class="timeline-item"><span class="timeline-time">5:15 AM</span><span class="timeline-event">Transport pick-up (excluding Debbie & Racine)</span></li>
         <li class="timeline-item"><span class="timeline-time">6:00–9:30AM</span><span class="timeline-event"><strong>Hot Air Balloon Experience</strong> — 3.5 hrs with breakfast<br><span class="timeline-note">Sunrise flight over the desert · Photography opportunity</span></span></li>
@@ -605,6 +654,7 @@
     <p>June 28 – July 2, 2026 &nbsp;·&nbsp; Conscious Hotel Vondelpark &nbsp;·&nbsp; 4 Nights</p>
   </div>
 </div>
+<div class="country-photo-strip" style="background-image:url('https://images.unsplash.com/photo-1534351590666-13e3e96b5702?auto=format&fit=crop&w=1400&q=80')"></div>
 
 <div class="days-grid">
 
@@ -653,6 +703,7 @@
       <span class="day-title">Brussels &amp; Bruges Full Day Excursion</span>
     </div>
     <div class="day-card-body">
+      <img class="day-photo" src="https://images.unsplash.com/photo-1546636889-ba9fdd63583e?auto=format&fit=crop&w=300&h=200&q=80" alt="Brussels Belgium" loading="lazy">
       <ul class="timeline">
         <li class="timeline-item"><span class="timeline-time">MORNING</span><span class="timeline-event">Breakfast at hotel</span></li>
         <li class="timeline-item"><span class="timeline-time">6:15 AM</span><span class="timeline-event"><strong>Trevia Taxi</strong> — +31 20 260 7070</span></li>
@@ -901,6 +952,8 @@
 <footer>
   <p>Prepared for <span>The Doula Exchange</span> by <span>Dexton-Livvy LLC</span> &nbsp;·&nbsp; Design Concept 1 of 3 &nbsp;·&nbsp; Confidential</p>
 </footer>
+
+<button class="print-float" onclick="window.print()">⬇ Save as PDF</button>
 
 </body>
 </html>

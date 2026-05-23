@@ -28,7 +28,8 @@
 
   /* COVER — Magazine style split */
   .cover {
-    background: var(--emerald);
+    background: linear-gradient(rgba(28,74,59,0.85), rgba(28,74,59,0.93)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+    background-color: var(--emerald);
     min-height: 100vh;
     display: grid;
     grid-template-rows: 1fr auto;
@@ -208,6 +209,38 @@
 
   footer { background: #0D1F1A; padding: 1.5rem 2rem; text-align: center; font-size: 0.73rem; color: rgba(255,255,255,0.3); }
   footer span { color: var(--gold); }
+
+  /* DESTINATION PHOTO STRIPS */
+  .country-photo-strip {
+    height: 210px;
+    background-size: cover; background-position: center;
+    position: relative;
+  }
+  .country-photo-strip::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 35%, var(--bg) 100%);
+  }
+
+  /* PRINT BUTTON */
+  .print-float {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+    background: var(--gold); color: var(--emerald);
+    border: none; cursor: pointer;
+    padding: 0.8rem 1.4rem;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    font-family: 'Inter', sans-serif;
+    transition: background 0.2s, transform 0.15s;
+    display: flex; align-items: center; gap: 0.45rem;
+  }
+  .print-float:hover { background: var(--emerald); color: white; transform: translateY(-2px); }
+
+  @media print {
+    nav, .concept-label, .print-float { display: none; }
+    .cover { min-height: auto; padding: 3rem 2rem; background-image: none !important; }
+    .country-photo-strip { display: none; }
+    .day-item { page-break-inside: avoid; }
+  }
 </style>
 </head>
 <body>
@@ -320,6 +353,7 @@
     <p>June 13 – 22, 2026 &nbsp;·&nbsp; EuroStars Hotel &nbsp;·&nbsp; 9 Nights</p>
   </div>
 </div>
+<div class="country-photo-strip" style="background-image:url('https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=1400&q=80')"></div>
 
 <div class="day-wrap">
   <div class="day-item">
@@ -354,6 +388,7 @@
       <div class="day-date-block"><span class="day-month">Jun</span><span class="day-num">19</span><span class="day-dow">Thu</span></div>
       <div class="day-title-block"><span class="day-title-text">Lisbon Cultural Tour Day</span><span class="day-subtitle">Tuk Tuk · Yellow Boat · Tramcar · Kong Vegan</span></div>
     </div>
+    <img class="day-photo" src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=300&h=200&q=80" alt="Lisbon tuk tuk" loading="lazy" style="display:block;float:right;margin:0.5rem 0 0.5rem 1rem;width:150px;height:100px;object-fit:cover;opacity:0.88;">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">8:30–12:30</span><span class="tl-ev"><strong>Tuk Tuk Tour</strong> — 4 hours via Viator<br><span class="tl-note">Historic Lisbon · Photography stops throughout</span></span></li>
       <li class="tl-row"><span class="tl-time">1:15 PM</span><span class="tl-ev">Return to hotel · Lunch</span></li>
@@ -410,6 +445,7 @@
     <p>June 22 – 28, 2026 &nbsp;·&nbsp; Riad Awa Spa &nbsp;·&nbsp; 6 Nights</p>
   </div>
 </div>
+<div class="country-photo-strip" style="background-image:url('https://images.unsplash.com/photo-1548693566-07c9c7f4b2c7?auto=format&fit=crop&w=1400&q=80')"></div>
 
 <div class="day-wrap">
   <div class="day-item">
@@ -431,6 +467,7 @@
       <div class="day-date-block"><span class="day-month">Jun</span><span class="day-num">24</span><span class="day-dow">Tue</span></div>
       <div class="day-title-block"><span class="day-title-text">Sunrise Balloon &amp; Full Spa Day</span><span class="day-subtitle">Hot Air Balloon · La Maison Arabe Spa</span></div>
     </div>
+    <img class="day-photo" src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=300&h=200&q=80" alt="Hot air balloon sunrise Morocco" loading="lazy" style="display:block;float:right;margin:0.5rem 0 0.5rem 1rem;width:150px;height:100px;object-fit:cover;opacity:0.88;">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">5:15 AM</span><span class="tl-ev">Pick-up (excluding Debbie & Racine)</span></li>
       <li class="tl-row"><span class="tl-time">6:00–9:30</span><span class="tl-ev"><strong>Hot Air Balloon</strong> — 3.5 hrs with breakfast at sunrise</span></li>
@@ -485,6 +522,7 @@
     <p>June 28 – July 2, 2026 &nbsp;·&nbsp; Conscious Hotel Vondelpark &nbsp;·&nbsp; 4 Nights</p>
   </div>
 </div>
+<div class="country-photo-strip" style="background-image:url('https://images.unsplash.com/photo-1534351590666-13e3e96b5702?auto=format&fit=crop&w=1400&q=80')"></div>
 
 <div class="day-wrap">
   <div class="day-item">
@@ -651,6 +689,8 @@
 <footer>
   <p>Prepared for <span>The Doula Exchange</span> by <span>Dexton-Livvy LLC</span> &nbsp;·&nbsp; Design Concept 2 of 3 &nbsp;·&nbsp; Confidential</p>
 </footer>
+
+<button class="print-float" onclick="window.print()">⬇ Save as PDF</button>
 
 </body>
 </html>
