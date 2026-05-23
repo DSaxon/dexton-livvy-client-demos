@@ -30,7 +30,7 @@
 
   /* COVER */
   .cover {
-    background: linear-gradient(rgba(27,42,74,0.85), rgba(27,42,74,0.93)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+    background: linear-gradient(rgba(27,42,74,0.50), rgba(27,42,74,0.62)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
     background-color: var(--navy);
     min-height: 100vh;
     display: flex;
@@ -184,7 +184,7 @@
   .day-date-col .dd-num { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: white; line-height: 1; }
   .day-date-col .dd-month { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-top: 0.2rem; }
   .day-date-col .dd-year { font-size: 0.58rem; color: rgba(255,255,255,0.3); margin-top: 0.15rem; }
-  .day-body { padding: 1.2rem 1.5rem; }
+  .day-body { padding: 1.2rem 1.5rem; overflow: hidden; }
   .day-title { font-family: 'Libre Baskerville', serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.8rem; }
   .tl { display: flex; flex-direction: column; gap: 0.55rem; }
   .tl-row { display: grid; grid-template-columns: 70px 1fr; gap: 0.8rem; align-items: baseline; }
@@ -299,6 +299,18 @@
     background: linear-gradient(to bottom, transparent 35%, var(--bg) 100%);
   }
 
+  /* DAY CARD PHOTOS */
+  .day-photo {
+    float: right; margin: 0 0 0.8rem 1.2rem;
+    width: 150px; height: 100px;
+    object-fit: cover; opacity: 0.88;
+  }
+  .day-photo-l {
+    float: left; margin: 0 1.2rem 0.8rem 0;
+    width: 150px; height: 100px;
+    object-fit: cover; opacity: 0.88;
+  }
+
   /* PRINT BUTTON */
   .print-float {
     position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
@@ -320,6 +332,7 @@
     .concept-label, .print-float { display: none; }
     .country-photo-strip { display: none; }
     .day-card { page-break-inside: avoid; }
+    .day-photo, .day-photo-l { display: none; }
   }
   @media (max-width: 600px) {
     .cover-stats { grid-template-columns: repeat(2,1fr); }
@@ -479,6 +492,7 @@
         </div>
         <div class="day-body">
           <div class="day-title">Arrival in Lisbon — Check-In</div>
+          <img class="day-photo" src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=300&h=200&q=80" alt="Lisbon arrival" loading="lazy">
           <div class="tl">
             <div class="tl-row"><span class="tl-time">8:00 AM</span><span class="tl-event">NYC group arrives Humberto Delgado Airport</span></div>
             <div class="tl-row"><span class="tl-time">9:05 AM</span><span class="tl-event">NC group arrives Humberto Delgado Airport</span></div>
@@ -536,6 +550,7 @@
         </div>
         <div class="day-body">
           <div class="day-title">Walking Tour &amp; Hop-On Hop-Off</div>
+          <img class="day-photo-l" src="https://images.unsplash.com/photo-1566139884286-fce9e4fa8cba?auto=format&fit=crop&w=300&h=200&q=80" alt="Historic Lisbon streets" loading="lazy">
           <div class="tl">
             <div class="tl-row"><span class="tl-time">10:00 AM</span><span class="tl-event"><strong>My Lisbon Tours</strong> — walking tour<br><small>+351 911 582 499 &nbsp;·&nbsp; ends 1:00 PM</small></span></div>
             <div class="tl-row"><span class="tl-time">2:00 PM</span><span class="tl-event"><strong>Modern Lisbon HOHO</strong> — hop-on hop-off bus</span></div>
@@ -554,6 +569,7 @@
         </div>
         <div class="day-body">
           <div class="day-title">Sintra &amp; Cascais Private Tour</div>
+          <img class="day-photo" src="https://images.unsplash.com/photo-1548707309-dcebeab9ea9b?auto=format&fit=crop&w=300&h=200&q=80" alt="Sintra Palace Portugal" loading="lazy">
           <div class="tl">
             <div class="tl-row"><span class="tl-time">8:00 AM</span><span class="tl-event"><strong>Private 8-hour Sintra &amp; Cascais Tour</strong> — palaces, cliffs, seaside village</span></div>
             <div class="tl-row"><span class="tl-time">7:00 PM</span><span class="tl-event"><strong>Dinner — SEEN Sky Bar</strong><br><small>+351 21 096 5775 · Rooftop dining with city views</small></span></div>
@@ -617,6 +633,7 @@
         </div>
         <div class="day-body">
           <div class="day-title">Hospital Tour · Hammam · Jardin Majorelle</div>
+          <img class="day-photo" src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=300&h=200&q=80" alt="Jardin Majorelle" loading="lazy">
           <div class="tl">
             <div class="tl-row"><span class="tl-time">8:30 AM</span><span class="tl-event"><strong>Hospital Tour — Clinique Averroès</strong><br><small>+212 524 434 058 · Midwifery &amp; birth worker site visit</small></span></div>
             <div class="tl-row"><span class="tl-time">Morning</span><span class="tl-event"><strong>Hammam</strong> — Kim &amp; Debbie (Group 2) <span class="tl-pill">Spa</span></span></div>
@@ -655,6 +672,7 @@
         </div>
         <div class="day-body">
           <div class="day-title">Ouzoud Waterfall Day Trip</div>
+          <img class="day-photo-l" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=300&h=200&q=80" alt="Ouzoud Waterfall" loading="lazy">
           <div class="tl">
             <div class="tl-row"><span class="tl-time">6:00 AM</span><span class="tl-event"><strong>Ouzoud Waterfall Excursion</strong> — all-day trip to stunning cascades<br><small>Returns approx. 6:00 PM</small></span></div>
             <div class="tl-row"><span class="tl-time">7:30 PM</span><span class="tl-event"><strong>Dinner — Sahbi Sahbi</strong><br><small>+212 662-682312</small></span></div>
@@ -672,6 +690,7 @@
         </div>
         <div class="day-body">
           <div class="day-title">Agafay Desert Experience</div>
+          <img class="day-photo" src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=300&h=200&q=80" alt="Agafay Desert" loading="lazy">
           <div class="tl">
             <div class="tl-row"><span class="tl-time">2:30 PM</span><span class="tl-event"><strong>Agafay Desert</strong> — pool, quad biking, camel ride, traditional dress, dinner &amp; fire show <span class="tl-pill">Full Evening</span></span></div>
           </div>
@@ -689,6 +708,7 @@
         </div>
         <div class="day-body">
           <div class="day-title">Medina, Tombs &amp; Souk</div>
+          <img class="day-photo-l" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=300&h=200&q=80" alt="Marrakech souk" loading="lazy">
           <div class="tl">
             <div class="tl-row"><span class="tl-time">9:00 AM</span><span class="tl-event"><strong>Saadian Tombs</strong> — 16th-century royal burial site</span></div>
             <div class="tl-row"><span class="tl-time">10:00 AM</span><span class="tl-event"><strong>Bahia Palace</strong> — 19th-century Moroccan architecture</span></div>
@@ -733,6 +753,7 @@
         </div>
         <div class="day-body">
           <div class="day-title">Fly to Amsterdam — Vondelpark Check-In</div>
+          <img class="day-photo" src="https://images.unsplash.com/photo-1534351590666-13e3e96b5702?auto=format&fit=crop&w=300&h=200&q=80" alt="Amsterdam canals" loading="lazy">
           <div class="tl">
             <div class="tl-row"><span class="tl-time">9:55 AM</span><span class="tl-event"><strong>Transavia #5756</strong> — RAK → Amsterdam<br><small>Flight number: HV5756</small></span></div>
             <div class="tl-row"><span class="tl-time">3:35 PM</span><span class="tl-event">Arrive Amsterdam Schiphol Airport</span></div>
@@ -751,6 +772,7 @@
         </div>
         <div class="day-body">
           <div class="day-title">HOHO Amsterdam &amp; Hortus Botanicus</div>
+          <img class="day-photo-l" src="https://images.unsplash.com/photo-1558618047-f5c3b7e2f9c3?auto=format&fit=crop&w=300&h=200&q=80" alt="Amsterdam bicycles" loading="lazy">
           <div class="tl">
             <div class="tl-row"><span class="tl-time">Morning</span><span class="tl-event"><strong>Hop-On Hop-Off Amsterdam</strong> — major city landmarks</span></div>
             <div class="tl-row"><span class="tl-time">Afternoon</span><span class="tl-event"><strong>Hortus Botanicus</strong> — one of the world's oldest botanical gardens</span></div>
@@ -788,6 +810,7 @@
         </div>
         <div class="day-body">
           <div class="day-title">Food &amp; Culture Tour · Canal Dinner Cruise</div>
+          <img class="day-photo-l" src="https://images.unsplash.com/photo-1576803419089-87e6c77d793d?auto=format&fit=crop&w=300&h=200&q=80" alt="Amsterdam canal houses" loading="lazy">
           <div class="tl">
             <div class="tl-row"><span class="tl-time">11:30 AM</span><span class="tl-event"><strong>Food &amp; Culture Tour</strong> — Amsterdam neighborhoods &amp; cuisine</span></div>
             <div class="tl-row"><span class="tl-time">7:00 PM</span><span class="tl-event"><strong>Canal Dinner Cruise</strong> — 2 hours on the Amsterdam canals<br><small>Prins Hendrikkade 20A &nbsp;·&nbsp; ends 9:00 PM</small></span></div>

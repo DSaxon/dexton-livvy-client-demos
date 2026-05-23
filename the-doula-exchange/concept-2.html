@@ -28,7 +28,7 @@
 
   /* COVER — Magazine style split */
   .cover {
-    background: linear-gradient(rgba(28,74,59,0.85), rgba(28,74,59,0.93)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+    background: linear-gradient(rgba(28,74,59,0.50), rgba(28,74,59,0.62)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
     background-color: var(--emerald);
     min-height: 100vh;
     display: grid;
@@ -247,6 +247,18 @@
     background: linear-gradient(to bottom, transparent 35%, var(--bg) 100%);
   }
 
+  /* DAY CARD PHOTOS */
+  .day-photo {
+    float: right; margin: 0 0 0.8rem 1.2rem;
+    width: 150px; height: 100px;
+    object-fit: cover; opacity: 0.88;
+  }
+  .day-photo-l {
+    float: left; margin: 0 1.2rem 0.8rem 0;
+    width: 150px; height: 100px;
+    object-fit: cover; opacity: 0.88;
+  }
+
   /* PRINT BUTTON */
   .print-float {
     position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
@@ -266,6 +278,7 @@
     .cover { min-height: auto; padding: 3rem 2rem; background-image: none !important; }
     .country-photo-strip { display: none; }
     .day-item { page-break-inside: avoid; }
+    .day-photo, .day-photo-l { display: none; }
   }
 </style>
 </head>
@@ -412,6 +425,7 @@
       <div class="day-date-block"><span class="day-month">Jun</span><span class="day-num">14</span><span class="day-dow">Sun</span></div>
       <div class="day-title-block"><span class="day-title-text">Arrival Day — Welcome to Lisbon</span><span class="day-subtitle">Hotel Check-In · Group Dinner</span></div>
     </div>
+    <img class="day-photo" src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=300&h=200&q=80" alt="Lisbon arrival" loading="lazy">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">8:00 AM</span><span class="tl-ev"><strong>NY Group Arrives</strong> — Delta #272</span></li>
       <li class="tl-row"><span class="tl-time">9:05 AM</span><span class="tl-ev"><strong>NC Group Arrives</strong> — American #258</span></li>
@@ -443,6 +457,7 @@
       <div class="day-date-block"><span class="day-month">Jun</span><span class="day-num">20</span><span class="day-dow">Fri</span></div>
       <div class="day-title-block"><span class="day-title-text">Walking Tour & Modern Lisbon</span><span class="day-subtitle">Alfama · Rossio · Hop-On Hop-Off</span></div>
     </div>
+    <img class="day-photo-l" src="https://images.unsplash.com/photo-1566139884286-fce9e4fa8cba?auto=format&fit=crop&w=300&h=200&q=80" alt="Historic Lisbon streets" loading="lazy">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">10 AM–1 PM</span><span class="tl-ev"><strong>Walking Tour</strong> — My Lisbon Tours · +351 911 582 499<br><span class="tl-note">Largo do Chafariz de Dentro · Alfama neighborhood · Historic streets</span></span></li>
       <li class="tl-row"><span class="tl-time">1:30 PM</span><span class="tl-ev">Lunch · Uber to Rossio Square</span></li>
@@ -455,6 +470,7 @@
       <div class="day-date-block"><span class="day-month">Jun</span><span class="day-num">21</span><span class="day-dow">Sat</span></div>
       <div class="day-title-block"><span class="day-title-text">Sintra &amp; Cascais Full Day</span><span class="day-subtitle">Palaces · Coastal Views · SEEN Sky Bar</span></div>
     </div>
+    <img class="day-photo" src="https://images.unsplash.com/photo-1548707309-dcebeab9ea9b?auto=format&fit=crop&w=300&h=200&q=80" alt="Sintra Palace Portugal" loading="lazy">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">8:00 AM</span><span class="tl-ev"><strong>Sintra & Cascais Private Tour</strong> — 8 hours<br><span class="tl-note">Palace tickets included · Lunch included · Scenic coastal viewpoints</span></span></li>
       <li class="tl-row"><span class="tl-time">4:30 PM</span><span class="tl-ev">Return to hotel</span></li>
@@ -505,6 +521,7 @@
       <div class="day-date-block"><span class="day-month">Jun</span><span class="day-num">23</span><span class="day-dow">Mon</span></div>
       <div class="day-title-block"><span class="day-title-text">Hospital Tour · Jardin Majorelle</span><span class="day-subtitle">Education · Wellness · Cooking Class</span></div>
     </div>
+    <img class="day-photo" src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=300&h=200&q=80" alt="Jardin Majorelle Marrakech" loading="lazy">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">8:30–11:30</span><span class="tl-ev"><strong>Group 1 — Clinique Averroès Hospital Tour</strong><br><span class="tl-note">Rue de Sebou, Guéliz · +212 524 434 058 · Contact Emela</span></span></li>
       <li class="tl-row"><span class="tl-time">8:45 AM</span><span class="tl-ev"><strong>Group 2 (Kim & Debbie)</strong> — Hammam Massage<br><span class="tl-note">Quad Way Marrakech · +212 661 673 687</span></span></li>
@@ -532,6 +549,7 @@
       <div class="day-date-block"><span class="day-month">Jun</span><span class="day-num">25</span><span class="day-dow">Wed</span></div>
       <div class="day-title-block"><span class="day-title-text">Ouzoud Waterfall Excursion</span><span class="day-subtitle">Day Trip · Boat Ride · Nature</span></div>
     </div>
+    <img class="day-photo-l" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=300&h=200&q=80" alt="Ouzoud Waterfall" loading="lazy">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">6:00 AM</span><span class="tl-ev"><strong>Charter Bus departs</strong> — Bag breakfast to go</span></li>
       <li class="tl-row"><span class="tl-time">~9:00 AM</span><span class="tl-ev"><strong>Ouzoud Waterfall</strong> — Boat ride, scenic hikes, lunch at falls</span></li>
@@ -544,6 +562,7 @@
       <div class="day-date-block"><span class="day-month">Jun</span><span class="day-num">26</span><span class="day-dow">Thu</span></div>
       <div class="day-title-block"><span class="day-title-text">Agafay Desert Experience</span><span class="day-subtitle">Pool · Camels · Quads · Dinner Under the Stars</span></div>
     </div>
+    <img class="day-photo" src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=300&h=200&q=80" alt="Agafay Desert Morocco" loading="lazy">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">9:00 AM</span><span class="tl-ev"><strong>Amber & Ciera</strong> airport transfer (Ryanair FR6722) · Others: leisurely morning</span></li>
       <li class="tl-row"><span class="tl-time">2:30 PM</span><span class="tl-ev"><strong>Agafay Desert Experience</strong><br><span class="tl-note">Pool · Quad bikes · Camel rides · Traditional dress photography · Sunset relaxation</span></span></li>
@@ -556,6 +575,7 @@
       <div class="day-date-block"><span class="day-month">Jun</span><span class="day-num">27</span><span class="day-dow">Fri</span></div>
       <div class="day-title-block"><span class="day-title-text">Grand Souk &amp; Historic Marrakech</span><span class="day-subtitle">Saadian Tombs · Bahia Palace · LUMA Dinner Show</span></div>
     </div>
+    <img class="day-photo-l" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=300&h=200&q=80" alt="Marrakech souk market" loading="lazy">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">9:00–9:45</span><span class="tl-ev"><strong>Saadian Tombs</strong></span></li>
       <li class="tl-row"><span class="tl-time">10:00–10:45</span><span class="tl-ev"><strong>Bahia Palace</strong></span></li>
@@ -594,6 +614,7 @@
       <div class="day-date-block"><span class="day-month">Jun</span><span class="day-num">28</span><span class="day-dow">Sun</span></div>
       <div class="day-title-block"><span class="day-title-text">Marrakech → Amsterdam</span><span class="day-subtitle">Transavia Flight · Hotel Check-In</span></div>
     </div>
+    <img class="day-photo" src="https://images.unsplash.com/photo-1534351590666-13e3e96b5702?auto=format&fit=crop&w=300&h=200&q=80" alt="Amsterdam canals" loading="lazy">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">9:55 AM</span><span class="tl-ev"><strong>Transavia #5756</strong> RAK → AMS · +31 202 146 032</span></li>
       <li class="tl-row"><span class="tl-time">3:35 PM</span><span class="tl-ev">Arrive Amsterdam · Transfer to hotel by 5:00 PM</span></li>
@@ -606,6 +627,7 @@
       <div class="day-date-block"><span class="day-month">Jun</span><span class="day-num">29</span><span class="day-dow">Mon</span></div>
       <div class="day-title-block"><span class="day-title-text">Amsterdam HOHO &amp; Hortus Botanicus</span><span class="day-subtitle">Tram #1 · 24-Hour Pass · Garden Visit</span></div>
     </div>
+    <img class="day-photo-l" src="https://images.unsplash.com/photo-1558618047-f5c3b7e2f9c3?auto=format&fit=crop&w=300&h=200&q=80" alt="Amsterdam bicycles" loading="lazy">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">9:15 AM</span><span class="tl-ev">Groups 1 & 2 depart hotel → Tram #1</span></li>
       <li class="tl-row"><span class="tl-time">9:30 AM</span><span class="tl-ev">GVB Day Ticket ($15 × 2 days) · Tram to HOHO station</span></li>
@@ -620,6 +642,7 @@
       <div class="day-date-block"><span class="day-month">Jun</span><span class="day-num">30</span><span class="day-dow">Tue</span></div>
       <div class="day-title-block"><span class="day-title-text">Brussels &amp; Bruges Day Trip</span><span class="day-subtitle">Belgium — Amigo Tours · Atomium · Chocolate · Waffles</span></div>
     </div>
+    <img class="day-photo" src="https://images.unsplash.com/photo-1546636889-ba9fdd63583e?auto=format&fit=crop&w=300&h=200&q=80" alt="Brussels Belgium" loading="lazy">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">6:15 AM</span><span class="tl-ev">Trevia Taxi · +31 20 260 7070</span></li>
       <li class="tl-row"><span class="tl-time">6:45 AM</span><span class="tl-ev">Transfer to tour — Aloha, De Ruijterkade 151 · Amigo Tours: +34 911 293 483</span></li>
@@ -636,6 +659,7 @@
       <div class="day-date-block"><span class="day-month">Jul</span><span class="day-num">1</span><span class="day-dow">Wed</span></div>
       <div class="day-title-block"><span class="day-title-text">Food Tour &amp; Canal Dinner Cruise</span><span class="day-subtitle">Final Celebration Evening</span></div>
     </div>
+    <img class="day-photo-l" src="https://images.unsplash.com/photo-1576803419089-87e6c77d793d?auto=format&fit=crop&w=300&h=200&q=80" alt="Amsterdam canal houses" loading="lazy">
     <ul class="tl">
       <li class="tl-row"><span class="tl-time">11:30–3PM</span><span class="tl-ev"><strong>Amsterdam Food & Culture Tasting Tour</strong><br><span class="tl-note">Waterlooplein 129, 1011 PG Amsterdam · Dutch tastings · Local cafés</span></span></li>
       <li class="tl-row"><span class="tl-time">4:00 PM</span><span class="tl-ev">Return to hotel · Rest & refresh</span></li>
