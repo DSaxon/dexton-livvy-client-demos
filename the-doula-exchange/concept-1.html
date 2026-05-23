@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDE Birth Workers Retreat — Concept 1: Crimson & Gold</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --crimson: #870026;
+    --crimson-dk: #5C001A;
+    --crimson-lt: #FFF0F3;
+    --gold: #8D6B2B;
+    --gold-lt: #F9D8AF;
+    --gold-bright: #C9A040;
+    --cream: #FDF6EE;
+    --warm: #F9D8AF;
+    --white: #FFFFFF;
+    --ink: #1A0A0A;
+    --mid: #5A3A3A;
+    --light-rule: #EDD5C0;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); font-family: 'Inter', sans-serif; color: var(--ink); line-height: 1.6; }
+
+  /* LABEL BANNER */
+  .concept-label { background: #111; color: #fff; text-align: center; padding: 0.5rem; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+
+  /* COVER */
+  .cover {
+    background: var(--crimson-dk);
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 41px
+    );
+  }
+  .cover-lotus { font-size: 2.5rem; margin-bottom: 1.5rem; opacity: 0.7; }
+  .cover-tag {
+    display: inline-block;
+    border: 1px solid var(--gold-bright);
+    color: var(--gold-bright);
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 0.4rem 1.2rem; margin-bottom: 2rem; font-weight: 600;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+  .cover h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    color: var(--gold-bright);
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 3rem;
+  }
+  .cover-rule { width: 80px; height: 2px; background: var(--gold-bright); margin: 0 auto 2.5rem; }
+  .cover-pillars {
+    display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 3rem;
+  }
+  .cover-pillars span {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .cover-pillars span::before { content: '◆ '; color: var(--gold-bright); }
+  .cover-destinations {
+    display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .cover-dest {
+    text-align: center;
+    color: rgba(255,255,255,0.55);
+  }
+  .cover-dest .flag { font-size: 1.8rem; margin-bottom: 0.3rem; display: block; }
+  .cover-dest .cname { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+  .cover-dates {
+    color: var(--gold-bright);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+  }
+  .cover-organized { color: rgba(255,255,255,0.35); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.5rem; }
+
+  /* NAV */
+  nav {
+    background: var(--crimson);
+    position: sticky; top: 0; z-index: 100;
+    display: flex; gap: 0; overflow-x: auto;
+    border-bottom: 3px solid var(--gold-bright);
+  }
+  nav a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    padding: 1rem 1.3rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    white-space: nowrap;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: color 0.2s, background 0.2s;
+  }
+  nav a:hover { color: var(--gold-bright); background: rgba(255,255,255,0.05); }
+
+  /* SECTION WRAPPER */
+  .section { padding: 5rem 2rem; max-width: 1000px; margin: 0 auto; }
+  .section-header { margin-bottom: 3rem; }
+  .section-eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); font-weight: 700; margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--crimson-dk);
+    line-height: 1.2;
+  }
+  .section-rule { width: 60px; height: 3px; background: var(--gold-bright); margin-top: 1rem; }
+
+  /* OVERVIEW TABLE */
+  .overview-table { width: 100%; border-collapse: collapse; }
+  .overview-table thead { background: var(--crimson); color: white; }
+  .overview-table thead th { padding: 1rem 1.2rem; text-align: left; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+  .overview-table tbody tr { border-bottom: 1px solid var(--light-rule); }
+  .overview-table tbody tr:nth-child(even) { background: rgba(135,0,38,0.04); }
+  .overview-table tbody td { padding: 1rem 1.2rem; font-size: 0.9rem; vertical-align: top; }
+  .dest-cell { display: flex; align-items: center; gap: 0.7rem; }
+  .dest-flag { font-size: 1.4rem; }
+  .dest-name { font-weight: 700; color: var(--crimson); font-family: 'Playfair Display', serif; font-size: 1rem; }
+  .highlights-list { list-style: none; }
+  .highlights-list li::before { content: '◆ '; color: var(--gold-bright); font-size: 0.6rem; }
+  .highlights-list li { font-size: 0.85rem; color: var(--mid); line-height: 1.8; }
+
+  /* COUNTRY SECTION DIVIDERS */
+  .country-divider {
+    background: var(--crimson);
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .country-divider .flag-lg { font-size: 2.5rem; }
+  .country-divider-info {}
+  .country-divider h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; }
+  .country-divider p { font-size: 0.82rem; color: var(--gold-bright); letter-spacing: 0.05em; margin-top: 0.2rem; }
+
+  /* DAY CARDS */
+  .days-grid { display: flex; flex-direction: column; gap: 1.5rem; padding: 0 2rem 4rem; max-width: 1000px; margin: 0 auto; }
+  .day-card {
+    background: var(--white);
+    border-left: 4px solid var(--crimson);
+    box-shadow: 0 2px 12px rgba(135,0,38,0.07);
+  }
+  .day-card-header {
+    background: var(--crimson-lt);
+    padding: 1rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
+    border-bottom: 1px solid var(--light-rule);
+  }
+  .day-date { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--crimson); }
+  .day-title { font-size: 0.8rem; font-weight: 600; color: var(--mid); letter-spacing: 0.05em; text-transform: uppercase; }
+  .day-card-body { padding: 1.2rem 1.5rem; }
+  .timeline { list-style: none; }
+  .timeline-item { display: grid; grid-template-columns: 80px 1fr; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid var(--light-rule); }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-time { font-size: 0.75rem; font-weight: 700; color: var(--gold); text-align: right; padding-top: 0.1rem; white-space: nowrap; }
+  .timeline-event { font-size: 0.88rem; color: var(--ink); line-height: 1.5; }
+  .timeline-event strong { color: var(--crimson); }
+  .timeline-note { font-size: 0.78rem; color: var(--mid); display: block; margin-top: 0.15rem; }
+
+  /* ROSTER */
+  .roster-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+  .roster-card {
+    background: var(--white);
+    border: 1px solid var(--light-rule);
+    padding: 1.2rem;
+    display: flex; align-items: center; gap: 0.9rem;
+  }
+  .roster-avatar {
+    width: 40px; height: 40px;
+    background: var(--crimson);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; font-weight: 700;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+  .roster-name { font-size: 0.85rem; font-weight: 600; color: var(--ink); }
+  .roster-phone { font-size: 0.78rem; color: var(--mid); margin-top: 0.15rem; }
+
+  /* HOTELS */
+  .hotels-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .hotel-card {
+    background: var(--white);
+    border: 1px solid var(--light-rule);
+    overflow: hidden;
+  }
+  .hotel-card-top {
+    background: var(--crimson);
+    padding: 1.2rem 1.5rem;
+    color: white;
+  }
+  .hotel-country { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-bright); font-weight: 600; margin-bottom: 0.3rem; }
+  .hotel-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; }
+  .hotel-card-body { padding: 1.2rem 1.5rem; }
+  .hotel-detail { font-size: 0.83rem; color: var(--mid); margin-bottom: 0.4rem; }
+  .hotel-detail strong { color: var(--ink); font-weight: 600; }
+
+  /* EMBASSY GRID */
+  .embassy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .embassy-card {
+    background: var(--white);
+    border: 1px solid var(--light-rule);
+    padding: 1.2rem 1.5rem;
+    border-left: 3px solid var(--gold-bright);
+  }
+  .embassy-country { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .embassy-name { font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+  .embassy-phone { font-size: 0.83rem; color: var(--crimson); font-weight: 600; margin-top: 0.3rem; }
+
+  /* AFFIRMATIONS */
+  .affirmation-block {
+    background: var(--crimson-dk);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  .affirmation-block h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold-bright); margin-bottom: 2rem; font-weight: 400; font-style: italic; }
+  .affirmations { display: flex; flex-direction: column; gap: 1rem; max-width: 500px; margin: 0 auto 3rem; }
+  .affirmation { font-size: 0.9rem; color: rgba(255,255,255,0.8); letter-spacing: 0.03em; }
+  .closing-quote { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: white; font-style: italic; max-width: 600px; margin: 0 auto; line-height: 1.5; }
+
+  /* FOOTER */
+  footer { background: var(--crimson-dk); padding: 1.5rem 2rem; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+  footer span { color: var(--gold-bright); }
+
+  /* CURRENCY TABLE */
+  .currency-table { border-collapse: collapse; width: 100%; max-width: 400px; }
+  .currency-table th, .currency-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--light-rule); font-size: 0.88rem; }
+  .currency-table th { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+
+  /* PACKING */
+  .packing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+  .packing-group { }
+  .packing-group h4 { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--crimson); margin-bottom: 0.7rem; border-bottom: 2px solid var(--gold-bright); padding-bottom: 0.4rem; }
+  .packing-list { list-style: none; }
+  .packing-list li { font-size: 0.83rem; color: var(--mid); padding: 0.3rem 0; border-bottom: 1px solid var(--light-rule); }
+  .packing-list li::before { content: '□ '; color: var(--gold-bright); }
+
+  @media print {
+    .concept-label, nav { display: none; }
+    .cover { min-height: auto; padding: 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="concept-label">Concept 1 of 3 — "Crimson &amp; Gold" — TDE Brand Colors — Dexton-Livvy LLC Design Review</div>
+
+<!-- COVER -->
+<section class="cover" id="cover">
+  <div class="cover-lotus">⚘</div>
+  <div class="cover-tag">The Doula Exchange Presents</div>
+  <h1>TDE 14-Day<br>Birth Workers Retreat</h1>
+  <h2>A Global Sisterhood Journey</h2>
+  <div class="cover-rule"></div>
+  <div class="cover-pillars">
+    <span>Sisterhood</span>
+    <span>Learning</span>
+    <span>Wellness</span>
+    <span>Adventure</span>
+    <span>Culture</span>
+  </div>
+  <div class="cover-destinations">
+    <div class="cover-dest"><span class="flag">🇵🇹</span><span class="cname">Portugal</span></div>
+    <div class="cover-dest"><span class="flag">🇲🇦</span><span class="cname">Morocco</span></div>
+    <div class="cover-dest"><span class="flag">🇳🇱</span><span class="cname">Netherlands</span></div>
+    <div class="cover-dest"><span class="flag">🇧🇪</span><span class="cname">Belgium</span></div>
+  </div>
+  <div class="cover-dates">June 13 – July 2, 2026</div>
+  <div class="cover-organized">Organized by TDE · 12 Travelers · 14 Days</div>
+</section>
+
+<!-- NAV -->
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#portugal">🇵🇹 Portugal</a>
+  <a href="#morocco">🇲🇦 Morocco</a>
+  <a href="#amsterdam">🇳🇱 Amsterdam</a>
+  <a href="#roster">Group</a>
+  <a href="#hotels">Hotels</a>
+  <a href="#emergency">Emergency</a>
+  <a href="#packing">Packing</a>
+</nav>
+
+<!-- OVERVIEW -->
+<section class="section" id="overview">
+  <div class="section-header">
+    <div class="section-eyebrow">Master Itinerary</div>
+    <h2 class="section-title">Retreat at a Glance</h2>
+    <div class="section-rule"></div>
+  </div>
+  <table class="overview-table">
+    <thead>
+      <tr>
+        <th>Destination</th>
+        <th>Dates</th>
+        <th>Hotel</th>
+        <th>Highlights</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="dest-cell"><span class="dest-flag">🇵🇹</span><span class="dest-name">Portugal / Lisbon</span></div></td>
+        <td>June 13 – 22</td>
+        <td>EuroStars Hotel</td>
+        <td><ul class="highlights-list"><li>Tuk Tuk Tour</li><li>Yellow Boat Tour</li><li>Sintra & Cascais Full Day</li><li>Walking Tour of Historic Lisbon</li></ul></td>
+      </tr>
+      <tr>
+        <td><div class="dest-cell"><span class="dest-flag">🇲🇦</span><span class="dest-name">Morocco / Marrakech</span></div></td>
+        <td>June 22 – 28</td>
+        <td>Riad Awa Spa</td>
+        <td><ul class="highlights-list"><li>Clinique Averroès Hospital Tour</li><li>Hot Air Balloon at Sunrise</li><li>Jardin Majorelle & Cooking Class</li><li>Agafay Desert Experience</li><li>Ouzoud Waterfall Day Trip</li></ul></td>
+      </tr>
+      <tr>
+        <td><div class="dest-cell"><span class="dest-flag">🇳🇱</span><span class="dest-name">Netherlands / Amsterdam</span></div></td>
+        <td>June 28 – July 2</td>
+        <td>Conscious Hotel Vondelpark</td>
+        <td><ul class="highlights-list"><li>Amsterdam Hop-On Hop-Off</li><li>Hortus Botanicus</li><li>Canal Dinner Cruise</li><li>Amsterdam Food & Culture Tour</li></ul></td>
+      </tr>
+      <tr>
+        <td><div class="dest-cell"><span class="dest-flag">🇧🇪</span><span class="dest-name">Belgium</span></div></td>
+        <td>June 30 (Day Trip)</td>
+        <td>—</td>
+        <td><ul class="highlights-list"><li>Grand Place, Brussels</li><li>Atomium</li><li>Bruges Guided Tour</li><li>Chocolate & Waffle tasting</li></ul></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PORTUGAL DAYS -->
+<div class="country-divider" id="portugal">
+  <span class="flag-lg">🇵🇹</span>
+  <div class="country-divider-info">
+    <h3>Portugal · Lisbon</h3>
+    <p>June 13 – 22, 2026 &nbsp;·&nbsp; EuroStars Hotel &nbsp;·&nbsp; 9 Nights</p>
+  </div>
+</div>
+
+<div class="days-grid">
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Saturday, June 13 — Travel Day</span>
+      <span class="day-title">Departure from USA</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">MORNING</span><span class="timeline-event"><strong>NY Group departs</strong> — Delta Flight #272<br><span class="timeline-note">Debbie Standard · 1C · GR8NSU &nbsp;|&nbsp; Kim Cunningham · 1G · GRZL5M &nbsp;|&nbsp; Ciera Woodard</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">MORNING</span><span class="timeline-event"><strong>NC Group departs</strong> — American Flight #258<br><span class="timeline-note">Ayana 20A AKTDOO · Amber 20C YZUHUI · Sonya 21C CDUVVH · Coralee 21B QHOJRQ · Veronica 21A NZNLAP · Racine 22C GXCYKY</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">OVERNIGHT</span><span class="timeline-event">Overnight international flights to Lisbon<br><span class="timeline-note">Compression socks recommended · Stay hydrated · Set watches to Lisbon time</span></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Sunday, June 14 — Arrival Day</span>
+      <span class="day-title">Welcome to Lisbon</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">8:00 AM</span><span class="timeline-event"><strong>NY Group Arrives</strong> — Delta Flight #272</span></li>
+        <li class="timeline-item"><span class="timeline-time">9:05 AM</span><span class="timeline-event"><strong>NC Group Arrives</strong> — American Flight #258</span></li>
+        <li class="timeline-item"><span class="timeline-time">9:30–11AM</span><span class="timeline-event">Immigration · Passport Control · Baggage Claim · Customs</span></li>
+        <li class="timeline-item"><span class="timeline-time">12:00 PM</span><span class="timeline-event"><strong>Charter Bus Transfer</strong> — Rapid Shuttle (George) · 949-510-4637</span></li>
+        <li class="timeline-item"><span class="timeline-time">12:30 PM</span><span class="timeline-event"><strong>Hotel Check-In</strong> — EuroStars Hotel · Rua Castilho 6-12<br><span class="timeline-note">+351 21 357 3094 · Hotel tax paid at property</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">AFTERNOON</span><span class="timeline-event">Lunch · Currency exchange at Banco Montepio · Afternoon tour TBD</span></li>
+        <li class="timeline-item"><span class="timeline-time">6:15 PM</span><span class="timeline-event">Charter bus to dinner</span></li>
+        <li class="timeline-item"><span class="timeline-time">7:00 PM</span><span class="timeline-event"><strong>Dinner — Sofia's</strong> (group of 18)<br><span class="timeline-note">Rua de Sao Bento Nr 67 · +351 963 498 785 (WhatsApp)</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">9:00 PM</span><span class="timeline-event">Charter bus back to hotel</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Thursday, June 19 — Tour Day</span>
+      <span class="day-title">Tuk Tuk · Yellow Boat · Tram Tour</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">MORNING</span><span class="timeline-event">Breakfast at hotel</span></li>
+        <li class="timeline-item"><span class="timeline-time">8:00 AM</span><span class="timeline-event">Transport pick-up by tour</span></li>
+        <li class="timeline-item"><span class="timeline-time">8:30–12:30PM</span><span class="timeline-event"><strong>Tuk Tuk Tour</strong> — 4-hour tour via Viator<br><span class="timeline-note">Historic Lisbon route · Photography stops throughout</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">1:00 PM</span><span class="timeline-event">Transport back to hotel · Lunch at 1:15 PM</span></li>
+        <li class="timeline-item"><span class="timeline-time">2:00 PM</span><span class="timeline-event">Uber to boat pick-up — Terreiro do Paço river cruise terminal (Estação Fluvial Sul e Sueste)</span></li>
+        <li class="timeline-item"><span class="timeline-time">2:30 PM</span><span class="timeline-event"><strong>Yellow Boat Tour</strong> — Hop-on Hop-off (1st tour) via Viator</span></li>
+        <li class="timeline-item"><span class="timeline-time">4:15 PM</span><span class="timeline-event">5-minute walk to Comércio Square tram stop</span></li>
+        <li class="timeline-item"><span class="timeline-time">4:30–5:30PM</span><span class="timeline-event"><strong>Hills Tramcar Tour</strong> — Hop-in Hop-off (2nd tour)</span></li>
+        <li class="timeline-item"><span class="timeline-time">6:00 PM</span><span class="timeline-event">Uber to EuroStar Da Letras</span></li>
+        <li class="timeline-item"><span class="timeline-time">7:15 PM</span><span class="timeline-event">Charter bus to dinner</span></li>
+        <li class="timeline-item"><span class="timeline-time">7:45 PM</span><span class="timeline-event"><strong>Dinner — Kong Vegan</strong><br><span class="timeline-note">Rua Do Corpo Santo 2, 1200-129 Lisboa</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">9:45 PM</span><span class="timeline-event">Charter bus back to hotel</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Friday, June 20 — Walking Tour Day</span>
+      <span class="day-title">Historic Lisbon · Modern City Tour</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">MORNING</span><span class="timeline-event">Breakfast</span></li>
+        <li class="timeline-item"><span class="timeline-time">9:30 AM</span><span class="timeline-event">Uber to morning tour — Largo do Chafariz de Dentro 30, 1100-605 Lisboa</span></li>
+        <li class="timeline-item"><span class="timeline-time">10AM–1PM</span><span class="timeline-event"><strong>Walking Tour</strong> — My Lisbon Tours via Viator<br><span class="timeline-note">+351 911 582 499 · Alfama & historic neighborhoods · End point: Largo do Carmo</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">1:30 PM</span><span class="timeline-event">Lunch · Uber to Rossio Square</span></li>
+        <li class="timeline-item"><span class="timeline-time">2:00 PM</span><span class="timeline-event"><strong>Modern Lisbon Hop-On Hop-Off Tour</strong> — 10 stops</span></li>
+        <li class="timeline-item"><span class="timeline-time">6:00 PM</span><span class="timeline-event">Uber to EuroStar Da Letras</span></li>
+        <li class="timeline-item"><span class="timeline-time">7:30 PM</span><span class="timeline-event"><strong>Dinner — Maria Calita</strong><br><span class="timeline-note">R. dos Bacalhoeiros 30, 1100-389 · +351 211 331 313</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">EVENING</span><span class="timeline-event">Charter bus back · After dinner nightlife TBD</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Saturday, June 21 — Sintra & Cascais</span>
+      <span class="day-title">Full Day Coastal Excursion</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">MORNING</span><span class="timeline-event">Breakfast · Tour transport pick-up</span></li>
+        <li class="timeline-item"><span class="timeline-time">8:00 AM</span><span class="timeline-event"><strong>Sintra & Cascais Private Tour</strong> — Full day, 8 hours<br><span class="timeline-note">Palace tickets included · Coastal viewpoints · Lunch included</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">4:30 PM</span><span class="timeline-event">Transport back to hotel · Freshen up</span></li>
+        <li class="timeline-item"><span class="timeline-time">6:00 PM</span><span class="timeline-event">Charter bus to dinner</span></li>
+        <li class="timeline-item"><span class="timeline-time">7:00 PM</span><span class="timeline-event"><strong>Dinner — SEEN Sky Bar</strong><br><span class="timeline-note">Hotel Tivoli · Avenida Liberdade, Lisbon 1269-050 · +351 21 096 5775 · Zone 1 seating</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">9:00 PM</span><span class="timeline-event">Charter bus back to hotel</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Sunday, June 22 — Travel Day</span>
+      <span class="day-title">Lisbon → Marrakech</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">5:15 AM</span><span class="timeline-event"><strong>Hotel Check-Out</strong></span></li>
+        <li class="timeline-item"><span class="timeline-time">5:30 AM</span><span class="timeline-event">Charter Bus to Lisbon Airport (LIS) — group of 11</span></li>
+        <li class="timeline-item"><span class="timeline-time">6:15 AM</span><span class="timeline-event">Arrive LIS · Breakfast in airport</span></li>
+        <li class="timeline-item"><span class="timeline-time">9:10 AM</span><span class="timeline-event"><strong>TAP Flight #1452 → Marrakech</strong> · 800-903-7914<br><span class="timeline-note">Venus 6A · Trinisha 6B · Ayana 6C · Veronica 6D · Debbie 7A · Kim 7B · Sonya 7C · Coralee 7D · Amber 9D · Ciera 9C · Racine 8A · Shawnee: Fast Track</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">10:00 AM</span><span class="timeline-event"><strong>Arrive Marrakech (RAK)</strong></span></li>
+        <li class="timeline-item"><span class="timeline-time">10AM–12:15PM</span><span class="timeline-event">Immigration · Passport Control · Baggage · Currency Exchange<br><span class="timeline-note">Al Barid Bank at RAK Airport — near departures board</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">12:30 PM</span><span class="timeline-event">Meet personal driver · Charter Bus pick-up</span></li>
+        <li class="timeline-item"><span class="timeline-time">1:15 PM</span><span class="timeline-event"><strong>Lunch — Amal Gueliz Restaurant</strong><br><span class="timeline-note">Rue Allal Ben Ahmed et Rue Ibn Sina Gueliz · +212 524 446 896</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">4:00 PM</span><span class="timeline-event"><strong>Hotel Check-In — Riad Awa Spa</strong><br><span class="timeline-note">Quartier Kasbah N°6 Derb El Hajra · Manager Bushlar: +212 661 243 468 (WhatsApp)</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">7:45 PM</span><span class="timeline-event">Depart for dinner</span></li>
+        <li class="timeline-item"><span class="timeline-time">8:30 PM</span><span class="timeline-event"><strong>Dinner & Show — Chez Ali Fantasia</strong><br><span class="timeline-note">Ought Sidi Brahim Dour Belaaguide · +212 672 210 464 · Note: drinks & tips not included</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">11:15 PM</span><span class="timeline-event">Return to Riad</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- MOROCCO DAYS -->
+<div class="country-divider" id="morocco">
+  <span class="flag-lg">🇲🇦</span>
+  <div class="country-divider-info">
+    <h3>Morocco · Marrakech</h3>
+    <p>June 22 – 28, 2026 &nbsp;·&nbsp; Riad Awa Spa &nbsp;·&nbsp; 6 Nights</p>
+  </div>
+</div>
+
+<div class="days-grid">
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Monday, June 23 — Education & Culture</span>
+      <span class="day-title">Hospital Tour · Jardin Majorelle · Cooking Class</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">7:00 AM</span><span class="timeline-event">Breakfast at Riad</span></li>
+        <li class="timeline-item"><span class="timeline-time">8:00 AM</span><span class="timeline-event">Charter Bus pick-up</span></li>
+        <li class="timeline-item"><span class="timeline-time">8:30–11:30AM</span><span class="timeline-event"><strong>Group 1 — Hospital Tour</strong> — Clinique Averroès<br><span class="timeline-note">Rue de Sebou, Guéliz · +212 524 434 058 · Contact: Emela</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">8:45 AM</span><span class="timeline-event"><strong>Group 2 (Kim & Debbie)</strong> — Hammam Massage<br><span class="timeline-note">Quad Way Marrakech · +212 661 673 687</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">11:15–11:30AM</span><span class="timeline-event">Pick up both groups</span></li>
+        <li class="timeline-item"><span class="timeline-time">12:00 PM</span><span class="timeline-event">Lunch — Cafe Majorelle</span></li>
+        <li class="timeline-item"><span class="timeline-time">1:00–2:30PM</span><span class="timeline-event"><strong>Jardin Majorelle</strong> & Pierre Berge Museum<br><span class="timeline-note">Photography, vibrant cobalt blue gardens, YSL collection</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">3:00 PM</span><span class="timeline-event"><strong>Cooking Class — La Maison Arabe</strong><br><span class="timeline-note">1 Derb Assehbé, Bab Doukkala, Marrakech Médina · +212 524 38 70 10</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">6:30 PM</span><span class="timeline-event">Return to Riad · Relax &amp; enjoy until 10pm</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Tuesday, June 24 — Balloon & Spa</span>
+      <span class="day-title">Sunrise Hot Air Balloon · Full Spa Day</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">5:15 AM</span><span class="timeline-event">Transport pick-up (excluding Debbie & Racine)</span></li>
+        <li class="timeline-item"><span class="timeline-time">6:00–9:30AM</span><span class="timeline-event"><strong>Hot Air Balloon Experience</strong> — 3.5 hrs with breakfast<br><span class="timeline-note">Sunrise flight over the desert · Photography opportunity</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">9:45 AM</span><span class="timeline-event">Return to Riad</span></li>
+        <li class="timeline-item"><span class="timeline-time">10:30 AM</span><span class="timeline-event">Charter Bus pick-up</span></li>
+        <li class="timeline-item"><span class="timeline-time">11:00 AM</span><span class="timeline-event"><strong>Full Spa Day — La Maison Arabe</strong><br><span class="timeline-note">1 Derb Assehbé, Bab Doukkala · +212 524 38 70 10 · Massages · Hammam · Relaxation</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">5:15 PM</span><span class="timeline-event">Return to Riad</span></li>
+        <li class="timeline-item"><span class="timeline-time">8:00 PM</span><span class="timeline-event"><strong>Dinner — La Trattoria</strong><br><span class="timeline-note">179 Rue Mohammed el Begal · +212 524 432 641</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">10:00 PM</span><span class="timeline-event">Return to Riad</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Wednesday, June 25 — Waterfalls</span>
+      <span class="day-title">Ouzoud Waterfall Day Excursion</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">5:30 AM</span><span class="timeline-event">Bag breakfast to go</span></li>
+        <li class="timeline-item"><span class="timeline-time">6:00 AM</span><span class="timeline-event">Charter Bus pick-up</span></li>
+        <li class="timeline-item"><span class="timeline-time">~9:00 AM</span><span class="timeline-event"><strong>Ouzoud Waterfall</strong> — Boat ride · Scenic hikes · Lunch at falls</span></li>
+        <li class="timeline-item"><span class="timeline-time">3:00 PM</span><span class="timeline-event">Depart waterfalls</span></li>
+        <li class="timeline-item"><span class="timeline-time">6:00 PM</span><span class="timeline-event">Arrive back at Riad</span></li>
+        <li class="timeline-item"><span class="timeline-time">7:30 PM</span><span class="timeline-event"><strong>Dinner — Sahbi Sahbi</strong><br><span class="timeline-note">N 37 Bd eh Mansour Eddahbi, Gueliz Marrakech · +212 662-682312</span></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Thursday, June 26 — Desert Night</span>
+      <span class="day-title">Agafay Desert Luxury Experience</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">8:00 AM</span><span class="timeline-event">Leisurely breakfast · Enjoy the Riad morning</span></li>
+        <li class="timeline-item"><span class="timeline-time">9:00 AM</span><span class="timeline-event"><strong>Amber &amp; Ciera</strong> — Airport transfer (Ryanair FR6722)</span></li>
+        <li class="timeline-item"><span class="timeline-time">MIDDAY</span><span class="timeline-event">Lunch · Leisure time</span></li>
+        <li class="timeline-item"><span class="timeline-time">1:30 PM</span><span class="timeline-event">Transport pick-up by tour</span></li>
+        <li class="timeline-item"><span class="timeline-time">2:30 PM</span><span class="timeline-event"><strong>Agafay Desert Experience</strong><br><span class="timeline-note">Pool · Quad bikes · Camel rides · Traditional dress photography · Sunset relaxation</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">EVENING</span><span class="timeline-event">Dinner under the stars · Fire show · Live music<br><span class="timeline-note">Beverages (alcoholic & non-alcoholic) included · Tips appreciated</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">10:30 PM</span><span class="timeline-event">Depart desert</span></li>
+        <li class="timeline-item"><span class="timeline-time">11:30 PM</span><span class="timeline-event">Arrive back at Riad</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Friday, June 27 — Souk Day</span>
+      <span class="day-title">Saadian Tombs · Bahia Palace · Grand Souk</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">8:00 AM</span><span class="timeline-event">Breakfast · Charter Bus pick-up at 8:30 AM</span></li>
+        <li class="timeline-item"><span class="timeline-time">9:00–9:45AM</span><span class="timeline-event"><strong>Saadian Tombs</strong></span></li>
+        <li class="timeline-item"><span class="timeline-time">10:00–10:45AM</span><span class="timeline-event"><strong>Bahia Palace</strong></span></li>
+        <li class="timeline-item"><span class="timeline-time">11:00 AM</span><span class="timeline-event">Head toward Jemaa El-Fnaa Square</span></li>
+        <li class="timeline-item"><span class="timeline-time">11:30 AM</span><span class="timeline-event"><strong>Lunch — Mo Mo's</strong><br><span class="timeline-note">Riad Piton Lakdim 1, Marrakech · +212 666 420 640</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">AFTERNOON</span><span class="timeline-event"><strong>Grand Souk Tour</strong><br><span class="timeline-note">Souk El Kebir · Souk des Teinturiers · Souk des Babouches · Souk Cherratine · Rahba (spices, argan oil, cosmetics)</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">4:00 PM</span><span class="timeline-event"><strong>Specialty Boutiques</strong><br><span class="timeline-note">Rugs: Chabi Chic / Al Matjar · Linens: V Barkowski · Fashion: Marqa / Michele Baconnier · Lanterns & Argan oils</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">6:00 PM</span><span class="timeline-event">Return to Riad</span></li>
+        <li class="timeline-item"><span class="timeline-time">8:00 PM – 1AM</span><span class="timeline-event"><strong>Dinner & Show — LUMA Restaurant</strong><br><span class="timeline-note">Leopard Marrakech, Bd Mohamed VI · +212 625 566 566 · Tips for dinner</span></span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- AMSTERDAM DAYS -->
+<div class="country-divider" id="amsterdam">
+  <span class="flag-lg">🇳🇱</span>
+  <div class="country-divider-info">
+    <h3>Netherlands · Amsterdam &amp; 🇧🇪 Belgium</h3>
+    <p>June 28 – July 2, 2026 &nbsp;·&nbsp; Conscious Hotel Vondelpark &nbsp;·&nbsp; 4 Nights</p>
+  </div>
+</div>
+
+<div class="days-grid">
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Sunday, June 28 — Travel Day</span>
+      <span class="day-title">Marrakech → Amsterdam</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">MORNING</span><span class="timeline-event">Breakfast at Riad</span></li>
+        <li class="timeline-item"><span class="timeline-time">7:15 AM</span><span class="timeline-event">Transport to RAK Airport</span></li>
+        <li class="timeline-item"><span class="timeline-time">7:30 AM</span><span class="timeline-event">Arrive RAK Airport · Breakfast in airport</span></li>
+        <li class="timeline-item"><span class="timeline-time">9:55 AM</span><span class="timeline-event"><strong>Transavia Flight #5756 → Amsterdam</strong><br><span class="timeline-note">+31 202 146 032</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">3:35 PM</span><span class="timeline-event">Arrive Amsterdam (AMS)</span></li>
+        <li class="timeline-item"><span class="timeline-time">5:00 PM</span><span class="timeline-event">Transfer from AMS Airport to hotel</span></li>
+        <li class="timeline-item"><span class="timeline-time">5:30 PM</span><span class="timeline-event"><strong>Hotel Check-In — Conscious Hotel Vondelpark</strong><br><span class="timeline-note">Overtoom 519-521, Amsterdam · +31 20 820 3333</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">EVENING</span><span class="timeline-event">Dinner TBD · Transportation back to hotel</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Monday, June 29 — Hop-On Hop-Off Day</span>
+      <span class="day-title">Amsterdam City Tour · Hortus Botanicus</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">MORNING</span><span class="timeline-event">Breakfast at hotel</span></li>
+        <li class="timeline-item"><span class="timeline-time">9:15 AM</span><span class="timeline-event">Groups 1 &amp; 2 leave hotel to Tram #1</span></li>
+        <li class="timeline-item"><span class="timeline-time">9:30 AM</span><span class="timeline-event">Amsterdam GVB day ticket — $15 × 2 days · Tram #1 to HOHO station</span></li>
+        <li class="timeline-item"><span class="timeline-time">10:00 AM</span><span class="timeline-event"><strong>Hop-On Hop-Off Amsterdam</strong> — 24-hour pass<br><span class="timeline-note">Group 1: stay on full tram tour · Group 2: exit at Hortus Botanicus</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">11AM–1PM</span><span class="timeline-event"><strong>Group 2 — Hortus Botanicus</strong><br><span class="timeline-note">Plantage Middenlaan 2A, 1018DD Amsterdam</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">1:15 PM</span><span class="timeline-event">Groups 1 &amp; 2 reunite for lunch</span></li>
+        <li class="timeline-item"><span class="timeline-time">2:15 PM</span><span class="timeline-event">Continue HOHO tour together</span></li>
+        <li class="timeline-item"><span class="timeline-time">5:00 PM</span><span class="timeline-event">Return to hotel</span></li>
+        <li class="timeline-item"><span class="timeline-time">EVENING</span><span class="timeline-event">Dinner TBD · After dinner: walking tour of Red Light District</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Tuesday, June 30 — Belgium Day Trip</span>
+      <span class="day-title">Brussels &amp; Bruges Full Day Excursion</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">MORNING</span><span class="timeline-event">Breakfast at hotel</span></li>
+        <li class="timeline-item"><span class="timeline-time">6:15 AM</span><span class="timeline-event"><strong>Trevia Taxi</strong> — +31 20 260 7070</span></li>
+        <li class="timeline-item"><span class="timeline-time">6:45 AM</span><span class="timeline-event">Transport to tour — Aloha, De Ruijterkade 151, Amsterdam · Amigo Tours: +34 911 293 483</span></li>
+        <li class="timeline-item"><span class="timeline-time">7:00 AM</span><span class="timeline-event"><strong>Brussels Day Tour departs</strong></span></li>
+        <li class="timeline-item"><span class="timeline-time">10:30 AM</span><span class="timeline-event">Arrive Brussels</span></li>
+        <li class="timeline-item"><span class="timeline-time">12:30 PM</span><span class="timeline-event">Lunch</span></li>
+        <li class="timeline-item"><span class="timeline-time">1:30 PM</span><span class="timeline-event">Travel Brussels City Centre → Atomium</span></li>
+        <li class="timeline-item"><span class="timeline-time">2:00 PM</span><span class="timeline-event"><strong>Atomium</strong> — de l'Atomium, 1020 Bruxelles<br><span class="timeline-note">Passing: Grand Place · Manneken Pis · Tintin Mural · Mont des Arts</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">3:00 PM</span><span class="timeline-event">Travel Brussels → Bruges</span></li>
+        <li class="timeline-item"><span class="timeline-time">4:30 PM</span><span class="timeline-event"><strong>Bruges Guided Tour</strong><br><span class="timeline-note">Canal scenery · Historic architecture · Waffle tasting</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">5:30 PM</span><span class="timeline-event">Dinner in Brussels</span></li>
+        <li class="timeline-item"><span class="timeline-time">6:30 PM</span><span class="timeline-event">Travel back to Amsterdam<br><span class="timeline-note">See along the way: Minnewater Lake, Mary's Bridge</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">9:30 PM</span><span class="timeline-event">Arrive back at pick-up location · Hotel by 10:00 PM</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Wednesday, July 1 — Final Night</span>
+      <span class="day-title">Amsterdam Food Tour · Canal Dinner Cruise</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">MORNING</span><span class="timeline-event">Breakfast at hotel</span></li>
+        <li class="timeline-item"><span class="timeline-time">11:00 AM</span><span class="timeline-event">Transportation to food tour</span></li>
+        <li class="timeline-item"><span class="timeline-time">11:30AM–3PM</span><span class="timeline-event"><strong>Amsterdam Food &amp; Culture Tasting Tour</strong><br><span class="timeline-note">Waterlooplein 129, 1011 PG Amsterdam · Dutch tastings · Local cafés · Cultural food experiences</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">4:00 PM</span><span class="timeline-event">Everyone returns to hotel · Rest &amp; refresh</span></li>
+        <li class="timeline-item"><span class="timeline-time">6:30 PM</span><span class="timeline-event">Transportation to dinner — Prins Hendrikkade 20A, 1012 TL</span></li>
+        <li class="timeline-item"><span class="timeline-time">7:00–9:00PM</span><span class="timeline-event"><strong>Amsterdam Canal Dinner Cruise</strong> 🚢<br><span class="timeline-note">Final group celebration · Tips appreciated</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">9:00 PM</span><span class="timeline-event">Transportation back to hotel · Last evening in Europe</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-card-header">
+      <span class="day-date">Thursday, July 2 — Return Home</span>
+      <span class="day-title">Departure Day</span>
+    </div>
+    <div class="day-card-body">
+      <ul class="timeline">
+        <li class="timeline-item"><span class="timeline-time">8:30 AM</span><span class="timeline-event">Final breakfast · Hotel check-out</span></li>
+        <li class="timeline-item"><span class="timeline-time">10:30 AM</span><span class="timeline-event">Transportation to AMS Airport</span></li>
+        <li class="timeline-item"><span class="timeline-time">11:30 AM</span><span class="timeline-event">Arrive AMS Airport</span></li>
+        <li class="timeline-item"><span class="timeline-time">1:30 PM</span><span class="timeline-event"><strong>NC Group — American/Aer Lingus #EL605</strong> AMS → DUB → RDU<br><span class="timeline-note">Sonya 23B/24B · Coralee 23C/24C · Veronica 23A/24A · Racine 23D/34K</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">2:45 PM</span><span class="timeline-event"><strong>NY Group — Delta Flight #49</strong> AMS → JFK<br><span class="timeline-note">Venus 22A · Trinisha 22B · Debbie 23A · Kim 23B · Shawnee</span></span></li>
+        <li class="timeline-item"><span class="timeline-time">5:10 PM</span><span class="timeline-event">NY Group arrives JFK · Lounge: Amex Centurion T4 or Delta Sky Club T4</span></li>
+        <li class="timeline-item"><span class="timeline-time">7:25 PM</span><span class="timeline-event"><strong>Delta #5103</strong> JFK → RDU (Venus group)</span></li>
+        <li class="timeline-item"><span class="timeline-time">9:38 PM</span><span class="timeline-event">Arrives RDU</span></li>
+        <li class="timeline-item"><span class="timeline-time">10:30 PM</span><span class="timeline-event">Arrive Home 🏠</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ROSTER -->
+<section class="section" id="roster">
+  <div class="section-header">
+    <div class="section-eyebrow">Travel Group</div>
+    <h2 class="section-title">Our Sisterhood — 12 Travelers</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="roster-grid">
+    <div class="roster-card"><div class="roster-avatar">VS</div><div><div class="roster-name">Venus Standard</div><div class="roster-phone">919-606-9994</div></div></div>
+    <div class="roster-card"><div class="roster-avatar">TW</div><div><div class="roster-name">Trinisha Williams</div><div class="roster-phone">917-375-1763</div></div></div>
+    <div class="roster-card"><div class="roster-avatar">SK</div><div><div class="roster-name">Sonya Kearse</div><div class="roster-phone">919-924-9641</div></div></div>
+    <div class="roster-card"><div class="roster-avatar">CO</div><div><div class="roster-name">Coralee Oates</div><div class="roster-phone">919-696-6874</div></div></div>
+    <div class="roster-card"><div class="roster-avatar">AH</div><div><div class="roster-name">Ayana Hines</div><div class="roster-phone">202-336-2352</div></div></div>
+    <div class="roster-card"><div class="roster-avatar">VW</div><div><div class="roster-name">Veronica Wease</div><div class="roster-phone">206-802-8378</div></div></div>
+    <div class="roster-card"><div class="roster-avatar">DS</div><div><div class="roster-name">Debbie Standard</div><div class="roster-phone">631-220-3322</div></div></div>
+    <div class="roster-card"><div class="roster-avatar">KC</div><div><div class="roster-name">Kim Cunningham</div><div class="roster-phone">646-825-0298</div></div></div>
+    <div class="roster-card"><div class="roster-avatar">RH</div><div><div class="roster-name">Racine Hooper</div><div class="roster-phone">828-779-1489</div></div></div>
+    <div class="roster-card"><div class="roster-avatar">AB</div><div><div class="roster-name">Amber Bell</div><div class="roster-phone">919-264-1789</div></div></div>
+    <div class="roster-card"><div class="roster-avatar">CW</div><div><div class="roster-name">Ciera Woodard</div><div class="roster-phone">919-924-3604</div></div></div>
+    <div class="roster-card"><div class="roster-avatar">SB</div><div><div class="roster-name">Shawnee Benton</div><div class="roster-phone">718-781-6979</div></div></div>
+  </div>
+</section>
+
+<!-- HOTELS -->
+<section class="section" id="hotels">
+  <div class="section-header">
+    <div class="section-eyebrow">Accommodations</div>
+    <h2 class="section-title">Where We Stay</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="hotels-grid">
+    <div class="hotel-card">
+      <div class="hotel-card-top">
+        <div class="hotel-country">🇵🇹 Portugal — Lisbon (9 nights)</div>
+        <div class="hotel-name">EuroStars Hotel</div>
+      </div>
+      <div class="hotel-card-body">
+        <div class="hotel-detail"><strong>Address:</strong> Rua Castilho 6-12, Lisbon</div>
+        <div class="hotel-detail"><strong>Phone:</strong> +351 21 357 3094</div>
+        <div class="hotel-detail"><strong>Note:</strong> Hotel tax paid at property · Booked via Expedia</div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-card-top">
+        <div class="hotel-country">🇲🇦 Morocco — Marrakech (6 nights)</div>
+        <div class="hotel-name">Riad Awa Spa</div>
+      </div>
+      <div class="hotel-card-body">
+        <div class="hotel-detail"><strong>Address:</strong> Quartier Kasbah N°6 Derb El Hajra</div>
+        <div class="hotel-detail"><strong>Manager:</strong> Bushlar</div>
+        <div class="hotel-detail"><strong>WhatsApp:</strong> +212 661 243 468</div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-card-top">
+        <div class="hotel-country">🇳🇱 Netherlands — Amsterdam (4 nights)</div>
+        <div class="hotel-name">Conscious Hotel Vondelpark</div>
+      </div>
+      <div class="hotel-card-body">
+        <div class="hotel-detail"><strong>Address:</strong> Overtoom 519-521, Amsterdam</div>
+        <div class="hotel-detail"><strong>Phone:</strong> +31 20 820 3333</div>
+        <div class="hotel-detail"><strong>Note:</strong> Eco-conscious hotel near Vondelpark</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCY -->
+<section class="section" id="emergency">
+  <div class="section-header">
+    <div class="section-eyebrow">Safety First</div>
+    <h2 class="section-title">Emergency Contacts &amp; Embassies</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="embassy-grid">
+    <div class="embassy-card">
+      <div class="embassy-country">🇵🇹 Portugal</div>
+      <div class="embassy-name">US Embassy Lisbon</div>
+      <div class="embassy-phone">+351-21-727-3300</div>
+    </div>
+    <div class="embassy-card">
+      <div class="embassy-country">🇲🇦 Morocco</div>
+      <div class="embassy-name">US Consulate Casablanca</div>
+      <div class="embassy-phone">+(212) (522) 64-20-00</div>
+    </div>
+    <div class="embassy-card">
+      <div class="embassy-country">🇳🇱 Netherlands</div>
+      <div class="embassy-name">US Embassy Amsterdam</div>
+      <div class="embassy-phone">+31 70 310-2209</div>
+    </div>
+    <div class="embassy-card">
+      <div class="embassy-country">🇧🇪 Belgium</div>
+      <div class="embassy-name">US Embassy Brussels</div>
+      <div class="embassy-phone">+32 2-811-4000</div>
+    </div>
+    <div class="embassy-card">
+      <div class="embassy-country">🚐 Charter / Transport</div>
+      <div class="embassy-name">Rapid Shuttle — George</div>
+      <div class="embassy-phone">949-510-4637</div>
+    </div>
+    <div class="embassy-card">
+      <div class="embassy-country">🏨 Morocco Riad Manager</div>
+      <div class="embassy-name">Bushlar (WhatsApp)</div>
+      <div class="embassy-phone">+212 661 243 468</div>
+    </div>
+  </div>
+
+  <div style="margin-top:3rem;">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--crimson-dk);margin-bottom:1.5rem;">Currency Guide</h3>
+    <table class="currency-table">
+      <thead><tr><th>Country</th><th>Currency</th></tr></thead>
+      <tbody>
+        <tr><td>🇵🇹 Portugal</td><td>Euro (€)</td></tr>
+        <tr><td>🇲🇦 Morocco</td><td>Moroccan Dirham (MAD)</td></tr>
+        <tr><td>🇳🇱 Netherlands</td><td>Euro (€)</td></tr>
+        <tr><td>🇧🇪 Belgium</td><td>Euro (€)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PACKING -->
+<section class="section" id="packing">
+  <div class="section-header">
+    <div class="section-eyebrow">Be Prepared</div>
+    <h2 class="section-title">Packing Guide</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="packing-grid">
+    <div class="packing-group">
+      <h4>Conference Attire</h4>
+      <ul class="packing-list">
+        <li>Business casual dresses</li>
+        <li>Professional conference outfits</li>
+        <li>Comfortable flats or loafers</li>
+        <li>Lightweight blazers</li>
+      </ul>
+    </div>
+    <div class="packing-group">
+      <h4>Morocco / Desert</h4>
+      <ul class="packing-list">
+        <li>Breathable fabrics</li>
+        <li>Modest shoulder coverage</li>
+        <li>Midi / maxi dresses</li>
+        <li>Light shawls / scarves</li>
+        <li>Sand-friendly shoes</li>
+        <li>Head scarf (mosque areas)</li>
+      </ul>
+    </div>
+    <div class="packing-group">
+      <h4>General Essentials</h4>
+      <ul class="packing-list">
+        <li>Comfortable walking shoes</li>
+        <li>Evening dinner attire</li>
+        <li>Swimwear</li>
+        <li>Sunscreen</li>
+        <li>Refillable water bottle</li>
+        <li>Small crossbody bag</li>
+      </ul>
+    </div>
+    <div class="packing-group">
+      <h4>Tech &amp; Travel</h4>
+      <ul class="packing-list">
+        <li>Universal travel adapters</li>
+        <li>Portable charger / power bank</li>
+        <li>WhatsApp installed</li>
+        <li>Offline Google Maps downloaded</li>
+        <li>Compression socks (flights)</li>
+        <li>Medications in carry-on</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- AFFIRMATIONS / CLOSING -->
+<div class="affirmation-block">
+  <h3>Our Retreat Mission</h3>
+  <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;max-width:550px;margin:0 auto 2rem;line-height:1.7;">To create a transformative global experience centered on birth work, wellness, education, cultural immersion, and sisterhood.</p>
+  <div class="affirmations">
+    <div class="affirmation">◆ &nbsp;We travel in community.</div>
+    <div class="affirmation">◆ &nbsp;We lead with compassion.</div>
+    <div class="affirmation">◆ &nbsp;We honor wellness and growth.</div>
+    <div class="affirmation">◆ &nbsp;We celebrate global sisterhood.</div>
+  </div>
+  <div class="closing-quote">"One Sisterhood. Many Destinations. Lifelong Impact."</div>
+</div>
+
+<footer>
+  <p>Prepared for <span>The Doula Exchange</span> by <span>Dexton-Livvy LLC</span> &nbsp;·&nbsp; Design Concept 1 of 3 &nbsp;·&nbsp; Confidential</p>
+</footer>
+
+</body>
+</html>
