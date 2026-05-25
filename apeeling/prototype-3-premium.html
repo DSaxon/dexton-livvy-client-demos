@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apeeling LLC – Natural Ingredients. Sustainable Solutions. Global Reach.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Rubik:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f1a506;
+      --orange-dark: #c8880a;
+      --orange-pale: #fdf6e3;
+      --forest: #164827;
+      --forest-mid: #1d5c32;
+      --forest-pale: #edf4ee;
+      --cream: #f9f5ef;
+      --cream-dark: #ede8e0;
+      --warm: #8b7355;
+      --dark: #1c1812;
+      --muted: #7a7060;
+      --border: #ddd8ce;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Rubik', sans-serif;
+      background: var(--cream); color: var(--dark); line-height: 1.6;
+    }
+
+    h1, h2, h3, .serif { font-family: 'Cormorant Garamond', serif; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(249,245,239,0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 76px;
+    }
+
+    .logo { text-decoration: none; }
+
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--dark); letter-spacing: 0.5px;
+    }
+
+    .logo-text em { color: var(--orange); font-style: italic; }
+
+    .logo-sub {
+      font-size: 0.6rem; font-weight: 500; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--muted);
+      display: block; margin-top: -2px;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--dark); }
+
+    .nav-cta {
+      background: var(--forest) !important; color: var(--white) !important;
+      padding: 0.55rem 1.5rem !important; border-radius: 0 !important;
+      font-weight: 600 !important; font-size: 0.78rem !important;
+      letter-spacing: 1px !important;
+    }
+
+    .nav-cta:hover { background: var(--forest-mid) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; padding-top: 76px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      background: var(--forest);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 4rem 5rem 5rem;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-left::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v5h5v5H0v5h20v-9.5zm-2-17.5h2v2h-2v-2zM0 2h2v2H0V2zm7 0h2v2H7V2zm7 0h2v2h-2V2z' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/svg%3E");
+    }
+
+    .hero-overline {
+      font-size: 0.68rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 3px; color: var(--orange);
+      margin-bottom: 2rem; position: relative;
+    }
+
+    .hero h1 {
+      font-size: 5.5rem; font-weight: 700; line-height: 0.9;
+      color: var(--white); margin-bottom: 2rem;
+      letter-spacing: -2px; position: relative;
+    }
+
+    .hero h1 .orange { color: var(--orange); font-style: italic; }
+
+    .hero-desc {
+      font-size: 0.95rem; color: rgba(255,255,255,0.6);
+      line-height: 1.8; max-width: 380px; margin-bottom: 3rem;
+      font-weight: 300; position: relative;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; position: relative; }
+
+    .btn-gold {
+      background: var(--orange); color: var(--dark);
+      padding: 1rem 2.25rem; font-weight: 600; font-size: 0.82rem;
+      text-transform: uppercase; letter-spacing: 1px;
+      text-decoration: none; transition: background 0.15s;
+      display: inline-block;
+    }
+
+    .btn-gold:hover { background: var(--orange-dark); }
+
+    .btn-ghost-white {
+      background: transparent; color: rgba(255,255,255,0.75);
+      padding: 1rem 2.25rem; font-weight: 500; font-size: 0.82rem;
+      text-transform: uppercase; letter-spacing: 1px;
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.25);
+      transition: border-color 0.15s, color 0.15s; display: inline-block;
+    }
+
+    .btn-ghost-white:hover { border-color: rgba(255,255,255,0.6); color: var(--white); }
+
+    .hero-right {
+      background: var(--cream);
+      display: flex; flex-direction: column;
+    }
+
+    .hero-right-top {
+      flex: 1;
+      background: var(--cream-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7rem; position: relative; overflow: hidden;
+    }
+
+    .hero-right-top::after {
+      content: 'APEELING';
+      position: absolute; bottom: 1.5rem; right: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 6rem; font-weight: 700;
+      color: rgba(22,72,39,0.06); letter-spacing: -3px;
+      line-height: 1;
+    }
+
+    .hero-right-bottom {
+      padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border);
+    }
+
+    .hero-stat-cell {
+      background: var(--cream); padding: 1.5rem;
+    }
+
+    .hero-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 700; color: var(--dark);
+      line-height: 1; margin-bottom: 0.25rem;
+    }
+
+    .hero-stat-label { font-size: 0.72rem; color: var(--muted); font-weight: 500; letter-spacing: 0.5px; }
+
+    /* SECTION */
+    .section { padding: 7rem 3rem; }
+    .section-inner { max-width: 1280px; margin: 0 auto; }
+
+    .eyebrow-serif {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; font-style: italic; color: var(--orange);
+      letter-spacing: 0.5px; margin-bottom: 1rem;
+    }
+
+    .heading-xl {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.75rem; font-weight: 700; line-height: 1.05;
+      color: var(--dark); letter-spacing: -1px; margin-bottom: 1rem;
+    }
+
+    .body-text {
+      font-size: 0.95rem; color: var(--muted); line-height: 1.8;
+      max-width: 500px; font-weight: 300;
+    }
+
+    /* ABOUT */
+    .about-section { background: var(--white); }
+
+    .about-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 7rem; align-items: center;
+    }
+
+    .manifesto {
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+    }
+
+    .manifesto p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 400; color: var(--dark);
+      line-height: 1.5; margin-bottom: 0.75rem; font-style: italic;
+    }
+
+    .manifesto p strong { color: var(--forest); font-style: normal; font-weight: 700; }
+
+    .about-panel { display: flex; flex-direction: column; gap: 0; }
+
+    .about-item {
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; gap: 1.5rem;
+    }
+
+    .about-item-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 700; color: var(--cream-dark);
+      flex-shrink: 0; line-height: 1; min-width: 2ch;
+    }
+
+    .about-item h3 { font-size: 1rem; font-weight: 600; color: var(--dark); margin-bottom: 0.4rem; }
+    .about-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+    /* SERVICES */
+    .services-section { background: var(--cream); }
+
+    .services-layout {
+      display: grid; grid-template-columns: 1fr 2fr; gap: 6rem;
+      align-items: start;
+    }
+
+    .services-sticky { position: sticky; top: 100px; }
+
+    .services-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border); border: 1px solid var(--border);
+    }
+
+    .svc-block {
+      background: var(--cream); padding: 2.5rem 2rem;
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .svc-block:hover { background: var(--white); }
+
+    .svc-block::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 0; background: var(--orange);
+      transition: height 0.3s;
+    }
+
+    .svc-block:hover::before { height: 100%; }
+
+    .svc-num-lg {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem; font-weight: 700; color: var(--cream-dark);
+      line-height: 1; margin-bottom: 0.75rem;
+    }
+
+    .svc-block h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; color: var(--dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .svc-block p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+    /* MATERIALS */
+    .materials-section { background: var(--dark); }
+
+    .materials-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 4rem; flex-wrap: wrap; gap: 2rem;
+    }
+
+    .materials-section .heading-xl { color: var(--white); }
+    .materials-section .body-text { color: rgba(255,255,255,0.45); }
+
+    .mat-strip {
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mat-col {
+      border-right: 1px solid rgba(255,255,255,0.08);
+      padding: 2.5rem 1.5rem;
+      transition: background 0.2s;
+    }
+
+    .mat-col:last-child { border-right: none; }
+    .mat-col:hover { background: rgba(241,165,6,0.06); }
+
+    .mat-col-icon { font-size: 2rem; margin-bottom: 1.5rem; display: block; }
+
+    .mat-col-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600; color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .mat-col-props { display: flex; flex-direction: column; gap: 0.3rem; }
+
+    .mat-prop { font-size: 0.72rem; color: rgba(255,255,255,0.4); font-weight: 400; letter-spacing: 0.3px; }
+
+    .mat-col:hover .mat-col-name { color: var(--orange); }
+
+    /* SUSTAINABILITY */
+    .sustain-section { background: var(--orange-pale); }
+
+    .sustain-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 7rem; align-items: center;
+    }
+
+    .sustain-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 600; color: var(--dark);
+      line-height: 1.3; margin-top: 2rem;
+      padding-top: 2rem; border-top: 2px solid var(--orange);
+      font-style: italic;
+    }
+
+    .sustain-list { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 3rem; }
+
+    .s-item { display: flex; gap: 1.25rem; align-items: flex-start; }
+
+    .s-bullet {
+      width: 8px; height: 8px; background: var(--orange);
+      border-radius: 50%; flex-shrink: 0; margin-top: 8px;
+    }
+
+    .s-item h4 { font-size: 0.95rem; font-weight: 600; color: var(--dark); margin-bottom: 0.3rem; }
+    .s-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+    /* CONTACT */
+    .contact-section { background: var(--white); }
+
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; margin-top: 4rem;
+    }
+
+    .contact-left > p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem; font-weight: 300; }
+
+    .c-info { margin-bottom: 1.5rem; }
+    .c-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--orange); margin-bottom: 0.3rem; }
+    .c-value { font-size: 0.92rem; color: var(--dark); }
+    .c-value a { color: var(--dark); text-decoration: none; border-bottom: 1px solid var(--border); transition: border-color 0.15s; }
+    .c-value a:hover { border-color: var(--orange); }
+
+    .contact-form { }
+
+    form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+    label { display: block; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 0.4rem; }
+
+    input, select, textarea {
+      width: 100%; padding: 0.8rem 0;
+      border: none; border-bottom: 1.5px solid var(--border);
+      background: transparent; font-family: 'Rubik', sans-serif;
+      font-size: 0.9rem; color: var(--dark); outline: none;
+      transition: border-color 0.15s; border-radius: 0;
+    }
+
+    input:focus, select:focus, textarea:focus { border-color: var(--orange); }
+    textarea { resize: none; min-height: 90px; }
+
+    .form-submit {
+      background: var(--forest); color: var(--white);
+      border: none; padding: 1rem 2.5rem;
+      font-family: 'Rubik', sans-serif; font-size: 0.82rem;
+      font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+      cursor: pointer; transition: background 0.15s;
+      align-self: flex-start;
+    }
+
+    .form-submit:hover { background: var(--forest-mid); }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      padding: 3rem;
+    }
+
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      align-items: flex-end; flex-wrap: wrap; gap: 2rem;
+    }
+
+    .footer-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--white); letter-spacing: 0.5px;
+    }
+
+    .footer-logo-text em { color: var(--orange); font-style: italic; }
+
+    .footer-tagline {
+      font-size: 0.72rem; font-weight: 400; letter-spacing: 1.5px;
+      text-transform: uppercase; color: rgba(255,255,255,0.3);
+      margin-top: 0.25rem;
+    }
+
+    footer p { font-size: 0.75rem; color: rgba(255,255,255,0.25); text-align: right; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .hero, .about-layout, .services-layout, .sustain-inner, .contact-layout { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 3.5rem; }
+      .hero-right { display: none; }
+      .mat-strip { grid-template-columns: repeat(3, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-text">Ape<em>el</em>ing</div>
+      <span class="logo-sub">Natural · Sustainable · Global</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#materials">Materials</a></li>
+      <li><a href="#sustainability">Sustainability</a></li>
+      <li><a href="#contact" class="nav-cta">Inquire</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-overline">Natural Ingredients · Sustainable Solutions · Global Reach</div>
+    <h1>Fabric<br />rooted<br />in <span class="orange">nature</span></h1>
+    <p class="hero-desc">Apeeling LLC delivers world-class natural textile solutions to manufacturers, brands, and distributors worldwide — from design to production at global scale.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-gold">Start a Project</a>
+      <a href="#materials" class="btn-ghost-white">View Materials</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-top">🌿</div>
+    <div class="hero-right-bottom">
+      <div class="hero-stat-cell">
+        <div class="hero-stat-num">6+</div>
+        <div class="hero-stat-label">Natural Materials</div>
+      </div>
+      <div class="hero-stat-cell">
+        <div class="hero-stat-num">5</div>
+        <div class="hero-stat-label">Core Services</div>
+      </div>
+      <div class="hero-stat-cell">
+        <div class="hero-stat-num">Global</div>
+        <div class="hero-stat-label">Supply Chain</div>
+      </div>
+      <div class="hero-stat-cell">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Natural Focus</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-section" id="about">
+  <div class="section-inner">
+    <div class="about-layout">
+      <div>
+        <div class="eyebrow-serif">About Apeeling LLC</div>
+        <h2 class="heading-xl">Nature-forward textiles. Global scale.</h2>
+        <p class="body-text">We are a full-service textile company built on a singular belief — the best fabrics come from nature. Apeeling LLC partners with brands, manufacturers, and distributors who demand quality without compromise and who believe the future of textiles is rooted in sustainable, natural ingredients.</p>
+        <div class="manifesto">
+          <p>"We don't just source fabric.<br />We source <strong>from the earth</strong>,<br />with respect for it."</p>
+        </div>
+      </div>
+      <div class="about-panel">
+        <div class="about-item">
+          <div class="about-item-num">01</div>
+          <div>
+            <h3>Natural Ingredient Focus</h3>
+            <p>Every material we work with starts in nature — cotton fields, silk farms, wool pastures, and flax crops. We build supply chains that honor this origin.</p>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-item-num">02</div>
+          <div>
+            <h3>Full-Service Capability</h3>
+            <p>Design, manufacture, engineer, print, and dye — complete end-to-end control with one partner, one point of accountability.</p>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-item-num">03</div>
+          <div>
+            <h3>Global Reach</h3>
+            <p>Our network spans continents. We source from the world's best growing regions and produce at scale across international manufacturing partners.</p>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-item-num">04</div>
+          <div>
+            <h3>Sustainable by Design</h3>
+            <p>Sustainability is embedded in every decision — from the seeds planted to the dyes applied and the logistics routes chosen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services-section" id="services">
+  <div class="section-inner">
+    <div class="services-layout">
+      <div class="services-sticky">
+        <div class="eyebrow-serif">What We Do</div>
+        <h2 class="heading-xl">End-to-end textile services</h2>
+        <p class="body-text">From first sketch to finished product — Apeeling manages the complete fabric lifecycle under one roof.</p>
+        <br /><br />
+        <a href="#contact" class="btn-gold">Discuss Your Project</a>
+      </div>
+      <div class="services-grid">
+        <div class="svc-block">
+          <div class="svc-num-lg">01</div>
+          <h3>Fabric Design</h3>
+          <p>Custom design from concept to technical specification. We develop patterns, weave structures, and fiber compositions aligned to your brand vision.</p>
+        </div>
+        <div class="svc-block">
+          <div class="svc-num-lg">02</div>
+          <h3>Manufacturing</h3>
+          <p>Precision manufacturing with full quality oversight. We scale from sample runs to commercial volumes with consistent, repeatable output.</p>
+        </div>
+        <div class="svc-block">
+          <div class="svc-num-lg">03</div>
+          <h3>Engineering</h3>
+          <p>Technical fabric engineering for performance applications. Material science applied to functional, compliance, and durability specifications.</p>
+        </div>
+        <div class="svc-block">
+          <div class="svc-num-lg">04</div>
+          <h3>Fabric Printing</h3>
+          <p>High-fidelity print on natural and blended substrates. Digital and screen printing with precision color matching and lasting results.</p>
+        </div>
+        <div class="svc-block" style="grid-column: 1 / -1;">
+          <div class="svc-num-lg">05</div>
+          <h3>Fabric Dyeing</h3>
+          <p>Sustainable dyeing with low-impact dyes and water-conscious processes. We achieve precise color targets without environmental compromise — across all natural fiber types.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATERIALS -->
+<section class="section materials-section" id="materials">
+  <div class="section-inner">
+    <div class="materials-header">
+      <div>
+        <div class="eyebrow-serif" style="color: var(--orange);">Our Materials</div>
+        <h2 class="heading-xl">Six natural fabric families</h2>
+      </div>
+      <p class="body-text">Each material carries its own story, properties, and sustainable credentials. We master all of them.</p>
+    </div>
+    <div class="mat-strip">
+      <div class="mat-col">
+        <span class="mat-col-icon">🌾</span>
+        <div class="mat-col-name">Cotton</div>
+        <div class="mat-col-props">
+          <span class="mat-prop">Breathable</span>
+          <span class="mat-prop">Versatile</span>
+          <span class="mat-prop">Organic Available</span>
+          <span class="mat-prop">Hypoallergenic</span>
+        </div>
+      </div>
+      <div class="mat-col">
+        <span class="mat-col-icon">🪺</span>
+        <div class="mat-col-name">Silk</div>
+        <div class="mat-col-props">
+          <span class="mat-prop">Luxury Drape</span>
+          <span class="mat-prop">Natural Protein</span>
+          <span class="mat-prop">Lightweight</span>
+          <span class="mat-prop">Temperature-Smart</span>
+        </div>
+      </div>
+      <div class="mat-col">
+        <span class="mat-col-icon">🐑</span>
+        <div class="mat-col-name">Wool</div>
+        <div class="mat-col-props">
+          <span class="mat-prop">Insulating</span>
+          <span class="mat-prop">Fire-Resistant</span>
+          <span class="mat-prop">Biodegradable</span>
+          <span class="mat-prop">Self-Cleaning</span>
+        </div>
+      </div>
+      <div class="mat-col">
+        <span class="mat-col-icon">🌿</span>
+        <div class="mat-col-name">Linen</div>
+        <div class="mat-col-props">
+          <span class="mat-prop">Low Water Use</span>
+          <span class="mat-prop">Durable</span>
+          <span class="mat-prop">Naturally Anti-Bact.</span>
+          <span class="mat-prop">Sustainable</span>
+        </div>
+      </div>
+      <div class="mat-col">
+        <span class="mat-col-icon">✨</span>
+        <div class="mat-col-name">Georgette</div>
+        <div class="mat-col-props">
+          <span class="mat-prop">Sheer</span>
+          <span class="mat-prop">Flowing Drape</span>
+          <span class="mat-prop">Crinkled Texture</span>
+          <span class="mat-prop">Apparel-Grade</span>
+        </div>
+      </div>
+      <div class="mat-col">
+        <span class="mat-col-icon">🦬</span>
+        <div class="mat-col-name">Leather</div>
+        <div class="mat-col-props">
+          <span class="mat-prop">Premium Grade</span>
+          <span class="mat-prop">Full Traceability</span>
+          <span class="mat-prop">Veg-Tan Available</span>
+          <span class="mat-prop">Durable</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section class="section sustain-section" id="sustainability">
+  <div class="section-inner">
+    <div class="sustain-inner">
+      <div>
+        <div class="eyebrow-serif">Our Commitment</div>
+        <h2 class="heading-xl">Sustainability isn't a checkbox</h2>
+        <p class="body-text">We've built sustainability into the DNA of Apeeling — not as a marketing position, but as an operating principle that guides every sourcing, production, and logistics decision we make.</p>
+        <div class="sustain-quote">"The earth provides the ingredients. We are responsible for what we do with them."</div>
+      </div>
+      <div>
+        <div class="sustain-list">
+          <div class="s-item">
+            <div class="s-bullet"></div>
+            <div>
+              <h4>Natural Sourcing First</h4>
+              <p>We prioritize naturally grown and harvested raw materials, working exclusively with suppliers who meet our environmental sourcing standards.</p>
+            </div>
+          </div>
+          <div class="s-item">
+            <div class="s-bullet"></div>
+            <div>
+              <h4>Water-Conscious Processing</h4>
+              <p>Our dyeing and finishing operations use closed-loop water systems and low-impact dyes to minimize consumption and chemical discharge.</p>
+            </div>
+          </div>
+          <div class="s-item">
+            <div class="s-bullet"></div>
+            <div>
+              <h4>End-of-Life Design Thinking</h4>
+              <p>We design for circularity — helping clients select fibers and finishes that allow for recyclability, biodegradation, or material recovery.</p>
+            </div>
+          </div>
+          <div class="s-item">
+            <div class="s-bullet"></div>
+            <div>
+              <h4>Ethical Global Standards</h4>
+              <p>We audit and hold every partner in our supply chain to rigorous social and environmental compliance standards — globally, consistently.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="section-inner">
+    <div class="eyebrow-serif">Work With Apeeling</div>
+    <h2 class="heading-xl">Begin your fabric project</h2>
+    <div class="contact-layout">
+      <div class="contact-left">
+        <p>Whether you have a detailed specification or an early-stage concept — we're the right partner to bring it to life. Tell us about your project and we'll respond within one business day.</p>
+        <div class="c-info">
+          <div class="c-label">Email</div>
+          <div class="c-value"><a href="mailto:info@apeelingllc.com">info@apeelingllc.com</a></div>
+        </div>
+        <div class="c-info">
+          <div class="c-label">Website</div>
+          <div class="c-value"><a href="https://apeelingllc.com">apeelingllc.com</a></div>
+        </div>
+        <div class="c-info">
+          <div class="c-label">Specialties</div>
+          <div class="c-value">Natural Fabrics · Sustainable Textiles · Global Supply Chain</div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <form>
+          <div class="form-row">
+            <div><label>First Name</label><input type="text" placeholder="Jane" /></div>
+            <div><label>Last Name</label><input type="text" placeholder="Smith" /></div>
+          </div>
+          <div><label>Company</label><input type="text" placeholder="Your Company" /></div>
+          <div><label>Email Address</label><input type="email" placeholder="jane@company.com" /></div>
+          <div>
+            <label>Service Interest</label>
+            <select>
+              <option value="">Select...</option>
+              <option>Fabric Design</option>
+              <option>Manufacturing</option>
+              <option>Engineering</option>
+              <option>Fabric Printing</option>
+              <option>Fabric Dyeing</option>
+              <option>Multiple / Custom</option>
+            </select>
+          </div>
+          <div><label>Project Brief</label><textarea placeholder="Materials, quantities, timeline, intended application..."></textarea></div>
+          <button type="submit" class="form-submit">Send Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo-text">Ape<em>el</em>ing LLC</div>
+      <div class="footer-tagline">Natural Ingredients · Sustainable Solutions · Global Reach</div>
+    </div>
+    <p>&copy; 2025 Apeeling LLC. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

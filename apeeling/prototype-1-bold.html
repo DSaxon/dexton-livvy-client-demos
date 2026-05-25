@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apeeling LLC – Natural Ingredients. Sustainable Solutions. Global Reach.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f1a506;
+      --orange-dark: #d4900a;
+      --green: #164827;
+      --green-mid: #1e6335;
+      --charcoal: #1a1a1a;
+      --charcoal-2: #242424;
+      --charcoal-3: #2e2e2e;
+      --white: #ffffff;
+      --off: #f5f5f0;
+      --muted: #888888;
+      --border: #333333;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Rubik', sans-serif; background: var(--charcoal); color: var(--white); line-height: 1.6; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26,26,26,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: var(--orange);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      flex-shrink: 0;
+    }
+
+    .logo-name {
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--white); letter-spacing: -0.5px;
+    }
+
+    .logo-name span { color: var(--orange); }
+
+    .nav-links { display: flex; gap: 0.25rem; list-style: none; align-items: center; }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.65); text-decoration: none;
+      font-size: 0.875rem; font-weight: 500;
+      padding: 0.45rem 0.85rem; border-radius: 4px;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.07); }
+
+    .nav-cta {
+      background: var(--orange) !important;
+      color: var(--charcoal) !important;
+      font-weight: 700 !important;
+      border-radius: 4px !important;
+    }
+
+    .nav-cta:hover { background: var(--orange-dark) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 4rem 5rem 6rem;
+      position: relative; z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--orange); margin-bottom: 2rem;
+    }
+
+    .hero-eyebrow::before {
+      content: ''; width: 32px; height: 2px; background: var(--orange);
+    }
+
+    .hero h1 {
+      font-size: 5rem; font-weight: 900; line-height: 0.95;
+      letter-spacing: -2px; margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    .hero h1 .line-accent { color: var(--orange); display: block; }
+
+    .hero-sub {
+      font-size: 1rem; color: rgba(255,255,255,0.55);
+      line-height: 1.75; max-width: 420px; margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-orange {
+      background: var(--orange); color: var(--charcoal);
+      padding: 0.9rem 2rem; font-weight: 700; font-size: 0.9rem;
+      text-decoration: none; border-radius: 4px;
+      transition: background 0.15s, transform 0.1s; display: inline-block;
+    }
+
+    .btn-orange:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+    .btn-border {
+      background: transparent; color: var(--white);
+      padding: 0.9rem 2rem; font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; border-radius: 4px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      transition: border-color 0.15s, background 0.15s; display: inline-block;
+    }
+
+    .btn-border:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+      background: var(--charcoal-2);
+    }
+
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      height: 100%; gap: 2px;
+    }
+
+    .hero-tile {
+      background: var(--charcoal-3);
+      display: flex; align-items: flex-end;
+      padding: 1.5rem; position: relative; overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .hero-tile:hover { background: #383838; }
+
+    .hero-tile-label {
+      font-size: 0.8rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: rgba(255,255,255,0.5);
+      position: relative; z-index: 1;
+    }
+
+    .hero-tile-icon {
+      position: absolute; top: 1.5rem; left: 1.5rem;
+      font-size: 2rem; opacity: 0.3;
+    }
+
+    .hero-tile:nth-child(1) { background: var(--green); }
+    .hero-tile:nth-child(1):hover { background: var(--green-mid); }
+    .hero-tile:nth-child(1) .hero-tile-label { color: rgba(255,255,255,0.8); }
+
+    .hero-tile:nth-child(4) .hero-tile-label { color: var(--orange); }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--orange);
+      padding: 1.25rem 2rem;
+    }
+
+    .stats-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; justify-content: space-around; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      font-size: 1.75rem; font-weight: 900;
+      color: var(--charcoal); line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.72rem; font-weight: 600;
+      color: rgba(26,26,26,0.65); text-transform: uppercase;
+      letter-spacing: 1px; margin-top: 0.2rem;
+    }
+
+    .stat-divider {
+      width: 1px; height: 40px;
+      background: rgba(26,26,26,0.2);
+    }
+
+    /* SECTION */
+    .section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1280px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--orange); margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+
+    .section-tag::before { content: ''; width: 24px; height: 2px; background: var(--orange); }
+
+    .section-h {
+      font-size: 3rem; font-weight: 900;
+      color: var(--white); line-height: 1.05;
+      letter-spacing: -1px; text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-p {
+      font-size: 1rem; color: var(--muted);
+      line-height: 1.75; max-width: 540px; font-weight: 300;
+    }
+
+    /* ABOUT */
+    .about-section { background: var(--charcoal-2); }
+
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: center;
+    }
+
+    .about-values {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border);
+      margin-top: 2.5rem; border: 1px solid var(--border);
+    }
+
+    .value-cell {
+      background: var(--charcoal-2);
+      padding: 1.5rem; transition: background 0.2s;
+    }
+
+    .value-cell:hover { background: var(--charcoal-3); }
+
+    .value-cell h4 {
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--orange); text-transform: uppercase;
+      letter-spacing: 0.5px; margin-bottom: 0.4rem;
+    }
+
+    .value-cell p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-visual-box {
+      background: var(--green);
+      aspect-ratio: 4/5;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 6rem; position: relative; overflow: hidden;
+    }
+
+    .about-visual-box::after {
+      content: '';
+      position: absolute; bottom: 0; right: 0;
+      width: 60%; height: 60%;
+      background: var(--orange); opacity: 0.15;
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
+
+    .about-badge {
+      position: absolute; bottom: -1.5rem; left: -1.5rem;
+      background: var(--orange); color: var(--charcoal);
+      padding: 1.25rem 1.5rem; font-weight: 900;
+      font-size: 0.8rem; text-transform: uppercase;
+      letter-spacing: 0.5px; line-height: 1.3;
+    }
+
+    /* SERVICES */
+    .services-section { background: var(--charcoal); }
+
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      margin-top: 3rem; border: 1px solid var(--border);
+    }
+
+    .svc-cell {
+      background: var(--charcoal-2);
+      padding: 2.5rem 2rem;
+      transition: background 0.2s;
+      position: relative; overflow: hidden;
+    }
+
+    .svc-cell:hover { background: var(--charcoal-3); }
+
+    .svc-cell::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: transparent;
+      transition: background 0.2s;
+    }
+
+    .svc-cell:hover::before { background: var(--orange); }
+
+    .svc-num {
+      font-size: 3rem; font-weight: 900;
+      color: rgba(241,165,6,0.1);
+      line-height: 1; margin-bottom: 1rem;
+    }
+
+    .svc-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+    .svc-cell h3 {
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.3px;
+    }
+
+    .svc-cell p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+    /* MATERIALS */
+    .materials-section { background: var(--charcoal-2); }
+
+    .materials-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem;
+    }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .mat-card {
+      background: var(--charcoal-3);
+      aspect-ratio: 3/4;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 1.25rem;
+      position: relative; overflow: hidden;
+      transition: background 0.25s;
+      cursor: pointer;
+    }
+
+    .mat-card:hover { background: var(--green); }
+
+    .mat-emoji {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -60%);
+      font-size: 2.5rem; opacity: 0.4;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    .mat-card:hover .mat-emoji { opacity: 0.7; transform: translate(-50%, -65%); }
+
+    .mat-name {
+      font-size: 0.8rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: rgba(255,255,255,0.7);
+      position: relative; z-index: 1;
+    }
+
+    .mat-card:hover .mat-name { color: var(--white); }
+
+    /* SUSTAINABILITY */
+    .sustain-section { background: var(--green); }
+
+    .sustain-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+
+    .sustain-section .section-h { color: var(--white); }
+    .sustain-section .section-p { color: rgba(255,255,255,0.65); }
+
+    .sustain-pillars {
+      display: flex; flex-direction: column; gap: 0;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .pillar {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex; gap: 1.25rem; align-items: flex-start;
+      transition: background 0.2s;
+    }
+
+    .pillar:last-child { border-bottom: none; }
+    .pillar:hover { background: rgba(255,255,255,0.05); }
+
+    .pillar-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: rgba(241,165,6,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .pillar h4 { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+    .pillar p { font-size: 0.83rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+    /* CONTACT */
+    .contact-section { background: var(--charcoal); }
+
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start; margin-top: 3rem;
+    }
+
+    .contact-form {
+      background: var(--charcoal-2);
+      padding: 2.5rem; border: 1px solid var(--border);
+    }
+
+    form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    label {
+      display: block; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      color: rgba(255,255,255,0.5); margin-bottom: 0.35rem;
+    }
+
+    input, select, textarea {
+      width: 100%; padding: 0.75rem 1rem;
+      background: var(--charcoal-3); border: 1px solid var(--border);
+      color: var(--white); font-family: 'Rubik', sans-serif;
+      font-size: 0.9rem; outline: none;
+      transition: border-color 0.15s;
+    }
+
+    input:focus, select:focus, textarea:focus { border-color: var(--orange); }
+    select option { background: var(--charcoal-3); }
+    textarea { resize: vertical; min-height: 110px; }
+
+    .form-submit {
+      background: var(--orange); color: var(--charcoal);
+      border: none; padding: 1rem;
+      font-family: 'Rubik', sans-serif; font-size: 0.9rem;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+      cursor: pointer; transition: background 0.15s;
+    }
+
+    .form-submit:hover { background: var(--orange-dark); }
+
+    .contact-info { padding-top: 0.5rem; }
+
+    .contact-info h3 {
+      font-size: 1.5rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: -0.5px;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info p { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
+
+    .info-block { margin-bottom: 1.5rem; }
+
+    .info-label {
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--orange); margin-bottom: 0.3rem;
+    }
+
+    .info-value { font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+    .info-value a { color: rgba(255,255,255,0.75); text-decoration: none; }
+    .info-value a:hover { color: var(--orange); }
+
+    /* FOOTER */
+    footer {
+      background: #111111;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+
+    .footer-logo { font-size: 1.15rem; font-weight: 700; color: var(--white); }
+    .footer-logo span { color: var(--orange); }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 4rem 2rem; }
+      .hero h1 { font-size: 3.5rem; }
+      .hero-right { display: none; }
+      .about-grid, .sustain-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .materials-grid { grid-template-columns: repeat(3, 1fr); }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark"></div>
+      <span class="logo-name">Ape<span>el</span>ing</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#materials">Materials</a></li>
+      <li><a href="#sustainability">Sustainability</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Natural Textiles &amp; Sustainable Fabrics</div>
+    <h1>Global<br />Fabric<br /><span class="line-accent">Solutions</span></h1>
+    <p class="hero-sub">From natural fibers to finished textiles — Apeeling LLC delivers world-class fabric design, manufacturing, and global supply chain solutions built for a sustainable future.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-orange">Start a Project</a>
+      <a href="#materials" class="btn-border">View Materials</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-grid">
+      <div class="hero-tile">
+        <span class="hero-tile-icon">🌿</span>
+        <span class="hero-tile-label">Natural Ingredients</span>
+      </div>
+      <div class="hero-tile">
+        <span class="hero-tile-icon">🏭</span>
+        <span class="hero-tile-label">Manufacturing</span>
+      </div>
+      <div class="hero-tile">
+        <span class="hero-tile-icon">🌍</span>
+        <span class="hero-tile-label">Global Reach</span>
+      </div>
+      <div class="hero-tile">
+        <span class="hero-tile-icon">♻️</span>
+        <span class="hero-tile-label">Sustainable Solutions</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">6+</div>
+      <div class="stat-label">Material Types</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Core Services</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">Global</div>
+      <div class="stat-label">Reach &amp; Distribution</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Natural Focus</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section about-section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div class="section-tag">About Apeeling</div>
+        <h2 class="section-h">Natural.<br />Sustainable.<br />Global.</h2>
+        <p class="section-p">Apeeling LLC is a full-service textile company specializing in natural ingredients and sustainable fabric solutions for businesses worldwide. We partner with manufacturers, brands, and distributors who demand quality without compromise — and who believe the future of textiles is rooted in nature.</p>
+        <div class="about-values">
+          <div class="value-cell">
+            <h4>Natural First</h4>
+            <p>We source and produce from natural, responsibly grown materials at every stage.</p>
+          </div>
+          <div class="value-cell">
+            <h4>Global Network</h4>
+            <p>Our reach extends across continents with supply chains built for reliability.</p>
+          </div>
+          <div class="value-cell">
+            <h4>Quality Systems</h4>
+            <p>Engineering-led manufacturing ensures consistency from sample to scale.</p>
+          </div>
+          <div class="value-cell">
+            <h4>Client Focused</h4>
+            <p>Every engagement is tailored — no off-the-shelf solutions, only custom ones.</p>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-visual-box">🌿</div>
+        <div class="about-badge">Natural Ingredients.<br />Sustainable Solutions.<br />Global Reach.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services-section" id="services">
+  <div class="section-inner">
+    <div class="section-tag">What We Do</div>
+    <h2 class="section-h">Our Services</h2>
+    <p class="section-p">End-to-end textile solutions — from initial concept design through to finished manufacturing and global delivery.</p>
+    <div class="services-grid">
+      <div class="svc-cell">
+        <div class="svc-num">01</div>
+        <div class="svc-icon">✏️</div>
+        <h3>Fabric Design</h3>
+        <p>Custom fabric design from concept to specification. We develop patterns, structures, and compositions tailored to your brand's unique requirements.</p>
+      </div>
+      <div class="svc-cell">
+        <div class="svc-num">02</div>
+        <div class="svc-icon">🏭</div>
+        <h3>Manufacturing</h3>
+        <p>Precision fabric manufacturing with rigorous quality control. We scale from small batch production to high-volume runs with consistent results.</p>
+      </div>
+      <div class="svc-cell">
+        <div class="svc-num">03</div>
+        <div class="svc-icon">⚙️</div>
+        <h3>Engineering</h3>
+        <p>Technical fabric engineering for performance applications. We apply material science to meet functional, durability, and compliance specifications.</p>
+      </div>
+      <div class="svc-cell">
+        <div class="svc-num">04</div>
+        <div class="svc-icon">🎨</div>
+        <h3>Fabric Printing</h3>
+        <p>High-fidelity printing on natural and blended fabrics. From digital to screen printing, we bring your designs to life with color accuracy and durability.</p>
+      </div>
+      <div class="svc-cell">
+        <div class="svc-num">05</div>
+        <div class="svc-icon">🔬</div>
+        <h3>Fabric Dyeing</h3>
+        <p>Sustainable dyeing processes using low-impact dyes and water-conscious techniques. We achieve the colors you need without environmental compromise.</p>
+      </div>
+      <div class="svc-cell" style="background: var(--green);">
+        <div class="svc-num" style="color: rgba(255,255,255,0.15)">→</div>
+        <h3 style="margin-top: 1rem;">Ready to Start?</h3>
+        <p style="color: rgba(255,255,255,0.65); margin-bottom: 2rem;">Let's discuss your fabric project and find the right solution for your business.</p>
+        <a href="#contact" class="btn-orange">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATERIALS -->
+<section class="section materials-section" id="materials">
+  <div class="section-inner">
+    <div class="materials-header">
+      <div>
+        <div class="section-tag">Our Portfolio</div>
+        <h2 class="section-h">Materials</h2>
+      </div>
+      <p class="section-p" style="max-width: 360px;">We work across a broad range of natural and performance fabrics — each with unique properties for different applications.</p>
+    </div>
+    <div class="materials-grid">
+      <div class="mat-card">
+        <span class="mat-emoji">🌾</span>
+        <span class="mat-name">Cotton</span>
+      </div>
+      <div class="mat-card">
+        <span class="mat-emoji">🪺</span>
+        <span class="mat-name">Silk</span>
+      </div>
+      <div class="mat-card">
+        <span class="mat-emoji">🐑</span>
+        <span class="mat-name">Wool</span>
+      </div>
+      <div class="mat-card">
+        <span class="mat-emoji">🌿</span>
+        <span class="mat-name">Linen</span>
+      </div>
+      <div class="mat-card">
+        <span class="mat-emoji">✨</span>
+        <span class="mat-name">Georgette</span>
+      </div>
+      <div class="mat-card">
+        <span class="mat-emoji">🦬</span>
+        <span class="mat-name">Leather</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section class="section sustain-section" id="sustainability">
+  <div class="section-inner">
+    <div class="sustain-grid">
+      <div>
+        <div class="section-tag" style="color: var(--orange);">Our Commitment</div>
+        <h2 class="section-h">Sustainable by Design</h2>
+        <p class="section-p">Sustainability isn't a checkbox for us — it's embedded in every decision we make, from sourcing raw materials to the dyes we use and the partners we choose.</p>
+        <br /><br />
+        <a href="#contact" class="btn-orange">Learn More</a>
+      </div>
+      <div class="sustain-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">🌱</div>
+          <div>
+            <h4>Natural Sourcing</h4>
+            <p>We prioritize naturally grown and harvested raw materials, working with suppliers who share our environmental values.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">💧</div>
+          <div>
+            <h4>Water-Conscious Processes</h4>
+            <p>Our dyeing and finishing operations use water-efficient techniques to minimize environmental impact at scale.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">♻️</div>
+          <div>
+            <h4>Circular Solutions</h4>
+            <p>We design with end-of-life in mind — supporting recyclable, biodegradable, and reusable fabric solutions.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🌍</div>
+          <div>
+            <h4>Global Responsibility</h4>
+            <p>Operating globally means acting globally — we hold our entire supply chain to high ethical and environmental standards.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="section-inner">
+    <div class="section-tag">Work With Us</div>
+    <h2 class="section-h">Get in Touch</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>Whether you have a fabric brief ready or you're just starting to explore possibilities — we're ready to talk. Tell us about your project and we'll get back to you within one business day.</p>
+        <div class="info-block">
+          <div class="info-label">Email</div>
+          <div class="info-value"><a href="mailto:info@apeelingllc.com">info@apeelingllc.com</a></div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Website</div>
+          <div class="info-value"><a href="https://apeelingllc.com">apeelingllc.com</a></div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Focus Areas</div>
+          <div class="info-value">Natural Fabrics · Sustainable Textiles · Global Supply Chain</div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <form>
+          <div class="form-row">
+            <div><label>First Name</label><input type="text" placeholder="Jane" /></div>
+            <div><label>Last Name</label><input type="text" placeholder="Smith" /></div>
+          </div>
+          <div><label>Company</label><input type="text" placeholder="Your Company" /></div>
+          <div><label>Email</label><input type="email" placeholder="jane@company.com" /></div>
+          <div>
+            <label>Service Interest</label>
+            <select>
+              <option value="">Select a service...</option>
+              <option>Fabric Design</option>
+              <option>Manufacturing</option>
+              <option>Engineering</option>
+              <option>Fabric Printing</option>
+              <option>Fabric Dyeing</option>
+              <option>Multiple Services</option>
+            </select>
+          </div>
+          <div><label>Project Details</label><textarea placeholder="Tell us about your project, materials, volume, timeline..."></textarea></div>
+          <button type="submit" class="form-submit">Send Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Ape<span>el</span>ing LLC</div>
+    <p>Natural Ingredients. Sustainable Solutions. Global Reach. &copy; 2025</p>
+  </div>
+</footer>
+
+<script>
+  // Animate stats on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.svc-cell, .mat-card, .pillar').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apeeling LLC – Natural Ingredients. Sustainable Solutions. Global Reach.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f1a506;
+      --orange-pale: #fef3d6;
+      --green: #164827;
+      --green-mid: #1e6335;
+      --green-light: #2a8a4a;
+      --green-pale: #e8f4ec;
+      --earth: #c8b89a;
+      --earth-pale: #f5f0e8;
+      --white: #ffffff;
+      --off: #fafaf7;
+      --dark: #1a2218;
+      --muted: #6b7a6e;
+      --border: #e0ddd6;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Rubik', sans-serif; background: var(--white); color: var(--dark); line-height: 1.6; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+    }
+
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+
+    .logo-leaf {
+      width: 32px; height: 32px; background: var(--green);
+      border-radius: 60% 0 60% 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+
+    .logo-name { font-size: 1.3rem; font-weight: 700; color: var(--dark); letter-spacing: -0.3px; }
+    .logo-name em { color: var(--green); font-style: normal; }
+
+    .nav-links { display: flex; gap: 0.25rem; list-style: none; align-items: center; }
+
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.875rem;
+      font-weight: 500; padding: 0.4rem 0.8rem; border-radius: 100px;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--dark); background: var(--green-pale); }
+
+    .nav-cta {
+      background: var(--green) !important; color: var(--white) !important;
+      font-weight: 600 !important; border-radius: 100px !important;
+    }
+
+    .nav-cta:hover { background: var(--green-mid) !important; }
+
+    /* HERO */
+    .hero {
+      padding: 9rem 2rem 6rem;
+      background: var(--earth-pale);
+      position: relative; overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(22,72,39,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.2fr 0.8fr;
+      gap: 5rem; align-items: center; position: relative;
+    }
+
+    .hero-chip {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--green-pale); color: var(--green);
+      font-size: 0.75rem; font-weight: 600;
+      padding: 0.4rem 1rem; border-radius: 100px;
+      margin-bottom: 1.75rem; border: 1px solid rgba(22,72,39,0.15);
+    }
+
+    .hero-chip::before { content: '🌿'; }
+
+    .hero h1 {
+      font-size: 4rem; font-weight: 900;
+      color: var(--dark); line-height: 1.1;
+      letter-spacing: -1.5px; margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em { color: var(--green); font-style: normal; }
+
+    .hero-tagline {
+      display: flex; gap: 0.5rem; align-items: center;
+      flex-wrap: wrap; margin-bottom: 1.5rem;
+    }
+
+    .tag-pill {
+      background: var(--white); border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem; border-radius: 100px;
+      font-size: 0.78rem; font-weight: 500; color: var(--muted);
+    }
+
+    .hero p {
+      font-size: 1.05rem; color: var(--muted); line-height: 1.75;
+      margin-bottom: 2.5rem; font-weight: 300; max-width: 480px;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-green {
+      background: var(--green); color: var(--white);
+      padding: 0.875rem 2rem; border-radius: 100px;
+      font-weight: 700; font-size: 0.9rem;
+      text-decoration: none; transition: background 0.15s, transform 0.1s;
+      display: inline-block;
+    }
+
+    .btn-green:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+    .btn-outline-green {
+      background: transparent; color: var(--green);
+      padding: 0.875rem 2rem; border-radius: 100px;
+      font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; border: 1.5px solid var(--green);
+      transition: background 0.15s; display: inline-block;
+    }
+
+    .btn-outline-green:hover { background: var(--green-pale); }
+
+    .hero-card {
+      background: var(--white); border-radius: 20px;
+      padding: 2rem; border: 1px solid var(--border);
+      box-shadow: 0 4px 30px rgba(22,72,39,0.08);
+    }
+
+    .hero-card-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 1.25rem; }
+
+    .material-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .mat-row {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.75rem; background: var(--off); border-radius: 10px;
+    }
+
+    .mat-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+    .mat-row-name { font-weight: 600; font-size: 0.88rem; color: var(--dark); flex: 1; }
+    .mat-row-tag { font-size: 0.7rem; background: var(--orange-pale); color: var(--orange); padding: 0.2rem 0.6rem; border-radius: 100px; font-weight: 600; }
+
+    /* SECTION */
+    .section { padding: 5.5rem 2rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .eyebrow { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--green); margin-bottom: 0.75rem; }
+
+    .heading { font-size: 2.75rem; font-weight: 900; color: var(--dark); line-height: 1.1; letter-spacing: -1px; margin-bottom: 0.75rem; }
+
+    .subheading { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 520px; font-weight: 300; }
+
+    /* SERVICES */
+    .services-section { background: var(--off); }
+
+    .svc-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; margin-top: 3rem;
+    }
+
+    .svc-card {
+      background: var(--white); border-radius: 16px;
+      padding: 2rem; border: 1.5px solid var(--border);
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+
+    .svc-card:hover {
+      border-color: var(--green); transform: translateY(-3px);
+      box-shadow: 0 8px 40px rgba(22,72,39,0.1);
+    }
+
+    .svc-icon-wrap {
+      width: 52px; height: 52px; border-radius: 12px;
+      background: var(--green-pale); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1.25rem;
+    }
+
+    .svc-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 0.6rem; }
+    .svc-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+    /* MATERIALS */
+    .materials-section { background: var(--green); }
+    .materials-section .heading { color: var(--white); }
+    .materials-section .subheading { color: rgba(255,255,255,0.6); }
+    .materials-section .eyebrow { color: var(--orange); }
+
+    .mat-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; margin-top: 3rem;
+    }
+
+    .mat-block {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; padding: 2rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .mat-block:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+
+    .mat-block-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+    .mat-block h3 { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+
+    .mat-block p { font-size: 0.83rem; color: rgba(255,255,255,0.6); line-height: 1.65; }
+
+    .mat-tag-list { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 1rem; }
+
+    .mat-tag {
+      font-size: 0.7rem; font-weight: 600;
+      background: rgba(241,165,6,0.2); color: var(--orange);
+      padding: 0.2rem 0.6rem; border-radius: 100px;
+    }
+
+    /* ABOUT */
+    .about-section { background: var(--earth-pale); }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+
+    .about-visual {
+      background: var(--white); border-radius: 20px;
+      overflow: hidden; border: 1px solid var(--border);
+    }
+
+    .about-visual-top {
+      background: var(--green); padding: 3rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; aspect-ratio: 4/3;
+    }
+
+    .about-visual-bottom { padding: 1.5rem; }
+
+    .tagline-display {
+      font-size: 0.85rem; font-weight: 700; color: var(--dark);
+      line-height: 1.8;
+    }
+
+    .tagline-display span { color: var(--green); }
+
+    .pillars-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+
+    .p-row { display: flex; gap: 1rem; align-items: flex-start; }
+
+    .p-num {
+      width: 28px; height: 28px; background: var(--green-pale);
+      color: var(--green); font-size: 0.75rem; font-weight: 700;
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; margin-top: 2px;
+    }
+
+    .p-row h4 { font-size: 0.9rem; font-weight: 700; color: var(--dark); margin-bottom: 0.2rem; }
+    .p-row p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+    /* SUSTAINABILITY */
+    .sustain-section { background: var(--white); }
+
+    .sustain-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 3rem; }
+
+    .sustain-card {
+      border-radius: 16px; padding: 2rem;
+      background: var(--off); border: 1.5px solid var(--border);
+      text-align: center; transition: border-color 0.2s;
+    }
+
+    .sustain-card:hover { border-color: var(--green); }
+
+    .sustain-card-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .sustain-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; }
+    .sustain-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+    /* CONTACT */
+    .contact-section { background: var(--off); }
+
+    .contact-wrap {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 4rem; margin-top: 3rem;
+    }
+
+    .contact-left h3 {
+      font-size: 1.4rem; font-weight: 700; color: var(--dark);
+      margin-bottom: 1rem;
+    }
+
+    .contact-left p { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
+
+    .info-item { margin-bottom: 1.25rem; }
+
+    .info-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--green); margin-bottom: 0.25rem; }
+    .info-value { font-size: 0.9rem; color: var(--dark); }
+    .info-value a { color: var(--dark); text-decoration: none; }
+    .info-value a:hover { color: var(--green); }
+
+    .contact-form-card {
+      background: var(--white); border-radius: 20px;
+      padding: 2.5rem; border: 1px solid var(--border);
+    }
+
+    .contact-form-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 1.5rem; }
+
+    form { display: flex; flex-direction: column; gap: 0.875rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+
+    label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--muted); margin-bottom: 0.3rem; }
+
+    input, select, textarea {
+      width: 100%; padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      font-family: 'Rubik', sans-serif; font-size: 0.9rem;
+      color: var(--dark); background: var(--white); outline: none;
+      transition: border-color 0.15s;
+    }
+
+    input:focus, select:focus, textarea:focus { border-color: var(--green); }
+    textarea { resize: vertical; min-height: 100px; }
+
+    .form-btn {
+      background: var(--green); color: var(--white);
+      border: none; border-radius: 100px; padding: 0.9rem;
+      font-family: 'Rubik', sans-serif; font-size: 0.9rem;
+      font-weight: 700; cursor: pointer; transition: background 0.15s;
+    }
+
+    .form-btn:hover { background: var(--green-mid); }
+
+    /* FOOTER */
+    footer { background: var(--dark); padding: 2.5rem 2rem; }
+
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+
+    .footer-logo { font-size: 1.15rem; font-weight: 700; color: var(--white); }
+    .footer-logo em { color: var(--orange); font-style: normal; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .hero-inner, .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .hero h1 { font-size: 2.8rem; }
+      .svc-grid, .mat-grid, .sustain-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-leaf">🍃</div>
+      <span class="logo-name">Ape<em>el</em>ing</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#materials">Materials</a></li>
+      <li><a href="#sustainability">Sustainability</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-chip">Natural Textiles &amp; Sustainable Fabrics</div>
+      <h1>Fabric built from <em>nature's</em> best ingredients</h1>
+      <div class="hero-tagline">
+        <span class="tag-pill">🌿 Natural Ingredients</span>
+        <span class="tag-pill">♻️ Sustainable Solutions</span>
+        <span class="tag-pill">🌍 Global Reach</span>
+      </div>
+      <p>Apeeling LLC partners with brands, manufacturers, and distributors worldwide to deliver natural, sustainable fabric solutions — from concept design to finished goods.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-green">Start a Project</a>
+        <a href="#services" class="btn-outline-green">Our Services</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-title">Materials We Work With</div>
+      <div class="material-list">
+        <div class="mat-row">
+          <div class="mat-dot"></div>
+          <span class="mat-row-name">Cotton</span>
+          <span class="mat-row-tag">Natural</span>
+        </div>
+        <div class="mat-row">
+          <div class="mat-dot"></div>
+          <span class="mat-row-name">Silk</span>
+          <span class="mat-row-tag">Luxury</span>
+        </div>
+        <div class="mat-row">
+          <div class="mat-dot"></div>
+          <span class="mat-row-name">Wool</span>
+          <span class="mat-row-tag">Natural</span>
+        </div>
+        <div class="mat-row">
+          <div class="mat-dot"></div>
+          <span class="mat-row-name">Linen</span>
+          <span class="mat-row-tag">Sustainable</span>
+        </div>
+        <div class="mat-row">
+          <div class="mat-dot"></div>
+          <span class="mat-row-name">Georgette</span>
+          <span class="mat-row-tag">Lightweight</span>
+        </div>
+        <div class="mat-row">
+          <div class="mat-dot"></div>
+          <span class="mat-row-name">Leather</span>
+          <span class="mat-row-tag">Premium</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services-section" id="services">
+  <div class="section-inner">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:1.5rem; margin-bottom:0">
+      <div>
+        <div class="eyebrow">What We Do</div>
+        <h2 class="heading">End-to-end textile services</h2>
+        <p class="subheading">From initial fabric design through to manufacturing and global delivery — we handle the full lifecycle.</p>
+      </div>
+      <a href="#contact" class="btn-green">Request a Quote</a>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-icon-wrap">✏️</div>
+        <h3>Fabric Design</h3>
+        <p>Custom fabric design from concept to specification. Patterns, structures, and compositions tailored to your brand's unique requirements.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">🏭</div>
+        <h3>Manufacturing</h3>
+        <p>Precision fabric manufacturing with rigorous quality control. From small batch to high-volume runs with consistent, reliable results.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">⚙️</div>
+        <h3>Engineering</h3>
+        <p>Technical fabric engineering for performance applications. Material science applied to meet functional, durability, and compliance specs.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">🎨</div>
+        <h3>Fabric Printing</h3>
+        <p>High-fidelity printing on natural and blended fabrics. Digital to screen printing with color accuracy and lasting durability.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">🔬</div>
+        <h3>Fabric Dyeing</h3>
+        <p>Sustainable dyeing using low-impact dyes and water-conscious techniques. The colors you need without environmental compromise.</p>
+      </div>
+      <div class="svc-card" style="background: var(--green-pale); border-color: var(--green);">
+        <div class="svc-icon-wrap" style="background: rgba(22,72,39,0.1);">🤝</div>
+        <h3 style="color: var(--green);">Custom Partnerships</h3>
+        <p>Need something not listed? We build custom engagements for brands with unique fabric sourcing and production needs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATERIALS -->
+<section class="section materials-section" id="materials">
+  <div class="section-inner">
+    <div class="eyebrow">Our Portfolio</div>
+    <h2 class="heading">Materials we master</h2>
+    <p class="subheading">Six distinct fabric families — each with unique properties, applications, and sustainable sourcing pathways.</p>
+    <div class="mat-grid">
+      <div class="mat-block">
+        <div class="mat-block-icon">🌾</div>
+        <h3>Cotton</h3>
+        <p>The world's most-used natural fiber. Breathable, versatile, and available in organic grades for sustainable applications.</p>
+        <div class="mat-tag-list">
+          <span class="mat-tag">Breathable</span>
+          <span class="mat-tag">Organic Available</span>
+          <span class="mat-tag">Versatile</span>
+        </div>
+      </div>
+      <div class="mat-block">
+        <div class="mat-block-icon">🪺</div>
+        <h3>Silk</h3>
+        <p>The ultimate luxury natural fiber. Naturally protein-rich, with a luster and drape unmatched by synthetics.</p>
+        <div class="mat-tag-list">
+          <span class="mat-tag">Luxury</span>
+          <span class="mat-tag">Natural Protein</span>
+          <span class="mat-tag">Lightweight</span>
+        </div>
+      </div>
+      <div class="mat-block">
+        <div class="mat-block-icon">🐑</div>
+        <h3>Wool</h3>
+        <p>Nature's performance fiber. Temperature-regulating, naturally fire-resistant, and biodegradable at end of life.</p>
+        <div class="mat-tag-list">
+          <span class="mat-tag">Temperature-Regulating</span>
+          <span class="mat-tag">Biodegradable</span>
+        </div>
+      </div>
+      <div class="mat-block">
+        <div class="mat-block-icon">🌿</div>
+        <h3>Linen</h3>
+        <p>One of the most sustainable natural fabrics. Grown from flax with minimal water and pesticide inputs.</p>
+        <div class="mat-tag-list">
+          <span class="mat-tag">Low Water Use</span>
+          <span class="mat-tag">Durable</span>
+          <span class="mat-tag">Sustainable</span>
+        </div>
+      </div>
+      <div class="mat-block">
+        <div class="mat-block-icon">✨</div>
+        <h3>Georgette</h3>
+        <p>A lightweight, sheer fabric with a crinkled texture. Excellent drape for apparel and fashion applications.</p>
+        <div class="mat-tag-list">
+          <span class="mat-tag">Sheer</span>
+          <span class="mat-tag">Flowing Drape</span>
+          <span class="mat-tag">Apparel</span>
+        </div>
+      </div>
+      <div class="mat-block">
+        <div class="mat-block-icon">🦬</div>
+        <h3>Leather</h3>
+        <p>Premium natural leather with full traceability. Available in vegetable-tanned options for reduced environmental impact.</p>
+        <div class="mat-tag-list">
+          <span class="mat-tag">Premium</span>
+          <span class="mat-tag">Veg-Tan Available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-visual-top">🌿</div>
+        <div class="about-visual-bottom">
+          <div class="tagline-display">
+            <span>Natural Ingredients.</span><br />
+            <span>Sustainable Solutions.</span><br />
+            <span>Global Reach.</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow">About Apeeling</div>
+        <h2 class="heading">Nature-forward textiles for a global market</h2>
+        <p class="subheading">Apeeling LLC is a full-service textile company built on one belief: the best fabrics come from nature. We deliver natural, sustainable solutions to businesses worldwide — without sacrificing performance or scale.</p>
+        <div class="pillars-list">
+          <div class="p-row">
+            <div class="p-num">1</div>
+            <div>
+              <h4>Natural Ingredient Focus</h4>
+              <p>We source and produce exclusively from natural, responsibly grown materials — from cotton fields to silk farms.</p>
+            </div>
+          </div>
+          <div class="p-row">
+            <div class="p-num">2</div>
+            <div>
+              <h4>Full-Service Capability</h4>
+              <p>Design, manufacture, engineer, print, and dye — all under one roof, with end-to-end accountability.</p>
+            </div>
+          </div>
+          <div class="p-row">
+            <div class="p-num">3</div>
+            <div>
+              <h4>Global Supply Chain</h4>
+              <p>Our network spans continents, giving you access to world-class materials and reliable production at scale.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section class="section sustain-section" id="sustainability">
+  <div class="section-inner">
+    <div style="text-align: center; margin-bottom: 0;">
+      <div class="eyebrow" style="justify-content: center; display: flex;">Our Commitment</div>
+      <h2 class="heading" style="text-align: center;">Sustainability is not a feature.<br />It's our foundation.</h2>
+    </div>
+    <div class="sustain-grid">
+      <div class="sustain-card">
+        <div class="sustain-card-icon">🌱</div>
+        <h3>Natural Sourcing</h3>
+        <p>Prioritizing naturally grown and harvested materials at every step of our supply chain.</p>
+      </div>
+      <div class="sustain-card">
+        <div class="sustain-card-icon">💧</div>
+        <h3>Water Efficiency</h3>
+        <p>Water-conscious dyeing and finishing processes that minimize environmental impact at scale.</p>
+      </div>
+      <div class="sustain-card">
+        <div class="sustain-card-icon">♻️</div>
+        <h3>Circular Design</h3>
+        <p>Designing with end-of-life in mind — recyclable, biodegradable, and reusable fabric solutions.</p>
+      </div>
+      <div class="sustain-card">
+        <div class="sustain-card-icon">🤝</div>
+        <h3>Ethical Partnerships</h3>
+        <p>Holding our global supply chain to high ethical and environmental standards — no exceptions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="section-inner">
+    <div class="eyebrow">Work With Us</div>
+    <h2 class="heading">Let's build something together</h2>
+    <div class="contact-wrap">
+      <div class="contact-left">
+        <h3>Have a fabric project in mind?</h3>
+        <p>Whether you have a detailed brief or you're just exploring what's possible — we'd love to hear from you. We typically respond within one business day.</p>
+        <div class="info-item">
+          <div class="info-label">Email</div>
+          <div class="info-value"><a href="mailto:info@apeelingllc.com">info@apeelingllc.com</a></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Website</div>
+          <div class="info-value"><a href="https://apeelingllc.com">apeelingllc.com</a></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Specialties</div>
+          <div class="info-value">Natural Fabrics · Sustainable Textiles · Global Supply</div>
+        </div>
+      </div>
+      <div class="contact-form-card">
+        <h3>Send Us a Message</h3>
+        <form>
+          <div class="form-row">
+            <div><label>First Name</label><input type="text" placeholder="Jane" /></div>
+            <div><label>Last Name</label><input type="text" placeholder="Smith" /></div>
+          </div>
+          <div><label>Company</label><input type="text" placeholder="Your Company" /></div>
+          <div><label>Email</label><input type="email" placeholder="jane@company.com" /></div>
+          <div>
+            <label>Service Interest</label>
+            <select>
+              <option value="">Select a service...</option>
+              <option>Fabric Design</option>
+              <option>Manufacturing</option>
+              <option>Engineering</option>
+              <option>Fabric Printing</option>
+              <option>Fabric Dyeing</option>
+              <option>Multiple / Custom</option>
+            </select>
+          </div>
+          <div><label>Project Details</label><textarea placeholder="Materials, volume, timeline, special requirements..."></textarea></div>
+          <button type="submit" class="form-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Ape<em>el</em>ing LLC</div>
+    <p>Natural Ingredients. Sustainable Solutions. Global Reach. &copy; 2025</p>
+  </div>
+</footer>
+</body>
+</html>
