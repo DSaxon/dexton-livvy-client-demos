@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Doula Exchange — Onboarding Portal Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --crimson:     #7a1428;
+    --crimson-dk:  #5c0f1e;
+    --gold:        #b09030;
+    --gold-lt:     #d4a843;
+    --warm:        #faf6f0;
+    --dark:        #111318;
+    --border:      #E4E4E7;
+    --gray:        #6B7280;
+    --light:       #F9F9F8;
+    --white:       #FFFFFF;
+  }
+  body { background: var(--light); font-family: 'Inter', sans-serif; color: var(--dark); line-height: 1.6; }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--dark); color: white; padding: 0 2.5rem;
+    height: 52px; display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .topbar-brand { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; opacity: 0.9; }
+  .topbar-brand span { opacity: 0.45; font-weight: 400; margin: 0 0.5rem; }
+  .topbar-note { font-size: 0.75rem; opacity: 0.45; }
+
+  /* HERO HEADER */
+  .hero {
+    background: var(--crimson);
+    padding: 3.5rem 2.5rem;
+    display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap;
+  }
+  .hero-logo img { height: 90px; object-fit: contain; }
+  .hero-text { flex: 1; min-width: 280px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(176,144,48,.2); color: var(--gold-lt);
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.85rem; margin-bottom: 1rem;
+  }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--gold-lt); border-radius: 50%; }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 700; color: white;
+    line-height: 1.15; margin-bottom: 0.75rem;
+  }
+  .hero p { color: rgba(255,255,255,0.7); font-size: 0.97rem; max-width: 560px; line-height: 1.75; }
+
+  /* NOTICE BANNER */
+  .notice {
+    background: rgba(176,144,48,.12); border-left: 4px solid var(--gold);
+    padding: 0.9rem 2.5rem; display: flex; align-items: center; gap: 0.75rem;
+  }
+  .notice p { font-size: 0.88rem; color: #7a5a10; line-height: 1.55; }
+  .notice p strong { font-weight: 600; }
+
+  /* MAIN CONTENT */
+  main { max-width: 1200px; padding: 3rem 2.5rem; }
+
+  /* SECTION BLOCKS */
+  .portal-section { margin-bottom: 4rem; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--crimson); margin-bottom: 0.6rem;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block; width: 22px; height: 3px; background: var(--crimson);
+  }
+  .section-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .section-desc { font-size: 0.92rem; color: var(--gray); max-width: 680px; line-height: 1.75; margin-bottom: 1.5rem; }
+
+  /* SCREENSHOT FRAME */
+  .screenshot-frame {
+    border: 1.5px solid var(--border);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.1);
+    overflow: hidden;
+    background: #eee;
+  }
+  .screenshot-frame img { width: 100%; display: block; }
+  .screenshot-caption {
+    background: var(--white); border-top: 1px solid var(--border);
+    padding: 0.75rem 1.2rem; font-size: 0.82rem; color: var(--gray);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .screenshot-caption::before {
+    content: '↑'; font-weight: 700; color: var(--crimson);
+  }
+
+  /* TWO-COL GRID */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  @media (max-width: 780px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* FEATURE LIST */
+  .feature-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
+  .feature-item {
+    display: flex; align-items: flex-start; gap: 0.65rem;
+    font-size: 0.88rem; color: var(--dark);
+  }
+  .feature-check {
+    width: 18px; height: 18px; background: var(--crimson); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* STEPS GRID */
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+  .step-chip {
+    background: var(--white); border: 1.5px solid var(--border);
+    padding: 0.75rem 1rem;
+  }
+  .step-num { font-size: 0.7rem; font-weight: 700; color: var(--crimson); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.2rem; }
+  .step-name { font-size: 0.85rem; font-weight: 600; color: var(--dark); }
+  .step-type { font-size: 0.75rem; color: var(--gray); margin-top: 0.15rem; }
+
+  /* DIVIDER */
+  .section-divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+  /* CTA BAR */
+  .cta-bar {
+    background: var(--crimson); padding: 2.5rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .cta-bar-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.3rem; }
+  .cta-bar-text p { font-size: 0.88rem; color: rgba(255,255,255,0.65); }
+  .cta-btn {
+    background: var(--gold); color: var(--dark);
+    padding: 0.8rem 2rem; font-family: 'Inter', sans-serif;
+    font-size: 0.88rem; font-weight: 700; text-decoration: none;
+    display: inline-block; letter-spacing: 0.02em;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover { background: var(--gold-lt); }
+
+  /* FOOTER */
+  footer { padding: 1.5rem 2.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { font-size: 0.78rem; color: var(--gray); }
+  .footer-right { font-size: 0.75rem; color: #D1D5DB; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">Dexton-Livvy LLC <span>|</span> Client Design Review</div>
+  <div class="topbar-note">Prepared for The Doula Exchange · June 2026</div>
+</div>
+
+<div class="hero">
+  <div class="hero-logo">
+    <img src="https://static.wixstatic.com/media/204057_b226f45bb8cd48c9bd9037db9726b418~mv2.png"
+         alt="The Doula Exchange" onerror="this.style.opacity=0">
+  </div>
+  <div class="hero-text">
+    <div class="hero-eyebrow">Portal Preview</div>
+    <h1>Doula Onboarding Portal</h1>
+    <p>A private admin portal that guides your team through every step of onboarding a new doula, from initial application to final welcome. No Google Forms, no external tools, everything in one place.</p>
+  </div>
+</div>
+
+<div class="notice">
+  <div>📋</div>
+  <p><strong>This is a functional prototype.</strong> The portal is fully operational with a live database, email notifications, and all 12 onboarding steps. Screenshots below show the real application running with sample doula data.</p>
+</div>
+
+<main>
+
+  <!-- SECTION 1: LOGIN -->
+  <div class="portal-section">
+    <div class="section-label">01 — Access</div>
+    <div class="section-title">Secure Admin Login</div>
+    <p class="section-desc">Only authorized team members can access the portal. Admins sign in with their email and password. Session-based authentication keeps everything private and secure.</p>
+
+    <div class="screenshot-frame">
+      <img src="imgs/01-login.png" alt="Login page">
+      <div class="screenshot-caption">Login screen — branded to match The Doula Exchange website</div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 2: DASHBOARD -->
+  <div class="portal-section">
+    <div class="section-label">02 — Overview</div>
+    <div class="section-title">Command Dashboard</div>
+    <p class="section-desc">The dashboard gives admins an at-a-glance view of where every doula stands in the onboarding pipeline, which steps are creating bottlenecks, and recent activity across the team.</p>
+
+    <div class="feature-list">
+      <div class="feature-item"><div class="feature-check">✓</div>Total doulas in onboarding, active, and completed counts</div>
+      <div class="feature-item"><div class="feature-check">✓</div>Bottleneck chart showing which onboarding steps have the most pending doulas</div>
+      <div class="feature-item"><div class="feature-check">✓</div>Recent doulas table with quick-click access to each profile</div>
+    </div>
+
+    <div class="screenshot-frame">
+      <img src="imgs/02-dashboard.png" alt="Dashboard overview">
+      <div class="screenshot-caption">Dashboard — top-level stats, bottleneck chart, and recent doulas table</div>
+    </div>
+
+    <div style="margin-top: 1.5rem;">
+      <div class="screenshot-frame">
+        <img src="imgs/03-dashboard-stats.png" alt="Dashboard stats and doulas table">
+        <div class="screenshot-caption">Scrolled view — stat cards and recent doulas with current onboarding step</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 3: DOULAS LIST -->
+  <div class="portal-section">
+    <div class="section-label">03 — Management</div>
+    <div class="section-title">Doulas Directory</div>
+    <p class="section-desc">A searchable, filterable list of all doulas in the system. Admins can search by name or email, filter by onboarding status, and click any row to open the full detail view.</p>
+
+    <div class="screenshot-frame">
+      <img src="imgs/04-doulas-list.png" alt="Doulas list">
+      <div class="screenshot-caption">Doulas tab — search bar, status filter, and full directory table</div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 4: ADD DOULA -->
+  <div class="portal-section">
+    <div class="section-label">04 — Intake</div>
+    <div class="section-title">Adding a New Doula</div>
+    <p class="section-desc">When a new doula is ready to onboard, admins click "Add Doula" to capture the essential information. The portal immediately creates their profile and initializes all 12 onboarding steps as pending.</p>
+
+    <div class="screenshot-frame">
+      <img src="imgs/05-add-doula-modal.png" alt="Add Doula modal">
+      <div class="screenshot-caption">Add Doula form — first name, last name, email, phone, address, training organization</div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 5: ONBOARDING STEPS -->
+  <div class="portal-section">
+    <div class="section-label">05 — The 12-Step Workflow</div>
+    <div class="section-title">Complete Onboarding Checklist</div>
+    <p class="section-desc">Every doula goes through the same structured 12-step process. Admins work through each step inside the portal, no Google Forms or external links required. Steps include forms, document uploads, an interview tracker, profile building, and the final welcome email.</p>
+
+    <div class="steps-grid">
+      <div class="step-chip"><div class="step-num">Step 01</div><div class="step-name">Initial Application</div><div class="step-type">Form — contact + training info</div></div>
+      <div class="step-chip"><div class="step-num">Step 02</div><div class="step-name">Document Submission</div><div class="step-type">Upload — certifications &amp; ID</div></div>
+      <div class="step-chip"><div class="step-num">Step 03</div><div class="step-name">Background Check</div><div class="step-type">Action — initiate &amp; track status</div></div>
+      <div class="step-chip"><div class="step-num">Step 04</div><div class="step-name">Interview Scheduled</div><div class="step-type">Form — date, time, format</div></div>
+      <div class="step-chip"><div class="step-num">Step 05</div><div class="step-name">Interview Completed</div><div class="step-type">Form — outcome &amp; notes</div></div>
+      <div class="step-chip"><div class="step-num">Step 06</div><div class="step-name">Contract Signed</div><div class="step-type">Upload — signed agreement</div></div>
+      <div class="step-chip"><div class="step-num">Step 07</div><div class="step-name">Insurance Verified</div><div class="step-type">Upload — liability certificate</div></div>
+      <div class="step-chip"><div class="step-num">Step 08</div><div class="step-name">Orientation</div><div class="step-type">Action — policies &amp; platform walkthrough</div></div>
+      <div class="step-chip"><div class="step-num">Step 09</div><div class="step-name">Portal Setup</div><div class="step-type">Action — login credentials</div></div>
+      <div class="step-chip"><div class="step-num">Step 10</div><div class="step-name">Headshot</div><div class="step-type">Upload — profile photo</div></div>
+      <div class="step-chip"><div class="step-num">Step 11</div><div class="step-name">Profile Published</div><div class="step-type">Form — bio, services, availability</div></div>
+      <div class="step-chip"><div class="step-num">Step 12</div><div class="step-name">Welcome Email</div><div class="step-type">Notify — sent automatically</div></div>
+    </div>
+
+    <div class="screenshot-frame">
+      <img src="imgs/06-doula-detail-top.png" alt="Doula detail view">
+      <div class="screenshot-caption">Doula detail — profile info and onboarding step tracker</div>
+    </div>
+
+    <div style="margin-top: 1.5rem;">
+      <div class="two-col">
+        <div class="screenshot-frame">
+          <img src="imgs/07-doula-steps-1.png" alt="Steps 1-4">
+          <div class="screenshot-caption">Steps 1 through 4 — application, documents, background check, interview scheduling</div>
+        </div>
+        <div class="screenshot-frame">
+          <img src="imgs/08-doula-steps-2.png" alt="Steps 5-8">
+          <div class="screenshot-caption">Steps 5 through 8 — interview outcome, contract, insurance, orientation</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 1.5rem;">
+      <div class="screenshot-frame">
+        <img src="imgs/09-doula-steps-3.png" alt="Steps 9-12">
+        <div class="screenshot-caption">Steps 9 through 12 — portal setup, headshot, profile, and welcome email</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 1.5rem;">
+      <div class="screenshot-frame">
+        <img src="imgs/11-doula-detail-full.png" alt="Full doula detail page">
+        <div class="screenshot-caption">Full view — complete doula profile with all 12 steps visible in one scroll</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 6: TEAM -->
+  <div class="portal-section">
+    <div class="section-label">06 — Administration</div>
+    <div class="section-title">Team Members</div>
+    <p class="section-desc">Admins can invite team members to access the portal and manage their roles. New team members receive an email with login instructions automatically.</p>
+
+    <div class="screenshot-frame">
+      <img src="imgs/10-team-members.png" alt="Team members page">
+      <div class="screenshot-caption">Team Members tab — manage admin access and invite new users</div>
+    </div>
+  </div>
+
+</main>
+
+<div class="cta-bar">
+  <div class="cta-bar-text">
+    <h2>Ready to move forward?</h2>
+    <p>Reach out to Dexton-Livvy to discuss next steps, customizations, or deployment.</p>
+  </div>
+  <a href="mailto:dsaxon@dexton-livvy.com" class="cta-btn">Contact Dexton-Livvy →</a>
+</div>
+
+<footer>
+  <span class="footer-left">Prepared by Dexton-Livvy LLC · dsaxon@dexton-livvy.com · June 2026</span>
+  <span class="footer-right">Confidential · For The Doula Exchange review only</span>
+</footer>
+
+</body>
+</html>
