@@ -23,6 +23,17 @@
 
 html { scroll-behavior: smooth; }
 
+/* ACCESSIBILITY (quality floor) */
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 1px; }
+.btn-gold:focus-visible { outline-color: var(--forest); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background: var(--cream); color: var(--dark); line-height: 1.65;
@@ -166,7 +177,7 @@ nav {
 }
 .hero-desc {
   font-size: 1rem; color: rgba(255,255,255,0.82);
-  line-height: 1.8; max-width: 540px; margin-bottom: 2.75rem; font-weight: 300;
+  line-height: 1.8; max-width: 540px; margin-bottom: 2.75rem; font-weight: 400;
 }
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
@@ -186,7 +197,7 @@ nav {
 }
 .page-hero p {
   font-size: 1.05rem; color: rgba(255,255,255,0.82);
-  line-height: 1.8; max-width: 600px; font-weight: 300;
+  line-height: 1.8; max-width: 600px; font-weight: 400;
 }
 
 /* TRUST BAR */
@@ -208,7 +219,7 @@ nav {
 .section-inner { max-width: 1280px; margin: 0 auto; }
 .eyebrow-serif {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.05rem; font-style: italic; color: var(--orange);
+  font-size: 1.05rem; font-style: italic; color: var(--orange-dark);
   letter-spacing: 0.5px; margin-bottom: 1rem;
 }
 .heading-xl {
@@ -221,7 +232,7 @@ nav {
   font-size: 2.25rem; font-weight: 700; line-height: 1.1;
   color: var(--dark); letter-spacing: -0.5px; margin-bottom: 1rem;
 }
-.body-text { font-size: 1rem; color: var(--muted); line-height: 1.85; max-width: 560px; font-weight: 300; }
+.body-text { font-size: 1rem; color: #5f574e; line-height: 1.85; max-width: 560px; font-weight: 400; }
 .body-text + .body-text { margin-top: 1.25rem; }
 .lead {
   font-family: 'Cormorant Garamond', serif; font-style: italic;
