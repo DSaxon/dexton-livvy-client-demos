@@ -1,208 +1,690 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apeeling LLC — Website Design Options</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --dark:   #111318; --mid: #23262F; --border: #E4E4E7;
-    --gray:   #6B7280; --light: #F9F9F8; --white: #FFFFFF;
-    --accent: #2563EB; --accent-lt: #EEF2FF;
-  }
-  body { background: var(--light); font-family: 'Inter', sans-serif; color: var(--dark); line-height: 1.6; }
-  .topbar { background: var(--dark); color: white; padding: 0 2.5rem; height: 52px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-  .topbar-brand { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; opacity: 0.9; }
-  .topbar-brand span { opacity: 0.45; font-weight: 400; margin: 0 0.5rem; }
-  .topbar-note { font-size: 0.75rem; opacity: 0.45; }
-  .header { background: var(--white); border-bottom: 1px solid var(--border); padding: 3rem 2.5rem 2.5rem; }
-  .header-inner { max-width: 900px; }
-  .header-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent-lt); color: var(--accent); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 0.9rem; margin-bottom: 1.2rem; }
-  .header-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
-  .header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.2; }
-  .header p { color: var(--gray); font-size: 0.97rem; max-width: 580px; line-height: 1.75; margin-bottom: 1.5rem; }
-  .header-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
-  .header-meta-item { font-size: 0.82rem; color: var(--gray); }
-  .header-meta-item strong { color: var(--dark); font-weight: 600; display: block; font-size: 0.88rem; }
-  .instructions { background: var(--accent-lt); border: 1px solid #BFDBFE; padding: 1rem 2.5rem; display: flex; align-items: center; gap: 1rem; }
-  .instructions-icon { font-size: 1.2rem; flex-shrink: 0; }
-  .instructions p { font-size: 0.88rem; color: #1E40AF; line-height: 1.6; }
-  .instructions p strong { font-weight: 600; }
-  .grid { padding: 2.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem; max-width: 1400px; }
-  .card { background: var(--white); border: 1.5px solid var(--border); display: flex; flex-direction: column; transition: border-color 0.2s, box-shadow 0.2s; }
-  .card:hover { border-color: #A5B4FC; box-shadow: 0 4px 24px rgba(37,99,235,0.08); }
-  .card.selected { border-color: var(--accent); box-shadow: 0 4px 24px rgba(37,99,235,0.15); }
-  .preview-window { position: relative; overflow: hidden; background: #E5E7EB; height: 260px; cursor: pointer; border-bottom: 1.5px solid var(--border); }
-  .preview-window:hover .preview-overlay { opacity: 1; }
-  .preview-scaler { position: absolute; top: 0; left: 0; width: 1440px; height: 900px; transform-origin: 0 0; transform: scale(0.2847); pointer-events: none; }
-  .preview-scaler iframe { width: 1440px; height: 900px; border: none; display: block; }
-  .preview-overlay { position: absolute; inset: 0; background: rgba(37,99,235,0.12); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; }
-  .preview-overlay-btn { background: var(--accent); color: white; padding: 0.65rem 1.4rem; font-size: 0.82rem; font-weight: 600; border: none; cursor: pointer; font-family: 'Inter', sans-serif; }
-  .card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
-  .card-num { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
-  .card-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .card-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.7; flex: 1; margin-bottom: 1.2rem; }
-  .card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
-  .tag { font-size: 0.72rem; font-weight: 500; padding: 0.25rem 0.65rem; background: var(--light); border: 1px solid var(--border); color: var(--gray); }
-  .card-actions { display: flex; gap: 0.6rem; }
-  .btn-preview { flex: 1; background: var(--dark); color: white; padding: 0.7rem; font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; border: none; cursor: pointer; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.4rem; transition: background 0.2s; }
-  .btn-preview:hover { background: var(--mid); }
-  .btn-preview svg { width: 13px; height: 13px; fill: white; }
-  .btn-select { padding: 0.7rem 1rem; background: white; color: var(--dark); font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; border: 1.5px solid var(--border); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-  .btn-select:hover { border-color: var(--accent); color: var(--accent); }
-  .btn-select.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .selection-panel { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: var(--dark); color: white; padding: 1rem 2.5rem; display: flex; align-items: center; justify-content: space-between; transform: translateY(100%); transition: transform 0.3s ease; border-top: 3px solid var(--accent); }
-  .selection-panel.visible { transform: translateY(0); }
-  .selection-text { font-size: 0.92rem; }
-  .selection-text strong { color: #93C5FD; }
-  .selection-note { font-size: 0.78rem; color: rgba(255,255,255,0.45); max-width: 400px; line-height: 1.5; margin-top: 0.3rem; }
-  .btn-clear { background: none; border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); padding: 0.5rem 1rem; font-family: 'Inter', sans-serif; font-size: 0.8rem; cursor: pointer; }
-  .btn-clear:hover { border-color: white; color: white; }
-  .footer { padding: 2rem 2.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 0.5rem; }
-  .footer-left { font-size: 0.8rem; color: var(--gray); }
-  .footer-left strong { color: var(--dark); }
-  .footer-right { font-size: 0.78rem; color: #D1D5DB; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Apeeling LLC — Transforming Citrus Byproducts Into High-Value Ingredients</title>
+  <meta name="description" content="Apeeling LLC is an ingredient innovation company developing upcycled citrus ingredients for the food, beverage, personal care, wellness, and agricultural industries. Sustainable. Functional. Innovative." />
+  <meta name="keywords" content="upcycled ingredients, ingredient innovation, circular manufacturing, upcycled citrus ingredients, Orange Peel Granules, sustainable ingredients, food ingredients, FDA registered food facility" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Apeeling LLC — Transforming Citrus Byproducts Into High-Value Ingredients" />
+  <meta property="og:description" content="Upcycled citrus ingredients for food, beverage, personal care, wellness, and agriculture. Building the future of upcycled ingredients." />
+  <meta property="og:url" content="https://apeelingllc.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon (inline citrus mark — swap for brand logo asset when available) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23f1a506'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23164827'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f1a506;
+      --orange-dark: #c8880a;
+      --orange-pale: #fdf6e3;
+      --forest: #164827;
+      --forest-mid: #1d5c32;
+      --forest-pale: #edf4ee;
+      --cream: #f9f5ef;
+      --cream-dark: #ede8e0;
+      --warm: #8b7355;
+      --dark: #14130f;
+      --muted: #6f6a60;
+      --border: #e2ddd3;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream); color: var(--dark); line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, .serif { font-family: 'Cormorant Garamond', serif; }
+    .tm { font-size: 0.55em; vertical-align: super; font-weight: 500; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(249,245,239,0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 76px;
+    }
+
+    .logo { text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+    .logo-mark { width: 28px; height: 28px; flex-shrink: 0; }
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--dark); letter-spacing: 0.3px; line-height: 1;
+    }
+    .logo-text em { color: var(--orange); font-style: italic; }
+    .logo-sub {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--muted);
+      display: block; margin-top: 2px;
+    }
+
+    .nav-links { display: flex; gap: 1.85rem; list-style: none; align-items: center; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.4px; text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--dark); }
+
+    .nav-cta {
+      background: var(--forest) !important; color: var(--white) !important;
+      padding: 0.6rem 1.4rem !important;
+      font-weight: 600 !important; font-size: 0.74rem !important;
+      letter-spacing: 0.8px !important;
+    }
+    .nav-cta:hover { background: var(--forest-mid) !important; }
+
+    /* HERO */
+    .hero {
+      position: relative; min-height: 100vh; padding-top: 76px;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    /* Hero media: gradient/citrus-texture placeholder.
+       Swap the <video> source for the supplied brand video — it is already wired below. */
+    .hero-media {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(circle at 78% 28%, rgba(241,165,6,0.22), transparent 42%),
+        radial-gradient(circle at 12% 88%, rgba(29,92,50,0.45), transparent 48%),
+        linear-gradient(135deg, #123a20 0%, #164827 55%, #0f3119 100%);
+    }
+    .hero-media img, .hero-media video {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .hero-media::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(15,40,24,0.85) 0%, rgba(15,40,24,0.55) 45%, rgba(15,40,24,0.2) 100%);
+    }
+
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto; padding: 4rem 3rem;
+      width: 100%;
+    }
+    .hero-overline {
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 3px; color: var(--orange); margin-bottom: 1.75rem;
+    }
+    .hero h1 {
+      font-size: 4.75rem; font-weight: 700; line-height: 0.98;
+      color: var(--white); margin-bottom: 1.5rem;
+      letter-spacing: -1.5px; max-width: 16ch;
+    }
+    .hero h1 .orange { color: var(--orange); font-style: italic; }
+    .hero-sub {
+      font-size: 1.05rem; font-weight: 500; color: var(--orange);
+      letter-spacing: 1px; margin-bottom: 1.75rem; text-transform: uppercase;
+    }
+    .hero-desc {
+      font-size: 1rem; color: rgba(255,255,255,0.82);
+      line-height: 1.8; max-width: 540px; margin-bottom: 2.75rem;
+      font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-gold {
+      background: var(--orange); color: var(--dark);
+      padding: 1rem 2.25rem; font-weight: 600; font-size: 0.82rem;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      text-decoration: none; transition: background 0.15s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-gold:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+    .btn-ghost-white {
+      background: transparent; color: rgba(255,255,255,0.85);
+      padding: 1rem 2.25rem; font-weight: 500; font-size: 0.82rem;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.3);
+      transition: border-color 0.15s, color 0.15s; display: inline-block;
+    }
+    .btn-ghost-white:hover { border-color: rgba(255,255,255,0.7); color: var(--white); }
+
+    /* TRUST BAR */
+    .trust-bar { background: var(--forest); }
+    .trust-inner {
+      max-width: 1280px; margin: 0 auto; padding: 1.4rem 3rem;
+      display: flex; flex-wrap: wrap; gap: 1rem 2.5rem;
+      align-items: center; justify-content: center;
+    }
+    .trust-item {
+      font-size: 0.76rem; font-weight: 500; letter-spacing: 1px;
+      text-transform: uppercase; color: rgba(255,255,255,0.85);
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .trust-item::before { content: '✦'; color: var(--orange); font-size: 0.7rem; }
+
+    /* SECTIONS */
+    .section { padding: 7rem 3rem; }
+    .section-inner { max-width: 1280px; margin: 0 auto; }
+
+    .eyebrow-serif {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-style: italic; color: var(--orange);
+      letter-spacing: 0.5px; margin-bottom: 1rem;
+    }
+    .heading-xl {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem; font-weight: 700; line-height: 1.05;
+      color: var(--dark); letter-spacing: -1px; margin-bottom: 1.25rem;
+      max-width: 18ch;
+    }
+    .body-text { font-size: 1rem; color: var(--muted); line-height: 1.85; max-width: 560px; font-weight: 300; }
+    .body-text + .body-text { margin-top: 1.25rem; }
+
+    /* INTRO / SECTION TWO */
+    .intro-section { background: var(--white); }
+    .intro-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .intro-note {
+      margin-top: 2.5rem; border-top: 1px solid var(--border); padding-top: 2rem;
+    }
+    .intro-note p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 500; color: var(--dark);
+      line-height: 1.45; font-style: italic;
+    }
+    .intro-note p strong { color: var(--forest); font-style: normal; font-weight: 700; }
+    .intro-visual {
+      aspect-ratio: 4/5; border-radius: 2px; position: relative; overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(241,165,6,0.35), transparent 55%),
+        linear-gradient(160deg, var(--forest-pale), var(--cream-dark));
+      display: flex; align-items: flex-end; padding: 2.5rem;
+    }
+    .intro-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    /* Image placeholder fallback text — replace with manufacturing / ingredient photography */
+    .intro-visual span {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      color: var(--forest); font-size: 1.15rem; opacity: 0.5;
+    }
+
+    /* INGREDIENT / SECTION THREE */
+    .ingredient-section { background: var(--cream); }
+    .ingredient-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .ingredient-card {
+      aspect-ratio: 1/1; position: relative; overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(241,165,6,0.9), var(--orange-dark) 70%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ingredient-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='%23164827' fill-opacity='0.18'/%3E%3C/svg%3E");
+    }
+    .ingredient-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+    /* Product image placeholder fallback — replace with Orange Peel Granules™ photography */
+    .ingredient-card span {
+      position: relative; z-index: 1; color: var(--forest);
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.3rem; text-align: center; opacity: 0.7;
+    }
+    .badge-first {
+      display: inline-block; background: var(--forest); color: var(--white);
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 0.4rem 0.9rem; margin-bottom: 1.5rem;
+    }
+
+    /* INDUSTRIES / SECTION FOUR */
+    .industries-section { background: var(--dark); }
+    .industries-section .heading-xl { color: var(--white); }
+    .industries-section .body-text { color: rgba(255,255,255,0.5); }
+    .industries-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 2rem; flex-wrap: wrap; margin-bottom: 4rem;
+    }
+    .ind-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .ind-col {
+      border-right: 1px solid rgba(255,255,255,0.1);
+      padding: 2.5rem 1.5rem; transition: background 0.2s;
+    }
+    .ind-col:last-child { border-right: none; }
+    .ind-col:hover { background: rgba(241,165,6,0.07); }
+    .ind-icon { font-size: 1.6rem; margin-bottom: 1.25rem; display: block; filter: grayscale(0.1); }
+    .ind-name {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+      font-weight: 600; color: var(--white); margin-bottom: 0.85rem;
+    }
+    .ind-col:hover .ind-name { color: var(--orange); }
+    .ind-col p { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+
+    /* SUSTAINABILITY / SECTION FIVE */
+    .sustain-section { background: var(--orange-pale); }
+    .sustain-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .sustain-question {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.25rem;
+      font-style: italic; color: var(--forest); line-height: 1.3;
+      margin: 2rem 0; padding-left: 1.5rem; border-left: 3px solid var(--orange);
+    }
+    .sustain-closer {
+      margin-top: 2.5rem; border-top: 1px solid var(--cream-dark); padding-top: 2rem;
+    }
+    .sustain-closer p {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.65rem;
+      font-weight: 600; color: var(--dark); line-height: 1.4;
+    }
+    .sustain-closer p .orange { color: var(--orange); font-style: italic; }
+    .stat-stack { display: flex; flex-direction: column; gap: 0; }
+    .stat-row {
+      display: flex; align-items: baseline; gap: 1.5rem;
+      padding: 1.75rem 0; border-bottom: 1px solid var(--cream-dark);
+    }
+    .stat-row:first-child { border-top: 1px solid var(--cream-dark); }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.5rem;
+      font-weight: 700; color: var(--orange); line-height: 1; min-width: 5ch;
+    }
+    .stat-row p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+    .stat-row h4 { font-size: 1rem; font-weight: 600; color: var(--dark); margin-bottom: 0.25rem; }
+
+    /* QUALITY / SECTION SIX */
+    .quality-section { background: var(--white); }
+    .quality-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 6rem; align-items: center; }
+    .reg-box { background: var(--cream); border: 1px solid var(--border); padding: 2.5rem; }
+    .reg-box h3 { font-size: 1.6rem; font-weight: 600; color: var(--dark); margin-bottom: 1rem; }
+    .reg-box p { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; }
+    /* FDA Registration Certificate placeholder — drop the certificate image/PDF preview here */
+    .cert-frame {
+      aspect-ratio: 8.5/11; max-width: 240px; margin-bottom: 1.5rem;
+      border: 1px solid var(--border); background: var(--white);
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      color: var(--muted); font-size: 0.8rem; padding: 1rem;
+      box-shadow: 0 10px 30px rgba(20,19,15,0.06);
+    }
+    .btn-download {
+      background: var(--forest); color: var(--white);
+      padding: 0.9rem 1.75rem; font-weight: 600; font-size: 0.8rem;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem;
+      transition: background 0.15s;
+    }
+    .btn-download:hover { background: var(--forest-mid); }
+    .disclaimer {
+      margin-top: 1.5rem; font-size: 0.78rem; font-style: italic;
+      color: var(--muted); line-height: 1.6;
+    }
+
+    /* COMING SOON */
+    .coming-section {
+      background: var(--forest); text-align: center;
+    }
+    .coming-section .eyebrow-serif { color: var(--orange); }
+    .coming-section h2 { color: var(--white); margin: 0 auto 1.25rem; }
+    .coming-section .body-text { color: rgba(255,255,255,0.65); margin: 0 auto; }
+    .coming-row {
+      display: flex; justify-content: center; gap: 1px; margin-top: 3.5rem;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1);
+      max-width: 760px; margin-left: auto; margin-right: auto;
+    }
+    .coming-cell {
+      flex: 1; background: var(--forest); padding: 2.25rem 1.5rem;
+      color: rgba(255,255,255,0.55);
+    }
+    .coming-cell .dot { font-size: 1.5rem; color: var(--orange); display: block; margin-bottom: 0.75rem; }
+    .coming-cell span.label {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.1rem; color: rgba(255,255,255,0.7);
+    }
+
+    /* CONTACT CTA */
+    .cta-section { background: var(--cream); text-align: center; }
+    .cta-section .heading-xl { margin: 0 auto 1.5rem; }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem; }
+    .btn-forest {
+      background: var(--forest); color: var(--white);
+      padding: 1rem 2.25rem; font-weight: 600; font-size: 0.82rem;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      text-decoration: none; transition: background 0.15s; display: inline-block;
+    }
+    .btn-forest:hover { background: var(--forest-mid); }
+    .btn-outline {
+      background: transparent; color: var(--forest);
+      padding: 1rem 2.25rem; font-weight: 600; font-size: 0.82rem;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      text-decoration: none; border: 1px solid var(--forest);
+      transition: all 0.15s; display: inline-block;
+    }
+    .btn-outline:hover { background: var(--forest); color: var(--white); }
+
+    /* FOOTER */
+    footer { background: var(--dark); padding: 4rem 3rem 2.5rem; }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: start;
+    }
+    .footer-logo-text {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.6rem;
+      font-weight: 700; color: var(--white); letter-spacing: 0.3px;
+    }
+    .footer-logo-text em { color: var(--orange); font-style: italic; }
+    .footer-tagline {
+      font-size: 0.95rem; color: rgba(255,255,255,0.55); margin-top: 1rem;
+      max-width: 420px; line-height: 1.7; font-weight: 300;
+    }
+    .footer-meta { font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--orange); margin-top: 1.5rem; }
+    .footer-links { display: flex; flex-direction: column; gap: 0.65rem; }
+    .footer-links a {
+      font-size: 0.82rem; color: rgba(255,255,255,0.6); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: 1280px; margin: 3rem auto 0; padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.75rem; color: rgba(255,255,255,0.3);
+    }
+
+    /* MOBILE */
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+      .nav-inner { padding: 0 1.5rem; }
+      .section { padding: 4.5rem 1.5rem; }
+      .hero-inner { padding: 3rem 1.5rem; }
+      .hero h1 { font-size: 3rem; letter-spacing: -1px; }
+      .intro-layout, .ingredient-layout, .sustain-inner, .quality-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .ind-grid { grid-template-columns: 1fr 1fr; }
+      .heading-xl { font-size: 2.5rem; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .coming-row { flex-wrap: wrap; }
+      .coming-cell { min-width: 33%; }
+      .trust-inner { gap: 0.75rem 1.5rem; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="topbar">
-  <span class="topbar-brand">Dexton-Livvy LLC <span>·</span> Client Design Review</span>
-  <span class="topbar-note">For review purposes only — not a final product</span>
-</div>
+<!-- NAV -->
+<!-- Nav links currently anchor to Home sections for single-page review.
+     When the multi-page site is built, repoint to about.html, ingredients.html, etc. -->
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#f1a506"/><circle cx="16" cy="16" r="6" fill="#164827"/></svg>
+      <span>
+        <span class="logo-text">Ape<em>el</em>ing</span>
+        <span class="logo-sub">Upcycled Ingredients</span>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#ingredient">Ingredients</a></li>
+      <li><a href="#industries">Industries</a></li>
+      <li><a href="#sustainability">Sustainability</a></li>
+      <li><a href="#quality">Quality &amp; Food Safety</a></li>
+      <li><a href="#contact" class="nav-cta">Request a Sample</a></li>
+    </ul>
+  </div>
+</nav>
 
-<div class="header">
-  <div class="header-inner">
-    <div class="header-eyebrow">Website Design Review</div>
-    <h1>Apeeling LLC — Choose Your Direction</h1>
-    <p>Below are 3 distinct website design concepts prepared for your review. Each uses your approved copy. Click <strong>View Full Preview</strong> on any option to see the full design, then use <strong>Select This Option</strong> to mark your preference.</p>
-    <div class="header-meta">
-      <div class="header-meta-item"><strong>Client</strong>Apeeling LLC</div>
-      <div class="header-meta-item"><strong>Prepared by</strong>Dexton-Livvy LLC</div>
-      <div class="header-meta-item"><strong>Options</strong>3 Concepts</div>
-      <div class="header-meta-item"><strong>Status</strong>Awaiting Selection</div>
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <!-- TEMPORARY placement-only stock image (Unsplash). For launch, swap this <img> for the
+         supplied hero video: drop assets/hero-citrus.mp4 and use a <video autoplay muted loop playsinline> block. -->
+    <img src="assets/hero.jpg" alt="Upcycled citrus ingredients" />
+  </div>
+  <div class="hero-inner">
+    <div class="hero-overline">Ingredient Innovation · Sustainability · Circular Manufacturing</div>
+    <h1>Transforming Citrus Byproducts Into <span class="orange">High-Value Ingredients</span></h1>
+    <div class="hero-sub">Sustainable. Functional. Innovative.</div>
+    <p class="hero-desc">Apeeling LLC develops and commercializes upcycled citrus ingredients that help manufacturers create products with purpose. By transforming citrus byproducts into valuable ingredient solutions, we support innovation across the food, beverage, personal care, wellness, and agricultural industries while advancing a more sustainable future.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-gold">Request a Sample</a>
+      <a href="#contact" class="btn-ghost-white">Become a Partner</a>
     </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <span class="trust-item">FDA Registered Food Facility</span>
+    <span class="trust-item">Ingredient Innovation</span>
+    <span class="trust-item">Sustainable Manufacturing</span>
+    <span class="trust-item">Circular Economy Solutions</span>
   </div>
 </div>
 
-<div class="instructions">
-  <span class="instructions-icon">👆</span>
-  <p><strong>How to review:</strong> Click anywhere on a design preview to open the full version in a new tab. Scroll through it like a real website. When you've found the direction you prefer, click <strong>"Select This Option"</strong> — then screenshot or note your selection and share it back with us.</p>
-</div>
-
-<div class="grid">
-
-  <!-- OPTION 01 -->
-  <div class="card" id="card-1">
-    <div class="preview-window" onclick="window.open('prototype-1-bold.html','_blank')">
-      <div class="preview-scaler">
-        <iframe src="prototype-1-bold.html" scrolling="no" tabindex="-1"></iframe>
+<!-- SECTION TWO — INTRO -->
+<section class="section intro-section" id="about">
+  <div class="section-inner">
+    <div class="intro-layout">
+      <div>
+        <div class="eyebrow-serif">The Future of Ingredients</div>
+        <h2 class="heading-xl">Starts With What Others Leave Behind.</h2>
+        <p class="body-text">At Apeeling LLC, we believe that some of the world's most valuable ingredients are hiding in plain sight. For generations, citrus byproducts have been overlooked, discarded, or underutilized — despite containing functional properties that can serve numerous industries.</p>
+        <p class="body-text">Our company was founded to change that. By transforming citrus materials into premium ingredients, we are creating solutions that help manufacturers innovate, reduce waste, and participate in a more circular economy.</p>
+        <div class="intro-note">
+          <p>Today, our first ingredient is <strong>Orange Peel Granules<span class="tm">™</span></strong>. Tomorrow, our ingredient portfolio will continue to expand as we unlock new opportunities in upcycled ingredient development.</p>
+        </div>
       </div>
-      <div class="preview-overlay">
-        <button class="preview-overlay-btn">Open Full Preview ↗</button>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="card-num">Option 01</div>
-      <div class="card-name">Bold and Dark</div>
-      <p class="card-desc">Dark high-impact design with charcoal background, gold accents, and bold green CTAs. Conveys strength and global authority.</p>
-      <div class="card-tags"><span class="tag">Dark Theme</span><span class="tag">Bold</span><span class="tag">Modern</span><span class="tag">High-Impact</span></div>
-      <div class="card-actions">
-        <a class="btn-preview" href="prototype-1-bold.html" target="_blank">
-          <svg viewBox="0 0 16 16"><path d="M6 2H2v12h12v-4h-2v2H4V4h2V2zm4 0v2h2l-6 6 1.5 1.5L14 5.5V8h2V2h-6z"/></svg>
-          View Full Preview
-        </a>
-        <button class="btn-select" onclick="selectOption(1, 'Bold and Dark')">Select This</button>
+      <div class="intro-visual">
+        <!-- TEMPORARY placement-only stock image (Unsplash) — upcycled orange peel ingredient -->
+        <img src="assets/ingredient.jpg" alt="Upcycled orange peel ingredient" />
       </div>
     </div>
   </div>
+</section>
 
-  <!-- OPTION 02 -->
-  <div class="card" id="card-2">
-    <div class="preview-window" onclick="window.open('prototype-2-sustainable.html','_blank')">
-      <div class="preview-scaler">
-        <iframe src="prototype-2-sustainable.html" scrolling="no" tabindex="-1"></iframe>
+<!-- SECTION THREE — FIRST INGREDIENT -->
+<section class="section ingredient-section" id="ingredient">
+  <div class="section-inner">
+    <div class="ingredient-layout">
+      <div class="ingredient-card">
+        <!-- TEMPORARY placement-only stock image (Unsplash) — citrus granules/powder -->
+        <img src="assets/granules.jpg" alt="Orange Peel Granules" />
       </div>
-      <div class="preview-overlay">
-        <button class="preview-overlay-btn">Open Full Preview ↗</button>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="card-num">Option 02</div>
-      <div class="card-name">Sustainable and Clean</div>
-      <p class="card-desc">Clean white design emphasizing sustainability credentials, green tones, and earthy warmth. Natural and approachable.</p>
-      <div class="card-tags"><span class="tag">Light Theme</span><span class="tag">Clean</span><span class="tag">Sustainable</span><span class="tag">Earthy</span></div>
-      <div class="card-actions">
-        <a class="btn-preview" href="prototype-2-sustainable.html" target="_blank">
-          <svg viewBox="0 0 16 16"><path d="M6 2H2v12h12v-4h-2v2H4V4h2V2zm4 0v2h2l-6 6 1.5 1.5L14 5.5V8h2V2h-6z"/></svg>
-          View Full Preview
-        </a>
-        <button class="btn-select" onclick="selectOption(2, 'Sustainable and Clean')">Select This</button>
+      <div>
+        <div class="badge-first">Our First Ingredient</div>
+        <h2 class="heading-xl">Orange Peel Granules<span class="tm">™</span></h2>
+        <p class="body-text">Orange Peel Granules<span class="tm">™</span> are premium upcycled citrus ingredients produced from carefully processed orange peels and developed for commercial applications across multiple industries.</p>
+        <p class="body-text">Orange peel has long been valued for its natural aroma, flavor profile, fiber content, and botanical properties. As consumer demand continues to shift toward natural and sustainable ingredients, manufacturers are seeking innovative ways to incorporate citrus ingredients into their products.</p>
+        <p class="body-text">Our Orange Peel Granules<span class="tm">™</span> provide a versatile ingredient solution that allows companies to formulate with ingredients that are both functional and environmentally responsible.</p>
+        <br />
+        <a href="#contact" class="btn-gold">Learn More</a>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- OPTION 03 -->
-  <div class="card" id="card-3">
-    <div class="preview-window" onclick="window.open('prototype-3-premium.html','_blank')">
-      <div class="preview-scaler">
-        <iframe src="prototype-3-premium.html" scrolling="no" tabindex="-1"></iframe>
+<!-- SECTION FOUR — INDUSTRIES -->
+<section class="section industries-section" id="industries">
+  <div class="section-inner">
+    <div class="industries-header">
+      <div>
+        <div class="eyebrow-serif" style="color: var(--orange);">Applications</div>
+        <h2 class="heading-xl">One Ingredient. Multiple Industries.</h2>
       </div>
-      <div class="preview-overlay">
-        <button class="preview-overlay-btn">Open Full Preview ↗</button>
-      </div>
+      <p class="body-text">Upcycled citrus ingredients designed to support clean-label, natural, and sustainability initiatives across the products people use every day.</p>
     </div>
-    <div class="card-body">
-      <div class="card-num">Option 03</div>
-      <div class="card-name">Premium and Elegant</div>
-      <p class="card-desc">Warm cream palette with serif typography and premium positioning. Elevated brand story for luxury ingredient sourcing.</p>
-      <div class="card-tags"><span class="tag">Premium</span><span class="tag">Elegant</span><span class="tag">Serif</span><span class="tag">Warm</span></div>
-      <div class="card-actions">
-        <a class="btn-preview" href="prototype-3-premium.html" target="_blank">
-          <svg viewBox="0 0 16 16"><path d="M6 2H2v12h12v-4h-2v2H4V4h2V2zm4 0v2h2l-6 6 1.5 1.5L14 5.5V8h2V2h-6z"/></svg>
-          View Full Preview
-        </a>
-        <button class="btn-select" onclick="selectOption(3, 'Premium and Elegant')">Select This</button>
+    <div class="ind-grid">
+      <div class="ind-col">
+        <span class="ind-icon">🥖</span>
+        <div class="ind-name">Food</div>
+        <p>Bakery products, seasonings, confections, tea blends, specialty foods, and other innovative food applications that pair functionality with clean-label goals.</p>
+      </div>
+      <div class="ind-col">
+        <span class="ind-icon">🫖</span>
+        <div class="ind-name">Beverage</div>
+        <p>Tea infusions, flavored beverages, functional drinks, and emerging beverage applications seeking distinctive natural flavor and botanical appeal.</p>
+      </div>
+      <div class="ind-col">
+        <span class="ind-icon">🧴</span>
+        <div class="ind-name">Personal Care</div>
+        <p>Exfoliating products, soaps, scrubs, botanical formulations, and other clean-beauty applications formulated with naturally derived ingredients.</p>
+      </div>
+      <div class="ind-col">
+        <span class="ind-icon">🌱</span>
+        <div class="ind-name">Agriculture</div>
+        <p>Feed applications, soil enhancement, and other agricultural solutions that advance sustainability through upcycled citrus ingredients.</p>
+      </div>
+      <div class="ind-col">
+        <span class="ind-icon">🌿</span>
+        <div class="ind-name">Wellness</div>
+        <p>Functional products and wellness formulations drawing on the versatility of citrus ingredients sourced from nature.</p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="footer">
-  <div class="footer-left">Prepared for <strong>Apeeling LLC</strong> by <strong>Dexton-Livvy LLC</strong> · Business Management Solutions</div>
-  <div class="footer-right">dsaxon@dexton-livvy.com · dexton-livvy.com</div>
-</div>
-
-<div class="selection-panel" id="selectionPanel">
-  <div>
-    <div class="selection-text">You selected: <strong id="selectionLabel"></strong></div>
-    <div class="selection-note">Screenshot this page or reply to your proposal email with your selection to move forward.</div>
+<!-- SECTION FIVE — SUSTAINABILITY -->
+<section class="section sustain-section" id="sustainability">
+  <div class="section-inner">
+    <div class="sustain-inner">
+      <div>
+        <div class="eyebrow-serif">Our Business Model</div>
+        <h2 class="heading-xl">Sustainability Is Not A Department.</h2>
+        <p class="body-text">Every year, millions of pounds of food byproducts are discarded despite containing significant commercial value. At Apeeling LLC, we believe that sustainable innovation begins by asking a different question:</p>
+        <div class="sustain-question">"What if these materials were not waste at all?"</div>
+        <div class="sustain-closer">
+          <p>The future of manufacturing is <span class="orange">circular</span>.<br />The future of ingredients is <span class="orange">upcycled</span>.</p>
+        </div>
+      </div>
+      <div>
+        <div class="stat-stack">
+          <div class="stat-row">
+            <div class="stat-num">01</div>
+            <div>
+              <h4>Reduce Waste</h4>
+              <p>We transform citrus byproducts into valuable ingredients that continue serving industries around the world.</p>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-num">02</div>
+            <div>
+              <h4>Create Opportunity</h4>
+              <p>By extending the life of these materials, we create economic opportunity from resources once treated as waste.</p>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-num">03</div>
+            <div>
+              <h4>Enable Sustainable Manufacturing</h4>
+              <p>We support manufacturers seeking more sustainable ingredient solutions through responsible processing.</p>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-num">04</div>
+            <div>
+              <h4>Keep Resources In Circulation</h4>
+              <p>Circular manufacturing keeps valuable resources generating economic and environmental benefit.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <button class="btn-clear" onclick="clearSelection()">Clear Selection</button>
-</div>
+</section>
 
-<script>
-  let selected = null;
-  function selectOption(num, label) {
-    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
-    document.querySelectorAll('.btn-select').forEach(b => { b.classList.remove('active'); b.textContent = 'Select This'; });
-    if (selected === num) { selected = null; document.getElementById('selectionPanel').classList.remove('visible'); return; }
-    selected = num;
-    document.getElementById('card-' + num).classList.add('selected');
-    const btn = document.getElementById('card-' + num).querySelector('.btn-select');
-    btn.classList.add('active'); btn.textContent = '✓ Selected';
-    document.getElementById('selectionLabel').textContent = 'Option 0' + num + ' — ' + label;
-    document.getElementById('selectionPanel').classList.add('visible');
-  }
-  function clearSelection() {
-    selected = null;
-    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
-    document.querySelectorAll('.btn-select').forEach(b => { b.classList.remove('active'); b.textContent = 'Select This'; });
-    document.getElementById('selectionPanel').classList.remove('visible');
-  }
-</script>
+<!-- SECTION SIX — QUALITY & FOOD SAFETY -->
+<section class="section quality-section" id="quality">
+  <div class="section-inner">
+    <div class="quality-layout">
+      <div>
+        <div class="eyebrow-serif">Quality, Food Safety &amp; Regulatory Compliance</div>
+        <h2 class="heading-xl">Built On A Foundation Of Trust.</h2>
+        <p class="body-text">At Apeeling LLC, quality and food safety are foundational to everything we do. Our company operates as an FDA Registered Food Facility and is committed to maintaining systems and procedures that support safe ingredient manufacturing, product traceability, and continuous quality improvement.</p>
+        <p class="body-text">As our ingredient portfolio grows, we remain dedicated to transparency, accountability, and regulatory compliance while meeting the expectations of manufacturers and ingredient buyers around the world.</p>
+      </div>
+      <div class="reg-box">
+        <h3>Regulatory Commitment</h3>
+        <p>Apeeling LLC is registered with the United States Food and Drug Administration in accordance with the Food Safety Modernization Act (FSMA).</p>
+        <!-- FDA Registration Certificate preview — replace with certificate image when supplied -->
+        <div class="cert-frame">FDA Registration Certificate<br />(preview)</div>
+        <!-- Point href to the certificate PDF when available -->
+        <a href="#" class="btn-download">⬇ Download FDA Registration Certificate</a>
+        <p class="disclaimer">"FDA registration does not constitute FDA approval of any product or claim."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMING SOON — PORTFOLIO -->
+<section class="section coming-section">
+  <div class="section-inner">
+    <div class="eyebrow-serif">Coming Soon</div>
+    <h2 class="heading-xl">Expanding Our Ingredient Portfolio</h2>
+    <p class="body-text">At Apeeling LLC, Orange Peel Granules<span class="tm">™</span> are only the beginning. We continue to explore new opportunities to transform citrus byproducts into innovative ingredients that serve industries around the world.</p>
+    <div class="coming-row">
+      <div class="coming-cell">
+        <span class="dot">●</span>
+        <span class="label">Orange Peel Granules<span class="tm">™</span></span>
+      </div>
+      <div class="coming-cell">
+        <span class="dot">○</span>
+        <span class="label">In Development</span>
+      </div>
+      <div class="coming-cell">
+        <span class="dot">○</span>
+        <span class="label">In Development</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section class="section cta-section" id="contact">
+  <div class="section-inner">
+    <div class="eyebrow-serif">Let's Connect</div>
+    <h2 class="heading-xl">Let's Build The Future Of Ingredients Together.</h2>
+    <p class="body-text" style="margin: 0 auto;">Whether you are developing a new product, exploring sustainable ingredient alternatives, or seeking innovative ingredient solutions, we welcome the opportunity to connect.</p>
+    <div class="cta-actions">
+      <a href="mailto:info@apeelingllc.com" class="btn-forest">Request a Sample</a>
+      <a href="mailto:info@apeelingllc.com" class="btn-outline">Become a Distribution Partner</a>
+      <a href="mailto:info@apeelingllc.com" class="btn-outline">General Inquiries</a>
+    </div>
+    <p class="body-text" style="margin: 2.5rem auto 0; font-size: 0.85rem;">Apeeling LLC · Denver, Colorado, USA<br />Email &amp; phone to be confirmed</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo-text">Ape<em>el</em>ing LLC</div>
+      <p class="footer-tagline">Transforming Citrus Byproducts Into High-Value Ingredients. Upcycled ingredients for food, beverage, personal care, wellness, and agriculture.</p>
+      <div class="footer-meta">FDA Registered Food Facility</div>
+    </div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#ingredient">Ingredients</a>
+      <a href="#industries">Industries</a>
+      <a href="#sustainability">Sustainability</a>
+      <a href="#quality">Quality &amp; Food Safety</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Apeeling LLC. All Rights Reserved.
+  </div>
+</footer>
 
 </body>
 </html>
