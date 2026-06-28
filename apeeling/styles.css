@@ -1,5 +1,5 @@
 /* ===========================================================
-   Apeeling LLC — shared stylesheet
+   Apeeling LLC, shared stylesheet
    Premium citrus-ingredient design system
    =========================================================== */
 
@@ -9,9 +9,9 @@
   --orange: #f1a506;
   --orange-dark: #c8880a;
   --orange-pale: #fdf6e3;
-  --forest: #164827;
-  --forest-mid: #1d5c32;
-  --forest-pale: #edf4ee;
+  --forest: #9c4a2a;
+  --forest-mid: #b85a36;
+  --forest-pale: #f6e7dc;
   --cream: #f9f5ef;
   --cream-dark: #ede8e0;
   --warm: #8b7355;
@@ -138,13 +138,13 @@ nav {
   position: absolute; inset: 0; z-index: 0;
   background:
     radial-gradient(circle at 78% 28%, rgba(241,165,6,0.22), transparent 42%),
-    radial-gradient(circle at 12% 88%, rgba(29,92,50,0.45), transparent 48%),
-    linear-gradient(135deg, #123a20 0%, #164827 55%, #0f3119 100%);
+    radial-gradient(circle at 12% 88%, rgba(156,74,42,0.5), transparent 48%),
+    linear-gradient(135deg, #5f2c18 0%, #8a4023 55%, #46200f 100%);
 }
 .hero-media img, .hero-media video { width: 100%; height: 100%; object-fit: cover; }
 .hero-media::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(15,40,24,0.85) 0%, rgba(15,40,24,0.55) 45%, rgba(15,40,24,0.2) 100%);
+  background: linear-gradient(90deg, rgba(42,20,12,0.85) 0%, rgba(42,20,12,0.55) 45%, rgba(42,20,12,0.2) 100%);
 }
 .hero-inner {
   position: relative; z-index: 2;
@@ -175,8 +175,8 @@ nav {
   position: relative; padding: 10rem 3rem 5.5rem; overflow: hidden;
   background:
     radial-gradient(circle at 85% 20%, rgba(241,165,6,0.25), transparent 45%),
-    radial-gradient(circle at 10% 95%, rgba(29,92,50,0.5), transparent 50%),
-    linear-gradient(135deg, #123a20 0%, #164827 60%, #0f3119 100%);
+    radial-gradient(circle at 10% 95%, rgba(156,74,42,0.5), transparent 50%),
+    linear-gradient(135deg, #5f2c18 0%, #8a4023 60%, #46200f 100%);
 }
 .page-hero .inner { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; }
 .page-hero .eyebrow-serif { color: var(--orange); }
@@ -259,7 +259,7 @@ nav {
 .media-frame.square { aspect-ratio: 1/1; }
 .media-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
-/* HOME — intro/ingredient (kept for index.html) */
+/* HOME, intro/ingredient (kept for index.html) */
 .intro-note { margin-top: 2.5rem; border-top: 1px solid var(--border); padding-top: 2rem; }
 .intro-note p {
   font-family: 'Cormorant Garamond', serif;
@@ -278,7 +278,7 @@ nav {
   aspect-ratio: 1/1; position: relative; overflow: hidden;
   background: radial-gradient(circle at 50% 45%, rgba(241,165,6,0.9), var(--orange-dark) 70%);
 }
-.ingredient-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.ingredient-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 58% center; z-index: 1; }
 .badge-first {
   display: inline-block; background: var(--forest); color: var(--white);
   font-size: 0.68rem; font-weight: 600; letter-spacing: 1.5px;
