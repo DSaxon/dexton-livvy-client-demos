@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abundant Life Market — Design Concepts</title>
+<meta name="description" content="Three design directions for the Abundant Life Market storefront. Review and choose.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--ink:#14251b;--muted:#5f6f64;--line:#e6ede6;--kale:#14432a;--lime:#7cc00c;--bg:#f7f9f4}
+  body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  .disp{font-family:'Bricolage Grotesque',sans-serif}
+  a{text-decoration:none;color:inherit}
+  header{background:var(--kale);color:#fff;padding:44px 26px}
+  header .in{max-width:1080px;margin:0 auto}
+  header .eyebrow{color:var(--lime);font-weight:600;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase}
+  header h1{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(2rem,5vw,3.2rem);margin:8px 0 6px;letter-spacing:-.02em}
+  header p{color:rgba(255,255,255,.8);max-width:640px}
+  main{max-width:1080px;margin:0 auto;padding:40px 26px 60px}
+  .note{background:#fff;border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:10px;padding:16px 20px;color:var(--muted);font-size:.92rem;margin-bottom:34px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+  .card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(20,67,42,.12)}
+  .swatch{height:150px;position:relative;display:flex;align-items:flex-end;padding:16px}
+  .swatch .no{position:absolute;top:14px;right:16px;font-family:'Bricolage Grotesque';font-weight:800;font-size:2.4rem;opacity:.25}
+  .swatch .nm{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.4rem}
+  /* direction 1 */
+  .s1{background:radial-gradient(ellipse at 20% 0,#26382c,#1b2a23);color:#f2eee0}
+  .s1 .nm{color:#f2eee0}.s1 .no{color:#e79a3a}
+  .s1 .chip{background:#e2574c}
+  /* direction 2 */
+  .s2{background:repeating-linear-gradient(45deg,#f2ecda 0 10px,#e7dcc2 10px 20px);color:#2a3126}
+  .s2 .nm{font-family:'Bricolage Grotesque';color:#2a3126}.s2 .no{color:#9c3b2e}
+  .s2 .chip{background:#9c3b2e}
+  /* direction 3 */
+  .s3{background:linear-gradient(135deg,#e9f4dc,#dcefe4);color:#14432a}
+  .s3 .no{color:#69a608}
+  .s3 .chip{background:#69a608}
+  .chip{position:absolute;top:16px;left:16px;color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:4px 11px}
+  .card .body{padding:20px;display:flex;flex-direction:column;flex:1}
+  .card h2{font-size:1.15rem;font-weight:600;margin-bottom:2px}
+  .card .tagline{font-size:.82rem;color:var(--muted);margin-bottom:12px}
+  .card p{font-size:.9rem;color:var(--muted);flex:1}
+  .card .meta{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px}
+  .card .meta span{font-size:.74rem;color:var(--kale);background:#f1f6ec;border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+  .card .open{display:block;text-align:center;background:var(--kale);color:#fff;font-weight:600;border-radius:999px;padding:13px;transition:.2s}
+  .card .open:hover{background:var(--lime);color:var(--kale)}
+  footer{max-width:1080px;margin:0 auto;padding:0 26px 50px;color:var(--muted);font-size:.85rem}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  :focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+</style>
+</head>
+<body>
+<header>
+  <div class="in">
+    <div class="eyebrow">Dexton-Livvy · Design Review</div>
+    <h1 class="disp">Abundant Life Market</h1>
+    <p>Three directions for the online farm-market storefront — same products, prices, story, and working cart in each. Open any concept, click through the shop, and tell us which feels most like Abundant Life.</p>
+  </div>
+</header>
+<main>
+  <div class="note"><strong>How to review:</strong> each concept is a live, clickable prototype. Try “Add to Cart,” open the cart, and browse on your phone too. The checkout button is a placeholder for now (it shows a friendly “coming soon” message) — payment hookup comes after you pick a direction.</div>
+  <div class="cards">
+
+    <a class="card" href="prototype-1-market-stall.html">
+      <div class="swatch s1"><span class="chip">Concept 01</span><span class="no">01</span><span class="nm">Market Stall</span></div>
+      <div class="body">
+        <h2>The Market Stall</h2>
+        <div class="tagline">Chalkboard · hand-lettered · tactile</div>
+        <p>A farmers-market feel: a slate chalkboard, poster-condensed headlines, and hand-chalked price tags on every item. Warm, local, and made-by-hand — like a stall you’d actually walk up to.</p>
+        <div class="meta"><span>Anton + Caveat</span><span>Chalk price tags</span><span>Bold &amp; friendly</span></div>
+        <span class="open">Open Concept 01 →</span>
+      </div>
+    </a>
+
+    <a class="card" href="prototype-2-seed-almanac.html">
+      <div class="swatch s2"><span class="chip">Concept 02</span><span class="no">02</span><span class="nm">Seed Almanac</span></div>
+      <div class="body">
+        <h2>The Seed Almanac</h2>
+        <div class="tagline">Vintage catalogue · editorial · heritage</div>
+        <p>An old seed-catalogue spirit: warm paper, an elegant display serif, and each product logged as a numbered “lot” like a heritage almanac. Trustworthy and rooted, with real craft in the details.</p>
+        <div class="meta"><span>Rozha One + Spectral</span><span>Seed-packet cards</span><span>Refined &amp; classic</span></div>
+        <span class="open">Open Concept 02 →</span>
+      </div>
+    </a>
+
+    <a class="card" href="prototype-3-fresh-modern.html">
+      <div class="swatch s3"><span class="chip">Concept 03</span><span class="no">03</span><span class="nm">Fresh Modern</span></div>
+      <div class="body">
+        <h2>Fresh Modern</h2>
+        <div class="tagline">Bright DTC · clean · conversion-ready</div>
+        <p>A contemporary grocery-brand look: crisp white, deep kale green, and a bright lime pop, with big rounded product tiles color-coded by category. The most e-commerce-forward and easiest to scale.</p>
+        <div class="meta"><span>Bricolage + Inter</span><span>Category color tiles</span><span>Modern &amp; scalable</span></div>
+        <span class="open">Open Concept 03 →</span>
+      </div>
+    </a>
+
+  </div>
+</main>
+<footer>Prepared for Abundant Life Market · Capitol Heights, MD &amp; the DMV · © 2026 Dexton-Livvy LLC</footer>
+</body>
+</html>

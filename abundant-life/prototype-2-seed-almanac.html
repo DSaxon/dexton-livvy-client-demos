@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abundant Life Market — Purveyors of Farm-Fresh Provisions</title>
+<meta name="description" content="A DMV farm market in the spirit of the old seed catalogs. Organic produce, pasture-raised meats, eggs &amp; whole-food supplements from Maryland &amp; Pennsylvania farms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --paper:#efe7d3; --paper2:#e7dcc2; --ink:#2a3126; --ink-soft:#55583f;
+    --oxblood:#9c3b2e; --gold:#a9812f; --sage:#5f6f4c; --rule:#c9bd9f;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Spectral',Georgia,serif;color:var(--ink);line-height:1.65;background:var(--paper);
+    background-image:radial-gradient(circle at 50% 0,#f4eeda,transparent 60%);}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;z-index:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E")}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 26px;position:relative;z-index:1}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  .serif{font-family:'Rozha One',serif;font-weight:400}
+
+  /* NAV / MASTHEAD */
+  header.mast{border-bottom:3px double var(--ink);background:var(--paper)}
+  .mast-in{max-width:1120px;margin:0 auto;padding:12px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .mast .est{font-family:'IBM Plex Mono';font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+  .mast nav{display:flex;gap:26px}
+  .mast nav a{font-family:'IBM Plex Mono';font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+  .mast nav a:hover{color:var(--oxblood)}
+  .cart-btn{font-family:'IBM Plex Mono';font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid var(--ink);
+    background:none;color:var(--ink);padding:7px 13px;cursor:pointer;display:flex;gap:8px;align-items:center}
+  .cart-btn:hover{background:var(--ink);color:var(--paper)}
+  .cart-count{background:var(--oxblood);color:var(--paper);border-radius:2px;padding:1px 6px;font-size:.68rem}
+
+  /* HERO — almanac cover */
+  .cover{text-align:center;padding:52px 0 40px;border-bottom:1px solid var(--rule)}
+  .cover .kicker{font-family:'IBM Plex Mono';font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--oxblood)}
+  .cover h1{font-family:'Rozha One';font-size:clamp(3.2rem,10vw,7rem);line-height:.98;margin:14px 0 6px;letter-spacing:-.01em}
+  .cover .flourish{display:flex;align-items:center;justify-content:center;gap:16px;color:var(--sage);margin:10px 0 18px}
+  .cover .flourish::before,.cover .flourish::after{content:"";height:1px;width:70px;background:var(--rule)}
+  .cover .flourish svg{width:26px;height:26px;stroke:var(--sage);fill:none;stroke-width:1.2}
+  .cover p.sub{font-style:italic;font-size:1.22rem;max-width:640px;margin:0 auto;color:var(--ink-soft)}
+  .cover .vols{display:flex;justify-content:center;gap:0;margin-top:30px;flex-wrap:wrap;border:1px solid var(--rule)}
+  .cover .vols div{padding:12px 26px;font-family:'IBM Plex Mono';font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);border-right:1px solid var(--rule)}
+  .cover .vols div:last-child{border-right:0}
+  .cover .vols b{display:block;font-family:'Rozha One';font-size:1.4rem;color:var(--ink);letter-spacing:0;text-transform:none;margin-top:2px}
+  .btn{display:inline-block;font-family:'IBM Plex Mono';font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+    padding:14px 26px;cursor:pointer;border:1.5px solid var(--ink);transition:.2s;margin-top:26px}
+  .btn.primary{background:var(--oxblood);border-color:var(--oxblood);color:var(--paper)}
+  .btn.primary:hover{background:var(--ink);border-color:var(--ink)}
+
+  /* SECTIONS */
+  .sec{padding:56px 0}
+  .sec-title{display:flex;align-items:center;gap:18px;margin-bottom:8px}
+  .sec-title h2{font-family:'Rozha One';font-size:clamp(2rem,5vw,3.2rem);white-space:nowrap}
+  .sec-title .ln{flex:1;height:1px;background:var(--rule)}
+  .sec-title .no{font-family:'IBM Plex Mono';font-size:.72rem;letter-spacing:.14em;color:var(--oxblood);text-transform:uppercase}
+  .sec-intro{font-style:italic;color:var(--ink-soft);max-width:560px;margin-bottom:32px}
+
+  /* SEED-PACKET CARDS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:0;border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
+  .packet{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:26px 24px 24px;background:var(--paper);
+    display:flex;flex-direction:column;position:relative;transition:background .2s}
+  .packet:hover{background:var(--paper2)}
+  .packet .lot{font-family:'IBM Plex Mono';font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);
+    display:flex;justify-content:space-between;border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:14px}
+  .packet .lot .dmv{color:var(--oxblood)}
+  .arch{height:150px;border:1px solid var(--rule);border-radius:120px 120px 8px 8px;display:flex;align-items:center;justify-content:center;
+    background:repeating-linear-gradient(45deg,#f2ecda 0 8px,#efe7d3 8px 16px);margin-bottom:16px}
+  .arch svg{width:88px;height:88px;stroke:var(--sage);fill:none;stroke-width:1.3}
+  .packet h3{font-family:'Rozha One';font-size:1.5rem;line-height:1.05}
+  .packet .latin{font-style:italic;font-size:.86rem;color:var(--gold);margin-bottom:8px}
+  .packet .desc{font-size:.9rem;color:var(--ink-soft);flex:1;margin-bottom:16px}
+  .packet .buy{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--rule);padding-top:14px}
+  .packet .price{font-family:'Rozha One';font-size:1.7rem}
+  .packet .price small{font-family:'IBM Plex Mono';font-size:.64rem;letter-spacing:.06em;color:var(--ink-soft);display:block;text-transform:uppercase}
+  .add{font-family:'IBM Plex Mono';font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid var(--ink);
+    background:none;color:var(--ink);padding:10px 16px;cursor:pointer;transition:.18s}
+  .add:hover{background:var(--sage);border-color:var(--sage);color:var(--paper)}
+  .add.added{background:var(--oxblood);border-color:var(--oxblood);color:var(--paper)}
+
+  /* STORY */
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule)}
+  .story .txt{padding:44px}
+  .story .drop::first-letter{font-family:'Rozha One';font-size:3.4rem;float:left;line-height:.8;padding:6px 12px 0 0;color:var(--oxblood)}
+  .story .txt p+p{margin-top:14px}
+  .story .plate{border-left:1px solid var(--rule);background:repeating-linear-gradient(45deg,#f2ecda 0 10px,#eae0c8 10px 20px);
+    display:flex;align-items:center;justify-content:center;min-height:320px;position:relative}
+  .story .plate svg{width:52%;stroke:var(--sage);fill:none;stroke-width:1}
+  .story .plate .cap{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-family:'IBM Plex Mono';font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+
+  /* CONTACT */
+  .contact{text-align:center;border:3px double var(--ink);padding:52px 24px;background:var(--paper)}
+  .contact .kicker{font-family:'IBM Plex Mono';font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--oxblood)}
+  .contact h2{font-family:'Rozha One';font-size:clamp(2rem,5vw,3rem);margin:8px 0 12px}
+  .contact p{font-style:italic;color:var(--ink-soft);max-width:520px;margin:0 auto 8px}
+  .contact .place{font-family:'IBM Plex Mono';font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;margin-top:22px}
+
+  footer.foot{border-top:3px double var(--ink);margin-top:56px;padding:30px 0;text-align:center}
+  footer.foot .nm{font-family:'Rozha One';font-size:1.5rem}
+  footer.foot .sm{font-family:'IBM Plex Mono';font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-top:8px}
+
+  /* CART */
+  .overlay{position:fixed;inset:0;background:rgba(42,49,38,.5);opacity:0;visibility:hidden;transition:.25s;z-index:60}
+  .overlay.open{opacity:1;visibility:visible}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(400px,92vw);background:var(--paper);border-left:3px double var(--ink);
+    transform:translateX(100%);transition:transform .3s;z-index:70;display:flex;flex-direction:column}
+  .drawer.open{transform:none}
+  .drawer h3{font-family:'Rozha One';font-size:1.6rem;padding:22px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
+  .drawer .x{background:none;border:none;font-size:1.6rem;cursor:pointer;line-height:1;color:var(--ink)}
+  .items{flex:1;overflow-y:auto;padding:8px 22px}
+  .empty{text-align:center;font-style:italic;color:var(--ink-soft);margin-top:50px}
+  .line{display:flex;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule)}
+  .line .n{flex:1}.line .n b{font-weight:600}.line .n span{display:block;font-family:'IBM Plex Mono';font-size:.72rem;color:var(--ink-soft)}
+  .qty{display:flex;align-items:center;gap:8px}
+  .qty button{width:26px;height:26px;border:1px solid var(--rule);background:none;cursor:pointer;color:var(--ink)}
+  .qty button:hover{border-color:var(--oxblood);color:var(--oxblood)}
+  .foot-cart{padding:22px;border-top:1px solid var(--rule)}
+  .subtotal{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+  .subtotal span:first-child{font-family:'IBM Plex Mono';font-size:.74rem;letter-spacing:.12em;text-transform:uppercase}
+  .subtotal .amt{font-family:'Rozha One';font-size:1.7rem;color:var(--oxblood)}
+  .checkout{width:100%;font-family:'IBM Plex Mono';font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;background:var(--oxblood);
+    color:var(--paper);border:none;padding:15px;cursor:pointer}
+  .checkout:hover{background:var(--ink)}
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(30px);background:var(--ink);color:var(--paper);
+    font-family:'IBM Plex Mono';font-size:.8rem;padding:14px 24px;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;transition:.3s;z-index:90}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media(max-width:820px){.mast nav{display:none}.story{grid-template-columns:1fr}.story .plate{min-height:220px}}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+  :focus-visible{outline:2.5px solid var(--oxblood);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="mast-in">
+    <div class="est">Est. in the DMV · No. 1</div>
+    <nav><a href="#shop">The Shop</a><a href="#story">Our Story</a><a href="#contact">Contact</a></nav>
+    <button class="cart-btn" onclick="openCart()">Basket <span class="cart-count" id="cc">0</span></button>
+  </div>
+</header>
+
+<div id="top" class="wrap">
+
+  <!-- COVER -->
+  <section class="cover">
+    <div class="kicker">Purveyors of Farm-Fresh Provisions</div>
+    <h1 class="serif">Abundant Life<br>Market</h1>
+    <div class="flourish">
+      <svg viewBox="0 0 24 24"><path d="M12 21c0-6 3-9 8-9-1 6-4 9-8 9Zm0 0c0-6-3-9-8-9 1 6 4 9 8 9Zm0 0V9"/></svg>
+    </div>
+    <p class="sub">A community market in the old spirit — organic produce, pasture-raised meats, and whole-food supplements, gathered from family farms in Maryland &amp; Pennsylvania and carried to your door across the DMV.</p>
+    <div class="vols">
+      <div>From the fields of<b>MD &amp; PA</b></div>
+      <div>Delivered to the<b>DMV</b></div>
+      <div>Six<b>Provisions</b></div>
+    </div>
+    <br>
+    <a class="btn primary" href="#shop">Open the Catalogue</a>
+  </section>
+
+  <!-- SHOP -->
+  <section class="sec" id="shop">
+    <div class="sec-title"><span class="no">No. 01</span><h2 class="serif">The Provisions</h2><span class="ln"></span></div>
+    <p class="sec-intro">This season’s harvest, each entry logged and lotted as it comes off the farm.</p>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- STORY -->
+  <section class="sec" id="story">
+    <div class="sec-title"><span class="no">No. 02</span><h2 class="serif">Our Story</h2><span class="ln"></span></div>
+    <div class="story">
+      <div class="txt">
+        <p class="drop">Abundant Life Market is rooted in the community garden. Started by a local grower and community builder, it was born from a simple belief: fresh, clean food should be within reach for everyone in the DMV.</p>
+        <p>We source directly from sustainable farms in Maryland and Pennsylvania — pasture-raised animals, organic produce, and whole-food supplements, with no shortcuts and no middleman. Just real food, picked at its peak and carried straight to your table.</p>
+      </div>
+      <div class="plate">
+        <svg viewBox="0 0 24 24"><path d="M12 20c0-5 3-8 7-8-1 5-3.5 8-7 8Zm0 0c0-5-3-8-7-8 1 5 3.5 8 7 8Zm0 0V8"/><path d="M12 8c1.4-1.4 1.4-3.7 0-5.5C10.6 4.3 10.6 6.6 12 8Z"/></svg>
+        <div class="cap">Plate I — From the Community Garden</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sec" id="contact">
+    <div class="contact">
+      <div class="kicker">Correspondence</div>
+      <h2 class="serif">Send Word to the Market</h2>
+      <p>Questions about the provisions, ordering, or delivery in the DMV area? Write to us and we’ll see you well supplied.</p>
+      <a class="btn primary" href="#shop">Begin an Order</a>
+      <div class="place">✦ Capitol Heights, MD &amp; the DMV Area ✦</div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="foot">
+  <div class="nm serif">Abundant Life Market</div>
+  <div class="sm">© 2026 · Capitol Heights, MD &amp; the DMV · Sourcing the best for our community</div>
+</footer>
+
+<!-- CART -->
+<div class="overlay" id="ov" onclick="closeCart()"></div>
+<aside class="drawer" id="dw" aria-label="Shopping basket">
+  <h3 class="serif">Your Basket <button class="x" onclick="closeCart()" aria-label="Close">×</button></h3>
+  <div class="items" id="items"><div class="empty">Your basket is empty — the catalogue awaits.</div></div>
+  <div class="foot-cart">
+    <div class="subtotal"><span>Subtotal</span><span class="amt serif" id="sub">$0.00</span></div>
+    <button class="checkout" onclick="checkout()">Proceed to Checkout</button>
+  </div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+var ART={
+ 'produce-bag':'<svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><path d="M12 12c1.5-1.5 3-1.5 4 0-1.5 1.5-3 1.5-4 0Zm0 0c-1.5-1.5-3-1.5-4 0 1.5 1.5 3 1.5 4 0Z"/></svg>',
+ 'farm-eggs':'<svg viewBox="0 0 24 24"><path d="M12 3c3 0 5 5 5 9a5 5 0 0 1-10 0c0-4 2-9 5-9Z"/></svg>',
+ 'chicken-breast':'<svg viewBox="0 0 24 24"><path d="M5 14c-2-3 0-8 5-8 4 0 6 3 8 3 2 0 3 2 1 4-1 1-3 1-4 2-2 2-2 4-5 4-3 0-4-2-5-5Z"/></svg>',
+ 'turkey-legs':'<svg viewBox="0 0 24 24"><path d="M7 17 4 20m3-3c-3-3-1-9 4-11 4-1.6 8 1 8 5 0 3-2 5-5 5-2 0-3-1-4-2Z"/><path d="M9 15l3-3"/></svg>',
+ 'greencake':'<svg viewBox="0 0 24 24"><path d="M4 20h16v-6a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v6Z"/><path d="M4 15h16"/><path d="M12 6v4M9 7v3M15 7v3"/></svg>',
+ 'green-powder':'<svg viewBox="0 0 24 24"><path d="M7 9h10l-1 11H8L7 9Z"/><path d="M8 9V7a4 4 0 0 1 8 0v2"/><path d="M12 13v3"/></svg>'
+};
+var PRODUCTS=[
+ {id:'produce-bag',name:'Organic Produce Bag',price:20,unit:'each',latin:'Hortus mixtus',desc:'Bountiful bag of organic produce grown on the Eastern Shore — okra, mustard greens, collard greens, bok choy &amp; green cherry tomatoes.'},
+ {id:'farm-eggs',name:'Farm Fresh Eggs',price:8,unit:'per dozen',latin:'Ova rustica',desc:'One dozen eggs from free-range chickens. Deep-gold yolks, gathered this week.'},
+ {id:'chicken-breast',name:'Chicken Breast',price:22,unit:'per 1.5 lb',latin:'Gallus pastoralis',desc:'Boneless, skinless breast of pastured, soy-free chicken. Clean protein direct from ethical farmers.'},
+ {id:'turkey-legs',name:'Smoked Turkey Legs',price:12,unit:'each',latin:'Meleagris fumata',desc:'Natural wood-smoked turkey legs from an Amish family farm in Lancaster, PA.'},
+ {id:'greencake',name:'Greencake',price:40,unit:'each',latin:'Placenta viridis',desc:'Whole-food green nutrition, baked into a rich and satisfying cake.'},
+ {id:'green-powder',name:'Green Powder',price:74,unit:'each',latin:'Pulvis viridis',desc:'Whole-food greens for shakes &amp; smoothies. Delivery in the DMV area only.',dmv:true}
+];
+var KEY='abundantLifeCart', cart=JSON.parse(localStorage.getItem(KEY)||'[]');
+function save(){localStorage.setItem(KEY,JSON.stringify(cart))}
+function find(id){return cart.find(function(i){return i.id===id})}
+function P(id){return PRODUCTS.find(function(p){return p.id===id})}
+function renderGrid(){
+  document.getElementById('grid').innerHTML=PRODUCTS.map(function(p,i){
+    var lot='LOT · No. '+('0'+(i+1)).slice(-2);
+    return '<article class="packet">'+
+      '<div class="lot"><span>'+lot+'</span><span class="'+(p.dmv?'dmv':'')+'">'+(p.dmv?'DMV Only':'Est. DMV')+'</span></div>'+
+      '<div class="arch">'+ART[p.id]+'</div>'+
+      '<h3 class="serif">'+p.name+'</h3>'+
+      '<div class="latin">'+p.latin+'</div>'+
+      '<p class="desc">'+p.desc+'</p>'+
+      '<div class="buy"><div class="price serif">$'+p.price.toFixed(0)+'<small>'+p.unit+'</small></div>'+
+      '<button class="add" onclick="add(\''+p.id+'\',this)">Add</button></div>'+
+    '</article>';
+  }).join('');
+}
+function add(id,btn){var it=find(id);if(it){it.q++}else{cart.push({id:id,q:1})}save();updateCart();
+  if(btn){btn.textContent='Added';btn.classList.add('added');setTimeout(function(){btn.textContent='Add';btn.classList.remove('added')},1100)}
+  toast(P(id).name+' added to your basket')}
+function chg(id,d){var it=find(id);if(!it)return;it.q+=d;if(it.q<1)cart=cart.filter(function(i){return i.id!==id});save();updateCart()}
+function updateCart(){
+  document.getElementById('cc').textContent=cart.reduce(function(a,i){return a+i.q},0);
+  var box=document.getElementById('items');
+  if(!cart.length){box.innerHTML='<div class="empty">Your basket is empty — the catalogue awaits.</div>'}
+  else{box.innerHTML=cart.map(function(i){var p=P(i.id);return '<div class="line"><div class="n"><b>'+p.name+'</b><span>$'+p.price.toFixed(2)+' · '+p.unit+'</span></div><div class="qty"><button onclick="chg(\''+i.id+'\',-1)" aria-label="Decrease">–</button><span>'+i.q+'</span><button onclick="chg(\''+i.id+'\',1)" aria-label="Increase">+</button></div></div>'}).join('')}
+  document.getElementById('sub').textContent='$'+cart.reduce(function(a,i){return a+P(i.id).price*i.q},0).toFixed(2);
+}
+function openCart(){document.getElementById('ov').classList.add('open');document.getElementById('dw').classList.add('open')}
+function closeCart(){document.getElementById('ov').classList.remove('open');document.getElementById('dw').classList.remove('open')}
+function checkout(){if(!cart.length){toast('Your basket is empty.');return}closeCart();toast('Checkout coming soon — write to us to place your order!')}
+var tt;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('show')},2400)}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCart()});
+renderGrid();updateCart();
+</script>
+</body>
+</html>
