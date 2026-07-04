@@ -78,8 +78,8 @@
   .card{background:linear-gradient(160deg,#24382c,#1e2e25);border:1.5px dashed var(--chalk-dim);border-radius:4px;
     padding:22px;position:relative;display:flex;flex-direction:column;transition:.2s}
   .card:hover{transform:translateY(-4px);border-color:var(--carrot);box-shadow:0 14px 34px rgba(0,0,0,.3)}
-  .card .art{height:120px;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
-  .card .art svg{width:96px;height:96px;stroke:var(--leaf);fill:none;stroke-width:1.6}
+  .card .art{height:158px;margin-bottom:14px;border-radius:4px;overflow:hidden;border:1px solid var(--chalk-dim);position:relative}
+  .card .art img{width:100%;height:100%;object-fit:cover;display:block}
   .card h3{font-family:'Anton';text-transform:uppercase;font-size:1.15rem;letter-spacing:.02em;margin-top:8px}
   .card .desc{font-size:.9rem;color:var(--chalk-dim);margin:8px 0 16px;flex:1}
   .price-tag{position:absolute;top:16px;right:-6px;background:var(--radish);color:#fff;font-family:'Caveat';font-weight:700;
@@ -99,7 +99,7 @@
   .crate{aspect-ratio:4/3;border:2px dashed var(--chalk-dim);border-radius:6px;background:
      repeating-linear-gradient(90deg,#20312800 0 38px,rgba(147,192,106,.06) 38px 40px),linear-gradient(160deg,#26382c,#1c2b23);
      display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-  .crate svg{width:60%;height:60%;stroke:var(--leaf);fill:none;stroke-width:1.2;opacity:.9}
+  .crate img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .crate .stamp{position:absolute;bottom:16px;right:16px;font-family:'Caveat';font-size:1.4rem;color:var(--carrot);
     border:2px solid var(--carrot);border-radius:6px;padding:2px 12px;transform:rotate(-6deg)}
 
@@ -208,7 +208,7 @@
         <p>We source directly from sustainable farms in Maryland and Pennsylvania — pasture-raised animals, organic produce, and whole-food supplements. No shortcuts, no middleman, just real food picked at its peak.</p>
       </div>
       <div class="crate">
-        <svg viewBox="0 0 24 24"><path d="M12 20c0-5 3-8 7-8-1 5-3.5 8-7 8Zm0 0c0-5-3-8-7-8 1 5 3.5 8 7 8Zm0 0V8"/><path d="M12 8c1.4-1.4 1.4-3.7 0-5.5C10.6 4.3 10.6 6.6 12 8Z"/></svg>
+        <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&q=72&auto=format&fit=crop" alt="Farm fields at harvest in the countryside">
         <span class="stamp chalk-hand">Grown in the DMV</span>
       </div>
     </div>
@@ -256,6 +256,8 @@ var ART={
  'greencake':'<svg viewBox="0 0 24 24"><path d="M4 20h16v-6a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v6Z"/><path d="M4 15h16"/><path d="M12 6v4M9 7v3M15 7v3"/></svg>',
  'green-powder':'<svg viewBox="0 0 24 24"><path d="M7 9h10l-1 11H8L7 9Z"/><path d="M8 9V7a4 4 0 0 1 8 0v2"/><path d="M12 13v3"/></svg>'
 };
+var PRODIMG={'produce-bag':'1488459716781-31db52582fe9','farm-eggs':'1506976785307-8732e854ad03','chicken-breast':'1604503468506-a8da13d82791','turkey-legs':'1606728035253-49e8a23146de','greencake':'1607478900766-efe13248b125','green-powder':'1622480916113-9000ac49b79d'};
+function img(id,w){return 'https://images.unsplash.com/photo-'+(PRODIMG[id]||id)+'?w='+(w||600)+'&q=72&auto=format&fit=crop';}
 var PRODUCTS=[
  {id:'produce-bag',name:'Organic Produce Bag',price:20,unit:'each',desc:'Bountiful bag of organic produce grown on the Eastern Shore — okra, mustard greens, collard greens, bok choy &amp; green cherry tomatoes.'},
  {id:'farm-eggs',name:'Farm Fresh Eggs',price:8,unit:'/ doz',desc:'One dozen eggs from free-range chickens. Deep-gold yolks, laid this week.'},
@@ -274,7 +276,7 @@ function renderGrid(){
     return '<article class="card">'+
       '<div class="price-tag">$'+p.price.toFixed(0)+'<small>'+(p.unit==='each'?'each':p.unit)+'</small></div>'+
       (p.badge?'<span class="badge chalk-hand">'+p.badge+'</span>':'')+
-      '<div class="art">'+ART[p.id]+'</div>'+
+      '<div class="art"><img src="'+img(p.id,600)+'" alt="'+p.name+'" loading="lazy"></div>'+
       '<h3>'+p.name+'</h3>'+
       '<p class="desc">'+p.desc+'</p>'+
       '<button class="add" data-id="'+p.id+'" onclick="add(\''+p.id+'\',this)">Add to Cart</button>'+

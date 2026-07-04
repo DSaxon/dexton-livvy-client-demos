@@ -56,7 +56,7 @@
   /* hero collage */
   .hero-art{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:14px;height:400px}
   .tileA{border-radius:26px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-  .tileA svg{width:44%;height:44%;stroke:var(--kale);fill:none;stroke-width:1.4}
+  .tileA img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .tileA.big{grid-row:span 2;background:var(--c-produce)}
   .tileA.e{background:var(--c-eggs)} .tileA.m{background:var(--c-meat)} .tileA.g{background:var(--c-greens)}
   .tileA .lbl{position:absolute;bottom:14px;left:16px;font-weight:600;font-size:.8rem;color:var(--kale);background:#ffffffcc;border-radius:999px;padding:4px 11px}
@@ -70,7 +70,7 @@
   .card{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;transition:.2s}
   .card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(20,67,42,.1)}
   .card .top{height:158px;display:flex;align-items:center;justify-content:center;position:relative}
-  .card .top svg{width:82px;height:82px;stroke:var(--kale);fill:none;stroke-width:1.5}
+  .card .top img{width:100%;height:100%;object-fit:cover;display:block}
   .card .top .tagpill{position:absolute;top:12px;left:12px;font-size:.72rem;font-weight:600;color:var(--kale);background:#ffffffcc;border-radius:999px;padding:4px 10px}
   .card .top .dmv{position:absolute;top:12px;right:12px;font-size:.7rem;font-weight:700;color:#fff;background:var(--lime-d);border-radius:999px;padding:4px 10px}
   .card .body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
@@ -92,8 +92,8 @@
   .story .stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:16px 20px;flex:1;min-width:120px}
   .story .stat b{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.7rem;display:block;color:var(--lime)}
   .story .stat span{font-size:.82rem;color:rgba(255,255,255,.7)}
-  .story-art{aspect-ratio:1;background:var(--lime);border-radius:24px;display:flex;align-items:center;justify-content:center}
-  .story-art svg{width:55%;stroke:var(--kale);fill:none;stroke-width:1.3}
+  .story-art{aspect-ratio:1;background:var(--lime);border-radius:24px;overflow:hidden;position:relative}
+  .story-art img{width:100%;height:100%;object-fit:cover}
 
   /* CONTACT */
   .contact{text-align:center;background:var(--cream);border-radius:32px;padding:60px 24px}
@@ -114,7 +114,8 @@
   .empty{text-align:center;color:var(--muted);margin-top:54px}
   .line{display:flex;gap:12px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
   .line .ic{width:46px;height:46px;border-radius:12px;background:var(--c-produce);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .line .ic svg{width:26px;height:26px;stroke:var(--kale);fill:none;stroke-width:1.6}
+  .line .ic{overflow:hidden}
+  .line .ic img{width:100%;height:100%;object-fit:cover}
   .line .n{flex:1}.line .n b{font-weight:600;font-size:.95rem}.line .n span{display:block;font-size:.8rem;color:var(--muted)}
   .qty{display:flex;align-items:center;gap:8px}
   .qty button{width:28px;height:28px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;color:var(--kale);font-size:1rem}
@@ -162,9 +163,9 @@
       </div>
     </div>
     <div class="hero-art">
-      <div class="tileA big"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><path d="M12 12c1.5-1.5 3-1.5 4 0-1.5 1.5-3 1.5-4 0Zm0 0c-1.5-1.5-3-1.5-4 0 1.5 1.5 3 1.5 4 0Z"/></svg><span class="lbl">Produce</span></div>
-      <div class="tileA e"><svg viewBox="0 0 24 24"><path d="M12 3c3 0 5 5 5 9a5 5 0 0 1-10 0c0-4 2-9 5-9Z"/></svg><span class="lbl">Eggs</span></div>
-      <div class="tileA g"><svg viewBox="0 0 24 24"><path d="M7 9h10l-1 11H8L7 9Z"/><path d="M8 9V7a4 4 0 0 1 8 0v2"/><path d="M12 13v3"/></svg><span class="lbl">Greens</span></div>
+      <div class="tileA big"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=700&q=72&auto=format&fit=crop" alt="Fresh vegetables at a farmers market"><span class="lbl">Produce</span></div>
+      <div class="tileA e"><img src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=400&q=72&auto=format&fit=crop" alt="Farm fresh eggs"><span class="lbl">Eggs</span></div>
+      <div class="tileA g"><img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=400&q=72&auto=format&fit=crop" alt="Leafy greens"><span class="lbl">Greens</span></div>
     </div>
   </section>
 
@@ -191,7 +192,7 @@
           <div class="stat"><b>0</b><span>shortcuts taken</span></div>
         </div>
       </div>
-      <div class="story-art"><svg viewBox="0 0 24 24"><path d="M12 20c0-5 3-8 7-8-1 5-3.5 8-7 8Zm0 0c0-5-3-8-7-8 1 5 3.5 8 7 8Zm0 0V8"/><path d="M12 8c1.4-1.4 1.4-3.7 0-5.5C10.6 4.3 10.6 6.6 12 8Z"/></svg></div>
+      <div class="story-art"><img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=700&q=72&auto=format&fit=crop" alt="Community garden vegetable beds"></div>
     </div>
   </section>
 
@@ -235,6 +236,8 @@ var ART={
  'greencake':'<svg viewBox="0 0 24 24"><path d="M4 20h16v-6a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v6Z"/><path d="M4 15h16"/><path d="M12 6v4M9 7v3M15 7v3"/></svg>',
  'green-powder':'<svg viewBox="0 0 24 24"><path d="M7 9h10l-1 11H8L7 9Z"/><path d="M8 9V7a4 4 0 0 1 8 0v2"/><path d="M12 13v3"/></svg>'
 };
+var PRODIMG={'produce-bag':'1488459716781-31db52582fe9','farm-eggs':'1506976785307-8732e854ad03','chicken-breast':'1604503468506-a8da13d82791','turkey-legs':'1606728035253-49e8a23146de','greencake':'1607478900766-efe13248b125','green-powder':'1622480916113-9000ac49b79d'};
+function img(id,w){return 'https://images.unsplash.com/photo-'+(PRODIMG[id]||id)+'?w='+(w||600)+'&q=72&auto=format&fit=crop';}
 var PRODUCTS=[
  {id:'produce-bag',name:'Organic Produce Bag',price:20,unit:'each',cat:'Produce',tint:'--c-produce',desc:'Organic produce grown on the Eastern Shore — okra, mustard &amp; collard greens, bok choy, green cherry tomatoes.'},
  {id:'farm-eggs',name:'Farm Fresh Eggs',price:8,unit:'per dozen',cat:'Eggs',tint:'--c-eggs',desc:'One dozen eggs from free-range chickens. Deep-gold yolks, laid this week.'},
@@ -250,7 +253,7 @@ function P(id){return PRODUCTS.find(function(p){return p.id===id})}
 function renderGrid(){
   document.getElementById('grid').innerHTML=PRODUCTS.map(function(p){
     return '<article class="card">'+
-      '<div class="top" style="background:var('+p.tint+')">'+ART[p.id]+
+      '<div class="top" style="background:var('+p.tint+')"><img src="'+img(p.id,600)+'" alt="'+p.name+'" loading="lazy">'+
         '<span class="tagpill">'+p.cat+'</span>'+(p.dmv?'<span class="dmv">DMV only</span>':'')+
       '</div>'+
       '<div class="body"><h3 class="disp">'+p.name+'</h3><p class="desc">'+p.desc+'</p>'+
@@ -268,7 +271,7 @@ function updateCart(){
   document.getElementById('cc').textContent=cart.reduce(function(a,i){return a+i.q},0);
   var box=document.getElementById('items');
   if(!cart.length){box.innerHTML='<div class="empty">Your cart is empty — let’s fill it up.</div>'}
-  else{box.innerHTML=cart.map(function(i){var p=P(i.id);return '<div class="line"><div class="ic" style="background:var('+p.tint+')">'+ART[i.id]+'</div><div class="n"><b>'+p.name+'</b><span>$'+p.price.toFixed(2)+' · '+p.unit+'</span></div><div class="qty"><button onclick="chg(\''+i.id+'\',-1)" aria-label="Decrease">–</button><span>'+i.q+'</span><button onclick="chg(\''+i.id+'\',1)" aria-label="Increase">+</button></div></div>'}).join('')}
+  else{box.innerHTML=cart.map(function(i){var p=P(i.id);return '<div class="line"><div class="ic" style="background:var('+p.tint+')"><img src="'+img(i.id,120)+'" alt=""></div><div class="n"><b>'+p.name+'</b><span>$'+p.price.toFixed(2)+' · '+p.unit+'</span></div><div class="qty"><button onclick="chg(\''+i.id+'\',-1)" aria-label="Decrease">–</button><span>'+i.q+'</span><button onclick="chg(\''+i.id+'\',1)" aria-label="Increase">+</button></div></div>'}).join('')}
   document.getElementById('sub').textContent='$'+cart.reduce(function(a,i){return a+P(i.id).price*i.q},0).toFixed(2);
 }
 function openCart(){document.getElementById('ov').classList.add('open');document.getElementById('dw').classList.add('open')}
