@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MDH &amp; Associates — Event Crew, Gear &amp; Technical Planning</title>
 <meta name="description" content="MDH &amp; Associates: skilled event, warehouse &amp; installation technicians, travel teams, gear rentals, and technical planning for live events across 60+ cities.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Saira+Stencil+One&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,7 +13,7 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
     --concrete:#e7e4dc; --paper:#f4f2ec; --ink:#1b1d21; --steel:#3c434c;
-    --hivis:#ffd400; --tape:#26282c; --line:#d3d0c5; --muted:#6b6960; --caution:#e5601f;
+    --hivis:#981b20; --tape:#26282c; --line:#d3d0c5; --muted:#6b6960; --caution:#800020;
   }
   html{scroll-behavior:smooth}
   body{background:var(--concrete);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
@@ -28,7 +29,7 @@
 
   /* gaffer-tape label */
   .tape{display:inline-block;background:var(--tape);color:#fff;font-family:'IBM Plex Mono';font-weight:500;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:5px 13px;transform:rotate(-1.4deg);box-shadow:0 2px 6px rgba(0,0,0,.2)}
-  .tape.hi{background:var(--hivis);color:var(--ink)}
+  .tape.hi{background:var(--hivis);color:#fff}
 
   /* NAV */
   header.nav{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:2px solid var(--ink)}
@@ -44,11 +45,11 @@
   .drop{position:absolute;top:calc(100% + 6px);left:-12px;background:var(--paper);border:2px solid var(--ink);padding:8px;min-width:236px;opacity:0;visibility:hidden;transform:translateY(6px);transition:.16s;z-index:5}
   .has-drop:hover .drop,.has-drop:focus-within .drop{opacity:1;visibility:visible;transform:none}
   .drop a{display:block;padding:9px 12px;font-size:.85rem;font-weight:500;color:var(--ink)}
-  .drop a:hover{background:var(--hivis)}
+  .drop a:hover{background:var(--hivis);color:#fff}
   .drop .lbl{font-family:'IBM Plex Mono';font-size:.62rem;letter-spacing:.12em;color:var(--muted);padding:8px 12px 3px;text-transform:uppercase}
   .btn{font-family:'Archivo';font-weight:800;text-transform:uppercase;letter-spacing:.01em;font-size:.85rem;padding:11px 20px;cursor:pointer;border:2px solid var(--ink);transition:.15s;display:inline-flex;align-items:center;gap:8px;border-radius:3px}
-  .btn.hivis{background:var(--hivis);color:var(--ink)}
-  .btn.hivis:hover{background:var(--ink);color:var(--hivis)}
+  .btn.hivis{background:var(--hivis);color:#fff}
+  .btn.hivis:hover{background:var(--ink);color:#fff}
   .btn.dark{background:var(--ink);color:var(--paper)}
   .btn.dark:hover{background:var(--caution);border-color:var(--caution)}
   .btn.line{background:transparent;color:var(--ink)}
@@ -68,7 +69,7 @@
   .hero{padding:70px 0 60px;position:relative}
   .hero .in{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
   .hero h1{font-family:'Archivo';font-weight:900;text-transform:uppercase;font-size:clamp(2.6rem,6.5vw,5.4rem);line-height:.9;letter-spacing:-.02em}
-  .hero h1 .hl{background:var(--hivis);padding:0 .08em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .hero h1 .hl{background:var(--hivis);color:#fff;padding:0 .08em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
   .hero p{margin:22px 0 28px;font-size:1.12rem;color:var(--steel);max-width:52ch}
   .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap}
   .hero .case{position:relative;border:3px solid var(--ink);border-radius:8px;overflow:hidden;aspect-ratio:4/5;background:var(--ink)}
@@ -93,7 +94,7 @@
   .fc:hover{transform:translateY(-4px);box-shadow:6px 6px 0 var(--ink)}
   .fc .no{font-family:'IBM Plex Mono';font-size:.7rem;letter-spacing:.12em;color:var(--muted)}
   .fc .ic{width:46px;height:46px;background:var(--hivis);border:2px solid var(--ink);border-radius:5px;display:flex;align-items:center;justify-content:center;margin:12px 0 16px}
-  .fc .ic svg{width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:1.9}
+  .fc .ic svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.9}
   .fc h3{font-family:'Archivo';font-weight:800;text-transform:uppercase;font-size:1.1rem;margin-bottom:8px}
   .fc p{font-size:.92rem;color:var(--steel)}
 
@@ -148,13 +149,13 @@
   footer{background:var(--ink);color:#c9c6bd;padding:56px 0 28px;margin-top:16px}
   .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px}
   footer .logo b{color:#fff}
-  .foot-grid h4{font-family:'IBM Plex Mono';font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--hivis);margin-bottom:14px}
+  .foot-grid h4{font-family:'IBM Plex Mono';font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#d9a1a5;margin-bottom:14px}
   .foot-grid a{display:block;font-size:.88rem;color:#c9c6bd;margin-bottom:9px}
   .foot-grid a:hover{color:#fff}
   .foot-brand p{font-size:.9rem;max-width:34ch;margin-top:12px}
   .foot-bottom{border-top:1px solid #3a3d42;margin-top:34px;padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:'IBM Plex Mono';font-size:.7rem;letter-spacing:.06em;color:#8f8c84}
 
-  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);background:var(--ink);color:var(--hivis);font-family:'Archivo';font-weight:800;text-transform:uppercase;padding:14px 24px;border-radius:5px;opacity:0;transition:.3s;z-index:90;font-size:.88rem}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);background:var(--ink);color:#fff;font-family:'Archivo';font-weight:800;text-transform:uppercase;padding:14px 24px;border-radius:5px;opacity:0;transition:.3s;z-index:90;font-size:.88rem}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
   @media(max-width:960px){
@@ -170,7 +171,7 @@
 
 <header class="nav">
   <div class="nav-in">
-    <a class="logo" href="#top"><span class="mk">MDH</span><span><b>MDH &amp; Associates</b><small>Event Production · Crew</small></span></a>
+    <a class="logo" href="#top"><img src="assets/mdh-logo.png" alt="MDH &amp; Associates" style="height:42px;width:auto"></a>
     <nav class="menu">
       <a href="#top">Home</a>
       <a href="#about">About Us</a>
@@ -213,7 +214,7 @@
       </div>
     </div>
     <div class="case">
-      <img src="https://images.unsplash.com/photo-1524230572899-a752b3835840?w=800&q=70&auto=format&fit=crop" alt="LED wall and staging being built for a live event">
+      <img src="assets/mdh-av.jpeg" alt="MDH technician at a grandMA3 lighting console with camera monitor wall">
       <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
       <span class="stamp tape">CASE 01 · LED + STAGING</span>
     </div>
@@ -251,7 +252,7 @@
 
 <!-- PLANNING -->
 <section id="planning" style="padding-top:0"><div class="wrap split">
-  <div class="media"><img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=900&q=70&auto=format&fit=crop" alt="Technician at an audio console during setup"></div>
+  <div class="media"><img src="assets/mdh-slider.png" alt="Front-of-house engineer at mixing consoles facing a lit stage"></div>
   <div>
     <span class="tape">Technical Planning</span>
     <h2 class="arch" style="font-size:clamp(1.8rem,4vw,2.8rem);text-transform:uppercase;line-height:.95;margin:14px 0 6px">Drawn, loaded,<br>and labor-planned</h2>
@@ -316,7 +317,7 @@
 <!-- FOOTER -->
 <footer><div class="wrap">
   <div class="foot-grid">
-    <div class="foot-brand"><a class="logo" href="#top"><span class="mk">MDH</span><span><b>MDH &amp; Associates</b></span></a><p>Event management &amp; production services — crew, gear, and technical planning for live events, nationwide.</p></div>
+    <div class="foot-brand"><a class="logo" href="#top"><img src="assets/mdh-logo-white.png" alt="MDH &amp; Associates" style="height:42px;width:auto"></a><p style="margin-top:14px">Event management &amp; production services — crew, gear, and technical planning for live events, nationwide.</p></div>
     <div><h4>Services</h4><a href="#services">Event Technicians</a><a href="#services">Warehouse Technicians</a><a href="#services">Installation Technicians</a><a href="#services">Travel Team</a></div>
     <div><h4>Company</h4><a href="#about">About Us</a><a href="#gear">Gear Rentals</a><a href="#planning">Technical Planning</a><a href="#join">Join The Team</a></div>
     <div><h4>Get crew</h4><a href="#cities">Cities Serviced</a><a href="#request">Request Crew!</a><a href="#request">Login</a><a href="#request">Contact Us</a></div>

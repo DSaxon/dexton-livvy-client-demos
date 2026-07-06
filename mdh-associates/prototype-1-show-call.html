@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MDH &amp; Associates — Live Event Crew, Nationwide</title>
 <meta name="description" content="MDH &amp; Associates staffs skilled AV, lighting, and video technicians for live events across 60+ cities. Event, warehouse &amp; installation crew, travel teams, gear rentals, and technical planning.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -12,7 +13,7 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
     --stage:#0b0d12; --panel:#141821; --panel2:#1b212c; --line:rgba(255,255,255,.09);
-    --amber:#f5a623; --magenta:#e0407f; --cyan:#35c6dd; --green:#7bd88f;
+    --amber:#b0202a; --magenta:#d13b3b; --cyan:#96a0b3; --green:#5fae6a;
     --text:#eef1f6; --muted:#8b95a6;
   }
   html{scroll-behavior:smooth}
@@ -43,8 +44,8 @@
   .drop .cue{padding:8px 12px 4px;color:var(--muted)}
   .nav-cta{display:flex;align-items:center;gap:12px}
   .btn{font-family:'Oswald';text-transform:uppercase;letter-spacing:.04em;font-weight:600;font-size:.85rem;padding:11px 20px;border-radius:6px;cursor:pointer;border:1.5px solid transparent;transition:.18s;display:inline-flex;align-items:center;gap:8px}
-  .btn.amber{background:var(--amber);color:#141821}
-  .btn.amber:hover{background:#ffbb45;transform:translateY(-1px)}
+  .btn.amber{background:var(--amber);color:#fff}
+  .btn.amber:hover{background:#c62f38;transform:translateY(-1px)}
   .btn.ghost{border-color:var(--line);color:var(--text)}
   .btn.ghost:hover{border-color:var(--amber);color:var(--amber)}
   .login{font-size:.82rem;color:var(--muted)}
@@ -57,8 +58,8 @@
 
   /* HERO */
   .hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden}
-  .hero .bg{position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1600&q=70&auto=format&fit=crop") center/cover;opacity:.34}
-  .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(245,166,35,.16),transparent 55%),linear-gradient(180deg,rgba(11,13,18,.55),var(--stage) 92%)}
+  .hero .bg{position:absolute;inset:0;background:url("assets/mdh-slider.png") center/cover;opacity:.5}
+  .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(176,32,42,.22),transparent 55%),linear-gradient(180deg,rgba(11,13,18,.5),var(--stage) 92%)}
   .hero .in{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:60px 24px}
   .hero .cue{margin-bottom:20px;display:flex;align-items:center;gap:12px}
   .hero .cue .live{width:9px;height:9px;border-radius:50%;background:var(--magenta);box-shadow:0 0 10px var(--magenta);animation:pulse 1.6s infinite}
@@ -146,7 +147,7 @@
   .foot-brand p{color:var(--muted);font-size:.9rem;max-width:34ch;margin-top:12px}
   .foot-bottom{border-top:1px solid var(--line);margin-top:34px;padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:'JetBrains Mono';font-size:.7rem;color:var(--muted);letter-spacing:.06em}
 
-  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);background:var(--amber);color:#141821;font-family:'Oswald';text-transform:uppercase;letter-spacing:.03em;padding:14px 24px;border-radius:8px;opacity:0;transition:.3s;z-index:90;font-size:.9rem}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);background:var(--amber);color:#fff;font-family:'Oswald';text-transform:uppercase;letter-spacing:.03em;padding:14px 24px;border-radius:8px;opacity:0;transition:.3s;z-index:90;font-size:.9rem}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
   @media(max-width:960px){
@@ -161,7 +162,7 @@
 
 <header class="nav">
   <div class="nav-in">
-    <a class="logo" href="#top"><span class="dot"></span><span>MDH &amp; Associates<small>Event Production · Est. crew</small></span></a>
+    <a class="logo" href="#top"><img src="assets/mdh-logo-white.png" alt="MDH &amp; Associates" style="height:36px;width:auto"></a>
     <nav class="menu">
       <a href="#top">Home</a>
       <a href="#about">About Us</a>
@@ -263,7 +264,7 @@
       <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Venue coordination &amp; power/rigging specs</li>
     </ul>
   </div>
-  <div class="media"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=70&auto=format&fit=crop" alt="Audio technician at a lighting and mixing console"><span class="tag">FOH · SIGNAL FLOW LOCKED</span></div>
+  <div class="media"><img src="assets/mdh-av.jpeg" alt="MDH technician at a grandMA3 lighting console with multi-camera monitor wall"><span class="tag">FOH · SIGNAL FLOW LOCKED</span></div>
 </div></section>
 
 <!-- STATS -->
@@ -320,7 +321,7 @@
 <!-- FOOTER -->
 <footer><div class="wrap">
   <div class="foot-grid">
-    <div class="foot-brand"><a class="logo" href="#top"><span class="dot"></span><span>MDH &amp; Associates</span></a><p>Event management &amp; production services. Skilled crew, gear, and technical planning for live events, nationwide.</p></div>
+    <div class="foot-brand"><a class="logo" href="#top"><img src="assets/mdh-logo-white.png" alt="MDH &amp; Associates" style="height:38px;width:auto"></a><p style="margin-top:14px">Event management &amp; production services. Skilled crew, gear, and technical planning for live events, nationwide.</p></div>
     <div><h4>Services</h4><a href="#services">Event Technicians</a><a href="#services">Warehouse Technicians</a><a href="#services">Installation Technicians</a><a href="#services">Travel Team</a></div>
     <div><h4>Company</h4><a href="#about">About Us</a><a href="#gear">Gear Rentals</a><a href="#planning">Technical Planning</a><a href="#join">Join The Team</a></div>
     <div><h4>Get crew</h4><a href="#cities">Cities Serviced</a><a href="#request">Request Crew!</a><a href="#request">Login</a><a href="#request">Contact Us</a></div>

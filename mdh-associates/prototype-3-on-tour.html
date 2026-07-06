@@ -5,14 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MDH &amp; Associates — One Call. Crew in Every City.</title>
 <meta name="description" content="MDH &amp; Associates staffs live-event crew in 60+ cities: event, warehouse &amp; installation technicians, travel teams, gear rentals, and technical planning. One call books the show.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
-    --navy:#0a1130; --navy2:#111a44; --blue:#3a6bff; --sky:#7aa0ff; --coral:#ff5a4d;
-    --cream:#f4f6ff; --ink:#0a1130; --muted:#69739b; --line:#e2e6f5; --dline:rgba(255,255,255,.12);
+    --navy:#201a1c; --navy2:#2c2427; --blue:#981b20; --sky:#e0a3a8; --coral:#800020;
+    --cream:#f6f3f1; --ink:#201a1c; --muted:#78707a; --line:#e7e0e2; --dline:rgba(255,255,255,.13);
   }
   html{scroll-behavior:smooth}
   body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
@@ -59,8 +60,8 @@
 
   /* HERO */
   .hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
-  .hero .bg{position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600&q=70&auto=format&fit=crop") center/cover;opacity:.28}
-  .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 20%,rgba(58,107,255,.4),transparent 45%),linear-gradient(180deg,rgba(10,17,48,.4),var(--navy))}
+  .hero .bg{position:absolute;inset:0;background:url("assets/mdh-slider.png") center/cover;opacity:.42}
+  .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 20%,rgba(152,27,32,.42),transparent 45%),linear-gradient(180deg,rgba(32,26,28,.42),var(--navy))}
   .hero .in{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:84px 24px 70px}
   .hero .eye{display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono';font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);background:rgba(58,107,255,.14);border:1px solid rgba(122,160,255,.3);padding:7px 14px;border-radius:999px}
   .hero h1{font-family:'Space Grotesk';font-weight:700;font-size:clamp(2.7rem,7vw,6rem);line-height:.98;letter-spacing:-.03em;margin:22px 0 0;max-width:16ch}
@@ -123,7 +124,7 @@
   .stat span{font-family:'Space Mono';font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)}
 
   /* JOIN + REQUEST */
-  .cta-band{background:linear-gradient(120deg,var(--blue),#6b3aff);border-radius:24px;padding:52px;color:#fff;text-align:center}
+  .cta-band{background:linear-gradient(120deg,#981b20,#800020);border-radius:24px;padding:52px;color:#fff;text-align:center}
   .cta-band h2{font-family:'Space Grotesk';font-weight:700;font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:12px}
   .cta-band p{color:rgba(255,255,255,.85);max-width:48ch;margin:0 auto 22px}
   .book{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start}
@@ -159,7 +160,7 @@
 
 <header class="nav">
   <div class="nav-in">
-    <a class="logo" href="#top"><span class="mk">M</span><span><b>MDH &amp; Associates</b><small>Live event crew</small></span></a>
+    <a class="logo" href="#top"><img src="assets/mdh-logo-white.png" alt="MDH &amp; Associates" style="height:38px;width:auto"></a>
     <nav class="menu">
       <a href="#top">Home</a>
       <a href="#about">About Us</a>
@@ -220,8 +221,8 @@
 <!-- GEAR + PLANNING duo -->
 <section class="light" style="padding-top:0" id="gear"><div class="wrap">
   <div class="duo">
-    <div class="panel"><img src="https://images.unsplash.com/photo-1524230572899-a752b3835840?w=800&q=70&auto=format&fit=crop" alt="LED video wall at a live event"><div class="c"><h3>Gear Rentals</h3><p>Audio, video, lighting, staging, and LED walls — delivered and dialed in with the crew who runs it.</p><span class="more">Browse gear →</span></div></div>
-    <div class="panel" id="planning"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=70&auto=format&fit=crop" alt="Technician planning at an audio console"><div class="c"><h3>Technical Planning</h3><p>CAD plots, signal flow, rigging design, and labor planning before the trucks roll.</p><span class="more">Plan a show →</span></div></div>
+    <div class="panel"><img src="assets/mdh-av.jpeg" alt="MDH technician at a grandMA3 lighting console with camera monitor wall"><div class="c"><h3>Gear Rentals</h3><p>Audio, video, lighting, staging, and LED walls — delivered and dialed in with the crew who runs it.</p><span class="more">Browse gear →</span></div></div>
+    <div class="panel" id="planning"><img src="assets/mdh-slider.png" alt="Front-of-house engineer at mixing consoles facing a lit stage"><div class="c"><h3>Technical Planning</h3><p>CAD plots, signal flow, rigging design, and labor planning before the trucks roll.</p><span class="more">Plan a show →</span></div></div>
   </div>
 </div></section>
 
@@ -274,7 +275,7 @@
 <!-- FOOTER -->
 <footer><div class="wrap">
   <div class="foot-grid">
-    <div class="foot-brand"><a class="logo" href="#top"><span class="mk">M</span><span><b>MDH &amp; Associates</b></span></a><p>Event management &amp; production services — crew, gear, and technical planning for live events, nationwide.</p></div>
+    <div class="foot-brand"><a class="logo" href="#top"><img src="assets/mdh-logo-white.png" alt="MDH &amp; Associates" style="height:40px;width:auto"></a><p style="margin-top:14px">Event management &amp; production services — crew, gear, and technical planning for live events, nationwide.</p></div>
     <div><h4>Services</h4><a href="#services">Event Technicians</a><a href="#services">Warehouse Technicians</a><a href="#services">Installation Technicians</a><a href="#services">Travel Team</a></div>
     <div><h4>Company</h4><a href="#about">About Us</a><a href="#gear">Gear Rentals</a><a href="#planning">Technical Planning</a><a href="#join">Join The Team</a></div>
     <div><h4>Get crew</h4><a href="#cities">Cities Serviced</a><a href="#request">Request Crew!</a><a href="#request">Login</a><a href="#request">Contact Us</a></div>
