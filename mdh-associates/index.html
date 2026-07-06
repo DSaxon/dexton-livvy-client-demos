@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDH &amp; Associates — Website Redesign Concepts</title>
+<meta name="description" content="Three website redesign directions for MDH & Associates event production. Review and choose.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--navy:#0a1130;--blue:#3a6bff;--sky:#7aa0ff;--ink:#131722;--muted:#5f6788;--line:#e4e7f2;--bg:#f4f6fc}
+  body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  .disp{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em}
+  .mono{font-family:'Space Mono',monospace}
+  a{text-decoration:none;color:inherit}
+  header{background:var(--navy);color:#fff;padding:46px 24px}
+  header .in{max-width:1080px;margin:0 auto}
+  header .eyebrow{font-family:'Space Mono';font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sky)}
+  header h1{font-family:'Space Grotesk';font-weight:700;font-size:clamp(2rem,5vw,3.2rem);margin:10px 0 8px;letter-spacing:-.02em}
+  header p{color:rgba(255,255,255,.78);max-width:660px}
+  main{max-width:1080px;margin:0 auto;padding:38px 24px 60px}
+  .note{background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:16px 20px;color:var(--muted);font-size:.92rem;margin-bottom:32px}
+  .note b{color:var(--ink)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+  .card:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(10,17,48,.14)}
+  .swatch{height:158px;position:relative;display:flex;align-items:flex-end;padding:18px;overflow:hidden}
+  .swatch .no{position:absolute;top:14px;right:18px;font-family:'Space Grotesk';font-weight:700;font-size:2.6rem;opacity:.28}
+  .swatch .nm{font-family:'Space Grotesk';font-weight:700;font-size:1.4rem;position:relative;z-index:2}
+  .swatch .chip{position:absolute;top:16px;left:18px;font-family:'Space Mono';font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:5px;z-index:2}
+  /* 1 show call — dark console */
+  .s1{background:radial-gradient(ellipse at 25% 30%,#2a2033,#0b0d12);color:#f5a623}
+  .s1 .nm{color:#eef1f6}.s1 .no{color:#f5a623}.s1 .chip{background:#f5a623;color:#141821}
+  /* 2 roadcase — light industrial */
+  .s2{background:repeating-linear-gradient(45deg,#ffd400 0 16px,#1b1d21 16px 32px)}
+  .s2 .nm{background:#1b1d21;color:#ffd400;padding:3px 10px}.s2 .no{color:#1b1d21}.s2 .chip{background:#1b1d21;color:#ffd400}
+  /* 3 on tour — electric */
+  .s3{background:linear-gradient(120deg,#3a6bff,#6b3aff);color:#fff}
+  .s3 .nm{color:#fff}.s3 .no{color:#fff}.s3 .chip{background:#fff;color:#3a6bff}
+  .body{padding:22px;display:flex;flex-direction:column;flex:1}
+  .body h2{font-family:'Space Grotesk';font-weight:600;font-size:1.2rem;margin-bottom:2px}
+  .body .tagline{font-family:'Space Mono';font-size:.74rem;color:var(--muted);margin-bottom:12px}
+  .body p{font-size:.9rem;color:var(--muted);flex:1}
+  .meta{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px}
+  .meta span{font-size:.72rem;color:var(--navy);background:#eef1fb;border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+  .open{display:block;text-align:center;background:var(--navy);color:#fff;font-family:'Space Grotesk';font-weight:600;border-radius:999px;padding:13px;transition:.2s}
+  .open:hover{background:var(--blue)}
+  footer{max-width:1080px;margin:0 auto;padding:0 24px 50px;color:var(--muted);font-size:.85rem}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  :focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+</style>
+</head>
+<body>
+<header><div class="in">
+  <div class="eyebrow">Dexton-Livvy · Website Redesign Review</div>
+  <h1 class="disp">MDH &amp; Associates</h1>
+  <p>Three redesign directions for the event-production site — each a live, clickable prototype with the full menu (Services, Cities Serviced, Gear Rentals, Technical Planning, Request Crew, Join The Team). Open any concept and tell us which feels like MDH.</p>
+</div></header>
+<main>
+  <div class="note"><b>How to review:</b> each concept is fully clickable — open the Services menu, browse the Cities list, and try the “Request Crew” form (it shows a friendly confirmation; wiring real dispatch comes after you pick a direction). Best viewed on desktop and phone.</div>
+  <div class="cards">
+
+    <a class="card" href="prototype-1-show-call.html">
+      <div class="swatch s1"><span class="chip">Concept 01</span><span class="no">01</span><span class="nm">Show Call</span></div>
+      <div class="body">
+        <h2>Show Call</h2>
+        <div class="tagline">Backstage · lighting console · cue sheet</div>
+        <p>Dark, cinematic, and unmistakably live-event: house-amber and gel accents, condensed tour-poster type, and a “run of show” cue sheet. Feels like being on headset backstage.</p>
+        <div class="meta"><span>Oswald + JetBrains Mono</span><span>Run-of-show motif</span><span>Bold &amp; moody</span></div>
+        <span class="open">Open Concept 01 →</span>
+      </div>
+    </a>
+
+    <a class="card" href="prototype-2-roadcase.html">
+      <div class="swatch s2"><span class="chip">Concept 02</span><span class="no">02</span><span class="nm">Roadcase</span></div>
+      <div class="body">
+        <h2>Roadcase</h2>
+        <div class="tagline">Industrial · gaffer tape · spec sheet</div>
+        <p>Light, engineered, and hands-on: stencil headers, gaffer-tape labels, safety-yellow accents, and gear listed like a spec sheet. The warehouse-and-roadcase side of production.</p>
+        <div class="meta"><span>Archivo + Stencil</span><span>Gaffer-tape labels</span><span>Utilitarian</span></div>
+        <span class="open">Open Concept 02 →</span>
+      </div>
+    </a>
+
+    <a class="card" href="prototype-3-on-tour.html">
+      <div class="swatch s3"><span class="chip">Concept 03</span><span class="no">03</span><span class="nm">On Tour</span></div>
+      <div class="body">
+        <h2>On Tour</h2>
+        <div class="tagline">Bold brand · electric · coverage-first</div>
+        <p>Energetic and modern, built around the 60-city footprint: a scrolling cities routing board, big geometric type, and electric blue. The most brand-forward and conversion-focused.</p>
+        <div class="meta"><span>Space Grotesk + Inter</span><span>Cities marquee</span><span>Vibrant &amp; scalable</span></div>
+        <span class="open">Open Concept 03 →</span>
+      </div>
+    </a>
+
+  </div>
+</main>
+<footer>Prepared for MDH &amp; Associates · Event Management &amp; Production · © 2026 Dexton-Livvy LLC</footer>
+</body>
+</html>

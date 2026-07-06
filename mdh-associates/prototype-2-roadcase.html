@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDH &amp; Associates — Event Crew, Gear &amp; Technical Planning</title>
+<meta name="description" content="MDH &amp; Associates: skilled event, warehouse &amp; installation technicians, travel teams, gear rentals, and technical planning for live events across 60+ cities.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Saira+Stencil+One&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --concrete:#e7e4dc; --paper:#f4f2ec; --ink:#1b1d21; --steel:#3c434c;
+    --hivis:#ffd400; --tape:#26282c; --line:#d3d0c5; --muted:#6b6960; --caution:#e5601f;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--concrete);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  .arch{font-family:'Archivo',sans-serif;font-weight:800;letter-spacing:-.02em}
+  .stencil{font-family:'Saira Stencil One',sans-serif}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  .hazard{background:repeating-linear-gradient(45deg,var(--hivis) 0 14px,var(--ink) 14px 28px)}
+  :focus-visible{outline:3px solid var(--caution);outline-offset:2px}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+  /* gaffer-tape label */
+  .tape{display:inline-block;background:var(--tape);color:#fff;font-family:'IBM Plex Mono';font-weight:500;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:5px 13px;transform:rotate(-1.4deg);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+  .tape.hi{background:var(--hivis);color:var(--ink)}
+
+  /* NAV */
+  header.nav{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:2px solid var(--ink)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 24px;max-width:1200px;margin:0 auto}
+  .logo{display:flex;align-items:center;gap:11px}
+  .logo .mk{width:34px;height:34px;background:var(--ink);color:var(--hivis);display:flex;align-items:center;justify-content:center;font-family:'Saira Stencil One';font-size:.9rem;border-radius:3px}
+  .logo b{font-family:'Archivo';font-weight:900;font-size:1.05rem;letter-spacing:-.01em;line-height:1;text-transform:uppercase}
+  .logo small{display:block;font-family:'IBM Plex Mono';font-size:.55rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+  nav.menu{display:flex;align-items:center;gap:20px}
+  nav.menu a{font-size:.85rem;font-weight:600;color:var(--steel);white-space:nowrap}
+  nav.menu a:hover{color:var(--ink)}
+  .has-drop{position:relative}
+  .drop{position:absolute;top:calc(100% + 6px);left:-12px;background:var(--paper);border:2px solid var(--ink);padding:8px;min-width:236px;opacity:0;visibility:hidden;transform:translateY(6px);transition:.16s;z-index:5}
+  .has-drop:hover .drop,.has-drop:focus-within .drop{opacity:1;visibility:visible;transform:none}
+  .drop a{display:block;padding:9px 12px;font-size:.85rem;font-weight:500;color:var(--ink)}
+  .drop a:hover{background:var(--hivis)}
+  .drop .lbl{font-family:'IBM Plex Mono';font-size:.62rem;letter-spacing:.12em;color:var(--muted);padding:8px 12px 3px;text-transform:uppercase}
+  .btn{font-family:'Archivo';font-weight:800;text-transform:uppercase;letter-spacing:.01em;font-size:.85rem;padding:11px 20px;cursor:pointer;border:2px solid var(--ink);transition:.15s;display:inline-flex;align-items:center;gap:8px;border-radius:3px}
+  .btn.hivis{background:var(--hivis);color:var(--ink)}
+  .btn.hivis:hover{background:var(--ink);color:var(--hivis)}
+  .btn.dark{background:var(--ink);color:var(--paper)}
+  .btn.dark:hover{background:var(--caution);border-color:var(--caution)}
+  .btn.line{background:transparent;color:var(--ink)}
+  .btn.line:hover{background:var(--ink);color:var(--paper)}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .login{font-size:.82rem;color:var(--muted);font-weight:600}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+  .burger span{width:22px;height:2.5px;background:var(--ink)}
+  .mobile{display:none;flex-direction:column;background:var(--paper);border-bottom:2px solid var(--ink)}
+  .mobile a{padding:13px 24px;border-top:1px solid var(--line);font-weight:600;font-size:.9rem}
+  .mobile.open{display:flex}
+
+  /* hazard rule */
+  .hz-rule{height:10px}
+
+  /* HERO */
+  .hero{padding:70px 0 60px;position:relative}
+  .hero .in{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
+  .hero h1{font-family:'Archivo';font-weight:900;text-transform:uppercase;font-size:clamp(2.6rem,6.5vw,5.4rem);line-height:.9;letter-spacing:-.02em}
+  .hero h1 .hl{background:var(--hivis);padding:0 .08em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .hero p{margin:22px 0 28px;font-size:1.12rem;color:var(--steel);max-width:52ch}
+  .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .hero .case{position:relative;border:3px solid var(--ink);border-radius:8px;overflow:hidden;aspect-ratio:4/5;background:var(--ink)}
+  .hero .case img{width:100%;height:100%;object-fit:cover;opacity:.92}
+  .hero .case .corner{position:absolute;width:26px;height:26px;border:3px solid var(--hivis)}
+  .hero .case .corner.tl{top:8px;left:8px;border-right:0;border-bottom:0}
+  .hero .case .corner.tr{top:8px;right:8px;border-left:0;border-bottom:0}
+  .hero .case .corner.bl{bottom:8px;left:8px;border-right:0;border-top:0}
+  .hero .case .corner.br{bottom:8px;right:8px;border-left:0;border-top:0}
+  .hero .case .stamp{position:absolute;left:14px;bottom:14px}
+
+  /* SECTIONS */
+  section{padding:76px 0}
+  .sec-head{margin-bottom:40px}
+  .sec-head .tape{margin-bottom:16px}
+  .sec-head h2{font-family:'Archivo';font-weight:900;text-transform:uppercase;font-size:clamp(1.9rem,4vw,3rem);line-height:.95;letter-spacing:-.02em}
+  .sec-head p{color:var(--steel);max-width:60ch;margin-top:12px}
+
+  /* SERVICES — flight cases */
+  .cases{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+  .fc{background:var(--paper);border:2.5px solid var(--ink);border-radius:6px;padding:24px;position:relative;transition:.15s}
+  .fc:hover{transform:translateY(-4px);box-shadow:6px 6px 0 var(--ink)}
+  .fc .no{font-family:'IBM Plex Mono';font-size:.7rem;letter-spacing:.12em;color:var(--muted)}
+  .fc .ic{width:46px;height:46px;background:var(--hivis);border:2px solid var(--ink);border-radius:5px;display:flex;align-items:center;justify-content:center;margin:12px 0 16px}
+  .fc .ic svg{width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:1.9}
+  .fc h3{font-family:'Archivo';font-weight:800;text-transform:uppercase;font-size:1.1rem;margin-bottom:8px}
+  .fc p{font-size:.92rem;color:var(--steel)}
+
+  /* GEAR spec table */
+  .spec{background:var(--paper);border:2.5px solid var(--ink);border-radius:6px;overflow:hidden}
+  .spec-head{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;padding:14px 22px;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono';font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+  .spec-row{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;padding:15px 22px;border-bottom:1px solid var(--line);align-items:center}
+  .spec-row:last-child{border-bottom:0}
+  .spec-row b{font-family:'Archivo';font-weight:700;font-size:1rem}
+  .spec-row .m{font-family:'IBM Plex Mono';font-size:.85rem;color:var(--steel)}
+  .spec-row .avail{font-family:'IBM Plex Mono';font-size:.72rem;color:#2f7d3a;letter-spacing:.08em}
+
+  /* CITIES */
+  .cities-box{border:2.5px solid var(--ink);border-radius:6px;background:var(--paper);padding:24px}
+  .cities-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:2px 20px;margin-top:6px}
+  .cities-grid a{font-family:'IBM Plex Mono';font-size:.82rem;color:var(--steel);padding:6px 0;display:flex;gap:8px;align-items:center}
+  .cities-grid a::before{content:"▸";color:var(--caution);font-size:.7rem}
+  .cities-grid a:hover{color:var(--ink);font-weight:600}
+
+  /* PLANNING split */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+  .split .media{border:3px solid var(--ink);border-radius:6px;overflow:hidden;aspect-ratio:4/3;position:relative}
+  .split .media img{width:100%;height:100%;object-fit:cover}
+  .checklist{list-style:none;margin-top:18px}
+  .checklist li{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line);color:var(--steel);font-weight:500}
+  .checklist li .n{font-family:'IBM Plex Mono';font-size:.8rem;color:var(--caution);font-weight:600}
+
+  /* STATS */
+  .report{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:2.5px solid var(--ink);border-radius:6px;overflow:hidden;background:var(--paper)}
+  .stat{padding:28px 22px;border-right:2px solid var(--ink)}
+  .stat:last-child{border-right:0}
+  .stat b{font-family:'Archivo';font-weight:900;font-size:2.7rem;display:block;line-height:1}
+  .stat span{font-family:'IBM Plex Mono';font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+  /* JOIN band */
+  .join{border:3px solid var(--ink);border-radius:8px;overflow:hidden}
+  .join-top{padding:40px 44px;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap;background:var(--paper)}
+  .join-top h2{font-family:'Archivo';font-weight:900;text-transform:uppercase;font-size:clamp(1.6rem,3.4vw,2.5rem);line-height:.95}
+  .join-top p{color:var(--steel);margin-top:8px;max-width:44ch}
+
+  /* REQUEST CREW */
+  .book{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start}
+  .form-card{background:var(--paper);border:3px solid var(--ink);border-radius:8px;padding:30px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-family:'IBM Plex Mono';font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .field input,.field select,.field textarea{width:100%;background:var(--concrete);border:2px solid var(--ink);border-radius:4px;padding:12px 13px;color:var(--ink);font-family:inherit;font-size:.93rem}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--caution)}
+  .field textarea{min-height:84px;resize:vertical}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:#c9c6bd;padding:56px 0 28px;margin-top:16px}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px}
+  footer .logo b{color:#fff}
+  .foot-grid h4{font-family:'IBM Plex Mono';font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--hivis);margin-bottom:14px}
+  .foot-grid a{display:block;font-size:.88rem;color:#c9c6bd;margin-bottom:9px}
+  .foot-grid a:hover{color:#fff}
+  .foot-brand p{font-size:.9rem;max-width:34ch;margin-top:12px}
+  .foot-bottom{border-top:1px solid #3a3d42;margin-top:34px;padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:'IBM Plex Mono';font-size:.7rem;letter-spacing:.06em;color:#8f8c84}
+
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);background:var(--ink);color:var(--hivis);font-family:'Archivo';font-weight:800;text-transform:uppercase;padding:14px 24px;border-radius:5px;opacity:0;transition:.3s;z-index:90;font-size:.88rem}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media(max-width:960px){
+    nav.menu{display:none}.burger{display:flex}
+    .hero .in,.split,.book{grid-template-columns:1fr}
+    .hero .case{max-width:340px}
+    .report{grid-template-columns:1fr 1fr}.stat:nth-child(2){border-right:0}.stat{border-bottom:2px solid var(--ink)}
+    .spec-head,.spec-row{grid-template-columns:1.3fr .8fr;}.spec-head span:last-child,.spec-row .avail{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top"><span class="mk">MDH</span><span><b>MDH &amp; Associates</b><small>Event Production · Crew</small></span></a>
+    <nav class="menu">
+      <a href="#top">Home</a>
+      <a href="#about">About Us</a>
+      <span class="has-drop"><a href="#services">Services ▾</a>
+        <span class="drop">
+          <span class="lbl">Labor</span>
+          <a href="#services">Event Technicians</a><a href="#services">Warehouse Technicians</a><a href="#services">Installation Technicians</a><a href="#services">Travel Team</a>
+          <span class="lbl">Coverage</span><a href="#cities">Cities Serviced</a>
+        </span>
+      </span>
+      <a href="#gear">Gear Rentals</a>
+      <a href="#planning">Technical Planning</a>
+      <a href="#join">Join The Team</a>
+      <a href="#request" class="login">Login</a>
+      <a href="#request">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#request" class="btn hivis">Request Crew!</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile" id="mobile">
+    <a href="#about">About Us</a><a href="#services">Services</a><a href="#cities">Cities Serviced</a><a href="#gear">Gear Rentals</a><a href="#planning">Technical Planning</a><a href="#join">Join The Team</a><a href="#request">Login</a><a href="#request">Request Crew!</a>
+  </div>
+</header>
+<div class="hazard hz-rule"></div>
+
+<div id="top"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="in">
+    <div>
+      <span class="tape hi">Cased · Cabled · Crewed</span>
+      <h1 style="margin-top:18px">Roll the cases.<br><span class="hl">We'll bring<br>the crew.</span></h1>
+      <p>MDH &amp; Associates staffs event, warehouse, and installation technicians — plus travel teams, gear, and technical planning — for live events in 60+ cities. Prepped, tested, show-ready.</p>
+      <div class="cta-row">
+        <a href="#request" class="btn hivis">Request Crew!</a>
+        <a href="#services" class="btn line">Browse services</a>
+      </div>
+    </div>
+    <div class="case">
+      <img src="https://images.unsplash.com/photo-1524230572899-a752b3835840?w=800&q=70&auto=format&fit=crop" alt="LED wall and staging being built for a live event">
+      <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+      <span class="stamp tape">CASE 01 · LED + STAGING</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services"><div class="wrap">
+  <div class="sec-head"><span class="tape">Services · Labor</span>
+    <h2>Every role on the load sheet</h2>
+    <p>Background-checked, gear-fluent technicians you can call by role — one A2 or a full touring crew.</p>
+  </div>
+  <div class="cases">
+    <div class="fc"><span class="no">ROLE / 01</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3Z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></div><h3>Event Technicians</h3><p>Audio, video, lighting &amp; LED techs for concerts, corporate, and broadcast.</p></div>
+    <div class="fc"><span class="no">ROLE / 02</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4Z"/><path d="M3 7v10l9 4 9-4V7M12 11v10"/></svg></div><h3>Warehouse Technicians</h3><p>Prep, test, and pack. Load-in / load-out and asset tracking that keeps inventory ready.</p></div>
+    <div class="fc"><span class="no">ROLE / 03</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M14 7l-1.5-1.5a2 2 0 0 0-3 0L3 12l4 4 6.5-6.5a2 2 0 0 0 0-3Z"/><path d="M14 7l4 4 3-3-4-4-3 3ZM7 16l-4 5"/></svg></div><h3>Installation Technicians</h3><p>Rigging, integration, and temporary or permanent installs, to spec and to code.</p></div>
+    <div class="fc"><span class="no">ROLE / 04</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 6v12"/></svg></div><h3>Travel Team</h3><p>Road-ready crew that tours with your show, city to city, per diem handled.</p></div>
+  </div>
+</div></section>
+
+<!-- GEAR RENTALS spec table -->
+<section id="gear"><div class="wrap">
+  <div class="sec-head"><span class="tape">Gear Rentals</span>
+    <h2>Gear that ships with the people who run it</h2>
+    <p>Rent it bare or crewed. Everything is tested and prepped in-house before it leaves the dock.</p>
+  </div>
+  <div class="spec">
+    <div class="spec-head"><span>Package</span><span>Class</span><span>Status</span></div>
+    <div class="spec-row"><b>Audio Systems</b><span class="m">PA · consoles · RF · comms</span><span class="avail">● IN STOCK</span></div>
+    <div class="spec-row"><b>Lighting Rigs</b><span class="m">movers · conventional · control</span><span class="avail">● IN STOCK</span></div>
+    <div class="spec-row"><b>Video &amp; LED</b><span class="m">walls · projection · switching</span><span class="avail">● IN STOCK</span></div>
+    <div class="spec-row"><b>Staging &amp; Rigging</b><span class="m">decks · truss · motors</span><span class="avail">● IN STOCK</span></div>
+  </div>
+</div></section>
+
+<!-- PLANNING -->
+<section id="planning" style="padding-top:0"><div class="wrap split">
+  <div class="media"><img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=900&q=70&auto=format&fit=crop" alt="Technician at an audio console during setup"></div>
+  <div>
+    <span class="tape">Technical Planning</span>
+    <h2 class="arch" style="font-size:clamp(1.8rem,4vw,2.8rem);text-transform:uppercase;line-height:.95;margin:14px 0 6px">Drawn, loaded,<br>and labor-planned</h2>
+    <p style="color:var(--steel)">We turn creative into a buildable rig, then staff exactly the roles it needs.</p>
+    <ul class="checklist">
+      <li><span class="n">01</span> CAD plots, rigging &amp; weight loading</li>
+      <li><span class="n">02</span> Signal flow — audio, video, lighting</li>
+      <li><span class="n">03</span> Labor plan, call times &amp; role counts</li>
+      <li><span class="n">04</span> Venue, power &amp; rigging coordination</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- CITIES -->
+<section id="cities"><div class="wrap">
+  <div class="sec-head"><span class="tape">Cities Serviced</span>
+    <h2>Local crew, 60+ markets</h2>
+    <p>Technicians who already know the venues, the docks, and the local rules.</p>
+  </div>
+  <div class="cities-box"><div class="cities-grid" id="citiesGrid"></div></div>
+</div></section>
+
+<!-- STATS -->
+<section id="about" style="padding-top:0"><div class="wrap">
+  <div class="sec-head"><span class="tape">About</span><h2>Prepped like it's our name on it</h2></div>
+  <div class="report">
+    <div class="stat"><b>60+</b><span>Cities serviced</span></div>
+    <div class="stat"><b>500+</b><span>Vetted technicians</span></div>
+    <div class="stat"><b>2,000+</b><span>Shows a year</span></div>
+    <div class="stat"><b>24/7</b><span>Dispatch</span></div>
+  </div>
+</div></section>
+
+<!-- JOIN -->
+<section style="padding-top:0"><div class="wrap">
+  <div class="join">
+    <div class="hazard" style="height:8px"></div>
+    <div class="join-top">
+      <div><span class="tape hi">Join The Team</span><h2 style="margin-top:14px">Techs — get cased in</h2><p>Reliable and gear-fluent? We keep audio, video, lighting, rigging, and warehouse crew working nationwide.</p></div>
+      <a href="#request" class="btn dark">Apply to crew</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- REQUEST CREW -->
+<section id="request"><div class="wrap book">
+  <div>
+    <span class="tape">Request Crew!</span>
+    <h2 class="arch" style="font-size:clamp(1.9rem,4vw,3rem);text-transform:uppercase;line-height:.95;margin:14px 0 10px">Call the load sheet</h2>
+    <p style="color:var(--steel)">Date, city, and roles — dispatch confirms availability, usually same day.</p>
+    <p class="mono" style="color:var(--steel);font-size:.82rem;line-height:2;margin-top:18px">DISPATCH // (000) 000-0000<br>CREW // crew@mdhassociates.com<br>HRS // 24/7 on-call</p>
+  </div>
+  <form class="form-card" id="crewForm">
+    <div class="frow"><div class="field"><label>Your name</label><input required placeholder="Production manager"></div><div class="field"><label>Company</label><input placeholder="Production co."></div></div>
+    <div class="frow"><div class="field"><label>Event date</label><input type="date"></div><div class="field"><label>City / market</label><input placeholder="Washington DC" list="citylist"><datalist id="citylist"></datalist></div></div>
+    <div class="frow"><div class="field"><label>Roles needed</label><select><option>Event Technicians</option><option>Warehouse Technicians</option><option>Installation Technicians</option><option>Travel Team</option><option>Full crew + gear</option></select></div><div class="field"><label>Crew count</label><input type="number" min="1" placeholder="6"></div></div>
+    <div class="field"><label>Show details</label><textarea placeholder="Scope, gear, call times…"></textarea></div>
+    <button type="submit" class="btn hivis" style="width:100%;justify-content:center">Send crew request</button>
+  </form>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="foot-grid">
+    <div class="foot-brand"><a class="logo" href="#top"><span class="mk">MDH</span><span><b>MDH &amp; Associates</b></span></a><p>Event management &amp; production services — crew, gear, and technical planning for live events, nationwide.</p></div>
+    <div><h4>Services</h4><a href="#services">Event Technicians</a><a href="#services">Warehouse Technicians</a><a href="#services">Installation Technicians</a><a href="#services">Travel Team</a></div>
+    <div><h4>Company</h4><a href="#about">About Us</a><a href="#gear">Gear Rentals</a><a href="#planning">Technical Planning</a><a href="#join">Join The Team</a></div>
+    <div><h4>Get crew</h4><a href="#cities">Cities Serviced</a><a href="#request">Request Crew!</a><a href="#request">Login</a><a href="#request">Contact Us</a></div>
+  </div>
+  <div class="foot-bottom"><span>© 2026 MDH &amp; ASSOCIATES · EVENT MANAGEMENT &amp; PRODUCTION</span><span>DISPATCH 24/7</span></div>
+</div></footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var CITIES=["Albuquerque","Ann Arbor","Atlanta","Austin","Baltimore","Boston","Boulder","Charlotte","Chicago","Cincinnati","Cleveland","Colorado Springs","Columbus","Dallas","Dayton","DC Metro Area","Denver","Detroit","Ft. Lauderdale","Ft. Myers","Greensboro","Harrisonburg","Hartford","Houston","Indianapolis","Jacksonville","Kansas City","Las Vegas","Lexington","Los Angeles","Louisville","Miami","Milwaukee","Minneapolis","Nashville","New Orleans","New York","North Jersey","Northern Virginia","Orlando","Philadelphia","Phoenix","Portland","Providence","Provo","Raleigh","Reno","Salt Lake City","San Antonio","San Diego","Sarasota","Seattle","South Jersey","St. Louis","Tampa","Tucson","Washington DC","Wichita","Wilmington"];
+document.getElementById('citiesGrid').innerHTML=CITIES.map(function(c){return '<a href="#request">'+c+'</a>';}).join('');
+document.getElementById('citylist').innerHTML=CITIES.map(function(c){return '<option value="'+c+'">';}).join('');
+document.getElementById('burger').addEventListener('click',function(){document.getElementById('mobile').classList.toggle('open');});
+var tt;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('show');},2600);}
+document.getElementById('crewForm').addEventListener('submit',function(e){e.preventDefault();this.reset();toast('Crew request sent — dispatch will confirm');});
+document.querySelectorAll('.mobile a').forEach(function(a){a.addEventListener('click',function(){document.getElementById('mobile').classList.remove('open');});});
+</script>
+</body>
+</html>

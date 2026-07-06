@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDH &amp; Associates — One Call. Crew in Every City.</title>
+<meta name="description" content="MDH &amp; Associates staffs live-event crew in 60+ cities: event, warehouse &amp; installation technicians, travel teams, gear rentals, and technical planning. One call books the show.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --navy:#0a1130; --navy2:#111a44; --blue:#3a6bff; --sky:#7aa0ff; --coral:#ff5a4d;
+    --cream:#f4f6ff; --ink:#0a1130; --muted:#69739b; --line:#e2e6f5; --dline:rgba(255,255,255,.12);
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  .disp{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em}
+  .board{font-family:'Space Mono',monospace}
+  :focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+
+  /* NAV */
+  header.nav{position:sticky;top:0;z-index:60;background:rgba(10,17,48,.92);backdrop-filter:blur(10px);color:#fff}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px 24px;max-width:1200px;margin:0 auto}
+  .logo{display:flex;align-items:center;gap:10px;color:#fff}
+  .logo .mk{width:34px;height:34px;border-radius:9px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:.82rem}
+  .logo b{font-family:'Space Grotesk';font-weight:700;font-size:1.05rem;letter-spacing:-.01em;line-height:1}
+  .logo small{display:block;font-family:'Space Mono';font-size:.54rem;letter-spacing:.12em;color:var(--sky);text-transform:uppercase}
+  nav.menu{display:flex;align-items:center;gap:22px}
+  nav.menu a{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.72);white-space:nowrap}
+  nav.menu a:hover{color:#fff}
+  .has-drop{position:relative}
+  .drop{position:absolute;top:calc(100% + 8px);left:-14px;background:#fff;color:var(--ink);border-radius:12px;padding:8px;min-width:234px;opacity:0;visibility:hidden;transform:translateY(6px);transition:.16s;box-shadow:0 20px 44px rgba(10,17,48,.28);z-index:5}
+  .has-drop:hover .drop,.has-drop:focus-within .drop{opacity:1;visibility:visible;transform:none}
+  .drop a{display:block;padding:10px 12px;border-radius:8px;font-size:.85rem;color:var(--ink)}
+  .drop a:hover{background:var(--cream);color:var(--blue)}
+  .drop .lbl{font-family:'Space Mono';font-size:.62rem;letter-spacing:.1em;color:var(--muted);padding:8px 12px 3px;text-transform:uppercase}
+  .btn{font-family:'Space Grotesk';font-weight:700;font-size:.85rem;padding:11px 20px;border-radius:999px;cursor:pointer;border:2px solid transparent;transition:.18s;display:inline-flex;align-items:center;gap:8px}
+  .btn.blue{background:var(--blue);color:#fff}
+  .btn.blue:hover{background:#5480ff;transform:translateY(-2px)}
+  .btn.coral{background:var(--coral);color:#fff}
+  .btn.coral:hover{background:#ff7368;transform:translateY(-2px)}
+  .btn.ghost-l{background:none;border-color:var(--line);color:var(--ink)}
+  .btn.ghost-l:hover{border-color:var(--blue);color:var(--blue)}
+  .btn.ghost-d{background:none;border-color:rgba(255,255,255,.25);color:#fff}
+  .btn.ghost-d:hover{border-color:#fff}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .login{font-size:.82rem;color:rgba(255,255,255,.7)}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+  .burger span{width:22px;height:2px;background:#fff}
+  .mobile{display:none;flex-direction:column;background:var(--navy2)}
+  .mobile a{padding:13px 24px;border-top:1px solid var(--dline);font-size:.9rem;color:#fff}
+  .mobile.open{display:flex}
+
+  /* HERO */
+  .hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+  .hero .bg{position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600&q=70&auto=format&fit=crop") center/cover;opacity:.28}
+  .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 20%,rgba(58,107,255,.4),transparent 45%),linear-gradient(180deg,rgba(10,17,48,.4),var(--navy))}
+  .hero .in{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:84px 24px 70px}
+  .hero .eye{display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono';font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);background:rgba(58,107,255,.14);border:1px solid rgba(122,160,255,.3);padding:7px 14px;border-radius:999px}
+  .hero h1{font-family:'Space Grotesk';font-weight:700;font-size:clamp(2.7rem,7vw,6rem);line-height:.98;letter-spacing:-.03em;margin:22px 0 0;max-width:16ch}
+  .hero h1 .blue{color:var(--sky)}
+  .hero p{font-size:1.18rem;color:rgba(255,255,255,.78);max-width:52ch;margin-top:20px}
+  .hero .cta-row{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero .quick{margin-top:38px;display:flex;gap:26px;flex-wrap:wrap;font-family:'Space Mono';font-size:.78rem;color:rgba(255,255,255,.6)}
+  .hero .quick b{color:#fff}
+
+  /* CITIES MARQUEE (signature) */
+  .marquee{background:var(--blue);color:#fff;padding:14px 0;overflow:hidden;white-space:nowrap}
+  .marquee .track{display:inline-flex;gap:0;animation:scroll 42s linear infinite}
+  .marquee span{font-family:'Space Grotesk';font-weight:600;font-size:1rem;padding:0 22px;display:inline-flex;align-items:center;gap:22px}
+  .marquee span::after{content:"◆";font-size:.6rem;color:var(--sky)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* SECTIONS */
+  section{padding:82px 0}
+  .light{background:var(--cream)}
+  .dark{background:var(--navy);color:#fff}
+  .sec-head{margin-bottom:44px}
+  .sec-head .eye{font-family:'Space Mono';font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+  .dark .sec-head .eye{color:var(--sky)}
+  .sec-head h2{font-family:'Space Grotesk';font-weight:700;font-size:clamp(2rem,4.4vw,3.2rem);letter-spacing:-.02em;line-height:1;margin-top:12px}
+  .sec-head p{color:var(--muted);max-width:60ch;margin-top:12px}
+  .dark .sec-head p{color:rgba(255,255,255,.72)}
+
+  /* SERVICES */
+  .svcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+  .svc{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;transition:.2s}
+  .svc:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(10,17,48,.1)}
+  .svc .ic{width:48px;height:48px;border-radius:12px;background:var(--cream);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .svc .ic svg{width:24px;height:24px;stroke:var(--blue);fill:none;stroke-width:1.8}
+  .svc h3{font-family:'Space Grotesk';font-weight:600;font-size:1.2rem;margin-bottom:8px}
+  .svc p{font-size:.92rem;color:var(--muted)}
+  .svc .more{font-family:'Space Mono';font-size:.72rem;color:var(--blue);margin-top:14px;display:inline-block;letter-spacing:.04em}
+
+  /* CITIES DEPARTURES BOARD */
+  .board-panel{background:var(--navy2);border:1px solid var(--dline);border-radius:18px;overflow:hidden}
+  .board-top{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--dline);font-family:'Space Mono';font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sky)}
+  .board-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0}
+  .board-grid a{font-family:'Space Mono';font-size:.82rem;color:rgba(255,255,255,.72);padding:11px 18px;border-bottom:1px solid var(--dline);border-right:1px solid var(--dline);display:flex;justify-content:space-between;align-items:center}
+  .board-grid a .st{color:#5fd18a;font-size:.62rem;letter-spacing:.06em}
+  .board-grid a:hover{background:rgba(58,107,255,.16);color:#fff}
+
+  /* SPLIT (planning + gear) */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .panel{border-radius:20px;overflow:hidden;position:relative;min-height:340px;display:flex;align-items:flex-end;color:#fff}
+  .panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,17,48,.15),rgba(10,17,48,.9))}
+  .panel .c{position:relative;z-index:2;padding:30px}
+  .panel h3{font-family:'Space Grotesk';font-weight:700;font-size:1.5rem;margin-bottom:8px}
+  .panel p{color:rgba(255,255,255,.82);font-size:.92rem;max-width:36ch}
+  .panel .more{font-family:'Space Mono';font-size:.72rem;color:var(--sky);margin-top:12px;display:inline-block}
+
+  /* STATS */
+  .report{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .stat{background:rgba(255,255,255,.05);border:1px solid var(--dline);border-radius:16px;padding:28px 22px}
+  .stat b{font-family:'Space Grotesk';font-weight:700;font-size:3rem;display:block;line-height:1;color:var(--sky)}
+  .stat span{font-family:'Space Mono';font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+
+  /* JOIN + REQUEST */
+  .cta-band{background:linear-gradient(120deg,var(--blue),#6b3aff);border-radius:24px;padding:52px;color:#fff;text-align:center}
+  .cta-band h2{font-family:'Space Grotesk';font-weight:700;font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:12px}
+  .cta-band p{color:rgba(255,255,255,.85);max-width:48ch;margin:0 auto 22px}
+  .book{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start}
+  .form-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-family:'Space Mono';font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .field input,.field select,.field textarea{width:100%;background:var(--cream);border:1.5px solid var(--line);border-radius:10px;padding:12px 13px;color:var(--ink);font-family:inherit;font-size:.93rem}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--blue)}
+  .field textarea{min-height:84px;resize:vertical}
+
+  /* FOOTER */
+  footer{background:var(--navy);color:rgba(255,255,255,.7);padding:56px 0 28px}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px}
+  footer .logo{margin-bottom:12px}
+  .foot-grid h4{font-family:'Space Mono';font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sky);margin-bottom:14px}
+  .foot-grid a{display:block;font-size:.88rem;margin-bottom:9px;color:rgba(255,255,255,.7)}
+  .foot-grid a:hover{color:#fff}
+  .foot-brand p{font-size:.9rem;max-width:34ch}
+  .foot-bottom{border-top:1px solid var(--dline);margin-top:34px;padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:'Space Mono';font-size:.7rem;color:rgba(255,255,255,.5)}
+
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);background:var(--blue);color:#fff;font-family:'Space Grotesk';font-weight:700;padding:14px 24px;border-radius:999px;opacity:0;transition:.3s;z-index:90;font-size:.9rem}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media(max-width:960px){
+    nav.menu{display:none}.burger{display:flex}
+    .duo,.book{grid-template-columns:1fr}
+    .report{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top"><span class="mk">M</span><span><b>MDH &amp; Associates</b><small>Live event crew</small></span></a>
+    <nav class="menu">
+      <a href="#top">Home</a>
+      <a href="#about">About Us</a>
+      <span class="has-drop"><a href="#services">Services ▾</a>
+        <span class="drop">
+          <span class="lbl">Labor</span>
+          <a href="#services">Event Technicians</a><a href="#services">Warehouse Technicians</a><a href="#services">Installation Technicians</a><a href="#services">Travel Team</a>
+          <span class="lbl">Coverage</span><a href="#cities">Cities Serviced</a>
+        </span>
+      </span>
+      <a href="#gear">Gear Rentals</a>
+      <a href="#planning">Technical Planning</a>
+      <a href="#join">Join The Team</a>
+      <a href="#request" class="login">Login</a>
+      <a href="#request">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#request" class="btn coral">Request Crew!</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile" id="mobile">
+    <a href="#about">About Us</a><a href="#services">Services</a><a href="#cities">Cities Serviced</a><a href="#gear">Gear Rentals</a><a href="#planning">Technical Planning</a><a href="#join">Join The Team</a><a href="#request">Login</a><a href="#request">Request Crew!</a>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<!-- HERO -->
+<section class="hero" style="padding:0">
+  <div class="bg"></div>
+  <div class="in">
+    <span class="eye">◆ 60+ cities · one dispatch</span>
+    <h1>One call.<br>Crew in <span class="blue">every city.</span></h1>
+    <p>MDH &amp; Associates puts vetted event, warehouse, and installation technicians on your show — plus travel teams, gear, and technical planning — wherever you're loading in.</p>
+    <div class="cta-row">
+      <a href="#request" class="btn coral">Request Crew!</a>
+      <a href="#cities" class="btn ghost-d">See our cities</a>
+    </div>
+    <div class="quick"><span><b>500+</b> vetted techs</span><span><b>2,000+</b> shows a year</span><span><b>24/7</b> dispatch</span></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true"><div class="track board" id="marquee"></div></div>
+
+<!-- SERVICES -->
+<section class="light" id="services"><div class="wrap">
+  <div class="sec-head"><span class="eye">Services · Labor</span><h2 class="disp">Every role, one roster</h2><p>Background-checked, gear-fluent technicians you can book by role — from a single tech to a full touring crew.</p></div>
+  <div class="svcs">
+    <div class="svc"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3Z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></div><h3>Event Technicians</h3><p>Audio, video, lighting &amp; LED techs for concerts, corporate, and broadcast.</p><span class="more">Learn more →</span></div>
+    <div class="svc"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4Z"/><path d="M3 7v10l9 4 9-4V7M12 11v10"/></svg></div><h3>Warehouse Technicians</h3><p>Prep, test, and pack. Load-in / load-out and asset tracking that keeps inventory ready.</p><span class="more">Learn more →</span></div>
+    <div class="svc"><div class="ic"><svg viewBox="0 0 24 24"><path d="M14 7l-1.5-1.5a2 2 0 0 0-3 0L3 12l4 4 6.5-6.5a2 2 0 0 0 0-3Z"/><path d="M14 7l4 4 3-3-4-4-3 3ZM7 16l-4 5"/></svg></div><h3>Installation Technicians</h3><p>Rigging, integration, and temporary or permanent installs, to spec and to code.</p><span class="more">Learn more →</span></div>
+    <div class="svc"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 6v12"/></svg></div><h3>Travel Team</h3><p>Road-ready crew that tours with your show, city to city, coast to coast.</p><span class="more">Learn more →</span></div>
+  </div>
+</div></section>
+
+<!-- GEAR + PLANNING duo -->
+<section class="light" style="padding-top:0" id="gear"><div class="wrap">
+  <div class="duo">
+    <div class="panel"><img src="https://images.unsplash.com/photo-1524230572899-a752b3835840?w=800&q=70&auto=format&fit=crop" alt="LED video wall at a live event"><div class="c"><h3>Gear Rentals</h3><p>Audio, video, lighting, staging, and LED walls — delivered and dialed in with the crew who runs it.</p><span class="more">Browse gear →</span></div></div>
+    <div class="panel" id="planning"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=70&auto=format&fit=crop" alt="Technician planning at an audio console"><div class="c"><h3>Technical Planning</h3><p>CAD plots, signal flow, rigging design, and labor planning before the trucks roll.</p><span class="more">Plan a show →</span></div></div>
+  </div>
+</div></section>
+
+<!-- CITIES BOARD -->
+<section class="dark" id="cities"><div class="wrap">
+  <div class="sec-head"><span class="eye">Cities Serviced</span><h2 class="disp">Departures board</h2><p>Local crew who know the venues, the docks, and the rules — in 60+ markets and growing.</p></div>
+  <div class="board-panel">
+    <div class="board-top"><span>MDH · CREW DISPATCH</span><span>ALL MARKETS · ON CALL</span></div>
+    <div class="board-grid" id="citiesGrid"></div>
+  </div>
+</div></section>
+
+<!-- STATS -->
+<section class="dark" style="padding-top:0" id="about"><div class="wrap">
+  <div class="sec-head"><span class="eye">About</span><h2 class="disp">The reliability is the product</h2><p>Years spent staffing the shows you've been to. When the truck arrives, the crew already knows the rig.</p></div>
+  <div class="report">
+    <div class="stat"><b>60+</b><span>Cities serviced</span></div>
+    <div class="stat"><b>500+</b><span>Vetted technicians</span></div>
+    <div class="stat"><b>2,000+</b><span>Shows a year</span></div>
+    <div class="stat"><b>24/7</b><span>On-call dispatch</span></div>
+  </div>
+</div></section>
+
+<!-- JOIN -->
+<section class="light" id="join"><div class="wrap">
+  <div class="cta-band">
+    <h2 class="disp">Techs — get on the roster</h2>
+    <p>Audio, video, lighting, rigging, or warehouse. If you're reliable and gear-fluent, we keep you working across the country.</p>
+    <a href="#request" class="btn" style="background:#fff;color:var(--blue)">Join the team</a>
+  </div>
+</div></section>
+
+<!-- REQUEST -->
+<section class="light" style="padding-top:0" id="request"><div class="wrap book">
+  <div>
+    <span class="eye" style="font-family:'Space Mono';font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)">Request Crew!</span>
+    <h2 class="disp" style="font-size:clamp(2rem,4.4vw,3.2rem);margin:12px 0 10px">Book the show</h2>
+    <p style="color:var(--muted)">Send the date, the city, and the roles — dispatch confirms availability, usually same day.</p>
+    <p class="board" style="color:var(--muted);font-size:.82rem;line-height:2;margin-top:18px">DISPATCH // (000) 000-0000<br>CREW // crew@mdhassociates.com<br>HRS // 24/7 on-call</p>
+  </div>
+  <form class="form-card" id="crewForm">
+    <div class="frow"><div class="field"><label>Your name</label><input required placeholder="Production manager"></div><div class="field"><label>Company</label><input placeholder="Production co."></div></div>
+    <div class="frow"><div class="field"><label>Event date</label><input type="date"></div><div class="field"><label>City / market</label><input placeholder="Washington DC" list="citylist"><datalist id="citylist"></datalist></div></div>
+    <div class="frow"><div class="field"><label>Roles needed</label><select><option>Event Technicians</option><option>Warehouse Technicians</option><option>Installation Technicians</option><option>Travel Team</option><option>Full crew + gear</option></select></div><div class="field"><label>Crew count</label><input type="number" min="1" placeholder="6"></div></div>
+    <div class="field"><label>Show details</label><textarea placeholder="Scope, gear, call times…"></textarea></div>
+    <button type="submit" class="btn coral" style="width:100%;justify-content:center">Send crew request</button>
+  </form>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="foot-grid">
+    <div class="foot-brand"><a class="logo" href="#top"><span class="mk">M</span><span><b>MDH &amp; Associates</b></span></a><p>Event management &amp; production services — crew, gear, and technical planning for live events, nationwide.</p></div>
+    <div><h4>Services</h4><a href="#services">Event Technicians</a><a href="#services">Warehouse Technicians</a><a href="#services">Installation Technicians</a><a href="#services">Travel Team</a></div>
+    <div><h4>Company</h4><a href="#about">About Us</a><a href="#gear">Gear Rentals</a><a href="#planning">Technical Planning</a><a href="#join">Join The Team</a></div>
+    <div><h4>Get crew</h4><a href="#cities">Cities Serviced</a><a href="#request">Request Crew!</a><a href="#request">Login</a><a href="#request">Contact Us</a></div>
+  </div>
+  <div class="foot-bottom"><span>© 2026 MDH &amp; Associates · Event Management &amp; Production</span><span>Dispatch 24/7</span></div>
+</div></footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var CITIES=["Albuquerque","Ann Arbor","Atlanta","Austin","Baltimore","Boston","Boulder","Charlotte","Chicago","Cincinnati","Cleveland","Colorado Springs","Columbus","Dallas","Dayton","DC Metro Area","Denver","Detroit","Ft. Lauderdale","Ft. Myers","Greensboro","Harrisonburg","Hartford","Houston","Indianapolis","Jacksonville","Kansas City","Las Vegas","Lexington","Los Angeles","Louisville","Miami","Milwaukee","Minneapolis","Nashville","New Orleans","New York","North Jersey","Northern Virginia","Orlando","Philadelphia","Phoenix","Portland","Providence","Provo","Raleigh","Reno","Salt Lake City","San Antonio","San Diego","Sarasota","Seattle","South Jersey","St. Louis","Tampa","Tucson","Washington DC","Wichita","Wilmington"];
+document.getElementById('citiesGrid').innerHTML=CITIES.map(function(c){return '<a href="#request">'+c+'<span class="st">● ON CALL</span></a>';}).join('');
+document.getElementById('citylist').innerHTML=CITIES.map(function(c){return '<option value="'+c+'">';}).join('');
+// marquee — duplicate list for seamless loop
+var mk=CITIES.concat(CITIES).map(function(c){return '<span>'+c+'</span>';}).join('');
+document.getElementById('marquee').innerHTML=mk;
+document.getElementById('burger').addEventListener('click',function(){document.getElementById('mobile').classList.toggle('open');});
+var tt;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('show');},2600);}
+document.getElementById('crewForm').addEventListener('submit',function(e){e.preventDefault();this.reset();toast('Crew request sent — dispatch will confirm');});
+document.querySelectorAll('.mobile a').forEach(function(a){a.addEventListener('click',function(){document.getElementById('mobile').classList.remove('open');});});
+</script>
+</body>
+</html>
