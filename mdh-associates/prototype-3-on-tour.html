@@ -26,15 +26,15 @@
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
 
   /* NAV */
-  header.nav{position:sticky;top:0;z-index:60;background:rgba(10,17,48,.92);backdrop-filter:blur(10px);color:#fff}
+  header.nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);color:var(--ink);border-bottom:1px solid var(--line)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px 24px;max-width:1200px;margin:0 auto}
-  .logo{display:flex;align-items:center;gap:10px;color:#fff}
+  .logo{display:flex;align-items:center;gap:10px;color:var(--ink)}
   .logo .mk{width:34px;height:34px;border-radius:9px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:.82rem}
   .logo b{font-family:'Space Grotesk';font-weight:700;font-size:1.05rem;letter-spacing:-.01em;line-height:1}
   .logo small{display:block;font-family:'Space Mono';font-size:.54rem;letter-spacing:.12em;color:var(--sky);text-transform:uppercase}
   nav.menu{display:flex;align-items:center;gap:22px}
-  nav.menu a{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.72);white-space:nowrap}
-  nav.menu a:hover{color:#fff}
+  nav.menu a{font-size:.85rem;font-weight:500;color:var(--muted);white-space:nowrap}
+  nav.menu a:hover{color:var(--ink)}
   .has-drop{position:relative}
   .drop{position:absolute;top:calc(100% + 8px);left:-14px;background:#fff;color:var(--ink);border-radius:12px;padding:8px;min-width:234px;opacity:0;visibility:hidden;transform:translateY(6px);transition:.16s;box-shadow:0 20px 44px rgba(10,17,48,.28);z-index:5}
   .has-drop:hover .drop,.has-drop:focus-within .drop{opacity:1;visibility:visible;transform:none}
@@ -43,33 +43,34 @@
   .drop .lbl{font-family:'Space Mono';font-size:.62rem;letter-spacing:.1em;color:var(--muted);padding:8px 12px 3px;text-transform:uppercase}
   .btn{font-family:'Space Grotesk';font-weight:700;font-size:.85rem;padding:11px 20px;border-radius:999px;cursor:pointer;border:2px solid transparent;transition:.18s;display:inline-flex;align-items:center;gap:8px}
   .btn.blue{background:var(--blue);color:#fff}
-  .btn.blue:hover{background:#5480ff;transform:translateY(-2px)}
+  .btn.blue:hover{background:#b52531;transform:translateY(-2px)}
   .btn.coral{background:var(--coral);color:#fff}
-  .btn.coral:hover{background:#ff7368;transform:translateY(-2px)}
+  .btn.coral:hover{background:#a01f26;transform:translateY(-2px)}
   .btn.ghost-l{background:none;border-color:var(--line);color:var(--ink)}
   .btn.ghost-l:hover{border-color:var(--blue);color:var(--blue)}
   .btn.ghost-d{background:none;border-color:rgba(255,255,255,.25);color:#fff}
   .btn.ghost-d:hover{border-color:#fff}
   .nav-cta{display:flex;align-items:center;gap:12px}
-  .login{font-size:.82rem;color:rgba(255,255,255,.7)}
+  .login{font-size:.82rem;color:var(--muted)}
   .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
-  .burger span{width:22px;height:2px;background:#fff}
-  .mobile{display:none;flex-direction:column;background:var(--navy2)}
-  .mobile a{padding:13px 24px;border-top:1px solid var(--dline);font-size:.9rem;color:#fff}
+  .burger span{width:22px;height:2px;background:var(--ink)}
+  .mobile{display:none;flex-direction:column;background:#fff;border-bottom:1px solid var(--line)}
+  .mobile a{padding:13px 24px;border-top:1px solid var(--line);font-size:.9rem;color:var(--ink)}
   .mobile.open{display:flex}
 
   /* HERO */
-  .hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
-  .hero .bg{position:absolute;inset:0;background:url("assets/mdh-slider.png") center/cover;opacity:.42}
-  .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 20%,rgba(152,27,32,.42),transparent 45%),linear-gradient(180deg,rgba(32,26,28,.42),var(--navy))}
-  .hero .in{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:84px 24px 70px}
-  .hero .eye{display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono';font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);background:rgba(58,107,255,.14);border:1px solid rgba(122,160,255,.3);padding:7px 14px;border-radius:999px}
-  .hero h1{font-family:'Space Grotesk';font-weight:700;font-size:clamp(2.7rem,7vw,6rem);line-height:.98;letter-spacing:-.03em;margin:22px 0 0;max-width:16ch}
-  .hero h1 .blue{color:var(--sky)}
-  .hero p{font-size:1.18rem;color:rgba(255,255,255,.78);max-width:52ch;margin-top:20px}
+  .hero{background:#fff;color:var(--ink)}
+  .hero .in{max-width:1200px;margin:0 auto;padding:72px 24px 60px;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .hero-photo{border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;position:relative;box-shadow:0 22px 48px rgba(32,26,28,.14)}
+  .hero-photo img{width:100%;height:100%;object-fit:cover}
+  .hero-photo .tag{position:absolute;left:16px;bottom:16px;font-family:'Space Mono';font-size:.68rem;letter-spacing:.1em;color:#fff;background:rgba(32,26,28,.6);padding:6px 12px;border-radius:999px}
+  .hero .eye{display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono';font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);background:rgba(152,27,32,.08);border:1px solid rgba(152,27,32,.2);padding:7px 14px;border-radius:999px}
+  .hero h1{font-family:'Space Grotesk';font-weight:700;font-size:clamp(2.6rem,6vw,5rem);line-height:.98;letter-spacing:-.03em;margin:22px 0 0;max-width:14ch}
+  .hero h1 .blue{color:var(--blue)}
+  .hero p{font-size:1.15rem;color:var(--muted);max-width:48ch;margin-top:20px}
   .hero .cta-row{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
-  .hero .quick{margin-top:38px;display:flex;gap:26px;flex-wrap:wrap;font-family:'Space Mono';font-size:.78rem;color:rgba(255,255,255,.6)}
-  .hero .quick b{color:#fff}
+  .hero .quick{margin-top:34px;display:flex;gap:26px;flex-wrap:wrap;font-family:'Space Mono';font-size:.78rem;color:var(--muted)}
+  .hero .quick b{color:var(--ink)}
 
   /* CITIES MARQUEE (signature) */
   .marquee{background:var(--blue);color:#fff;padding:14px 0;overflow:hidden;white-space:nowrap}
@@ -119,9 +120,9 @@
 
   /* STATS */
   .report{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .stat{background:rgba(255,255,255,.05);border:1px solid var(--dline);border-radius:16px;padding:28px 22px}
-  .stat b{font-family:'Space Grotesk';font-weight:700;font-size:3rem;display:block;line-height:1;color:var(--sky)}
-  .stat span{font-family:'Space Mono';font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  .stat{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:28px 22px}
+  .stat b{font-family:'Space Grotesk';font-weight:700;font-size:3rem;display:block;line-height:1;color:var(--blue)}
+  .stat span{font-family:'Space Mono';font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 
   /* JOIN + REQUEST */
   .cta-band{background:linear-gradient(120deg,#981b20,#800020);border-radius:24px;padding:52px;color:#fff;text-align:center}
@@ -151,7 +152,7 @@
 
   @media(max-width:960px){
     nav.menu{display:none}.burger{display:flex}
-    .duo,.book{grid-template-columns:1fr}
+    .hero .in,.duo,.book{grid-template-columns:1fr}
     .report{grid-template-columns:1fr 1fr}
   }
 </style>
@@ -160,7 +161,7 @@
 
 <header class="nav">
   <div class="nav-in">
-    <a class="logo" href="#top"><img src="assets/mdh-logo-white.png" alt="MDH &amp; Associates" style="height:38px;width:auto"></a>
+    <a class="logo" href="#top"><img src="assets/mdh-logo.png" alt="MDH &amp; Associates" style="height:40px;width:auto"></a>
     <nav class="menu">
       <a href="#top">Home</a>
       <a href="#about">About Us</a>
@@ -190,17 +191,19 @@
 <div id="top"></div>
 
 <!-- HERO -->
-<section class="hero" style="padding:0">
-  <div class="bg"></div>
+<section class="hero">
   <div class="in">
-    <span class="eye">◆ 60+ cities · one dispatch</span>
-    <h1>One call.<br>Crew in <span class="blue">every city.</span></h1>
-    <p>MDH &amp; Associates puts vetted event, warehouse, and installation technicians on your show — plus travel teams, gear, and technical planning — wherever you're loading in.</p>
-    <div class="cta-row">
-      <a href="#request" class="btn coral">Request Crew!</a>
-      <a href="#cities" class="btn ghost-d">See our cities</a>
+    <div>
+      <span class="eye">◆ 60+ cities · one dispatch</span>
+      <h1>One call.<br>Crew in <span class="blue">every city.</span></h1>
+      <p>MDH &amp; Associates puts vetted event, warehouse, and installation technicians on your show — plus travel teams, gear, and technical planning — wherever you're loading in.</p>
+      <div class="cta-row">
+        <a href="#request" class="btn coral">Request Crew!</a>
+        <a href="#cities" class="btn ghost-l">See our cities</a>
+      </div>
+      <div class="quick"><span><b>500+</b> vetted techs</span><span><b>2,000+</b> shows a year</span><span><b>24/7</b> dispatch</span></div>
     </div>
-    <div class="quick"><span><b>500+</b> vetted techs</span><span><b>2,000+</b> shows a year</span><span><b>24/7</b> dispatch</span></div>
+    <div class="hero-photo"><img src="assets/mdh-slider.png" alt="Front-of-house engineer at mixing consoles facing a lit stage"><span class="tag">LIVE · FOH</span></div>
   </div>
 </section>
 
@@ -236,7 +239,7 @@
 </div></section>
 
 <!-- STATS -->
-<section class="dark" style="padding-top:0" id="about"><div class="wrap">
+<section class="light" style="padding-top:0" id="about"><div class="wrap">
   <div class="sec-head"><span class="eye">About</span><h2 class="disp">The reliability is the product</h2><p>Years spent staffing the shows you've been to. When the truck arrives, the crew already knows the rig.</p></div>
   <div class="report">
     <div class="stat"><b>60+</b><span>Cities serviced</span></div>
@@ -270,6 +273,17 @@
     <div class="field"><label>Show details</label><textarea placeholder="Scope, gear, call times…"></textarea></div>
     <button type="submit" class="btn coral" style="width:100%;justify-content:center">Send crew request</button>
   </form>
+</div></section>
+
+<!-- RECENT SHOWS -->
+<section class="light" id="work"><div class="wrap">
+  <div class="sec-head"><span class="eye">Recent shows</span><h2 class="disp">On the road with MDH</h2><p>Crews on live shows. These tiles are ready for your event photography — the two marked "placeholder" are waiting on your photos.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px">
+    <img src="assets/mdh-av.jpeg" alt="MDH crew at a lighting console" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;border:1px solid var(--line)">
+    <img src="assets/mdh-slider.png" alt="FOH engineer at a live show" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;border:1px solid var(--line)">
+    <img src="assets/placeholder.svg" alt="Placeholder — add event photo" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;border:1px solid var(--line)">
+    <img src="assets/placeholder.svg" alt="Placeholder — add event photo" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;border:1px solid var(--line)">
+  </div>
 </div></section>
 
 <!-- FOOTER -->

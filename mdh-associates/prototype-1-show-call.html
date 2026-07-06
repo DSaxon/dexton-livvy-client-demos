@@ -12,9 +12,9 @@
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
-    --stage:#0b0d12; --panel:#141821; --panel2:#1b212c; --line:rgba(255,255,255,.09);
-    --amber:#b0202a; --magenta:#d13b3b; --cyan:#96a0b3; --green:#5fae6a;
-    --text:#eef1f6; --muted:#8b95a6;
+    --stage:#ffffff; --panel:#f7f4f2; --panel2:#efeae6; --line:#e7e2dd;
+    --amber:#981b20; --magenta:#c0392f; --cyan:#5a6472; --green:#3f8f52;
+    --text:#1c1c1e; --muted:#6c6c6e;
   }
   html{scroll-behavior:smooth}
   body{background:var(--stage);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
@@ -28,7 +28,7 @@
   @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto}}
 
   /* NAV */
-  header.nav{position:sticky;top:0;z-index:60;background:rgba(11,13,18,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  header.nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 24px;max-width:1200px;margin:0 auto}
   .logo{display:flex;align-items:center;gap:10px;font-family:'Oswald';font-weight:700;font-size:1.15rem;letter-spacing:.04em;text-transform:uppercase}
   .logo .dot{width:11px;height:11px;border-radius:50%;background:var(--amber);box-shadow:0 0 12px var(--amber)}
@@ -57,10 +57,11 @@
   .mobile.open{display:flex}
 
   /* HERO */
-  .hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden}
-  .hero .bg{position:absolute;inset:0;background:url("assets/mdh-slider.png") center/cover;opacity:.5}
-  .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(176,32,42,.22),transparent 55%),linear-gradient(180deg,rgba(11,13,18,.5),var(--stage) 92%)}
-  .hero .in{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:60px 24px}
+  .hero{padding:56px 0 34px}
+  .hero .in{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .hero-photo{border-radius:12px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;position:relative;box-shadow:0 20px 44px rgba(28,28,30,.12)}
+  .hero-photo img{width:100%;height:100%;object-fit:cover}
+  .hero-photo .tag{position:absolute;left:14px;bottom:14px;font-family:'JetBrains Mono';font-size:.68rem;letter-spacing:.1em;color:#fff;background:rgba(11,13,18,.62);padding:6px 11px;border-radius:6px}
   .hero .cue{margin-bottom:20px;display:flex;align-items:center;gap:12px}
   .hero .cue .live{width:9px;height:9px;border-radius:50%;background:var(--magenta);box-shadow:0 0 10px var(--magenta);animation:pulse 1.6s infinite}
   @keyframes pulse{50%{opacity:.35}}
@@ -81,9 +82,9 @@
   /* SERVICES — as console channels */
   .channels{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
   .ch{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:12px;padding:24px;position:relative;overflow:hidden;transition:.2s}
-  .ch:hover{transform:translateY(-4px);border-color:rgba(245,166,35,.4)}
+  .ch:hover{transform:translateY(-4px);border-color:rgba(152,27,32,.4)}
   .ch::before{content:attr(data-ch);position:absolute;top:16px;right:18px;font-family:'JetBrains Mono';font-size:.7rem;color:var(--muted);letter-spacing:.12em}
-  .ch .ic{width:44px;height:44px;border-radius:9px;background:rgba(245,166,35,.12);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .ch .ic{width:44px;height:44px;border-radius:9px;background:rgba(152,27,32,.1);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
   .ch .ic svg{width:23px;height:23px;stroke:var(--amber);fill:none;stroke-width:1.7}
   .ch h3{font-family:'Oswald';text-transform:uppercase;font-weight:600;font-size:1.15rem;margin-bottom:8px}
   .ch p{font-size:.92rem;color:var(--muted)}
@@ -152,7 +153,7 @@
 
   @media(max-width:960px){
     nav.menu{display:none}.burger{display:flex}
-    .split,.book{grid-template-columns:1fr}
+    .hero .in,.split,.book{grid-template-columns:1fr}
     .report{grid-template-columns:1fr 1fr}
     .join{padding:32px}
   }
@@ -162,7 +163,7 @@
 
 <header class="nav">
   <div class="nav-in">
-    <a class="logo" href="#top"><img src="assets/mdh-logo-white.png" alt="MDH &amp; Associates" style="height:36px;width:auto"></a>
+    <a class="logo" href="#top"><img src="assets/mdh-logo.png" alt="MDH &amp; Associates" style="height:38px;width:auto"></a>
     <nav class="menu">
       <a href="#top">Home</a>
       <a href="#about">About Us</a>
@@ -198,18 +199,20 @@
 <div id="top"></div>
 
 <!-- HERO -->
-<section class="hero" style="padding:0">
-  <div class="bg"></div>
+<section class="hero">
   <div class="in">
-    <div class="cue"><span class="live"></span> // Live event crew · nationwide · on call</div>
-    <h1 class="hero-h">When the show<br>can't wait,<br><span class="amber">we staff it.</span></h1>
-    <p class="sub">MDH &amp; Associates puts vetted audio, video, lighting, and rigging technicians on your deck — in 60+ cities, load-in to load-out. Book the crew, rent the gear, plan the show.</p>
-    <div class="cta-row">
-      <a href="#request" class="btn amber">Request Crew!</a>
-      <a href="#services" class="btn ghost">See what we cover</a>
+    <div>
+      <div class="cue"><span class="live"></span> // Live event crew · nationwide · on call</div>
+      <h1 class="hero-h">When the show<br>can't wait,<br><span class="amber">we staff it.</span></h1>
+      <p class="sub">MDH &amp; Associates puts vetted audio, video, lighting, and rigging technicians on your deck — in 60+ cities, load-in to load-out. Book the crew, rent the gear, plan the show.</p>
+      <div class="cta-row">
+        <a href="#request" class="btn amber">Request Crew!</a>
+        <a href="#services" class="btn ghost">See what we cover</a>
+      </div>
     </div>
-    <div class="ticker mono"><span>SVC/01 <b>EVENT TECH</b></span><span>SVC/02 <b>WAREHOUSE</b></span><span>SVC/03 <b>INSTALL</b></span><span>SVC/04 <b>TRAVEL TEAM</b></span><span>SVC/05 <b>GEAR</b></span><span>SVC/06 <b>TECH PLANNING</b></span></div>
+    <div class="hero-photo"><img src="assets/mdh-av.jpeg" alt="MDH technician at a grandMA3 lighting console with camera monitor wall"><span class="tag">FOH · SHOW READY</span></div>
   </div>
+  <div class="wrap" style="margin-top:36px"><div class="ticker mono"><span>SVC/01 <b>EVENT TECH</b></span><span>SVC/02 <b>WAREHOUSE</b></span><span>SVC/03 <b>INSTALL</b></span><span>SVC/04 <b>TRAVEL TEAM</b></span><span>SVC/05 <b>GEAR</b></span><span>SVC/06 <b>TECH PLANNING</b></span></div></div>
 </section>
 
 <!-- SERVICES -->
@@ -264,7 +267,7 @@
       <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Venue coordination &amp; power/rigging specs</li>
     </ul>
   </div>
-  <div class="media"><img src="assets/mdh-av.jpeg" alt="MDH technician at a grandMA3 lighting console with multi-camera monitor wall"><span class="tag">FOH · SIGNAL FLOW LOCKED</span></div>
+  <div class="media"><img src="assets/mdh-slider.png" alt="Front-of-house engineer at mixing consoles facing a lit stage"><span class="tag">FOH · SIGNAL FLOW LOCKED</span></div>
 </div></section>
 
 <!-- STATS -->
@@ -318,10 +321,23 @@
   </form>
 </div></section>
 
+<!-- RECENT SHOWS -->
+<section id="work"><div class="wrap">
+  <div class="sec-cue cue">Recent shows</div>
+  <h2 class="sec-h">From the deck</h2>
+  <p class="sec-lead">MDH crews on live shows. These tiles are ready for your event photography — the two marked "placeholder" are waiting on your photos.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px">
+    <img src="assets/mdh-av.jpeg" alt="MDH crew at a lighting console" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid var(--line)">
+    <img src="assets/mdh-slider.png" alt="FOH engineer at a live show" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid var(--line)">
+    <img src="assets/placeholder.svg" alt="Placeholder — add event photo" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid var(--line)">
+    <img src="assets/placeholder.svg" alt="Placeholder — add event photo" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid var(--line)">
+  </div>
+</div></section>
+
 <!-- FOOTER -->
 <footer><div class="wrap">
   <div class="foot-grid">
-    <div class="foot-brand"><a class="logo" href="#top"><img src="assets/mdh-logo-white.png" alt="MDH &amp; Associates" style="height:38px;width:auto"></a><p style="margin-top:14px">Event management &amp; production services. Skilled crew, gear, and technical planning for live events, nationwide.</p></div>
+    <div class="foot-brand"><a class="logo" href="#top"><img src="assets/mdh-logo.png" alt="MDH &amp; Associates" style="height:40px;width:auto"></a><p style="margin-top:14px">Event management &amp; production services. Skilled crew, gear, and technical planning for live events, nationwide.</p></div>
     <div><h4>Services</h4><a href="#services">Event Technicians</a><a href="#services">Warehouse Technicians</a><a href="#services">Installation Technicians</a><a href="#services">Travel Team</a></div>
     <div><h4>Company</h4><a href="#about">About Us</a><a href="#gear">Gear Rentals</a><a href="#planning">Technical Planning</a><a href="#join">Join The Team</a></div>
     <div><h4>Get crew</h4><a href="#cities">Cities Serviced</a><a href="#request">Request Crew!</a><a href="#request">Login</a><a href="#request">Contact Us</a></div>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Event photo placeholder">
+  <rect width="800" height="600" fill="#f4eff0"/>
+  <rect x="2" y="2" width="796" height="596" fill="none" stroke="#d9c6c8" stroke-width="3" stroke-dasharray="12 9"/>
+  <g fill="none" stroke="#98181e" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="296" y="232" width="208" height="146" rx="16"/>
+    <circle cx="400" cy="305" r="42"/>
+    <path d="M344 232l16-28h80l16 28"/>
+  </g>
+  <text x="400" y="440" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="#98181e">Event photo</text>
+  <text x="400" y="476" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#8a8a8c" letter-spacing="3">MDH &amp; ASSOCIATES · PLACEHOLDER</text>
+</svg>

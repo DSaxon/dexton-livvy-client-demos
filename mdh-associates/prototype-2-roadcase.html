@@ -12,8 +12,8 @@
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
-    --concrete:#e7e4dc; --paper:#f4f2ec; --ink:#1b1d21; --steel:#3c434c;
-    --hivis:#981b20; --tape:#26282c; --line:#d3d0c5; --muted:#6b6960; --caution:#800020;
+    --concrete:#ffffff; --paper:#f7f5f1; --ink:#1b1d21; --steel:#3c434c;
+    --hivis:#981b20; --tape:#26282c; --line:#e7e3db; --muted:#6b6960; --caution:#800020;
   }
   html{scroll-behavior:smooth}
   body{background:var(--concrete);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
@@ -312,6 +312,20 @@
     <div class="field"><label>Show details</label><textarea placeholder="Scope, gear, call times…"></textarea></div>
     <button type="submit" class="btn hivis" style="width:100%;justify-content:center">Send crew request</button>
   </form>
+</div></section>
+
+<!-- RECENT SHOWS -->
+<section id="work"><div class="wrap">
+  <div class="sec-head"><span class="tape">Recent shows</span>
+    <h2>Work off the truck</h2>
+    <p>MDH crews on live shows. These tiles are ready for your event photography — the two marked "placeholder" are waiting on your photos.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px">
+    <img src="assets/mdh-av.jpeg" alt="MDH crew at a lighting console" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:2px solid var(--ink)">
+    <img src="assets/mdh-slider.png" alt="FOH engineer at a live show" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:2px solid var(--ink)">
+    <img src="assets/placeholder.svg" alt="Placeholder — add event photo" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:2px solid var(--ink)">
+    <img src="assets/placeholder.svg" alt="Placeholder — add event photo" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:2px solid var(--ink)">
+  </div>
 </div></section>
 
 <!-- FOOTER -->
