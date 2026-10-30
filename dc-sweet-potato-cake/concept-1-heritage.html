@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DC Sweet Potato Cake — We Bake. We Love. We Inspire.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --plum: #5A1E3C; --plum-dk: #3E1329; --blush: #E8B4C4;
+    --cream: #FBF6EF; --sand: #F1E6D6; --ink: #2A1B22; --muted: #7A6670;
+    --potato: #D9792B;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.7; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; line-height: 1.15; }
+  .eyebrow { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--potato); font-weight: 600; margin-bottom: 1rem; }
+
+  /* NAV */
+  .announce { background: var(--plum); color: var(--cream); text-align: center; font-size: 0.8rem; padding: 0.55rem 1rem; letter-spacing: 0.04em; }
+  nav { background: var(--cream); border-bottom: 1px solid var(--sand); position: sticky; top: 0; z-index: 50; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+  .brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+  .brand img { width: 58px; height: 58px; }
+  .brand span { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--plum); }
+  .links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .links a { text-decoration: none; font-size: 0.9rem; color: var(--ink); }
+  .links a:hover { color: var(--plum); }
+  .links a.btn-plum { color: var(--cream); }
+  .btn { display: inline-block; text-decoration: none; padding: 0.85rem 1.8rem; font-weight: 600; font-size: 0.9rem; border-radius: 999px; transition: all 0.2s; }
+  .btn-plum { background: var(--plum); color: var(--cream); }
+  .btn-plum:hover { background: var(--plum-dk); }
+  .btn-line { border: 1.5px solid var(--plum); color: var(--plum); }
+  .btn-line:hover { background: var(--plum); color: var(--cream); }
+
+  /* HERO */
+  .hero { padding: 5rem 0 6rem; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: center; }
+  .hero h1 { font-size: 4rem; color: var(--plum); margin-bottom: 1.5rem; }
+  .hero h1 em { font-style: italic; color: var(--potato); font-weight: 500; }
+  .hero p { font-size: 1.1rem; color: var(--muted); max-width: 470px; margin-bottom: 2.2rem; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .hero-img { position: relative; }
+  .hero-img img { border-radius: 220px 220px 12px 12px; aspect-ratio: 4/5; object-fit: cover; width: 100%; }
+  .hero-badge { position: absolute; left: -2rem; bottom: 2.5rem; background: white; padding: 1.1rem 1.4rem; border-radius: 14px; box-shadow: 0 12px 40px rgba(90,30,60,0.15); }
+  .hero-badge strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--plum); }
+  .hero-badge span { font-size: 0.8rem; color: var(--muted); }
+
+  /* PARTNERS */
+  .partners { background: var(--sand); padding: 2rem 0; text-align: center; }
+  .partners p { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.9rem; }
+  .partner-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 3rem; font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--plum); opacity: 0.8; }
+
+  /* STORY */
+  .story { padding: 7rem 0; }
+  .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .story-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .story-imgs img { border-radius: 10px; object-fit: cover; height: 100%; }
+  .story-imgs img:first-child { grid-row: span 2; aspect-ratio: 3/4; }
+  .story h2 { font-size: 2.6rem; color: var(--plum); margin-bottom: 1.5rem; }
+  .story p { color: var(--muted); margin-bottom: 1.2rem; }
+  .sig { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--plum); margin-top: 1.5rem; }
+
+  /* MENU */
+  .menu { background: white; padding: 7rem 0; }
+  .section-head { text-align: center; max-width: 620px; margin: 0 auto 4rem; }
+  .section-head h2 { font-size: 2.6rem; color: var(--plum); margin-bottom: 1rem; }
+  .section-head p { color: var(--muted); }
+  .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  .item img { aspect-ratio: 1; object-fit: cover; border-radius: 12px; margin-bottom: 1.1rem; transition: transform 0.3s; }
+  .item:hover img { transform: translateY(-4px); }
+  .item h3 { font-size: 1.15rem; color: var(--ink); margin-bottom: 0.3rem; }
+  .item .desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.6rem; }
+  .item .price { font-weight: 600; color: var(--plum); font-size: 0.95rem; }
+  .menu-cta { text-align: center; margin-top: 3.5rem; }
+
+  /* PROCESS */
+  .process { padding: 7rem 0; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .step { background: white; border: 1px solid var(--sand); border-radius: 14px; padding: 2.4rem 2rem; }
+  .step-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--blush); line-height: 1; margin-bottom: 1rem; }
+  .step h3 { font-size: 1.3rem; color: var(--plum); margin-bottom: 0.6rem; }
+  .step p { font-size: 0.92rem; color: var(--muted); }
+
+  /* WHOLESALE */
+  .wholesale { background: var(--plum); color: var(--cream); }
+  .ws-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .ws-grid img { width: 100%; height: 100%; object-fit: cover; min-height: 480px; }
+  .ws-copy { padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+  .ws-copy .eyebrow { color: var(--blush); }
+  .ws-copy h2 { font-size: 2.5rem; margin-bottom: 1.3rem; }
+  .ws-copy p { opacity: 0.8; margin-bottom: 1.6rem; }
+  .ws-list { list-style: none; margin-bottom: 2rem; }
+  .ws-list li { padding: 0.45rem 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-size: 0.95rem; }
+  .ws-list li::before { content: '✦'; color: var(--blush); margin-right: 0.7rem; }
+  .btn-cream { background: var(--cream); color: var(--plum); align-self: flex-start; }
+
+  /* VISIT */
+  .visit { padding: 7rem 0; }
+  .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .visit h2 { font-size: 2.4rem; color: var(--plum); margin-bottom: 1.5rem; }
+  .info-row { display: flex; gap: 1rem; margin-bottom: 1.4rem; }
+  .info-row strong { display: block; color: var(--plum); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .info-row span { color: var(--muted); }
+  form { background: white; padding: 2.5rem; border-radius: 14px; border: 1px solid var(--sand); }
+  form h3 { color: var(--plum); font-size: 1.5rem; margin-bottom: 1.4rem; }
+  input, select, textarea { width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--sand); border-radius: 8px; font-family: inherit; font-size: 0.92rem; margin-bottom: 0.9rem; background: var(--cream); }
+  textarea { min-height: 110px; resize: vertical; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+
+  footer { background: var(--plum-dk); color: rgba(251,246,239,0.7); padding: 3.5rem 0 2rem; font-size: 0.88rem; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+  footer h4 { color: var(--cream); font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.9rem; }
+  footer a { display: block; text-decoration: none; margin-bottom: 0.4rem; }
+  footer a:hover { color: var(--cream); }
+  .copy { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; font-size: 0.78rem; }
+
+  @media (max-width: 900px) {
+    .links li:not(:last-child) { display: none; }
+    .hero-grid, .story-grid, .ws-grid, .visit-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .hero h1 { font-size: 2.8rem; }
+    .hero-badge { left: 1rem; }
+    .menu-grid { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .ws-copy { padding: 3.5rem 2rem; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">Fresh baked to order · Order by 1:00pm for next-day pickup · Nationwide shipping Mon–Wed</div>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#" class="brand"><img src="images/logo.png" alt="DC Sweet Potato Cake logo"><span>DC Sweet Potato Cake</span></a>
+    <ul class="links">
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#order">How to Order</a></li>
+      <li><a href="#wholesale">Wholesale</a></li>
+      <li><a href="#visit">Visit</a></li>
+      <li><a href="#menu" class="btn btn-plum">Order Now</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Hyattsville, MD · Serving the DMV</div>
+      <h1>The cake <em>to live for.</em></h1>
+      <p>Fresh smashed sweet potatoes, a family recipe, and a pecan cream cheese frosting people drive across town for. It's simple: we bake, we love, we inspire.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-plum">Shop Our Cakes</a>
+        <a href="#wholesale" class="btn btn-line">Wholesale Inquiries</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="images/signature-cake.jpg" alt="Original DC Sweet Potato Cake with a slice cut">
+      <div class="hero-badge"><strong>Original 10″ Round</strong><span>Serves 12–20 · from $49</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="partners">
+  <p>As served at</p>
+  <div class="partner-row"><span>Starbucks</span><span>Wegmans</span><span>Safeway</span><span>Compass Coffee</span><span>Ben's Chili Bowl</span></div>
+</div>
+
+<section class="story" id="story">
+  <div class="wrap story-grid">
+    <div class="story-imgs">
+      <img src="images/spread.jpg" alt="Sweet potato cakes and cupcakes on a table outdoors">
+      <img src="images/cupcakes.jpg" alt="Sweet potato cupcakes">
+      <img src="images/loaf.jpg" alt="Sliced sweet potato loaf">
+    </div>
+    <div>
+      <div class="eyebrow">Our Story</div>
+      <h2>Fresh out of the oven, since day one.</h2>
+      <p>The beauty of baking lies in the cracking of the eggs, the melting of the butter, the blending of the cinnamons, nutmegs and spices — and the aroma that fills the air as a fresh cake emerges.</p>
+      <p>DC Sweet Potato Cake began with one recipe and grew into the region's only dedicated sweet potato bakery. We bake with orange, white and purple sweet potatoes, and our cakes are now on the shelves at grocers and coffee shops across Maryland, DC and Virginia.</p>
+      <p>Today we're building our bakery café in the Gateway Arts District in Hyattsville, a place to grab a slice, a sandwich, and a moment.</p>
+      <div class="sig">— April Richardson, Founder</div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The Menu</div>
+      <h2>Baked with sweet potatoes, made with love.</h2>
+      <p>Whole cakes, cupcakes, loaves and personals. Order online for pickup or shipping.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="item"><img src="images/signature-cake.jpg" alt=""><h3>Original Sweet Potato Cake</h3><p class="desc">10″ round with pecan cream cheese frosting</p><div class="price">$49</div></div>
+      <div class="item"><img src="images/red-velvet-top.jpg" alt=""><h3>Red Velvet Sweet Potato</h3><p class="desc">Cupcakes, 6 or 12 pack</p><div class="price">from $15</div></div>
+      <div class="item"><img src="images/chocolate-cake.jpg" alt=""><h3>Chocolate Sweet Potato Cake</h3><p class="desc">10″ round, rich and fudgy</p><div class="price">$49</div></div>
+      <div class="item"><img src="images/loaf.jpg" alt=""><h3>Sweet Potato Loaf</h3><p class="desc">8″ loaf, perfect for gifting</p><div class="price">$18</div></div>
+      <div class="item"><img src="images/cupcakes.jpg" alt=""><h3>Original Cupcakes</h3><p class="desc">12 pack, cream cheese frosted</p><div class="price">$30</div></div>
+      <div class="item"><img src="images/lemon-cake.jpg" alt=""><h3>Lemon Layer Cake</h3><p class="desc">10″ layered, bright and tangy</p><div class="price">$39</div></div>
+      <div class="item"><img src="images/parfait.jpg" alt=""><h3>Sweet Potato Parfait</h3><p class="desc">Layers of cake and cream</p><div class="price">$4</div></div>
+      <div class="item"><img src="images/spread.jpg" alt=""><h3>Sheet Cakes &amp; Towers</h3><p class="desc">Quarter, half and full sheets for events</p><div class="price">from $40</div></div>
+    </div>
+    <div class="menu-cta"><a href="#order" class="btn btn-plum">See the Full Menu</a></div>
+  </div>
+</section>
+
+<section class="process" id="order">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How to Order</div>
+      <h2>Three easy steps to your cake.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3>Choose your bake</h3><p>Pick from whole cakes, cupcakes, loaves, personals or custom event cakes.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Pick a date</h3><p>Orders placed by 1:00pm are ready the next day by 1:00pm. Large and custom orders need a little more time.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Pick up or ship</h3><p>Collect in Hyattsville or have it shipped. We ship Monday through Wednesday so it arrives fresh.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="wholesale" id="wholesale">
+  <div class="ws-grid">
+    <img src="images/starbucks.jpg" alt="DC Sweet Potato Cake slice served with coffee">
+    <div class="ws-copy">
+      <div class="eyebrow">Wholesale &amp; Partnerships</div>
+      <h2>Bring the cake to your shelves.</h2>
+      <p>We supply grocers, coffee shops, restaurants and corporate caterers across the DMV with sweet potato baked goods, packaged and labeled for retail.</p>
+      <ul class="ws-list">
+        <li>Individually wrapped personals &amp; slices</li>
+        <li>Whole cakes, loaves &amp; cupcake trays</li>
+        <li>Retail-ready labels with full nutritionals</li>
+        <li>Certified minority-owned business</li>
+      </ul>
+      <a href="#visit" class="btn btn-cream">Request a Wholesale Kit</a>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap visit-grid">
+    <div>
+      <div class="eyebrow">Visit &amp; Contact</div>
+      <h2>Come say hello.</h2>
+      <div class="info-row"><div><strong>Bakery</strong><span>4806 Rhode Island Ave, Floor 2<br>Hyattsville, MD 20781</span></div></div>
+      <div class="info-row"><div><strong>Call</strong><span>(301) 577-7115</span></div></div>
+      <div class="info-row"><div><strong>Email</strong><span>info@dcsweetpotatocake.com</span></div></div>
+      <div class="info-row"><div><strong>Follow</strong><span>@dcsweetpotatocake on Instagram · @DCSweetPotato on X</span></div></div>
+    </div>
+    <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='Thanks, we\'ll be in touch!';">
+      <h3>Ask us anything</h3>
+      <div class="two"><input placeholder="Name"><input placeholder="Email"></div>
+      <select><option>I'm interested in…</option><option>Placing an order</option><option>Custom / event cake</option><option>Wholesale</option><option>Something else</option></select>
+      <textarea placeholder="Tell us about your order or event"></textarea>
+      <button class="btn btn-plum" style="border:none;cursor:pointer;">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><h4>DC Sweet Potato Cake</h4><p>It's simple: we bake, we love, we inspire. Sweet potato baked goods from Hyattsville, MD.</p></div>
+      <div><h4>Shop</h4><a href="#menu">Cakes</a><a href="#menu">Cupcakes</a><a href="#menu">Loaves &amp; Personals</a></div>
+      <div><h4>Company</h4><a href="#story">Our Story</a><a href="#wholesale">Wholesale</a><a href="#visit">Contact</a></div>
+      <div><h4>Follow</h4><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">X / Twitter</a></div>
+    </div>
+    <div class="copy">© 2026 DC Sweet Potato Cake · Food Opportunity LLC</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DC Sweet Potato Bakery &amp; Café — Hyattsville Arts District</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1C1714; --stone: #F4F0EA; --white: #FFFFFF; --muted: #776D66;
+    --clay: #B5562A; --plum: #4E1C36; --line: #E2DBD2;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Manrope', sans-serif; background: var(--stone); color: var(--ink); line-height: 1.7; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; }
+  h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; }
+  .kicker { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--clay); margin-bottom: 1.2rem; display: block; }
+  .link-arrow { color: var(--ink); text-decoration: none; font-weight: 600; font-size: 0.9rem; border-bottom: 1.5px solid var(--ink); padding-bottom: 2px; }
+  .link-arrow:hover { color: var(--clay); border-color: var(--clay); }
+
+  header { position: absolute; top: 0; left: 0; right: 0; z-index: 10; color: white; }
+  .head-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 96px; }
+  .head-inner nav { display: flex; gap: 2rem; align-items: center; }
+  .head-inner nav a { color: white; text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em; }
+  .head-inner nav:last-child { justify-content: flex-end; }
+  .center-logo { background: white; border-radius: 50%; padding: 6px; width: 78px; height: 78px; }
+  .order-pill { border: 1px solid rgba(255,255,255,0.6); padding: 0.55rem 1.2rem; border-radius: 99px; }
+
+  .hero { height: 100vh; min-height: 640px; position: relative; display: flex; align-items: flex-end; color: white; }
+  .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,12,10,0.78) 0%, rgba(20,12,10,0.2) 55%, rgba(20,12,10,0.55) 100%); }
+  .hero-content { position: relative; z-index: 1; padding-bottom: 5rem; display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: end; width: 100%; }
+  .hero h1 { font-size: 5.2rem; }
+  .hero h1 i { color: #F3B48C; }
+  .hero-side p { opacity: 0.85; margin-bottom: 1.5rem; }
+  .hero-side .link-arrow { color: white; border-color: white; }
+
+  .intro { padding: 8rem 0; text-align: center; }
+  .intro h2 { font-size: 2.6rem; max-width: 900px; margin: 0 auto; }
+  .intro h2 em { color: var(--clay); }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; background: white; }
+  .split img { width: 100%; height: 100%; object-fit: cover; min-height: 620px; }
+  .split-copy { padding: 6rem 5rem; display: flex; flex-direction: column; justify-content: center; }
+  .split-copy h2 { font-size: 3rem; margin-bottom: 1.5rem; }
+  .split-copy p { color: var(--muted); margin-bottom: 1.2rem; max-width: 470px; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2rem 0 2.5rem; border-top: 1px solid var(--line); padding-top: 1.8rem; }
+  .facts strong { display: block; font-family: 'Fraunces'; font-size: 1.8rem; font-weight: 400; color: var(--plum); }
+  .facts span { font-size: 0.8rem; color: var(--muted); }
+
+  .menu { padding: 8rem 0; }
+  .menu-head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 3.5rem; gap: 2rem; flex-wrap: wrap; }
+  .menu-head h2 { font-size: 3.2rem; }
+  .menu-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; }
+  .menu-photo { position: sticky; top: 2rem; align-self: start; }
+  .menu-photo img { aspect-ratio: 4/5; object-fit: cover; width: 100%; transition: opacity 0.25s; }
+  .menu-cat { margin-bottom: 3rem; }
+  .menu-cat h3 { font-size: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--ink); margin-bottom: 0.5rem; }
+  .row { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); cursor: default; }
+  .row:hover .row-name { color: var(--clay); }
+  .row-name { font-weight: 600; transition: color 0.15s; }
+  .row-desc { font-size: 0.85rem; color: var(--muted); }
+  .row-price { font-family: 'Fraunces'; font-size: 1.15rem; white-space: nowrap; }
+
+  .ws { background: var(--plum); color: var(--stone); padding: 8rem 0; }
+  .ws-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .ws .kicker { color: #F3B48C; }
+  .ws h2 { font-size: 3.2rem; margin-bottom: 1.5rem; }
+  .ws p { opacity: 0.75; margin-bottom: 2rem; }
+  .ws .link-arrow { color: var(--stone); border-color: var(--stone); }
+  .stockists { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(255,255,255,0.2); }
+  .stockists div { padding: 1.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.2); font-family: 'Fraunces'; font-size: 1.5rem; }
+  .stockists div:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.2); padding-right: 1rem; }
+  .stockists div:nth-child(even) { padding-left: 2rem; }
+
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .gallery img { aspect-ratio: 1; object-fit: cover; width: 100%; }
+
+  .visit { padding: 8rem 0; }
+  .visit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+  .visit h2 { font-size: 3rem; grid-column: 1 / -1; margin-bottom: 1rem; }
+  .visit h3 { font-family: 'Manrope'; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; }
+  .visit p { color: var(--muted); }
+
+  footer { border-top: 1px solid var(--line); padding: 2.5rem 0; font-size: 0.82rem; color: var(--muted); }
+  .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .foot a { color: var(--muted); text-decoration: none; margin-left: 1.5rem; }
+
+  @media (max-width: 960px) {
+    .head-inner { grid-template-columns: auto 1fr; }
+    .head-inner nav:first-child { display: none; }
+    .head-inner nav:last-child a:not(.order-pill) { display: none; }
+    .hero h1 { font-size: 3.2rem; }
+    .hero-content, .split, .menu-layout, .ws-grid, .visit-grid { grid-template-columns: 1fr; }
+    .split img { min-height: 360px; }
+    .split-copy { padding: 4rem 2rem; }
+    .menu-photo { position: static; }
+    .gallery { grid-template-columns: 1fr 1fr; }
+    .intro h2 { font-size: 1.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head-inner">
+    <nav><a href="#cafe">The Café</a><a href="#menu">Menu</a><a href="#wholesale">Wholesale</a></nav>
+    <img src="images/logo.png" class="center-logo" alt="DC Sweet Potato Cake">
+    <nav><a href="#visit">Visit</a><a href="#menu" class="order-pill">Order Online</a></nav>
+  </div>
+</header>
+
+<section class="hero">
+  <img src="images/spread.jpg" alt="Sweet potato cakes and cupcakes served outdoors">
+  <div class="wrap hero-content">
+    <h1>A bakery built on the<br><i>humble sweet potato.</i></h1>
+    <div class="hero-side">
+      <p>Cakes, cupcakes and loaves baked with orange, white and purple sweet potatoes, now coming to the Gateway Arts District in Hyattsville.</p>
+      <a href="#menu" class="link-arrow">Explore the menu →</a>
+    </div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="wrap">
+    <span class="kicker">We Bake · We Love · We Inspire</span>
+    <h2>The cracking of the eggs, the melting of the butter, the blending of <em>cinnamon and nutmeg</em> — and the aroma that fills the air as a fresh cake emerges.</h2>
+  </div>
+</section>
+
+<section class="split" id="cafe">
+  <img src="images/starbucks.jpg" alt="A slice of sweet potato cake with coffee">
+  <div class="split-copy">
+    <span class="kicker">The Bakery Café</span>
+    <h2>A slice, a sandwich, and a glass of wine.</h2>
+    <p>Our flagship bakery café in Hyattsville's Arts District is where everything comes together: fresh-from-the-oven cakes, gourmet sandwiches, coffee and wine in a space made for lingering.</p>
+    <p>One mile from DC, one mile from the University of Maryland, and steps from the neighborhood's best restaurants.</p>
+    <div class="facts">
+      <div><strong>1 mi</strong><span>from Washington, DC</span></div>
+      <div><strong>3</strong><span>sweet potato varieties</span></div>
+      <div><strong>24h</strong><span>order turnaround</span></div>
+    </div>
+    <a href="#visit" class="link-arrow">Plan your visit →</a>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="menu-head">
+      <div><span class="kicker">Menu</span><h2>From the oven</h2></div>
+      <a href="#visit" class="link-arrow">Order for pickup or shipping →</a>
+    </div>
+    <div class="menu-layout">
+      <div class="menu-photo"><img id="menuImg" src="images/signature-cake.jpg" alt="Menu item"></div>
+      <div>
+        <div class="menu-cat">
+          <h3>Whole Cakes</h3>
+          <div class="row" data-img="signature-cake"><div><div class="row-name">Original DC Sweet Potato Cake</div><div class="row-desc">10″ round, pecan cream cheese frosting, serves 12–20</div></div><div class="row-price">$49</div></div>
+          <div class="row" data-img="chocolate-cake"><div><div class="row-name">Chocolate Sweet Potato Cake</div><div class="row-desc">10″ round</div></div><div class="row-price">$49</div></div>
+          <div class="row" data-img="red-velvet-top"><div><div class="row-name">Red Velvet Sweet Potato Cake</div><div class="row-desc">10″ layered</div></div><div class="row-price">$52</div></div>
+          <div class="row" data-img="lemon-cake"><div><div class="row-name">Lemon Layer Cake</div><div class="row-desc">10″ layered, lemon buttercream</div></div><div class="row-price">$39</div></div>
+        </div>
+        <div class="menu-cat">
+          <h3>Cupcakes</h3>
+          <div class="row" data-img="cupcakes"><div><div class="row-name">Original Sweet Potato</div><div class="row-desc">6 pack / 12 pack</div></div><div class="row-price">$15 / $30</div></div>
+          <div class="row" data-img="red-velvet-cupcake"><div><div class="row-name">Red Velvet Sweet Potato</div><div class="row-desc">6 pack / 12 pack</div></div><div class="row-price">$15 / $30</div></div>
+        </div>
+        <div class="menu-cat">
+          <h3>Loaves, Personals &amp; More</h3>
+          <div class="row" data-img="loaf"><div><div class="row-name">Sweet Potato Loaf</div><div class="row-desc">8″ frosted loaf</div></div><div class="row-price">$18</div></div>
+          <div class="row" data-img="parfait"><div><div class="row-name">Sweet Potato Cake Parfait</div><div class="row-desc">Cake, cream &amp; toasted pecans</div></div><div class="row-price">$4</div></div>
+          <div class="row" data-img="spread"><div><div class="row-name">Sheet Cakes</div><div class="row-desc">Quarter, half or full sheet for events</div></div><div class="row-price">$40–120</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ws" id="wholesale">
+  <div class="wrap ws-grid">
+    <div>
+      <span class="kicker">Wholesale</span>
+      <h2>The region's only sweet potato bakery, on your shelf.</h2>
+      <p>We manufacture and distribute retail-ready sweet potato baked goods for grocers, coffee shops, restaurants and caterers across Maryland, DC and Virginia. Certified minority-owned business.</p>
+      <a href="#visit" class="link-arrow">Start a wholesale account →</a>
+    </div>
+    <div class="stockists">
+      <div>Starbucks</div><div>Wegmans</div>
+      <div>Safeway</div><div>Compass Coffee</div>
+      <div>Ben's Chili Bowl</div><div>&amp; local cafés</div>
+    </div>
+  </div>
+</section>
+
+<div class="gallery">
+  <img src="images/spread.jpg" alt=""><img src="images/red-velvet-top.jpg" alt=""><img src="images/loaf.jpg" alt=""><img src="images/cupcakes.jpg" alt="">
+</div>
+
+<section class="visit" id="visit">
+  <div class="wrap visit-grid">
+    <h2>Visit &amp; contact</h2>
+    <div><h3>Bakery</h3><p>4806 Rhode Island Ave, Floor 2<br>Hyattsville, MD 20781</p></div>
+    <div><h3>Orders</h3><p>Order by 1:00pm for next-day pickup.<br>We ship Monday–Wednesday.</p></div>
+    <div><h3>Say Hello</h3><p>(301) 577-7115<br>info@dcsweetpotatocake.com<br>@dcsweetpotatocake</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 DC Sweet Potato Bakery &amp; Café</span>
+    <span><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">X</a></span>
+  </div>
+</footer>
+
+<script>
+  const img = document.getElementById('menuImg');
+  document.querySelectorAll('.row').forEach(r => r.addEventListener('mouseenter', () => {
+    const src = 'images/' + r.dataset.img + '.jpg';
+    if (img.getAttribute('src') === src) return;
+    img.style.opacity = 0;
+    setTimeout(() => { img.src = src; img.style.opacity = 1; }, 180);
+  }));
+</script>
+</body>
+</html>
