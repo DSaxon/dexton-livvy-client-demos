@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>April Richardson — Powerhouse. Attorney. Builder.</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Archivo+Narrow:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --black: #0D0C0C; --char: #181616; --char-2: #221F1F; --gold: #D9A44A; --pink: #F2A7B8; --white: #F6F2EE; --muted: #9A928C; --line: #2E2A28; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Archivo', sans-serif; background: var(--black); color: var(--white); line-height: 1.6; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 2rem; }
+  h1, h2, h3 { font-weight: 900; line-height: 0.92; letter-spacing: -0.03em; text-transform: uppercase; }
+  .tag { font-family: 'Archivo Narrow'; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .btn { display: inline-flex; gap: 0.6rem; align-items: center; text-decoration: none; padding: 1.05rem 1.9rem; font-weight: 700; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.06em; transition: all 0.2s; border: none; cursor: pointer; font-family: inherit; }
+  .btn-gold { background: var(--gold); color: var(--black); }
+  .btn-gold:hover { background: var(--white); }
+  .btn-out { border: 1.5px solid var(--white); color: var(--white); }
+  .btn-out:hover { background: var(--white); color: var(--black); }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(13,12,12,0.82); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+  .mark { font-weight: 900; font-size: 1.3rem; letter-spacing: -0.02em; color: white; text-decoration: none; }
+  .links { display: flex; gap: 2rem; }
+  .links a { color: white; text-decoration: none; font-family: 'Archivo Narrow'; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.82rem; font-weight: 700; }
+
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1.25fr 1fr; }
+  .hero-left { padding: 9rem 3rem 4rem max(2rem, calc((100vw - 1320px) / 2 + 2rem)); display: flex; flex-direction: column; justify-content: space-between; }
+  .hero h1 { font-size: clamp(4rem, 9vw, 9.5rem); margin: 1.5rem 0; }
+  .hero h1 .o { -webkit-text-stroke: 2px var(--white); color: transparent; }
+  .hero h1 .g { color: var(--gold); }
+  .hero-sub { font-size: 1.15rem; color: var(--muted); max-width: 520px; margin-bottom: 2.4rem; }
+  .hero-sub strong { color: var(--white); font-weight: 500; }
+  .hero-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .hero-right { position: relative; overflow: hidden; }
+  .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 20%; filter: grayscale(0.15) contrast(1.05); }
+  .hero-right::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--black) 0%, transparent 25%); }
+  .hero-meta { display: flex; gap: 2.5rem; margin-top: 3rem; border-top: 1px solid var(--line); padding-top: 1.5rem; flex-wrap: wrap; }
+  .hero-meta div { font-size: 0.82rem; color: var(--muted); }
+  .hero-meta strong { display: block; color: var(--white); font-size: 1.6rem; font-weight: 900; }
+
+  .marquee { background: var(--gold); color: var(--black); overflow: hidden; white-space: nowrap; padding: 1.1rem 0; }
+  .marquee-track { display: inline-block; animation: m 28s linear infinite; font-weight: 900; font-size: 1.6rem; text-transform: uppercase; letter-spacing: -0.01em; }
+  .marquee-track span { margin: 0 1.6rem; }
+  @keyframes m { to { transform: translateX(-50%); } }
+
+  /* ROLES TABS */
+  .roles { padding: 8rem 0; }
+  .roles-head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; flex-wrap: wrap; }
+  .roles h2 { font-size: 4.5rem; }
+  .tabs { display: flex; gap: 0; border: 1px solid var(--line); }
+  .tab { background: none; border: none; color: var(--muted); padding: 1rem 1.4rem; font-family: 'Archivo Narrow'; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.82rem; cursor: pointer; border-right: 1px solid var(--line); }
+  .tab:last-child { border-right: none; }
+  .tab.active { background: var(--white); color: var(--black); }
+  .panel { display: none; grid-template-columns: 1fr 1fr; gap: 0; background: var(--char); border: 1px solid var(--line); }
+  .panel.active { display: grid; }
+  .panel img { width: 100%; height: 100%; object-fit: cover; min-height: 460px; }
+  .panel-copy { padding: 4rem; display: flex; flex-direction: column; justify-content: center; }
+  .panel-copy h3 { font-size: 3rem; margin: 1rem 0 1.4rem; }
+  .panel-copy p { color: var(--muted); margin-bottom: 1.2rem; }
+  .panel-copy ul { list-style: none; margin: 0.5rem 0 2rem; }
+  .panel-copy li { padding: 0.65rem 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+  .panel-copy li::before { content: '→'; color: var(--gold); margin-right: 0.8rem; }
+  .panel-copy .btn { align-self: flex-start; }
+
+  /* NUMBERS */
+  .numbers { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .num-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .num { padding: 3.5rem 2rem; border-right: 1px solid var(--line); }
+  .num:last-child { border-right: none; }
+  .num strong { display: block; font-size: 4.8rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1; color: var(--white); }
+  .num strong em { font-style: normal; color: var(--gold); }
+  .num span { color: var(--muted); font-size: 0.9rem; }
+
+  /* WORK */
+  .work { padding: 8rem 0; }
+  .work h2 { font-size: 4.5rem; margin-bottom: 3rem; }
+  .work-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-template-rows: 300px 300px; gap: 1rem; }
+  .card { position: relative; overflow: hidden; background: var(--char-2); text-decoration: none; color: var(--white); }
+  .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+  .card:hover img { transform: scale(1.05); }
+  .card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,12,12,0.92), rgba(13,12,12,0.05) 60%); }
+  .card-body { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.8rem; z-index: 1; }
+  .card-body h3 { font-size: 1.9rem; margin: 0.5rem 0 0.4rem; }
+  .card-body p { color: rgba(246,242,238,0.75); font-size: 0.88rem; }
+  .c-big { grid-row: span 2; }
+  .c-big h3 { font-size: 3rem; }
+  .card.solid { background: var(--pink); color: var(--black); }
+  .card.solid::after { display: none; }
+  .card.solid .tag { color: var(--black); }
+  .card.solid p { color: rgba(13,12,12,0.7); }
+
+  .logos { padding: 4rem 0; text-align: center; }
+  .logo-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem 3.5rem; margin-top: 1.5rem; font-weight: 900; font-size: 2rem; text-transform: uppercase; letter-spacing: -0.02em; color: #5A5350; }
+  .logo-row span:hover { color: var(--white); }
+
+  .cta { background: var(--white); color: var(--black); padding: 8rem 0; }
+  .cta-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 4rem; align-items: end; }
+  .cta h2 { font-size: clamp(3.5rem, 8vw, 8rem); }
+  .cta h2 span { color: var(--gold); }
+  .cta-info p { margin-bottom: 1.5rem; color: #4A4542; }
+  .cta-info a.line { display: block; font-size: 1.4rem; font-weight: 700; color: var(--black); text-decoration: none; padding: 0.9rem 0; border-bottom: 2px solid var(--black); }
+  .cta-info a.line:hover { color: var(--gold); border-color: var(--gold); }
+  footer { padding: 2rem 0; font-size: 0.8rem; color: var(--muted); }
+  .foot { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+  @media (max-width: 960px) {
+    .links a:not(:last-child) { display: none; }
+    .hero, .panel.active, .cta-grid { grid-template-columns: 1fr; }
+    .hero-left { padding: 7rem 1.5rem 3rem; }
+    .hero-right { height: 480px; }
+    .roles h2, .work h2 { font-size: 3rem; }
+    .panel-copy { padding: 2.5rem 1.5rem; }
+    .panel img { min-height: 320px; }
+    .num-grid { grid-template-columns: 1fr 1fr; }
+    .num { border-bottom: 1px solid var(--line); }
+    .num strong { font-size: 3.4rem; }
+    .work-grid { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-rows: 300px; }
+    .c-big { grid-row: auto; }
+    .tabs { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap nav-inner"><a href="#" class="mark">APRIL RICHARDSON</a><div class="links"><a href="#roles">Roles</a><a href="#work">Work</a><a href="#contact">Contact</a></div></div></nav>
+
+<header class="hero">
+  <div class="hero-left">
+    <div>
+      <span class="tag">April N. Richardson, Esq.</span>
+      <h1>Attorney.<br><span class="o">Founder.</span><br><span class="g">Builder.</span></h1>
+      <p class="hero-sub"><strong>Two decades in law. Fifteen years in food. Two food halls on the map.</strong> I turn ideas into companies, companies into community anchors, and empty buildings into places people gather.</p>
+      <div class="hero-actions"><a href="#contact" class="btn btn-gold">Work with April →</a><a href="#roles" class="btn btn-out">See what I do</a></div>
+    </div>
+    <div class="hero-meta">
+      <div><strong>5</strong>Companies built</div>
+      <div><strong>2</strong>Food halls</div>
+      <div><strong>DMV</strong>Based in DC · MD · VA</div>
+    </div>
+  </div>
+  <div class="hero-right"><img src="images/april-site.jpg" alt="April Richardson on a food hall construction site"></div>
+</header>
+
+<div class="marquee"><div class="marquee-track">
+  <span>Business Law ✦</span><span>Real Estate ✦</span><span>Food Halls ✦</span><span>DC Sweet Potato Cake ✦</span><span>Advisory ✦</span><span>Speaking ✦</span>
+  <span>Business Law ✦</span><span>Real Estate ✦</span><span>Food Halls ✦</span><span>DC Sweet Potato Cake ✦</span><span>Advisory ✦</span><span>Speaking ✦</span>
+</div></div>
+
+<section class="roles" id="roles">
+  <div class="wrap">
+    <div class="roles-head">
+      <div><span class="tag">The Many Parts</span><h2 style="margin-top:1rem">One woman.<br>Four lanes.</h2></div>
+      <div class="tabs">
+        <button class="tab active" data-p="law">Attorney</button>
+        <button class="tab" data-p="food">Entrepreneur</button>
+        <button class="tab" data-p="dev">Developer</button>
+        <button class="tab" data-p="speak">Advisor</button>
+      </div>
+    </div>
+
+    <div class="panel active" id="law">
+      <img src="images/headshot.jpg" alt="April Richardson headshot">
+      <div class="panel-copy">
+        <span class="tag">The Private Practice Law Group</span>
+        <h3>Counsel that's been in the room.</h3>
+        <p>A former white collar crimes investigator and prosecutor at the local and federal level who has trained the Secret Service and FBI. Today, a business and real estate attorney for hundreds of companies.</p>
+        <ul><li>Business formation &amp; structuring</li><li>Commercial real estate &amp; leasing</li><li>Contracts, partnerships &amp; risk</li></ul>
+        <a href="https://privatepracticelawgroup.com/" target="_blank" class="btn btn-gold">Visit the firm →</a>
+      </div>
+    </div>
+    <div class="panel" id="food">
+      <img src="images/april-dcsp.jpg" alt="April Richardson with DC Sweet Potato Cake">
+      <div class="panel-copy">
+        <span class="tag">DC Sweet Potato Cake · Food Opportunity</span>
+        <h3>The cake to live for.</h3>
+        <p>What started as one recipe became a manufacturing company with products on the shelves at Starbucks, Nordstrom, Wegmans, Safeway and QVC, plus retail bakeries in DC and Baltimore.</p>
+        <ul><li>DC Sweet Potato Cake</li><li>Baked in Baltimore</li><li>Food Opportunity manufacturing</li></ul>
+        <a href="https://www.dcsweetpotatocake.com/" target="_blank" class="btn btn-gold">Order a cake →</a>
+      </div>
+    </div>
+    <div class="panel" id="dev">
+      <img src="images/mill-on-north.jpg" alt="April Richardson at The Mill on North">
+      <div class="panel-copy">
+        <span class="tag">Culinary Partnerships</span>
+        <h3>Food halls for the people.</h3>
+        <p>Developing food halls that incubate minority-owned food businesses, from Savor in Prince George's County to the award-winning Mill on North in West Baltimore, with three more in development.</p>
+        <ul><li>Savor Food Hall, Brentwood MD</li><li>The Mill on North, Baltimore MD</li><li>3 new projects in development</li></ul>
+        <a href="https://culinarypartnerships.com/" target="_blank" class="btn btn-gold">See the projects →</a>
+      </div>
+    </div>
+    <div class="panel" id="speak">
+      <img src="images/portrait-studio.jpg" alt="April Richardson portrait">
+      <div class="panel-copy">
+        <span class="tag">Co-Lab Haus · Boards · Stages</span>
+        <h3>Advisor. Speaker. Board member.</h3>
+        <p>Strategic advisory for government, corporate and nonprofit partners, plus keynotes on entrepreneurship, white collar crime and building community wealth, always with clarity, compassion and humor.</p>
+        <ul><li>Strategic advisory &amp; project management</li><li>Keynotes &amp; guest lectures</li><li>Boards &amp; commissions</li></ul>
+        <a href="#contact" class="btn btn-gold">Book April →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="numbers">
+  <div class="wrap num-grid">
+    <div class="num"><strong>20<em>+</em></strong><span>Years practicing law</span></div>
+    <div class="num"><strong>15<em>+</em></strong><span>Years in the food business</span></div>
+    <div class="num"><strong><em>$</em>3.9M</strong><span>Mill on North development</span></div>
+    <div class="num"><strong>100<em>s</em></strong><span>Of companies advised</span></div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="wrap">
+    <span class="tag">Selected Work</span>
+    <h2 style="margin-top:1rem">Proof of build.</h2>
+    <div class="work-grid">
+      <a class="card c-big" href="#"><img src="images/mill-on-north.jpg" alt=""><div class="card-body"><span class="tag">2025 IEDC Excellence Award</span><h3>The Mill on North</h3><p>West Baltimore's first food hall: 7,800 sq. ft., six minority-owned vendors, 65 mixed-income homes.</p></div></a>
+      <a class="card" href="#"><img src="images/savor-food-hall.jpg" alt=""><div class="card-body"><span class="tag">Prince George's County</span><h3>Savor Food Hall</h3><p>The county's first food hall and incubator.</p></div></a>
+      <a class="card" href="#"><img src="images/spread.jpg" alt=""><div class="card-body"><span class="tag">Since 2013</span><h3>DC Sweet Potato Cake</h3><p>A DMV favorite, sold nationwide.</p></div></a>
+      <div class="card solid"><div class="card-body"><span class="tag">2010 · Maryland Daily Record</span><h3>Top 24 Leaders in Law</h3><p>Recognized among Maryland's leading legal minds.</p></div></div>
+      <a class="card" href="https://privatepracticelawgroup.com/" target="_blank"><img src="images/headshot.jpg" alt="" style="object-position:center 30%"><div class="card-body"><span class="tag">Law</span><h3>Private Practice Law Group</h3><p>Business &amp; real estate counsel.</p></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="logos">
+  <div class="wrap"><span class="tag">Products sold at</span><div class="logo-row"><span>Starbucks</span><span>Nordstrom</span><span>Wegmans</span><span>Safeway</span><span>QVC</span></div></div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap cta-grid">
+    <h2>Let's build <span>it.</span></h2>
+    <div class="cta-info">
+      <p>Legal counsel, a development partner, an advisor, or a speaker for your next event. Tell me what you're building.</p>
+      <a class="line" href="mailto:aprilnrichardson@gmail.com">aprilnrichardson@gmail.com ↗</a>
+      <a class="line" href="tel:2404175259">(240) 417-5259 ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap foot"><span>© 2026 April N. Richardson, Esq.</span><span>DC · MD · VA</span></div></footer>
+
+<script>
+  document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+    document.querySelectorAll('.tab, .panel').forEach(el => el.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.p).classList.add('active');
+  }));
+</script>
+</body>
+</html>

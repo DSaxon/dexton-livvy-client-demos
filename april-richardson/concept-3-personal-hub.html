@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Am April Richardson</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --blush: #FBEDEF; --blush-2: #F6DADF; --rose: #C2546E; --berry: #6E1F3A; --cream: #FFFAF6; --ink: #2A1C21; --muted: #806F75; --line: #F0D9DE; --sage: #E7EDE4; --butter: #FBF0D9; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.65; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 1.75rem; }
+  h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; line-height: 1.08; }
+  .pill { display: inline-flex; align-items: center; gap: 0.5rem; background: white; border: 1px solid var(--line); border-radius: 99px; padding: 0.4rem 1rem; font-size: 0.8rem; font-weight: 600; color: var(--berry); }
+  .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: #3CB371; box-shadow: 0 0 0 4px rgba(60,179,113,0.18); }
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; padding: 0.95rem 1.6rem; border-radius: 16px; font-weight: 600; font-size: 0.92rem; transition: transform 0.15s, box-shadow 0.15s; border: none; cursor: pointer; font-family: inherit; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(110,31,58,0.18); }
+  .btn-berry { background: var(--berry); color: white; }
+  .btn-white { background: white; color: var(--berry); border: 1px solid var(--line); }
+
+  nav { padding: 1.2rem 0; }
+  .nav-inner { display: flex; justify-content: space-between; align-items: center; background: white; border: 1px solid var(--line); border-radius: 20px; padding: 0.7rem 0.7rem 0.7rem 1.4rem; }
+  .logo { font-family: 'DM Serif Display'; font-size: 1.35rem; color: var(--berry); text-decoration: none; }
+  .logo i { color: var(--rose); }
+  .links { display: flex; gap: 1.6rem; align-items: center; }
+  .links a { text-decoration: none; color: var(--ink); font-size: 0.88rem; font-weight: 500; }
+  .links .btn { color: white; padding: 0.7rem 1.2rem; border-radius: 14px; }
+
+  .hero { padding: 3rem 0 5rem; }
+  .hero-card { background: var(--blush); border-radius: 36px; padding: 4rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; position: relative; overflow: hidden; }
+  .hero-card::before { content: ''; position: absolute; width: 520px; height: 520px; border-radius: 50%; background: var(--blush-2); right: -120px; top: -120px; }
+  .hero-copy { position: relative; z-index: 1; }
+  .hero h1 { font-size: 5rem; color: var(--berry); margin: 1.4rem 0 1.2rem; }
+  .hero h1 i { color: var(--rose); }
+  .hero p { font-size: 1.1rem; color: var(--muted); max-width: 500px; margin-bottom: 2rem; }
+  .hero-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+  .hero-photo { position: relative; z-index: 1; justify-self: center; }
+  .hero-photo img { width: 380px; height: 480px; object-fit: cover; border-radius: 200px 200px 28px 28px; border: 8px solid white; box-shadow: 0 30px 60px rgba(110,31,58,0.18); }
+  .float { position: absolute; background: white; border-radius: 16px; padding: 0.8rem 1.1rem; box-shadow: 0 12px 30px rgba(110,31,58,0.14); font-size: 0.82rem; font-weight: 600; display: flex; align-items: center; gap: 0.6rem; }
+  .float b { font-size: 1.3rem; }
+  .f1 { left: -40px; top: 60px; } .f2 { right: -30px; bottom: 90px; } .f3 { left: -20px; bottom: 20px; }
+
+  .section { padding: 5rem 0; }
+  .sec-head { text-align: center; max-width: 620px; margin: 0 auto 3rem; }
+  .sec-head h2 { font-size: 3.2rem; color: var(--berry); margin: 1rem 0 0.8rem; }
+  .sec-head p { color: var(--muted); }
+
+  /* BENTO */
+  .bento { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 210px; gap: 1rem; }
+  .b { border-radius: 28px; padding: 1.8rem; position: relative; overflow: hidden; text-decoration: none; color: var(--ink); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s; }
+  .b:hover { transform: translateY(-4px); }
+  .b h3 { font-size: 1.7rem; }
+  .b p { font-size: 0.88rem; color: var(--muted); }
+  .b .arrow { position: absolute; top: 1.4rem; right: 1.4rem; width: 40px; height: 40px; border-radius: 50%; background: white; display: grid; place-items: center; font-weight: 700; color: var(--berry); }
+  .b.photo { color: white; justify-content: flex-end; }
+  .b.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .b.photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(42,28,33,0.85), transparent 60%); }
+  .b.photo > div { position: relative; z-index: 1; }
+  .b.photo p { color: rgba(255,255,255,0.85); }
+  .b.photo .arrow { z-index: 2; }
+  .s3 { grid-column: span 3; } .s2 { grid-column: span 2; } .s4 { grid-column: span 4; } .tall { grid-row: span 2; }
+  .bg-blush { background: var(--blush); } .bg-sage { background: var(--sage); } .bg-butter { background: var(--butter); } .bg-berry { background: var(--berry); color: white; } .bg-berry p { color: rgba(255,255,255,0.75); }
+  .kicker { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rose); }
+  .b.photo .kicker, .bg-berry .kicker { color: #F6B8C6; }
+
+  /* WAYS */
+  .ways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .way { background: white; border: 1px solid var(--line); border-radius: 28px; padding: 2.2rem; display: flex; flex-direction: column; }
+  .way .icon { width: 56px; height: 56px; border-radius: 18px; background: var(--blush); display: grid; place-items: center; font-size: 1.6rem; margin-bottom: 1.4rem; }
+  .way h3 { font-size: 1.7rem; color: var(--berry); margin-bottom: 0.6rem; }
+  .way p { color: var(--muted); font-size: 0.93rem; flex: 1; margin-bottom: 1.4rem; }
+  .way a { color: var(--rose); font-weight: 700; text-decoration: none; font-size: 0.9rem; }
+
+  /* JOURNEY */
+  .journey { background: var(--berry); color: white; border-radius: 36px; padding: 4.5rem; }
+  .journey .sec-head h2 { color: white; }
+  .journey .sec-head p { color: rgba(255,255,255,0.7); }
+  .journey .kicker { color: #F6B8C6; }
+  .timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; position: relative; }
+  .timeline::before { content: ''; position: absolute; top: 18px; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.2); }
+  .t { position: relative; padding-top: 3rem; }
+  .t::before { content: ''; position: absolute; top: 10px; left: 0; width: 18px; height: 18px; border-radius: 50%; background: #F6B8C6; border: 4px solid var(--berry); }
+  .t strong { font-family: 'DM Serif Display'; font-size: 1.8rem; font-weight: 400; display: block; }
+  .t span { font-size: 0.88rem; color: rgba(255,255,255,0.75); }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  .contact h2 { font-size: 3.4rem; color: var(--berry); margin: 1rem 0; }
+  .contact p { color: var(--muted); margin-bottom: 1.8rem; }
+  .c-item { display: flex; gap: 1rem; align-items: center; padding: 1rem 1.2rem; background: white; border: 1px solid var(--line); border-radius: 18px; margin-bottom: 0.7rem; text-decoration: none; color: var(--ink); font-weight: 500; }
+  .c-item span { width: 40px; height: 40px; border-radius: 12px; background: var(--blush); display: grid; place-items: center; }
+  form { background: white; border: 1px solid var(--line); border-radius: 28px; padding: 2.2rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.2rem; }
+  .chip { border: 1px solid var(--line); background: var(--cream); border-radius: 99px; padding: 0.5rem 1rem; font-size: 0.85rem; cursor: pointer; font-family: inherit; }
+  .chip.on { background: var(--berry); color: white; border-color: var(--berry); }
+  input, textarea { width: 100%; border: 1px solid var(--line); background: var(--cream); border-radius: 14px; padding: 0.9rem 1rem; font-family: inherit; font-size: 0.92rem; margin-bottom: 0.8rem; }
+  textarea { min-height: 120px; resize: vertical; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+
+  footer { padding: 3rem 0; text-align: center; color: var(--muted); font-size: 0.85rem; }
+  .socials { display: flex; justify-content: center; gap: 0.6rem; margin-bottom: 1rem; }
+  .socials a { width: 44px; height: 44px; border-radius: 14px; background: white; border: 1px solid var(--line); display: grid; place-items: center; text-decoration: none; color: var(--berry); font-weight: 700; font-size: 0.8rem; }
+
+  @media (max-width: 960px) {
+    .links a:not(.btn) { display: none; }
+    .hero-card, .contact-grid { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; }
+    .contact-grid { padding: 0; }
+    .hero h1 { font-size: 3.4rem; }
+    .hero-photo img { width: 280px; height: 360px; }
+    .f1 { left: -10px; } .f2 { right: -10px; }
+    .bento { grid-template-columns: 1fr 1fr; }
+    .s3, .s2, .s4 { grid-column: span 2; } .tall { grid-row: span 1; }
+    .ways { grid-template-columns: 1fr; }
+    .journey { padding: 3rem 1.5rem; }
+    .timeline { grid-template-columns: 1fr; gap: 0; }
+    .timeline::before { left: 8px; right: auto; width: 2px; top: 0; bottom: 0; height: auto; }
+    .t { padding: 0 0 1.6rem 2.4rem; } .t::before { top: 6px; }
+    .sec-head h2, .contact h2 { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap"><div class="nav-inner">
+  <a href="#" class="logo">I Am <i>April</i></a>
+  <div class="links"><a href="#companies">Companies</a><a href="#work">Work With Me</a><a href="#journey">Journey</a><a href="#contact" class="btn btn-berry">Let's Connect</a></div>
+</div></div></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-card">
+      <div class="hero-copy">
+        <span class="pill"><span class="dot"></span>Taking new clients &amp; speaking dates</span>
+        <h1>Hi, I'm April. I <i>build</i> things.</h1>
+        <p>Attorney, food entrepreneur, food hall developer and mother. I help build communities, leaders, businesses and people, and this is where you'll find all of it in one place.</p>
+        <div class="hero-actions"><a href="#companies" class="btn btn-berry">Explore my world</a><a href="#contact" class="btn btn-white">Book a call</a></div>
+      </div>
+      <div class="hero-photo">
+        <img src="images/headshot.jpg" alt="April N. Richardson, Esq." style="object-position: 30% center">
+        <div class="float f1"><b>⚖️</b>20+ yrs in law</div>
+        <div class="float f2"><b>🍠</b>15+ yrs in food</div>
+        <div class="float f3"><b>🏆</b>2025 IEDC Award</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="companies">
+  <div class="wrap">
+    <div class="sec-head"><span class="kicker">My Companies</span><h2>Everything I'm building</h2><p>Tap any card to visit the company.</p></div>
+    <div class="bento">
+      <a class="b photo s3 tall" href="https://www.dcsweetpotatocake.com/" target="_blank"><img src="images/april-dcsp.jpg" alt=""><span class="arrow">↗</span><div><span class="kicker">Bakery</span><h3>DC Sweet Potato Cake</h3><p>The cake to live for, at Starbucks, Wegmans, Safeway, Nordstrom and QVC.</p></div></a>
+      <a class="b bg-blush s3" href="https://privatepracticelawgroup.com/" target="_blank"><span class="arrow">↗</span><span class="kicker">Law Firm</span><div><h3>The Private Practice Law Group</h3><p>Business &amp; real estate counsel for companies at every stage.</p></div></a>
+      <a class="b bg-sage s3" href="https://culinarypartnerships.com/" target="_blank"><span class="arrow">↗</span><span class="kicker">Food Hall Developer</span><div><h3>Culinary Partnerships</h3><p>Food halls that incubate minority-owned food businesses.</p></div></a>
+      <a class="b bg-butter s2" href="https://foodopportunity.com/" target="_blank"><span class="arrow">↗</span><span class="kicker">Manufacturer</span><div><h3>Food Opportunity</h3><p>Baked goods manufacturing &amp; distribution.</p></div></a>
+      <a class="b photo s4" href="#"><img src="images/savor-food-hall.jpg" alt=""><span class="arrow">↗</span><div><span class="kicker">Project</span><h3>Savor Food Hall</h3><p>Prince George's County's first food hall.</p></div></a>
+      <a class="b bg-berry s3" href="#contact"><span class="arrow">↗</span><span class="kicker">Advisory</span><div><h3>Co-Lab Haus</h3><p>Strategic advisory &amp; project management across government, corporate and nonprofit sectors.</p></div></a>
+      <a class="b photo s3" href="#"><img src="images/mill-on-north.jpg" alt=""><span class="arrow">↗</span><div><span class="kicker">2025 IEDC Excellence Award</span><h3>The Mill on North</h3><p>West Baltimore's first food hall, a $3.9M development.</p></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="sec-head"><span class="kicker">Work With Me</span><h2>How I can help</h2><p>Whether you're starting a business, developing a space or planning an event, there's a way to work together.</p></div>
+    <div class="ways">
+      <div class="way"><div class="icon">⚖️</div><h3>Legal Counsel</h3><p>Business formation, contracts, commercial real estate and leasing, from someone who has been an investigator, a prosecutor and an operator.</p><a href="#contact">Request a consultation →</a></div>
+      <div class="way"><div class="icon">🏗️</div><h3>Development &amp; Advisory</h3><p>Food hall development, project management and cross-sector strategy for cities, CDCs, developers and nonprofits.</p><a href="#contact">Start a project →</a></div>
+      <div class="way"><div class="icon">🎤</div><h3>Speaking</h3><p>Keynotes and workshops on entrepreneurship, building community wealth and white collar crime, delivered with clarity, compassion and humor.</p><a href="#contact">Book April to speak →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="journey">
+  <div class="wrap">
+    <div class="journey">
+      <div class="sec-head"><span class="kicker">My Journey</span><h2>From the courtroom to the kitchen</h2><p>A few milestones along the way.</p></div>
+      <div class="timeline">
+        <div class="t"><strong>Early career</strong><span>White collar crimes investigator &amp; prosecutor; trained the Secret Service &amp; FBI</span></div>
+        <div class="t"><strong>2010</strong><span>Named one of Maryland's Top 24 Leaders in Law by The Daily Record</span></div>
+        <div class="t"><strong>2013</strong><span>Launched DC Sweet Potato Cake, now at Starbucks, Wegmans &amp; more</span></div>
+        <div class="t"><strong>2019</strong><span>Opened Savor Food Hall, Prince George's County's first food hall</span></div>
+        <div class="t"><strong>2025</strong><span>The Mill on North opens and wins an IEDC Excellence Award</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="kicker">Let's Connect</span>
+      <h2>Chances are, we've already crossed paths.</h2>
+      <p>Conventional or unconventional, I'd love to hear what you're working on.</p>
+      <a class="c-item" href="mailto:aprilnrichardson@gmail.com"><span>✉️</span>aprilnrichardson@gmail.com</a>
+      <a class="c-item" href="tel:2404175259"><span>📞</span>(240) 417-5259</a>
+      <div class="c-item"><span>📍</span>DC · Maryland · Virginia</div>
+    </div>
+    <form onsubmit="event.preventDefault(); this.querySelector('.btn').textContent = 'Thank you! April will be in touch.';">
+      <p style="font-weight:600;color:var(--ink);margin-bottom:0.8rem">I'm reaching out about…</p>
+      <div class="chips"><button type="button" class="chip on">Legal counsel</button><button type="button" class="chip">A development project</button><button type="button" class="chip">Speaking</button><button type="button" class="chip">Wholesale cakes</button><button type="button" class="chip">Something else</button></div>
+      <div class="row2"><input placeholder="Your name"><input placeholder="Email"></div>
+      <input placeholder="Organization (optional)">
+      <textarea placeholder="Tell me a little about it"></textarea>
+      <button class="btn btn-berry" style="width:100%;justify-content:center">Send message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="socials"><a href="#">IG</a><a href="#">in</a><a href="#">FB</a></div>
+  © 2026 April N. Richardson, Esq. · Made with love in the DMV
+</footer>
+
+<script>
+  document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(x => x.classList.remove('on')); c.classList.add('on');
+  }));
+</script>
+</body>
+</html>
