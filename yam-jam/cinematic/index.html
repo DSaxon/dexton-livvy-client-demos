@@ -332,6 +332,21 @@
   .brand .script { font-family: 'Alex Brush', cursive; font-weight: 400; font-size: 2.5rem; color: var(--violet); }
   .brand small { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--violet-2); font-weight: 700; margin-top: -0.1rem; padding-left: 0.3rem; }
   .foot-brand .script { font-size: 2.8rem; color: #fff; }
+  /* Phones: intro text sits above the bottle instead of on top of it */
+  .hero-intro { display: none; }
+  @media (max-width: 1000px) {
+    .hero-intro { display: block; padding: 6.2rem 0 0.5rem; }
+    .hero-intro .intro-h { font-size: clamp(2.6rem, 12vw, 3.4rem); font-weight: 800; margin-bottom: 0.6rem; }
+    .hero-intro .intro-h em { font-style: normal; color: var(--amber); }
+    .hero-intro .tag { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.2rem; font-weight: 500; color: var(--violet-2); margin-bottom: 0.8rem; }
+    .hero-intro p { color: var(--muted); font-size: 0.95rem; }
+    #heroCopy { display: none; }
+    .scroll-hint { display: flex; bottom: 1rem; white-space: nowrap; }
+    .tour-title { top: 72px; background: var(--night); padding: 0.7rem 1rem 0.8rem; box-shadow: 0 8px 20px rgba(59,22,88,0.08); }
+    .tour-title .display { font-size: 1.35rem; text-shadow: none; }
+    .tour-title .kick { margin-bottom: 0.2rem; text-shadow: none; }
+    .callout, .callout.left { bottom: 5.4rem; }
+  }
 </style>
 </head>
 <body>
@@ -353,6 +368,20 @@
     </div>
   </div>
 </nav>
+
+<section class="hero-intro">
+  <div class="wrap">
+    <div class="kick">YAM JAM by Mrs. Miller</div>
+    <div class="display intro-h">Meet <em>YAM JAM</em></div>
+    <div class="tag">A Sweet Citrus Glaze for Every Table</div>
+    <p>Glaze your chicken, drizzle it over seafood, add something special to roasted vegetables, or bring a sweet citrus finish to breakfast and dessert. YAM JAM is a versatile family recipe that has been enjoyed at the Miller family table for generations.</p>
+    <p>First created in Mrs. Louise B. Miller's Washington, D.C. kitchen in the mid-1900s, YAM JAM became a family favorite, particularly on the sweet potatoes served at family gatherings. Her recipe has been passed down through generations, and now the Miller family is sharing it with yours.</p>
+    <div class="hero-actions">
+      <a href="shop.html" class="btn btn-amber">Shop Yam Jam</a>
+      <a href="our-story.html" class="btn btn-ghost">Meet Mrs. Miller</a>
+    </div>
+  </div>
+</section>
 
 <!-- 01 HOME: scroll-driven label tour -->
 <section class="tour" id="home">
@@ -490,7 +519,7 @@ function renderTour() {
   for (let k = 0; k < stops.length - 1; k++) if (p >= stops[k].p && p <= stops[k + 1].p) { a = stops[k]; b = stops[k + 1]; break; }
   const t = ease((p - a.p) / ((b.p - a.p) || 1));
   const mobile = innerWidth <= 1000;
-  const off = st => st.base ? (mobile ? { ox: 0, oy: -0.2, s: 0.62 } : { ox: 0.2, oy: 0, s: 0.92 }) : { ox: 0, oy: 0, s: st.s };
+  const off = st => st.base ? (mobile ? { ox: 0, oy: 0.02, s: 0.85 } : { ox: 0.2, oy: 0, s: 0.92 }) : { ox: 0, oy: 0, s: st.s };
   const A = off(a), B = off(b);
   const fx = a.fx + (b.fx - a.fx) * t, fy = a.fy + (b.fy - a.fy) * t, s = A.s + (B.s - A.s) * t;
   const ox = (A.ox + (B.ox - A.ox) * t) * innerWidth, oy = (A.oy + (B.oy - A.oy) * t) * innerHeight;

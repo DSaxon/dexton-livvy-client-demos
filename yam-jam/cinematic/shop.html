@@ -332,6 +332,21 @@
   .brand .script { font-family: 'Alex Brush', cursive; font-weight: 400; font-size: 2.5rem; color: var(--violet); }
   .brand small { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--violet-2); font-weight: 700; margin-top: -0.1rem; padding-left: 0.3rem; }
   .foot-brand .script { font-size: 2.8rem; color: #fff; }
+  /* Phones: intro text sits above the bottle instead of on top of it */
+  .hero-intro { display: none; }
+  @media (max-width: 1000px) {
+    .hero-intro { display: block; padding: 6.2rem 0 0.5rem; }
+    .hero-intro .intro-h { font-size: clamp(2.6rem, 12vw, 3.4rem); font-weight: 800; margin-bottom: 0.6rem; }
+    .hero-intro .intro-h em { font-style: normal; color: var(--amber); }
+    .hero-intro .tag { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.2rem; font-weight: 500; color: var(--violet-2); margin-bottom: 0.8rem; }
+    .hero-intro p { color: var(--muted); font-size: 0.95rem; }
+    #heroCopy { display: none; }
+    .scroll-hint { display: flex; bottom: 1rem; white-space: nowrap; }
+    .tour-title { top: 72px; background: var(--night); padding: 0.7rem 1rem 0.8rem; box-shadow: 0 8px 20px rgba(59,22,88,0.08); }
+    .tour-title .display { font-size: 1.35rem; text-shadow: none; }
+    .tour-title .kick { margin-bottom: 0.2rem; text-shadow: none; }
+    .callout, .callout.left { bottom: 5.4rem; }
+  }
 </style>
 </head>
 <body>
