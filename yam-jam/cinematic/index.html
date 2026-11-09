@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAM JAM by Mrs. Miller — A Sweet Citrus Glaze for Every Table</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --night: #100A14; --night-2: #1A1120; --panel: #221729; --line: rgba(255,240,220,0.08);
+    --amber: #F4A42C; --amber-2: #FFC861; --glaze: #E27A10; --violet: #9B6BDB; --violet-2: #6C3FA8;
+    --cream: #FFF4E2; --text: #F3E8DA; --muted: #A99BA6;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--night); color: var(--text); line-height: 1.65; font-size: 17px; overflow-x: hidden; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  h1, h2, h3, .display { font-family: 'Bricolage Grotesque', sans-serif; line-height: 1.02; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 800; margin-bottom: 1.2rem; }
+  h2 em, h1 em { font-style: normal; color: var(--amber); }
+  h3 { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.4rem; }
+  p + p { margin-top: 0.9rem; }
+  .kick { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; }
+  .muted { color: var(--muted); }
+  .btn { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.95rem 1.6rem; border-radius: 999px; font-weight: 600; font-size: 0.95rem; text-decoration: none; cursor: pointer; border: none; font-family: inherit; transition: transform 0.2s, background 0.2s, box-shadow 0.2s; }
+  .btn-amber { background: var(--amber); color: #1A0F06; box-shadow: 0 0 0 0 rgba(244,164,44,0.5); }
+  .btn-amber:hover { background: var(--amber-2); box-shadow: 0 0 30px rgba(244,164,44,0.45); }
+  .btn-ghost { background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid rgba(255,255,255,0.14); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+  .ask { background: none; border: none; color: var(--amber); font: inherit; font-weight: 600; font-size: 0.9rem; cursor: pointer; padding: 0; }
+  .ask:hover { color: var(--amber-2); }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 80; transition: background 0.3s; }
+  nav.solid { background: rgba(16,10,20,0.82); backdrop-filter: blur(14px); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 1rem; }
+  .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.25rem; }
+  .logo i { width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--amber-2), var(--glaze) 60%, #8A3E05); box-shadow: 0 0 18px rgba(244,164,44,0.55); display: inline-block; }
+  .logo small { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .links { display: flex; gap: 1.4rem; list-style: none; font-size: 0.9rem; white-space: nowrap; }
+  .talk { white-space: nowrap; }
+  .links a { text-decoration: none; color: #D9CCD6; }
+  .links a:hover { color: var(--amber); }
+  .nav-r { display: flex; gap: 0.6rem; align-items: center; }
+  .cart { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); text-decoration: none; font-size: 0.88rem; font-weight: 600; }
+  .cart b { background: var(--amber); color: #1A0F06; border-radius: 999px; min-width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; }
+  .talk { padding: 0.6rem 1.1rem; font-size: 0.88rem; }
+  .menu-btn { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
+  @media (max-width: 1300px) { .logo small { display: none; } }
+
+  /* HERO: scroll-driven label tour */
+  .tour { height: 520vh; position: relative; }
+  .tour-stick { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .tour-glow { position: absolute; width: 70vmin; height: 70vmin; border-radius: 50%; background: radial-gradient(circle, rgba(244,164,44,0.32), rgba(155,107,219,0.12) 45%, transparent 70%); filter: blur(10px); }
+  .tour-img { position: relative; height: min(82vh, 120vw); width: auto; max-width: none; border-radius: 28px; will-change: transform; box-shadow: 0 40px 120px rgba(0,0,0,0.6); transform-origin: center; }
+  .tour-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 35%, rgba(16,10,20,0.75) 80%); pointer-events: none; }
+  .hero-copy { position: absolute; left: 0; right: 0; bottom: 0; top: 0; display: flex; align-items: center; pointer-events: none; }
+  .hero-copy .wrap { width: 100%; }
+  .hero-copy-inner { max-width: 500px; pointer-events: auto; }
+  .hero-copy h1 { font-size: clamp(3.2rem, 7vw, 5.6rem); font-weight: 800; margin-bottom: 0.8rem; }
+  .hero-copy .tag { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.5rem; font-weight: 500; color: var(--cream); margin-bottom: 1rem; }
+  .hero-copy p { color: #CFC1CB; font-size: 0.98rem; }
+  .hero-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.6rem; }
+  .scroll-hint { position: absolute; bottom: 1.6rem; left: 50%; transform: translateX(-50%); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .scroll-hint span { width: 1px; height: 36px; background: linear-gradient(var(--amber), transparent); animation: drip 1.8s ease-in-out infinite; transform-origin: top; }
+  @keyframes drip { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+  .dot { position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 6px rgba(244,164,44,0.25), 0 0 30px rgba(244,164,44,0.8); opacity: 0; transition: opacity 0.3s; }
+  .dot::after { content: ''; position: absolute; inset: -14px; border-radius: 50%; border: 1px solid rgba(244,164,44,0.6); animation: ring 1.8s ease-out infinite; }
+  @keyframes ring { from { transform: scale(0.6); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
+  .callout { position: absolute; top: 50%; left: calc(50% + 60px); transform: translateY(-50%) translateX(14px); width: min(360px, 40vw); background: rgba(26,17,32,0.88); backdrop-filter: blur(12px); border: 1px solid rgba(244,164,44,0.3); border-radius: 20px; padding: 1.4rem 1.5rem; opacity: 0; transition: opacity 0.35s, transform 0.35s; pointer-events: none; }
+  .callout.left { left: auto; right: calc(50% + 60px); transform: translateY(-50%) translateX(-14px); }
+  .callout.on { opacity: 1; transform: translateY(-50%) translateX(0); }
+  .callout .n { font-size: 0.72rem; letter-spacing: 0.2em; color: var(--amber); font-weight: 600; margin-bottom: 0.4rem; }
+  .callout p { font-size: 0.93rem; color: #D7CAD3; }
+  .tour-progress { position: absolute; right: 1.6rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 0.6rem; }
+  .tour-progress i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: all 0.3s; }
+  .tour-progress i.on { background: var(--amber); height: 22px; border-radius: 4px; }
+  .tour-title { position: absolute; top: 96px; left: 0; right: 0; text-align: center; opacity: 0; transition: opacity 0.4s; }
+  .tour-title.on { opacity: 1; }
+  .tour-title .display { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; text-shadow: 0 2px 24px rgba(16,10,20,0.9), 0 0 4px rgba(16,10,20,0.8); }
+  .tour-title .kick { text-shadow: 0 0 12px rgba(16,10,20,0.9); }
+
+  /* SECTIONS */
+  section { position: relative; }
+  .pad { padding: 8rem 0; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5rem; align-items: center; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 26px; }
+
+  .kitchen-img { border-radius: 26px; overflow: hidden; position: relative; }
+  .kitchen-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+  .kitchen-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(16,10,20,0.6)); }
+
+  /* THEN & NOW */
+  .then { height: 420vh; }
+  .then-stick { position: sticky; top: 0; height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .then-photo { position: relative; height: 72vh; border-radius: 26px; overflow: hidden; background: #000; }
+  .then-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .then-photo .old { filter: grayscale(1) contrast(1.05) sepia(0.15); object-position: center 20%; }
+  .then-photo .now { opacity: 0; object-position: 40% center; }
+  .then-photo .grain { position: absolute; inset: 0; background: repeating-radial-gradient(circle at 30% 40%, rgba(255,255,255,0.03) 0 1px, transparent 1px 3px); mix-blend-mode: overlay; }
+  .then-photo .stamp { position: absolute; left: 1.2rem; bottom: 1.2rem; background: rgba(16,10,20,0.75); backdrop-filter: blur(8px); padding: 0.45rem 0.9rem; border-radius: 999px; font-size: 0.8rem; }
+  .year { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(4rem, 10vw, 8.5rem); font-weight: 800; line-height: 0.9; color: var(--amber); letter-spacing: -0.04em; margin-bottom: 1rem; min-height: 1em; transition: opacity 0.25s; }
+  .ms-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.8rem; }
+  .ms-text { color: #CFC1CB; max-width: 480px; min-height: 9em; }
+  .ms-bar { display: flex; gap: 0.4rem; margin-top: 1.8rem; }
+  .ms-bar i { flex: 1; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.12); overflow: hidden; position: relative; }
+  .ms-bar i b { position: absolute; inset: 0; background: var(--amber); transform-origin: left; transform: scaleX(0); }
+
+  /* GLAZE DIAL */
+  .glaze-stage { position: relative; border-radius: 28px; overflow: hidden; }
+  .glaze-stage img { width: 100%; aspect-ratio: 4/3; object-fit: cover; filter: saturate(0.75) brightness(0.92); transition: filter 0.3s; }
+  .glaze-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .glaze-stage .sheen { position: absolute; inset: 0; background: radial-gradient(ellipse at 52% 42%, rgba(255,190,80,0.45), transparent 55%); mix-blend-mode: soft-light; opacity: 0; }
+  .glaze-badge { position: absolute; left: 1.2rem; top: 1.2rem; background: rgba(16,10,20,0.75); backdrop-filter: blur(8px); border-radius: 999px; padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 600; color: var(--amber); }
+  .dial-wrap { display: flex; align-items: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
+  .dial { width: 210px; height: 210px; position: relative; touch-action: none; cursor: grab; user-select: none; }
+  .dial:active { cursor: grabbing; }
+  .dial svg { width: 100%; height: 100%; }
+  .dial-val { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
+  .dial-val strong { font-family: 'Bricolage Grotesque', sans-serif; font-size: 2.6rem; font-weight: 800; line-height: 1; }
+  .dial-val span { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); margin-top: 0.3rem; }
+  .dial-help { max-width: 260px; font-size: 0.92rem; color: var(--muted); }
+
+  /* PICKER */
+  .picker { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 1.6rem; margin-top: 3rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; align-content: flex-start; }
+  .chip { background: rgba(255,255,255,0.05); color: var(--text); border: 1px solid rgba(255,255,255,0.12); padding: 0.7rem 1.1rem; border-radius: 999px; font: inherit; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .chip:hover { border-color: rgba(244,164,44,0.6); }
+  .chip.on { background: var(--amber); color: #1A0F06; border-color: var(--amber); font-weight: 600; }
+  .dish { overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+  .dish-img { position: relative; aspect-ratio: 16/10; overflow: hidden; background: linear-gradient(135deg, #F4A42C, #E27A10 45%, #3E6B35); }
+  .dish-img img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.35s, transform 0.6s; }
+  .dish-img .soon[hidden] { display: none; }
+  .dish-img .soon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; font-weight: 700; color: #1A0F06; }
+  .dish-body { padding: 1.6rem 1.8rem; }
+  .moment { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0.6rem 0 0.9rem; }
+  .moment span { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--violet); border: 1px solid rgba(155,107,219,0.45); border-radius: 999px; padding: 0.2rem 0.65rem; }
+  .dish-intro { margin-top: 1.4rem; font-size: 0.95rem; }
+
+  /* TABLE PLANNER */
+  .planner { padding: 2.6rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center; }
+  .range-row { margin: 1.6rem 0; }
+  .range-row label { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--muted); margin-bottom: 0.6rem; }
+  .range-row label b { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.6rem; color: var(--text); }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: linear-gradient(90deg, var(--amber) var(--fill, 30%), rgba(255,255,255,0.1) var(--fill, 30%)); outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: var(--cream); border: 4px solid var(--amber); box-shadow: 0 0 20px rgba(244,164,44,0.6); cursor: pointer; }
+  input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--cream); border: 4px solid var(--amber); cursor: pointer; }
+  .result { background: var(--night-2); border-radius: 22px; padding: 2rem; text-align: center; border: 1px solid rgba(244,164,44,0.25); }
+  .jars { display: flex; justify-content: center; gap: 0.5rem; margin: 1rem 0 1.2rem; flex-wrap: wrap; min-height: 64px; }
+  .jar { width: 34px; height: 56px; border-radius: 8px 8px 10px 10px; background: linear-gradient(180deg, #2a1d10 0 16%, var(--amber-2) 16%, var(--glaze)); box-shadow: 0 0 18px rgba(244,164,44,0.35); position: relative; animation: pop 0.35s ease; }
+  .jar::after { content: ''; position: absolute; left: 5px; right: 5px; top: 22px; height: 18px; border-radius: 3px; background: #F7ECD6; box-shadow: inset 0 0 0 2px #6C3FA8; }
+  @keyframes pop { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .result .big { font-family: 'Bricolage Grotesque', sans-serif; font-size: 3.4rem; font-weight: 800; color: var(--amber); line-height: 1; }
+  .result small { display: block; color: var(--muted); font-size: 0.82rem; margin-top: 0.8rem; }
+
+  /* LEGACY */
+  .legacy-head { max-width: 820px; }
+  .legacy-head .lead { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.6rem; font-weight: 500; color: var(--cream); line-height: 1.35; }
+  .legacy-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 4rem; margin-top: 3.5rem; }
+  .legacy-grid .body p { color: #CFC1CB; }
+  .sign-wrap { position: sticky; top: 110px; align-self: start; }
+  .sign { background: #0F6B3A; color: #fff; border-radius: 10px; padding: 1rem 1.4rem; border: 3px solid #fff; box-shadow: 0 0 0 3px #0F6B3A, 0 30px 60px rgba(0,0,0,0.5); text-align: center; transform: rotate(-2deg); }
+  .sign .display { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 700; letter-spacing: 0; }
+  .sign small { display: block; font-size: 0.8rem; letter-spacing: 0.12em; opacity: 0.85; }
+  .pole { width: 14px; height: 60px; margin: 0 auto; background: linear-gradient(90deg, #6b6b6b, #bdbdbd, #6b6b6b); }
+  .honor { padding: 1.6rem 1.7rem; margin-top: 1.2rem; }
+  .honor p { font-size: 0.93rem; color: #CFC1CB; }
+
+  /* STORY */
+  .quote { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 500; line-height: 1.25; color: var(--cream); margin: 2.4rem 0; padding-left: 1.4rem; box-shadow: inset 3px 0 0 var(--amber); }
+  .quote cite { display: block; font-family: 'Inter', sans-serif; font-style: normal; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 0.8rem; }
+
+  /* SHOP */
+  .shop { padding: 3rem; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 3.5rem; align-items: center; background: radial-gradient(circle at 20% 30%, rgba(244,164,44,0.16), transparent 50%), var(--panel); }
+  .shop img { border-radius: 22px; width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+  .buy { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin: 1.8rem 0 0.8rem; }
+  .price { font-family: 'Bricolage Grotesque', sans-serif; font-size: 2rem; font-weight: 800; }
+  .price small { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 500; color: var(--muted); }
+  .qty { display: inline-flex; border: 1px solid rgba(255,255,255,0.16); border-radius: 999px; }
+  .qty button { background: none; border: none; color: var(--text); width: 42px; height: 46px; font-size: 1.1rem; cursor: pointer; }
+  .qty input { width: 32px; background: none; border: none; color: var(--text); text-align: center; font: inherit; font-weight: 600; }
+  details { margin-top: 1.4rem; background: rgba(0,0,0,0.25); border-radius: 16px; padding: 1rem 1.3rem; }
+  summary { cursor: pointer; font-weight: 600; font-size: 0.92rem; }
+  .nut { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin: 1rem 0 0.7rem; text-align: center; }
+  .nut div { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 0.7rem 0.3rem; }
+  .nut strong { display: block; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; }
+  .nut span { font-size: 0.72rem; color: var(--muted); }
+  .signup { text-align: center; }
+  .signup p { max-width: 560px; margin: 0 auto 2rem; color: #CFC1CB; }
+  .signup form { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; max-width: 720px; margin: 0 auto; }
+  .signup input { flex: 1; min-width: 220px; padding: 0.95rem 1.3rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.05); color: var(--text); font: inherit; }
+  .signup input::placeholder { color: var(--muted); }
+  .confirm { display: none; font-family: 'Bricolage Grotesque', sans-serif; font-size: 2rem; font-weight: 700; color: var(--amber); }
+  .signup.done form { display: none; }
+  .signup.done .confirm { display: block; }
+
+  /* ASSISTANT CTA */
+  .always { padding: 3rem; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center; overflow: hidden; position: relative; }
+  .always .orb-lg { width: 220px; height: 220px; margin: 0 auto; }
+  .qs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
+
+  footer { padding: 4rem 0 2.5rem; color: var(--muted); font-size: 0.9rem; }
+  .foot { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .foot ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; max-width: 560px; }
+  .foot a { text-decoration: none; }
+  .foot a:hover { color: var(--amber); }
+  .foot-note { margin-top: 2.5rem; font-size: 0.8rem; }
+  .foot-note em { font-family: 'Bricolage Grotesque', sans-serif; font-style: normal; font-size: 1.15rem; color: var(--cream); margin-right: 1rem; }
+
+  /* ORB + ASSISTANT */
+  .orb { border-radius: 50%; background: conic-gradient(from 0deg, #FFC861, #F4A42C, #E27A10, #9B6BDB, #6C3FA8, #FFC861); filter: blur(0.5px); position: relative; animation: spin 9s linear infinite; box-shadow: 0 0 60px rgba(244,164,44,0.35), inset 0 0 40px rgba(255,255,255,0.35); }
+  .orb::before { content: ''; position: absolute; inset: 10%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.85), rgba(255,255,255,0) 45%), radial-gradient(circle at 65% 70%, rgba(108,63,168,0.6), transparent 55%); animation: spin 5s linear infinite reverse; }
+  .orb.speaking { animation: spin 3s linear infinite, pulse 0.9s ease-in-out infinite; }
+  .orb.listening { box-shadow: 0 0 0 8px rgba(244,164,44,0.18), 0 0 70px rgba(244,164,44,0.6), inset 0 0 40px rgba(255,255,255,0.35); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse { 50% { scale: 1.06; } }
+  .fab { position: fixed; right: 1.4rem; bottom: 1.4rem; z-index: 90; display: flex; align-items: center; gap: 0.6rem; background: var(--amber); color: #1A0F06; border: none; border-radius: 999px; padding: 0.55rem 1.2rem 0.55rem 0.55rem; font: inherit; font-weight: 600; cursor: pointer; box-shadow: 0 14px 40px rgba(0,0,0,0.45), 0 0 30px rgba(244,164,44,0.35); }
+  .fab .orb { width: 36px; height: 36px; }
+  .assist { position: fixed; right: 1.4rem; bottom: 1.4rem; z-index: 100; width: min(380px, calc(100vw - 2rem)); max-height: calc(100vh - 2.8rem); background: #FBF5EC; color: #1F1426; border-radius: 28px; box-shadow: 0 30px 80px rgba(0,0,0,0.55); display: none; flex-direction: column; overflow: hidden; }
+  .assist.open { display: flex; animation: rise 0.3s ease; }
+  @keyframes rise { from { transform: translateY(20px); opacity: 0; } }
+  .assist-top { padding: 1.2rem 1.4rem 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #8B7F88; }
+  .assist-top button { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #8B7F88; }
+  .assist-hero { text-align: center; padding: 0.6rem 1.4rem 1rem; }
+  .assist-hero .orb { width: 110px; height: 110px; margin: 0.4rem auto 1rem; }
+  .assist-hero h3 { font-size: 1.4rem; color: #2A1A33; margin-bottom: 0.1rem; }
+  .assist-hero p { font-size: 0.82rem; color: #8B7F88; }
+  .log { flex: 1; overflow-y: auto; padding: 0 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; max-height: 34vh; }
+  .msg { padding: 0.7rem 1rem; border-radius: 16px; font-size: 0.9rem; line-height: 1.5; max-width: 90%; }
+  .msg.bot { background: #EFE4F6; color: #2A1A33; align-self: flex-start; border-bottom-left-radius: 4px; }
+  .msg.me { background: #F4A42C; color: #1A0F06; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .sugg { display: flex; gap: 0.4rem; flex-wrap: wrap; padding: 0.8rem 1.2rem 0; }
+  .sugg button { background: #fff; border: 1px solid #E5D8EA; color: #5B2A86; border-radius: 999px; padding: 0.35rem 0.75rem; font: inherit; font-size: 0.78rem; cursor: pointer; }
+  .assist-bar { display: flex; gap: 0.5rem; align-items: center; padding: 1rem 1.2rem 1.2rem; }
+  .assist-bar input { flex: 1; border: 1px solid #E5D8EA; border-radius: 999px; padding: 0.75rem 1rem; font: inherit; font-size: 0.9rem; background: #fff; min-width: 0; }
+  .round { width: 46px; height: 46px; flex: none; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .mic { background: #EFE4F6; color: #5B2A86; }
+  .mic.on { background: #5B2A86; color: #fff; }
+  .end { background: #E0442E; color: #fff; }
+  .assist-note { font-size: 0.7rem; color: #A3979F; text-align: center; padding: 0 1.2rem 1rem; }
+
+  .toast { position: fixed; top: 86px; left: 50%; transform: translate(-50%, -30px); background: var(--amber); color: #1A0F06; padding: 0.8rem 1.3rem; border-radius: 999px; font-weight: 600; opacity: 0; transition: all 0.3s; z-index: 110; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 1000px) {
+    .links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: var(--night-2); flex-direction: column; padding: 1.4rem 2rem; gap: 1rem; }
+    .links.open { display: flex; }
+    .menu-btn { display: block; }
+    .talk { display: none; }
+    .split, .picker, .planner, .legacy-grid, .shop, .always { grid-template-columns: 1fr; gap: 2.4rem; }
+    .then-stick { grid-template-columns: 1fr; gap: 1.4rem; align-content: center; }
+    .then-photo { height: 38vh; }
+    .ms-text { min-height: 7.5em; font-size: 0.95rem; }
+    .callout, .callout.left { left: 1rem; right: 1rem; top: auto; bottom: 1.4rem; width: auto; transform: translateY(14px); }
+    .callout.on { transform: none; }
+    .sign-wrap { position: static; }
+    .shop, .always, .planner { padding: 1.8rem; }
+    .hero-copy-inner { max-width: none; }
+    .hero-copy { align-items: flex-end; padding-bottom: 4.2rem; }
+    .hero-copy h1 { font-size: 3rem; }
+    .hero-copy .tag { font-size: 1.2rem; margin-bottom: 0.6rem; }
+    .hero-copy p:last-of-type { display: none; }
+    .hero-copy p { font-size: 0.9rem; }
+    .hero-actions { margin-top: 1.1rem; }
+    .scroll-hint { display: none; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 1rem; }
+    .then-stick { padding: 0 1rem; }
+    .nut { grid-template-columns: 1fr 1fr; }
+    .hero-copy p:last-of-type { display: none; }
+    .fab span { display: none; }
+    .fab { padding: 0.55rem; }
+    .tour-progress { display: none; }
+    .cart span { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .orb, .orb::before, .dot::after, .scroll-hint span { animation: none; } }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-inner">
+    <a href="#home" class="logo"><i></i>YAM JAM <small>by Mrs. Miller</small></a>
+    <ul class="links">
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#legacy">Mrs. Miller's Legacy</a></li>
+      <li><a href="#howto">How to Yam Jam</a></li>
+      <li><a href="#dc">Our D.C. Table</a></li>
+      <li><a href="#shop">Shop Yam Jam</a></li>
+    </ul>
+    <div class="nav-r">
+      <a href="#shop" class="cart"><span>Cart</span> <b id="cartCount">0</b></a>
+      <button class="btn btn-amber talk" onclick="openAssist()">Ask the Kitchen</button>
+      <button class="menu-btn" aria-label="Menu" onclick="document.querySelector('.links').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- 01 HOME: scroll-driven label tour -->
+<section class="tour" id="home">
+  <div class="tour-stick">
+    <div class="tour-glow"></div>
+    <img class="tour-img" id="tourImg" src="../images/bottles.jpg" alt="YAM JAM by Mrs. Miller Citrus Glaze, front and back of the 12 oz bottle">
+    <div class="tour-vignette"></div>
+    <div class="dot" id="dot"></div>
+    <div class="tour-title" id="tourTitle"><div class="kick">The Details in the Jar</div><div class="display">A Label Made From Her Story</div></div>
+
+    <div class="callout" data-i="1"><div class="n">01 · THE AFRICAN VIOLETS</div><h3>Her favorite flowers</h3><p>African violets were among Mrs. Miller's favorite flowers. Their inclusion in the label is a personal tribute to something she loved.</p></div>
+    <div class="callout" data-i="2"><div class="n">02 · THE NAME</div><h3>It was always YAM JAM</h3><p>YAM JAM was not a name created for a new product. It is what the Miller family has always called Mrs. Miller's sweet citrus sauce.</p></div>
+    <div class="callout" data-i="3"><div class="n">03 · THE STITCHING</div><h3>A seamstress's detail</h3><p>Mrs. Miller was a master seamstress who made clothing for her children. The stitching incorporated into the label acknowledges a skill that was both practical and an expression of the care she gave her family.</p></div>
+    <div class="callout left" data-i="4"><div class="n">04 · MRS. MILLER'S IMAGE</div><h3>The woman behind the recipe</h3><p>Her photograph places the woman behind the recipe at the center of the product. Although YAM JAM is now being introduced to families across the country, its origins remain connected to Mrs. Miller and the kitchen where it began.</p></div>
+
+    <div class="hero-copy" id="heroCopy">
+      <div class="wrap">
+        <div class="hero-copy-inner">
+          <div class="kick">YAM JAM by Mrs. Miller</div>
+          <h1>Meet <em>YAM JAM</em></h1>
+          <div class="tag">A Sweet Citrus Glaze for Every Table</div>
+          <p>Glaze your chicken, drizzle it over seafood, add something special to roasted vegetables, or bring a sweet citrus finish to breakfast and dessert. YAM JAM is a versatile family recipe that has been enjoyed at the Miller family table for generations.</p>
+          <p>First created in Mrs. Louise B. Miller's Washington, D.C. kitchen in the mid-1900s, YAM JAM became a family favorite, particularly on the sweet potatoes served at family gatherings. Her recipe has been passed down through generations, and now the Miller family is sharing it with yours.</p>
+          <div class="hero-actions">
+            <a href="#shop" class="btn btn-amber">Shop Yam Jam</a>
+            <a href="#story" class="btn btn-ghost">Meet Mrs. Miller</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint" id="scrollHint">Scroll to read the label<span></span></div>
+    <div class="tour-progress" id="tourProg"><i></i><i></i><i></i><i></i></div>
+  </div>
+</section>
+
+<!-- FROM MRS. MILLER'S KITCHEN -->
+<section class="pad">
+  <div class="wrap split">
+    <div class="kitchen-img reveal"><img src="../images/chicken.jpg" alt="YAM JAM poured over chicken wings"></div>
+    <div class="reveal">
+      <div class="kick">A Washington, D.C. family recipe shared for generations</div>
+      <h2>From Mrs. Miller's <em>Kitchen</em></h2>
+      <p class="muted">For the Miller family, YAM JAM was simply part of the food they grew up enjoying. Its sweet citrus flavor was especially memorable on sweet potatoes, but the family soon discovered that it was just as delicious on other dishes.</p>
+      <p class="muted">Today, YAM JAM is available in a 12-ounce jar, ready to become part of the meals and traditions you create at home.</p>
+      <div class="hero-actions"><a href="#howto" class="btn btn-ghost">Discover How to Yam Jam</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 OUR STORY: then & now scroll -->
+<section class="then" id="story">
+  <div class="then-stick">
+    <div class="then-photo">
+      <img class="old" src="../images/mrs-miller.jpg" alt="Mrs. Louise B. Miller in her Washington, D.C. home">
+      <img class="now" id="nowImg" src="../images/family.jpg" alt="The Miller family today">
+      <div class="grain" id="grain"></div>
+      <div class="stamp" id="stamp">Mrs. Louise B. Miller</div>
+    </div>
+    <div>
+      <div class="kick">Our Family Matriarch</div>
+      <div class="year" id="msYear">1916</div>
+      <div class="ms-title" id="msTitle"></div>
+      <p class="ms-text" id="msText"></p>
+      <div class="ms-bar" id="msBar"></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" style="padding-top:4rem">
+  <div class="wrap split">
+    <div class="reveal">
+      <h2>Before There Was YAM JAM, There Was <em>Mrs. Miller</em></h2>
+      <p class="muted">After graduating from Paul Laurence Dunbar High School, Mrs. Miller entered Howard University. She and her husband, Luther, built their life in Washington and raised four children.</p>
+      <p class="muted">At home, Mrs. Miller was a gifted seamstress and an extraordinary cook. She made clothes for her children and took particular care with the meals and traditions that made ordinary days, and especially the holidays, feel special.</p>
+      <p class="muted">Mrs. Miller was known for having something good on the table, and YAM JAM was one of those offerings.</p>
+      <div class="quote">“She made every effort to create a home where family gathered, laughed and always found something wonderful to eat.”<cite>The Miller Family</cite></div>
+      <a href="#legacy" class="btn btn-ghost">Discover Mrs. Miller's Legacy</a>
+    </div>
+    <div class="card reveal" style="padding:2.4rem">
+      <div class="kick">The Family Recipe</div>
+      <h2 style="font-size:2.4rem">We Always Called It YAM JAM</h2>
+      <p class="muted">The Miller family never needed to come up with a name for the sauce. It had always been YAM JAM.</p>
+      <p class="muted">Mrs. Miller originally prepared the sweet citrus glaze for sweet potatoes, and it became one of the dishes the family looked forward to having on the table. Over the years, they discovered that the same recipe worked beautifully with many other foods, including ham, chicken, seafood, vegetables and desserts.</p>
+      <p class="muted">The recipe remained in the family for generations, prepared and shared long before there was any thought of offering it commercially.</p>
+      <p class="muted">Bottling YAM JAM now allows the Miller family to share something that has been part of their lives for decades, while continuing to honor the woman who first made it.</p>
+      <div class="hero-actions"><a href="#shop" class="btn btn-amber">Shop Yam Jam</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 HOW TO YAM JAM: glaze dial -->
+<section class="pad" id="howto" style="background:linear-gradient(180deg,var(--night),var(--night-2))">
+  <div class="wrap split">
+    <div class="glaze-stage reveal" id="glazeStage">
+      <img src="../images/sweet-potato.jpg" alt="Baked sweet potato" id="glazeImg">
+      <div class="sheen" id="sheen"></div>
+      <svg viewBox="0 0 100 75" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="gz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC861"/><stop offset="1" stop-color="#D9690A"/></linearGradient>
+        </defs>
+        <filter id="soft"><feGaussianBlur stdDeviation="1.6"/></filter>
+        <ellipse id="coat" cx="51" cy="40" rx="27" ry="13" fill="#F4A42C" opacity="0" filter="url(#soft)"/>
+        <ellipse id="pool" cx="70" cy="64" rx="0" ry="0" fill="url(#gz)" opacity="0.75"/>
+        <g id="drips" fill="none" stroke-linecap="round"></g>
+      </svg>
+      <div class="glaze-badge" id="glazeBadge">Try it</div>
+    </div>
+    <div class="reveal">
+      <div class="kick">Try it · The original family favorite</div>
+      <h2>Pour it on the <em>sweet potato</em></h2>
+      <p class="muted">The original family favorite. Pour YAM JAM over warm sweet potatoes for the sweet citrus flavor that has been part of Miller family meals since the mid-1900s.</p>
+      <div class="dial-wrap">
+        <div class="dial" id="dial" role="slider" aria-label="Amount of YAM JAM" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+          <svg viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="14" stroke-dasharray="377 503" transform="rotate(135 100 100)" stroke-linecap="round"/>
+            <circle id="arc" cx="100" cy="100" r="80" fill="none" stroke="url(#arcG)" stroke-width="14" stroke-dasharray="0 503" transform="rotate(135 100 100)" stroke-linecap="round"/>
+            <defs><linearGradient id="arcG"><stop offset="0" stop-color="#FFC861"/><stop offset="1" stop-color="#E27A10"/></linearGradient></defs>
+            <circle id="knob" cx="43" cy="157" r="13" fill="#FFF4E2" stroke="#F4A42C" stroke-width="5"/>
+          </svg>
+          <div class="dial-val"><strong id="dialNum">0%</strong><span id="dialLbl">Plain</span></div>
+        </div>
+        <p class="dial-help">Drag the dial to glaze. Same sweet potato, now with YAM JAM.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- dish picker -->
+  <div class="wrap" style="margin-top:7rem">
+    <div class="kick">How to Yam Jam</div>
+    <h2 style="max-width:780px">One Sweet Citrus Glaze, So Many Ways to <em>Enjoy It</em></h2>
+    <p class="muted" style="max-width:760px">YAM JAM first became a family favorite as a glaze for sweet potatoes, but its sweet citrus flavor works with a surprising variety of foods. Whether you're preparing a holiday dinner, cooking on a weeknight or putting together something for breakfast, there are plenty of opportunities to bring YAM JAM to the table.</p>
+    <div class="picker">
+      <div>
+        <div class="kick" style="color:var(--muted)">What's on the table tonight?</div>
+        <div class="chips" id="chips"></div>
+        <p class="muted dish-intro">Pick a dish to see how the Miller family uses YAM JAM with it.</p>
+      </div>
+      <div class="card dish">
+        <div class="dish-img"><img id="dishImg" src="../images/sweet-potato.jpg" alt=""><div class="soon" id="dishSoon" hidden>Photo coming soon</div></div>
+        <div class="dish-body">
+          <h3 id="dishTitle"></h3>
+          <div class="moment" id="dishMoment"></div>
+          <p class="muted" id="dishText"></p>
+          <div style="margin-top:1rem"><button class="ask" id="dishAsk">Ask the kitchen about this →</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- table planner -->
+  <div class="wrap" style="margin-top:7rem">
+    <div class="card planner reveal">
+      <div>
+        <div class="kick">Quick check</div>
+        <h2 style="font-size:2.6rem">Planning a holiday <em>table?</em></h2>
+        <p class="muted">Slide to how many people you're feeding and how generously you glaze. We'll count the jars.</p>
+        <div class="range-row"><label>Guests at the table <b id="gOut">8</b></label><input type="range" id="guests" min="2" max="40" value="8"></div>
+        <div class="range-row"><label>Tablespoons per plate <b id="tOut">2</b></label><input type="range" id="tbsp" min="1" max="4" value="2"></div>
+      </div>
+      <div class="result">
+        <div class="kick" style="margin:0">You'll want</div>
+        <div class="jars" id="jarRow"></div>
+        <div class="big" id="jarOut">1 jar</div>
+        <button class="btn btn-amber" style="margin-top:1.4rem" id="jarAdd">Add to Cart</button>
+        <small>A 12 oz (355 mL) jar holds about 23 one-tablespoon servings, the serving size on the label.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 LEGACY -->
+<section class="pad" id="legacy">
+  <div class="wrap">
+    <div class="legacy-head reveal">
+      <div class="kick">Mrs. Miller's Legacy</div>
+      <h2>Her Table Was Only Part of Her <em>Legacy</em></h2>
+      <p class="lead">The woman whose recipe inspired YAM JAM also helped change the course of educational history in Washington, D.C.</p>
+    </div>
+    <div class="legacy-grid">
+      <div class="body reveal">
+        <p>During segregation, Black Deaf children living in Washington, D.C. were denied admission to the Kendall School for the Deaf on the campus of Gallaudet University. While white Deaf children could attend school in the District, Black Deaf children were required to travel to Baltimore, Maryland, to receive an education.</p>
+        <p>Mrs. Louise B. Miller and her husband, Luther, were raising three Deaf sons and a hearing daughter. Unwilling to accept that her children could not receive the same educational opportunities available to white children in their own city, Mrs. Miller took legal action.</p>
+        <p>In 1952, she became the lead plaintiff in Miller v. Board of Education of the District of Columbia, a federal lawsuit brought on behalf of her son Kenneth and other Black Deaf children who had been excluded from Kendall School.</p>
+        <p>On July 3, 1952, the United States District Court for the District of Columbia ruled in favor of the children, establishing that the District could not require Black Deaf students to leave Washington to obtain an education that was available locally to white Deaf students.</p>
+        <p>The decision led to the establishment of Kendall School Division II on Gallaudet's campus in 1953, allowing Black Deaf children to attend school in Washington rather than being sent to Maryland.</p>
+        <p>Mrs. Miller's legal victory came two years before the United States Supreme Court's landmark decision in Brown v. Board of Education in 1954. Her case became an important part of the legal history preceding the desegregation of American public schools.</p>
+        <p>What began with Mrs. Miller's determination to secure an education for her children helped change educational opportunities for Black Deaf families throughout Washington, D.C.</p>
+        <div class="card honor">
+          <h3>A Legacy Preserved at Gallaudet University</h3>
+          <p>Mrs. Miller's work is also being commemorated on the campus of Gallaudet University through the Louise B. Miller Pathways and Gardens: A Legacy to Black Deaf Children project.</p>
+          <p>The project honors Mrs. Miller, the students of Kendall School Division II and an important period in the history of education for Black Deaf children in Washington, D.C.</p>
+        </div>
+        <div class="card honor">
+          <h3>The Woman Her Family Remembers</h3>
+          <p>Washington has honored Mrs. Miller for her advocacy, and her family continues to honor the many other dimensions of her life.</p>
+          <p>She was a mother, wife, seamstress, cook and family matriarch whose home was filled with the people she loved. The recipes she prepared and the traditions she established remained with her children and grandchildren, becoming part of the family's shared history.</p>
+          <p>YAM JAM preserves one of those traditions.</p>
+        </div>
+      </div>
+      <div class="sign-wrap reveal">
+        <div class="sign"><small>1200 BLOCK · T ST NW</small><div class="display">Louise B. Miller Way</div></div>
+        <div class="pole"></div>
+        <div class="card honor" style="margin-top:0">
+          <h3>Louise B. Miller Way</h3>
+          <p>In 2025, Washington, D.C. ceremonially renamed the 1200 block of T Street NW between 12th and 13th Streets Louise B. Miller Way, honoring her advocacy for Black Deaf children and the families whose lives were changed by her determination to challenge an unjust educational system.</p>
+          <p>The street designation recognizes Mrs. Miller's place in Washington history and ensures that future generations will encounter her name and learn about her contributions.</p>
+        </div>
+        <div class="hero-actions"><a href="#story" class="btn btn-ghost">Explore Our Family Story</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 OUR D.C. TABLE -->
+<section class="pad" id="dc" style="background:var(--night-2)">
+  <div class="wrap split">
+    <div class="reveal">
+      <div class="kick">Born in Washington</div>
+      <h2>This Story Belongs to <em>D.C.</em></h2>
+      <p class="muted">Washington, D.C. has always been at the center of the Miller family's story.</p>
+      <p class="muted">Mrs. Miller was born here, attended Dunbar High School and Howard University, and raised her children with Luther in Washington. It was also here that she successfully challenged an educational system that denied Black Deaf children access to schooling available to white Deaf students in the District.</p>
+      <p class="muted">For the Miller family, Washington was also home to the everyday traditions that brought people together. Meals were prepared, family gathered, and recipes were passed from one generation to the next.</p>
+      <p class="muted">There were also trips to visit family in Virginia's Tidewater region and Williamsburg, where relatives spent time together and, inevitably, found themselves gathered around something good to eat.</p>
+      <p class="muted">Mrs. Miller brought that spirit of family and hospitality into her own Washington home. YAM JAM comes from that tradition and remains connected to the family and city in which it began.</p>
+    </div>
+    <div class="reveal">
+      <div class="kitchen-img"><img src="../images/family.jpg" alt="The Miller family" style="aspect-ratio:4/3"></div>
+      <div class="quote">“Now you can bring a little of our family table to yours.”<cite>The Miller Family</cite></div>
+      <p class="muted">The label brings these details together so that the jar reflects more than the recipe inside. It carries pieces of a woman's life and a family's memories into the next generation.</p>
+      <div class="hero-actions"><a href="#home" class="btn btn-ghost">Read the Label Again</a><a href="#shop" class="btn btn-amber">Shop Yam Jam</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSISTANT CTA -->
+<section class="pad" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="card always reveal">
+      <div>
+        <div class="kick">Someone's always in the kitchen</div>
+        <h2 style="font-size:2.6rem">Ask the Miller <em>Kitchen</em></h2>
+        <p class="muted">Talk or type to our assistant any hour. Ask how to use YAM JAM, what's in the jar, or about Mrs. Miller and her story.</p>
+        <div class="qs" id="ctaQs"></div>
+        <div class="hero-actions"><button class="btn btn-amber" onclick="openAssist()">Talk to the Kitchen</button></div>
+      </div>
+      <div class="orb orb-lg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 SHOP -->
+<section class="pad" id="shop">
+  <div class="wrap">
+    <div class="kick" style="text-align:center">Shop Yam Jam</div>
+    <h2 style="text-align:center;margin-bottom:3rem">Bring YAM JAM to Your <em>Table</em></h2>
+    <div class="card shop reveal">
+      <img src="../images/bottles.jpg" alt="YAM JAM 12 oz bottle">
+      <div>
+        <h3 style="font-size:2rem">YAM JAM by Mrs. Miller</h3>
+        <div class="kick" style="margin:0.3rem 0 1.2rem">Sweet Citrus Glaze · 12 oz</div>
+        <p class="muted">YAM JAM is a sweet citrus glaze created from a Miller family recipe that dates back to the mid-1900s in Washington, D.C.</p>
+        <p class="muted">Originally served with sweet potatoes, the sauce has become a family favorite for a variety of foods. Enjoy it with chicken, ham, seafood, roasted vegetables, biscuits, pancakes and desserts.</p>
+        <p class="muted">Whether you're preparing a familiar family recipe or trying something new, YAM JAM is an easy addition to your kitchen.</p>
+        <div class="buy">
+          <div class="price">$ —<small>12 oz Jar · price to be confirmed</small></div>
+          <div class="qty"><button onclick="q(-1)">−</button><input id="qty" value="1" readonly><button onclick="q(1)">+</button></div>
+          <button class="btn btn-amber" onclick="addCart(+document.getElementById('qty').value)">Add to Cart</button>
+        </div>
+        <div class="muted" style="font-size:0.9rem">Nationwide shipping available</div>
+        <details>
+          <summary>View Ingredients &amp; Nutrition</summary>
+          <div class="nut">
+            <div><strong>30</strong><span>Calories</span></div>
+            <div><strong>0g</strong><span>Sat Fat</span></div>
+            <div><strong>80mg</strong><span>Sodium</span></div>
+            <div><strong>6g</strong><span>Total Sugars</span></div>
+          </div>
+          <p class="muted" style="font-size:0.82rem">Per 1 Tbsp (15 mL), from the current label. Product ingredients, nutrition facts, allergens and storage information to be populated from the approved product label.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad signup" id="signup" style="padding-top:2rem">
+  <div class="wrap">
+    <div class="kick">Stay at the Family Table</div>
+    <h2>There's Always Room at the <em>Table</em></h2>
+    <p>Join the Miller family mailing list for recipes, serving ideas, family stories, product announcements and news about YAM JAM.</p>
+    <form onsubmit="event.preventDefault(); this.closest('.signup').classList.add('done');">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <button class="btn btn-amber" type="submit">Save My Seat</button>
+    </form>
+    <div class="confirm">Welcome to the family table</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><a href="#home" class="logo"><i></i>YAM JAM</a><div style="margin-top:0.5rem">YAM JAM by Mrs. Miller · A Washington, D.C. family recipe</div></div>
+      <ul>
+        <li><a href="#story">Our Story</a></li><li><a href="#legacy">Mrs. Miller's Legacy</a></li><li><a href="#howto">How to Yam Jam</a></li><li><a href="#dc">Our D.C. Table</a></li><li><a href="#shop">Shop Yam Jam</a></li><li><a href="#">FAQ</a></li><li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="foot-note"><em>From our table to yours</em>© 2026 YAM JAM by Mrs. Miller · Design concept by Dexton-Livvy LLC</div>
+  </div>
+</footer>
+
+<button class="fab" id="fab" onclick="openAssist()"><div class="orb"></div><span>Ask the Kitchen</span></button>
+
+<div class="assist" id="assist" role="dialog" aria-label="Ask the Miller Kitchen">
+  <div class="assist-top"><span id="timer">00:00</span><button onclick="closeAssist()" aria-label="Close">×</button></div>
+  <div class="assist-hero">
+    <div class="orb" id="orb"></div>
+    <h3>Ask the Miller Kitchen</h3>
+    <p id="assistStatus">Ask anything · Talk or type</p>
+  </div>
+  <div class="log" id="log"></div>
+  <div class="sugg" id="sugg"></div>
+  <form class="assist-bar" id="assistForm">
+    <button type="button" class="round mic" id="micBtn" aria-label="Talk">🎙</button>
+    <input id="assistIn" placeholder="Type a question…" autocomplete="off">
+    <button type="button" class="round end" onclick="closeAssist()" aria-label="End">✕</button>
+  </form>
+  <div class="assist-note">Demo assistant · answers come from the YAM JAM website copy</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- helpers ---------- */
+const $ = id => document.getElementById(id);
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const ease = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function progress(el) { const r = el.getBoundingClientRect(); return clamp(-r.top / (r.height - innerHeight), 0, 1); }
+
+/* ---------- cart ---------- */
+let cart = 0;
+try { cart = +localStorage.getItem('yamjamCart') || 0; } catch (e) {}
+$('cartCount').textContent = cart;
+function q(d) { const i = $('qty'); i.value = Math.max(1, +i.value + d); }
+function addCart(n) {
+  cart += n; $('cartCount').textContent = cart;
+  try { localStorage.setItem('yamjamCart', cart); } catch (e) {}
+  toast(n + ' × YAM JAM added to cart');
+}
+function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 2200); }
+
+/* ---------- 01 label tour ---------- */
+// focus points as fractions of the bottles image, scale = zoom level
+const stops = [
+  { p: 0.00, fx: 0.50, fy: 0.50, s: 1, base: true },
+  { p: 0.12, fx: 0.50, fy: 0.50, s: 1, base: true },
+  { p: 0.30, fx: 0.25, fy: 0.36, s: 2.3, i: 1 },
+  { p: 0.48, fx: 0.26, fy: 0.47, s: 2.3, i: 2 },
+  { p: 0.66, fx: 0.075, fy: 0.62, s: 2.5, i: 3 },
+  { p: 0.84, fx: 0.64, fy: 0.43, s: 2.4, i: 4 },
+  { p: 1.00, fx: 0.64, fy: 0.43, s: 2.4, i: 4 }
+];
+const tour = $('home'), tourImg = $('tourImg'), callouts = [...document.querySelectorAll('.callout')], progDots = [...$('tourProg').children];
+function renderTour() {
+  const p = progress(tour);
+  let a = stops[0], b = stops[stops.length - 1];
+  for (let k = 0; k < stops.length - 1; k++) if (p >= stops[k].p && p <= stops[k + 1].p) { a = stops[k]; b = stops[k + 1]; break; }
+  const t = ease((p - a.p) / ((b.p - a.p) || 1));
+  const mobile = innerWidth <= 1000;
+  const off = st => st.base ? (mobile ? { ox: 0, oy: -0.2, s: 0.62 } : { ox: 0.2, oy: 0, s: 0.92 }) : { ox: 0, oy: 0, s: st.s };
+  const A = off(a), B = off(b);
+  const fx = a.fx + (b.fx - a.fx) * t, fy = a.fy + (b.fy - a.fy) * t, s = A.s + (B.s - A.s) * t;
+  const ox = (A.ox + (B.ox - A.ox) * t) * innerWidth, oy = (A.oy + (B.oy - A.oy) * t) * innerHeight;
+  const W = tourImg.offsetWidth, H = tourImg.offsetHeight;
+  tourImg.style.transform = `translate(${ox - (fx - 0.5) * W * s}px, ${oy - (fy - 0.5) * H * s}px) scale(${s})`;
+  // which detail is in focus
+  let active = 0;
+  stops.forEach(st => { if (st.i && Math.abs(p - st.p) < 0.07) active = st.i; });
+  if (p > 0.84) active = 4;
+  callouts.forEach(c => c.classList.toggle('on', +c.dataset.i === active));
+  progDots.forEach((d, j) => d.classList.toggle('on', j + 1 === active));
+  $('dot').style.opacity = active ? 1 : 0;
+  const heroOp = clamp(1 - (p - 0.06) / 0.08, 0, 1);
+  $('heroCopy').style.opacity = heroOp; $('heroCopy').style.pointerEvents = heroOp < 0.2 ? 'none' : '';
+  $('scrollHint').style.opacity = heroOp;
+  $('tourTitle').classList.toggle('on', p > 0.16);
+}
+
+/* ---------- 02 then & now ---------- */
+const milestones = [
+  { y: '1916', t: 'Born in Washington, D.C.', d: 'Mrs. Louise B. Miller was born in Washington, D.C. in 1916 and grew up in a family where education, hard work and gathering mattered.' },
+  { y: 'Mid-1900s', t: 'YAM JAM in her kitchen', d: 'First created in Mrs. Louise B. Miller\'s Washington, D.C. kitchen in the mid-1900s, YAM JAM became a family favorite, particularly on the sweet potatoes served at family gatherings.' },
+  { y: '1952', t: 'Miller v. Board of Education', d: 'In 1952, she became the lead plaintiff in Miller v. Board of Education of the District of Columbia, a federal lawsuit brought on behalf of her son Kenneth and other Black Deaf children who had been excluded from Kendall School.' },
+  { y: '1953', t: 'Kendall School Division II', d: 'The decision led to the establishment of Kendall School Division II on Gallaudet\'s campus in 1953, allowing Black Deaf children to attend school in Washington rather than being sent to Maryland.' },
+  { y: '2025', t: 'Louise B. Miller Way', d: 'In 2025, Washington, D.C. ceremonially renamed the 1200 block of T Street NW between 12th and 13th Streets Louise B. Miller Way.' },
+  { y: 'Today', t: 'From her table to yours', d: 'The sweet citrus sauce became part of the family\'s meals and eventually passed from Mrs. Miller to her daughter and then to another generation. Today, her family has bottled the citrus sauce as YAM JAM by Mrs. Miller, bringing a cherished family recipe to tables beyond their own.' }
+];
+const then = $('story'); let msIdx = -1;
+milestones.forEach(() => { const i = document.createElement('i'); i.appendChild(document.createElement('b')); $('msBar').appendChild(i); });
+const bars = [...$('msBar').querySelectorAll('b')];
+function renderThen() {
+  const p = progress(then), n = milestones.length;
+  const f = p * n, idx = clamp(Math.floor(f), 0, n - 1);
+  bars.forEach((b, j) => b.style.transform = `scaleX(${clamp(f - j, 0, 1)})`);
+  if (idx !== msIdx) {
+    msIdx = idx; const m = milestones[idx];
+    ['msYear', 'msTitle', 'msText'].forEach(id => $(id).style.opacity = 0);
+    setTimeout(() => { $('msYear').textContent = m.y; $('msTitle').textContent = m.t; $('msText').textContent = m.d; ['msYear', 'msTitle', 'msText'].forEach(id => $(id).style.opacity = 1); }, 160);
+  }
+  const now = clamp((p - 0.7) / 0.2, 0, 1);
+  $('nowImg').style.opacity = now; $('grain').style.opacity = 1 - now;
+  $('stamp').textContent = now > 0.5 ? 'The Miller family today' : 'Mrs. Louise B. Miller';
+}
+
+/* ---------- glaze dial ---------- */
+const dripDefs = [
+  'M24 40 C28 30 33 30 35 38 C37 46 41 46 43 36 C45 26 50 26 52 35 C54 44 58 44 60 34 C62 26 67 27 69 36 C71 44 74 43 76 36',
+  'M27 48 C31 40 35 40 38 47 C41 54 45 53 48 45 C51 37 55 37 58 45 C61 52 65 52 68 44 C70 39 73 40 75 45',
+  'M43 36 C43 41 42 46 43 52', 'M60 34 C60 40 61 47 60 55 C60 58 61 60 62 62', 'M76 36 C77 42 77 50 79 58 C80 61 81 63 82 64'
+];
+const dripG = $('drips'), drips = [];
+dripDefs.forEach((d, k) => {
+  const w = k < 2 ? 2.6 : 1.9;
+  const base = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  base.setAttribute('d', d); base.setAttribute('stroke', 'url(#gz)'); base.setAttribute('stroke-width', w); base.setAttribute('opacity', '0.82');
+  const hi = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  hi.setAttribute('d', d); hi.setAttribute('stroke', 'rgba(255,245,215,0.75)'); hi.setAttribute('stroke-width', w * 0.22); hi.setAttribute('transform', 'translate(-0.5 -0.3)');
+  dripG.append(base, hi); drips.push([base, hi]);
+});
+drips.forEach(pair => pair.forEach(el => { const L = el.getTotalLength(); el.dataset.l = L; el.style.strokeDasharray = L; el.style.strokeDashoffset = L; }));
+let glaze = 0;
+function setGlaze(v) {
+  glaze = clamp(Math.round(v), 0, 100);
+  const t = glaze / 100;
+  drips.forEach((pair, k) => {
+    const start = k < 2 ? k * 0.15 : 0.35 + (k - 2) * 0.1, local = clamp((t - start) / 0.55, 0, 1);
+    pair.forEach(el => el.style.strokeDashoffset = el.dataset.l * (1 - local));
+  });
+  const pool = $('pool'); pool.setAttribute('rx', 14 * clamp((t - 0.55) / 0.45, 0, 1)); pool.setAttribute('ry', 3 * clamp((t - 0.55) / 0.45, 0, 1));
+  $('sheen').style.opacity = t; $('coat').setAttribute('opacity', 0.38 * t);
+  $('glazeImg').style.filter = `saturate(${0.75 + t * 0.45}) brightness(${0.92 + t * 0.1})`;
+  const arcLen = 377 * t; $('arc').setAttribute('stroke-dasharray', `${arcLen} 503`);
+  const ang = (135 + 270 * t) * Math.PI / 180; $('knob').setAttribute('cx', 100 + 80 * Math.cos(ang)); $('knob').setAttribute('cy', 100 + 80 * Math.sin(ang));
+  $('dialNum').textContent = glaze + '%';
+  const lbl = glaze === 0 ? 'Plain' : glaze < 35 ? 'A drizzle' : glaze < 75 ? 'Glazed' : 'Fully glazed';
+  $('dialLbl').textContent = lbl; $('glazeBadge').textContent = glaze ? lbl : 'Try it';
+  $('dial').setAttribute('aria-valuenow', glaze);
+}
+const dial = $('dial');
+function dialFromEvent(e) {
+  const r = dial.getBoundingClientRect(), x = e.clientX - (r.left + r.width / 2), y = e.clientY - (r.top + r.height / 2);
+  let a = Math.atan2(y, x) * 180 / Math.PI; a = (a - 135 + 360) % 360; if (a > 270) a = a > 315 ? 0 : 270;
+  setGlaze(a / 270 * 100);
+}
+dial.addEventListener('pointerdown', e => { dial.setPointerCapture(e.pointerId); dialFromEvent(e); });
+dial.addEventListener('pointermove', e => { if (dial.hasPointerCapture(e.pointerId)) dialFromEvent(e); });
+dial.addEventListener('keydown', e => { if (['ArrowRight', 'ArrowUp'].includes(e.key)) { setGlaze(glaze + 5); e.preventDefault(); } if (['ArrowLeft', 'ArrowDown'].includes(e.key)) { setGlaze(glaze - 5); e.preventDefault(); } });
+setGlaze(0);
+// pour a little on its own the first time the dish scrolls into view
+new IntersectionObserver((en, obs) => { if (en[0].isIntersecting && glaze === 0) { obs.disconnect(); let v = 0; const tick = () => { v += 1.2; setGlaze(v); if (v < 45 && !reduced) requestAnimationFrame(tick); else setGlaze(45); }; setTimeout(tick, 500); } }, { threshold: 0.6 }).observe($('glazeStage'));
+
+/* ---------- dish picker ---------- */
+const uses = [
+  { t: 'Sweet Potatoes', img: 'sweet-potato.jpg', m: ['The original', 'Holiday dinner'], d: 'The original family favorite. Pour YAM JAM over warm sweet potatoes for the sweet citrus flavor that has been part of Miller family meals since the mid-1900s.' },
+  { t: 'Ham & Roasts', img: 'ham.jpg', m: ['Holiday dinner'], d: 'Brush YAM JAM over ham or your favorite roast as it cooks, or add it toward the end for a glossy finish and a little citrus sweetness.' },
+  { t: 'Chicken', img: 'chicken.jpg', m: ['Weeknight', 'Glaze or marinade'], d: 'Use YAM JAM as a glaze, incorporate it into a marinade, or brush it over cooked chicken just before serving. Its sweetness works especially well with roasted or grilled dishes.' },
+  { t: 'Seafood', img: 'shrimp.jpg', m: ['Weeknight', 'Finishing glaze'], d: 'Try YAM JAM with salmon, shrimp or your favorite fish. Its citrus flavor makes a wonderful complement to seafood, whether brushed on during cooking or added as a finishing glaze.' },
+  { t: 'Vegetables', img: null, m: ['Weeknight', 'Holiday dinner'], d: 'Roasted carrots, Brussels sprouts, squash and other vegetables are delicious with a little YAM JAM. Add it toward the end of roasting or drizzle it over vegetables before serving.' },
+  { t: 'Biscuits & Breakfast', img: 'biscuits.jpg', m: ['Breakfast'], d: 'Warm biscuits, pancakes, French toast and other breakfast favorites are an easy way to enjoy YAM JAM. Try a little in place of your usual syrup or fruit topping.' },
+  { t: 'Desserts', img: 'pound-cake.jpg', m: ['Dessert'], d: 'Drizzle YAM JAM over pound cake, ice cream or a favorite dessert when you want to add a sweet citrus finish. It also pairs beautifully with simple desserts that allow its flavor to stand out.' }
+];
+let dishIdx = 0;
+function showDish(i) {
+  dishIdx = i; const u = uses[i];
+  [...$('chips').children].forEach((c, j) => c.classList.toggle('on', j === i));
+  $('dishTitle').textContent = u.t; $('dishText').textContent = u.d;
+  $('dishMoment').innerHTML = u.m.map(x => `<span>${x}</span>`).join('');
+  const img = $('dishImg');
+  if (u.img) { img.style.opacity = 0; setTimeout(() => { img.src = '../images/' + u.img; img.alt = u.t; img.style.opacity = 1; img.hidden = false; }, 180); $('dishSoon').hidden = true; }
+  else { img.hidden = true; $('dishSoon').hidden = false; }
+}
+uses.forEach((u, i) => { const b = document.createElement('button'); b.className = 'chip'; b.textContent = u.t; b.onclick = () => showDish(i); $('chips').appendChild(b); });
+showDish(0);
+$('dishAsk').onclick = () => { openAssist(); ask('How do I use YAM JAM on ' + uses[dishIdx].t.toLowerCase() + '?'); };
+
+/* ---------- table planner ---------- */
+const SERVINGS_PER_JAR = 23;
+function plan() {
+  const g = +$('guests').value, t = +$('tbsp').value, jars = Math.max(1, Math.ceil(g * t / SERVINGS_PER_JAR));
+  $('gOut').textContent = g; $('tOut').textContent = t;
+  [$('guests'), $('tbsp')].forEach(r => r.style.setProperty('--fill', ((r.value - r.min) / (r.max - r.min) * 100) + '%'));
+  $('jarOut').textContent = jars + (jars === 1 ? ' jar' : ' jars');
+  const row = $('jarRow');
+  if (row.children.length !== jars) { row.innerHTML = ''; for (let k = 0; k < jars; k++) { const j = document.createElement('div'); j.className = 'jar'; j.style.animationDelay = k * 0.05 + 's'; row.appendChild(j); } }
+  $('jarAdd').textContent = `Add ${jars} to Cart`; $('jarAdd').dataset.n = jars;
+}
+$('guests').oninput = plan; $('tbsp').oninput = plan; plan();
+$('jarAdd').onclick = () => addCart(+$('jarAdd').dataset.n);
+
+/* ---------- assistant (scripted demo, voice where the browser supports it) ---------- */
+const kb = [
+  { k: ['what is', 'what\'s yam jam', 'taste', 'flavor', 'glaze', 'sauce'], a: 'YAM JAM is a sweet citrus glaze created from a Miller family recipe that dates back to the mid-1900s in Washington, D.C. Glaze your chicken, drizzle it over seafood, add something special to roasted vegetables, or bring a sweet citrus finish to breakfast and dessert.' },
+  { k: ['sweet potato', 'yam', 'original'], a: 'Sweet potatoes are the original family favorite. Pour YAM JAM over warm sweet potatoes for the sweet citrus flavor that has been part of Miller family meals since the mid-1900s.' },
+  { k: ['ham', 'roast'], a: 'Brush YAM JAM over ham or your favorite roast as it cooks, or add it toward the end for a glossy finish and a little citrus sweetness.' },
+  { k: ['chicken', 'wing', 'marinade', 'grill'], a: 'Use YAM JAM as a glaze, incorporate it into a marinade, or brush it over cooked chicken just before serving. Its sweetness works especially well with roasted or grilled dishes.' },
+  { k: ['seafood', 'salmon', 'shrimp', 'fish'], a: 'Try YAM JAM with salmon, shrimp or your favorite fish. Its citrus flavor makes a wonderful complement to seafood, whether brushed on during cooking or added as a finishing glaze.' },
+  { k: ['vegetable', 'carrot', 'brussels', 'squash'], a: 'Roasted carrots, Brussels sprouts, squash and other vegetables are delicious with a little YAM JAM. Add it toward the end of roasting or drizzle it over vegetables before serving.' },
+  { k: ['biscuit', 'breakfast', 'pancake', 'french toast', 'syrup'], a: 'Warm biscuits, pancakes, French toast and other breakfast favorites are an easy way to enjoy YAM JAM. Try a little in place of your usual syrup or fruit topping.' },
+  { k: ['dessert', 'cake', 'ice cream', 'pound'], a: 'Drizzle YAM JAM over pound cake, ice cream or a favorite dessert when you want to add a sweet citrus finish.' },
+  { k: ['who', 'mrs. miller', 'mrs miller', 'louise', 'grandma', 'founder', 'story'], a: 'Mrs. Louise B. Miller was born in Washington, D.C. in 1916. She graduated from Paul Laurence Dunbar High School, entered Howard University, and with her husband, Luther, raised four children in Washington. She was a gifted seamstress and an extraordinary cook, and YAM JAM was one of the things she was known for having on the table.' },
+  { k: ['lawsuit', 'court', 'legacy', 'deaf', 'kendall', 'school', 'gallaudet', 'brown', 'case', '1952'], a: 'In 1952, Mrs. Miller became the lead plaintiff in Miller v. Board of Education of the District of Columbia, on behalf of her son Kenneth and other Black Deaf children excluded from Kendall School. On July 3, 1952, the court ruled in favor of the children, which led to Kendall School Division II opening on Gallaudet\'s campus in 1953. That was two years before Brown v. Board of Education.' },
+  { k: ['street', 'way', 't street', 'renamed', 'honor'], a: 'In 2025, Washington, D.C. ceremonially renamed the 1200 block of T Street NW, between 12th and 13th Streets, Louise B. Miller Way. Gallaudet University is also commemorating her through the Louise B. Miller Pathways and Gardens project.' },
+  { k: ['name', 'called', 'why yam jam'], a: 'The Miller family never needed to come up with a name for the sauce. It had always been YAM JAM, because Mrs. Miller originally made it for sweet potatoes.' },
+  { k: ['label', 'violet', 'stitch', 'flower', 'jar design'], a: 'The label honors Mrs. Miller: the stitching recalls her work as a master seamstress, the African violets were among her favorite flowers, and her photograph puts the woman behind the recipe at the center of the jar.' },
+  { k: ['price', 'cost', 'how much', 'buy', 'order', 'shop'], a: 'YAM JAM comes in a 12 oz jar. Final retail pricing is still being confirmed, and you can add it to your cart on the Shop section of this page.' },
+  { k: ['ship', 'deliver'], a: 'Nationwide shipping is available.' },
+  { k: ['size', 'ounce', 'oz', 'big'], a: 'Each jar is 12 ounces (355 mL), about 23 one-tablespoon servings.' },
+  { k: ['ingredient', 'allergen', 'gluten', 'vegan', 'nutrition', 'calorie', 'sugar', 'store', 'refrigerat'], a: 'Per 1 tablespoon, the label lists 30 calories, 0 g saturated fat, 80 mg sodium and 6 g total sugars. Full ingredients, allergen and storage information will be posted from the approved product label.' },
+  { k: ['d.c', 'dc', 'washington', 'where'], a: 'YAM JAM began in Mrs. Miller\'s Washington, D.C. home. Washington has always been at the center of the Miller family\'s story, and YAM JAM remains connected to the family and city in which it began.' },
+  { k: ['hello', 'hi', 'hey'], a: 'Hi, welcome to the Miller family kitchen. Ask me how to use YAM JAM, what\'s in the jar, or about Mrs. Miller.' }
+];
+const suggestions = ['What is YAM JAM?', 'How do I use it on chicken?', 'Who was Mrs. Miller?', 'Tell me about her legacy', 'Do you ship?'];
+function answer(qText) {
+  const t = ' ' + qText.toLowerCase() + ' ';
+  let best = null, score = 0;
+  kb.forEach(e => { const s = e.k.reduce((n, k) => n + (t.includes(k) ? k.length : 0), 0); if (s > score) { score = s; best = e; } });
+  return best ? best.a : 'I\'m a demo assistant, so I only know what\'s on this website. Try asking how to use YAM JAM, about Mrs. Miller, or about shipping.';
+}
+function addMsg(text, who) { const m = document.createElement('div'); m.className = 'msg ' + who; m.textContent = text; $('log').appendChild(m); $('log').scrollTop = 1e6; }
+function speak(text) {
+  if (!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text); u.rate = 1; u.pitch = 1;
+  u.onstart = () => { $('orb').classList.add('speaking'); $('assistStatus').textContent = 'Speaking…'; };
+  u.onend = () => { $('orb').classList.remove('speaking'); $('assistStatus').textContent = 'Ask anything · Talk or type'; };
+  speechSynthesis.speak(u);
+}
+let voiceOn = false;
+function ask(text) { if (!text.trim()) return; addMsg(text, 'me'); const a = answer(text); setTimeout(() => { addMsg(a, 'bot'); if (voiceOn) speak(a); }, 350); }
+let timerInt, secs = 0;
+function openAssist() {
+  const a = $('assist'); if (a.classList.contains('open')) return;
+  a.classList.add('open'); $('fab').style.display = 'none';
+  if (!$('log').children.length) addMsg('Hi, welcome to the Miller family kitchen. Ask me how to use YAM JAM, what\'s in the jar, or about Mrs. Miller.', 'bot');
+  secs = 0; $('timer').textContent = '00:00';
+  timerInt = setInterval(() => { secs++; $('timer').textContent = String(Math.floor(secs / 60)).padStart(2, '0') + ':' + String(secs % 60).padStart(2, '0'); }, 1000);
+  $('assistIn').focus({ preventScroll: true });
+}
+function closeAssist() { $('assist').classList.remove('open'); $('fab').style.display = ''; clearInterval(timerInt); if ('speechSynthesis' in window) speechSynthesis.cancel(); stopListen(); }
+suggestions.forEach(s => {
+  const b = document.createElement('button'); b.type = 'button'; b.textContent = s; b.onclick = () => ask(s); $('sugg').appendChild(b);
+  const c = document.createElement('button'); c.className = 'chip'; c.textContent = s; c.onclick = () => { openAssist(); ask(s); }; $('ctaQs').appendChild(c);
+});
+$('assistForm').addEventListener('submit', e => { e.preventDefault(); ask($('assistIn').value); $('assistIn').value = ''; });
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition; let rec = null;
+function stopListen() { if (rec) { try { rec.stop(); } catch (e) {} } $('micBtn').classList.remove('on'); $('orb').classList.remove('listening'); }
+$('micBtn').onclick = () => {
+  voiceOn = true;
+  if (!SR) { addMsg('Voice input isn\'t supported in this browser, so type your question and I\'ll read the answer aloud.', 'bot'); return; }
+  if ($('micBtn').classList.contains('on')) { stopListen(); return; }
+  rec = new SR(); rec.lang = 'en-US'; rec.interimResults = false;
+  rec.onresult = e => ask(e.results[0][0].transcript);
+  rec.onend = stopListen; rec.onerror = stopListen;
+  rec.start(); $('micBtn').classList.add('on'); $('orb').classList.add('listening'); $('assistStatus').textContent = 'Listening…';
+};
+
+/* ---------- scroll wiring ---------- */
+function onScroll() { renderTour(); renderThen(); $('nav').classList.toggle('solid', scrollY > 40); }
+addEventListener('scroll', () => requestAnimationFrame(onScroll), { passive: true });
+addEventListener('resize', onScroll);
+tourImg.complete ? onScroll() : tourImg.addEventListener('load', onScroll);
+const io = new IntersectionObserver(en => en.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }), { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+document.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => document.querySelector('.links').classList.remove('open')));
+</script>
+</body>
+</html>
