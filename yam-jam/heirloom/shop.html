@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop Yam Jam — YAM JAM by Mrs. Miller</title>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --violet: #5B2A86; --violet-dk: #3B1658; --violet-lt: #EFE6F6;
+    --cream: #FBF4E6; --paper: #FFFBF3; --honey: #D98A1E; --honey-lt: #F6DDB0;
+    --leaf: #3E6B35; --ink: #2B2130; --muted: #6E6273;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.7; font-size: 17px; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.15; color: var(--violet-dk); }
+  h2 { font-size: 2.7rem; margin-bottom: 1.4rem; }
+  h3 { font-size: 1.35rem; margin-bottom: 0.5rem; }
+  p + p { margin-top: 1rem; }
+  .eyebrow { font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--honey); font-weight: 700; margin-bottom: 0.9rem; }
+  .script { font-family: 'Alex Brush', cursive; font-weight: 400; }
+  .stitch { border: 2px dashed rgba(91,42,134,0.35); border-radius: 18px; }
+
+  .btn { display: inline-block; text-decoration: none; padding: 0.95rem 1.9rem; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 999px; transition: all 0.2s; cursor: pointer; border: none; font-family: inherit; }
+  .btn-violet { background: var(--violet); color: #fff; }
+  .btn-violet:hover { background: var(--violet-dk); }
+  .btn-line { border: 2px solid var(--violet); color: var(--violet); background: transparent; }
+  .btn-line:hover { background: var(--violet); color: #fff; }
+  .btn-honey { background: var(--honey); color: #fff; }
+  .btn-honey:hover { background: #B8720F; }
+
+  /* NAV */
+  .announce { background: var(--violet-dk); color: var(--honey-lt); text-align: center; font-size: 0.85rem; padding: 0.55rem 1rem; letter-spacing: 0.04em; }
+  nav { background: rgba(251,244,230,0.96); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 50; box-shadow: 0 1px 0 rgba(91,42,134,0.08); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 82px; gap: 1rem; }
+  .brand { text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
+  .brand .script { font-size: 2.5rem; color: var(--violet); }
+  .brand small { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--violet-dk); font-weight: 700; margin-top: -0.1rem; padding-left: 0.3rem; }
+  .links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+  .links a { text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+  .links a:hover { color: var(--violet); }
+  .cart { position: relative; display: inline-flex; align-items: center; gap: 0.4rem; }
+  .cart-count { background: var(--honey); color: #fff; font-size: 0.7rem; font-weight: 700; min-width: 20px; height: 20px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; }
+  .menu-btn { display: none; background: none; border: none; font-size: 1.6rem; color: var(--violet); cursor: pointer; }
+
+  /* HERO */
+  .hero { padding: 4.5rem 0 5.5rem; position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3.5rem; align-items: center; }
+  .hero h1 { font-size: 1.2rem; font-family: 'Source Sans 3', sans-serif; letter-spacing: 0.22em; text-transform: uppercase; color: var(--honey); font-weight: 700; margin-bottom: 0.6rem; }
+  .hero .meet { font-family: 'Alex Brush', cursive; font-size: 5.2rem; white-space: nowrap; line-height: 0.95; color: var(--violet); display: block; margin-bottom: 0.4rem; }
+  .hero .tagline { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--violet-dk); line-height: 1.2; margin-bottom: 1.6rem; }
+  .hero p { color: var(--muted); max-width: 520px; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.2rem; }
+  .hero-img { position: relative; }
+  .hero-img .frame { border-radius: 260px 260px 24px 24px; overflow: hidden; aspect-ratio: 4/5; background: var(--paper); box-shadow: 0 30px 60px rgba(59,22,88,0.18); }
+  .hero-img .frame img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-chip { position: absolute; left: -1.6rem; bottom: 2.4rem; background: var(--paper); padding: 1rem 1.3rem; border-radius: 16px; box-shadow: 0 14px 40px rgba(59,22,88,0.16); display: flex; gap: 0.9rem; align-items: center; }
+  .hero-chip img { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; object-position: top; filter: sepia(0.3); }
+  .hero-chip strong { display: block; font-family: 'Playfair Display', serif; color: var(--violet-dk); font-size: 1.05rem; }
+  .hero-chip span { font-size: 0.82rem; color: var(--muted); }
+
+  /* FROM KITCHEN */
+  .kitchen { background: var(--paper); padding: 6rem 0; }
+  .kitchen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5rem; align-items: center; }
+  .kitchen-img img { border-radius: 24px; aspect-ratio: 4/5; object-fit: cover; width: 100%; }
+  .kitchen .sub { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--violet); margin-bottom: 1.2rem; }
+
+  /* STORY */
+  .story { padding: 7rem 0; }
+  .story-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 5rem; align-items: start; }
+  .story-photo { position: sticky; top: 110px; }
+  .story-photo img { border-radius: 20px; width: 100%; aspect-ratio: 3/4; object-fit: cover; filter: sepia(0.15); }
+  .story-photo figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.8rem; text-align: center; font-style: italic; }
+  .quote { margin: 2.5rem 0; padding: 2rem 2.2rem; background: var(--violet-lt); border-radius: 18px; }
+  .quote blockquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.45rem; color: var(--violet-dk); line-height: 1.45; }
+  .quote cite { display: block; font-style: normal; font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-top: 0.9rem; }
+  .recipe { margin-top: 5rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; }
+  .recipe-img img { border-radius: 20px; width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+
+  /* LEGACY */
+  .legacy { background: var(--violet-dk); color: #EDE3F3; padding: 7rem 0; }
+  .legacy h2, .legacy h3 { color: #fff; }
+  .legacy .eyebrow { color: var(--honey-lt); }
+  .legacy-intro { max-width: 760px; margin-bottom: 4rem; }
+  .legacy-intro .lead { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--honey-lt); line-height: 1.5; }
+  .legacy-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; }
+  .legacy-body p { color: #DCCDE6; }
+  .legacy-side { display: flex; flex-direction: column; gap: 1.2rem; }
+  .fact { background: rgba(255,255,255,0.06); border-radius: 18px; padding: 1.6rem 1.8rem; }
+  .fact .yr { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--honey); line-height: 1; margin-bottom: 0.4rem; }
+  .fact p { font-size: 0.95rem; color: #DCCDE6; }
+  .honors { margin-top: 5rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+  .honor { background: rgba(255,255,255,0.06); border-radius: 18px; padding: 2rem; }
+  .honor p { font-size: 0.96rem; color: #DCCDE6; }
+  .legacy-photo { margin-top: 4rem; border-radius: 22px; overflow: hidden; position: relative; }
+  .legacy-photo img { width: 100%; aspect-ratio: 21/9; object-fit: cover; object-position: center 35%; }
+  .legacy-photo span { position: absolute; left: 1.5rem; bottom: 1.2rem; background: rgba(59,22,88,0.8); color: #fff; padding: 0.4rem 0.9rem; border-radius: 999px; font-size: 0.8rem; }
+
+  /* HOW TO */
+  .howto { padding: 7rem 0; }
+  .howto-head { text-align: center; max-width: 760px; margin: 0 auto 3.5rem; }
+  .howto-head p { color: var(--muted); }
+  .uses { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; }
+  .use { background: var(--paper); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s, box-shadow 0.25s; }
+  .use:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(59,22,88,0.12); }
+  .use img { aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+  .use .noimg { aspect-ratio: 4/3; background: linear-gradient(135deg, #E9A23B, #D9792B 50%, #3E6B35); display: flex; align-items: center; justify-content: center; color: #fff; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; }
+  .use-body { padding: 1.3rem 1.4rem 1.6rem; }
+  .use-body p { font-size: 0.93rem; color: var(--muted); }
+  .use.feature { grid-column: span 2; grid-row: span 2; }
+  .use.wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+  .use.wide img { aspect-ratio: auto; height: 100%; }
+  .use.feature img { aspect-ratio: auto; flex: 1; min-height: 280px; }
+  .use.feature .badge { display: inline-block; background: var(--violet); color: #fff; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 999px; margin-bottom: 0.6rem; font-weight: 700; }
+  .center { text-align: center; margin-top: 3rem; }
+
+  /* DC TABLE */
+  .dc { background: var(--paper); padding: 7rem 0; }
+  .dc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5rem; align-items: center; }
+  .dc-img img { border-radius: 22px; width: 100%; aspect-ratio: 3/2; object-fit: cover; }
+  .label-sec { margin-top: 6rem; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 4rem; align-items: start; }
+  .label-pics { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .label-pics button { border: none; padding: 0; background: none; cursor: zoom-in; border-radius: 14px; overflow: hidden; position: relative; }
+  .label-pics img { width: 100%; aspect-ratio: 470/880; object-fit: cover; transition: transform 0.4s; }
+  .label-pics button:hover img { transform: scale(1.04); }
+  .label-pics button span { position: absolute; bottom: 0.7rem; left: 50%; transform: translateX(-50%); background: rgba(59,22,88,0.85); color: #fff; font-size: 0.72rem; padding: 0.3rem 0.8rem; border-radius: 999px; white-space: nowrap; }
+  .details { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 1.8rem 0; }
+  .detail { padding: 1.4rem 1.5rem; }
+  .detail p { font-size: 0.93rem; color: var(--muted); }
+
+  /* SHOP */
+  .shop { padding: 7rem 0; }
+  .shop-card { background: var(--paper); border-radius: 28px; padding: 3.5rem; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4rem; align-items: center; }
+  .shop-img { background: var(--cream); border-radius: 20px; overflow: hidden; }
+  .shop-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+  .shop-sub { font-weight: 600; color: var(--honey); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 1.2rem; }
+  .shop-body p { color: var(--muted); }
+  .buy { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; margin: 2rem 0 0.8rem; }
+  .size { padding: 0.55rem 1.1rem; border: 2px solid var(--violet); border-radius: 999px; font-weight: 700; color: var(--violet); font-size: 0.9rem; }
+  .price { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--violet-dk); }
+  .price small { font-family: 'Source Sans 3', sans-serif; font-size: 0.75rem; color: var(--muted); display: block; letter-spacing: 0.05em; }
+  .qty { display: inline-flex; border: 2px solid #E2D6EA; border-radius: 999px; overflow: hidden; }
+  .qty button { background: none; border: none; width: 40px; font-size: 1.1rem; cursor: pointer; color: var(--violet); }
+  .qty input { width: 40px; border: none; text-align: center; font: inherit; font-weight: 700; background: transparent; }
+  .ship { font-size: 0.9rem; color: var(--leaf); font-weight: 600; }
+  details { margin-top: 1.6rem; background: var(--cream); border-radius: 14px; padding: 1rem 1.3rem; }
+  summary { cursor: pointer; font-weight: 700; color: var(--violet-dk); letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.85rem; }
+  .nut { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin: 1rem 0 0.8rem; text-align: center; }
+  .nut div { background: var(--paper); border-radius: 10px; padding: 0.7rem 0.4rem; }
+  .nut strong { display: block; font-size: 1.25rem; color: var(--violet-dk); }
+  .nut span { font-size: 0.75rem; color: var(--muted); }
+  .note { font-size: 0.85rem; color: var(--muted); font-style: italic; }
+
+  /* SIGNUP */
+  .signup { background: var(--violet); color: #fff; padding: 5.5rem 0; text-align: center; position: relative; overflow: hidden; }
+  .signup h2 { color: #fff; }
+  .signup .eyebrow { color: var(--honey-lt); }
+  .signup p { color: #E6D9EF; max-width: 560px; margin: 0 auto 2rem; }
+  .signup form { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; max-width: 720px; margin: 0 auto; }
+  .signup input { padding: 0.95rem 1.3rem; border-radius: 999px; border: none; font: inherit; min-width: 230px; flex: 1; }
+  .confirm { display: none; font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--honey-lt); }
+  .signup.done form { display: none; }
+  .signup.done .confirm { display: block; }
+
+  /* FOOTER */
+  footer { background: var(--violet-dk); color: #CDBBD9; padding: 4rem 0 2.5rem; }
+  .foot { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; align-items: flex-start; }
+  .foot .script { font-size: 2.8rem; color: #fff; line-height: 1; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; max-width: 520px; list-style: none; }
+  .foot-links a { text-decoration: none; font-size: 0.95rem; }
+  .foot-links a:hover { color: #fff; }
+  .foot-bottom { margin-top: 3rem; font-size: 0.85rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; color: #A893B8; }
+  .foot-bottom em { font-family: 'Playfair Display', serif; color: var(--honey-lt); font-size: 1.05rem; }
+
+  /* LIGHTBOX */
+  .lightbox { position: fixed; inset: 0; background: rgba(30,12,44,0.9); z-index: 200; display: none; align-items: center; justify-content: center; padding: 2rem; cursor: zoom-out; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-height: 92vh; border-radius: 12px; }
+  .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translate(-50%, 150%); background: var(--ink); color: #fff; padding: 0.9rem 1.5rem; border-radius: 999px; font-size: 0.92rem; transition: transform 0.3s; z-index: 210; }
+  .toast.show { transform: translate(-50%, 0); }
+
+  @media (max-width: 980px) {
+    .links { display: none; position: absolute; top: 82px; left: 0; right: 0; background: var(--cream); flex-direction: column; padding: 1.5rem; gap: 1rem; box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
+    .links.open { display: flex; }
+    .menu-btn { display: block; }
+    .hero-grid, .kitchen-grid, .story-grid, .recipe, .legacy-grid, .dc-grid, .label-sec, .shop-card { grid-template-columns: 1fr; gap: 2.5rem; }
+    .story-photo { position: static; }
+    .uses { grid-template-columns: 1fr 1fr; }
+    .honors { grid-template-columns: 1fr; }
+    .hero .meet { font-size: 4.4rem; }
+    h2 { font-size: 2.1rem; }
+    .shop-card { padding: 1.6rem; }
+    .hero-chip { left: 0.8rem; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 1rem; }
+    .uses, .details { grid-template-columns: 1fr; }
+    .hero .meet { font-size: 3.4rem; white-space: normal; }
+    .use.feature, .use.wide { grid-column: auto; grid-row: auto; }
+    .use.wide { display: flex; }
+    .nut { grid-template-columns: 1fr 1fr; }
+  }
+  :is(.links, .nav-l, .nav-r) a[aria-current="page"]:not(.btn):not(.cart-btn):not(.bag) { color: var(--violet); text-decoration: underline; text-underline-offset: 8px; text-decoration-thickness: 2px; }
+</style>
+</head>
+<body>
+
+<div class="announce">A Washington, D.C. family recipe shared for generations · Nationwide shipping available</div>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand"><span class="script">Yam Jam</span><small>by Mrs. Miller</small></a>
+    <button class="menu-btn" aria-label="Menu" onclick="document.querySelector('.links').classList.toggle('open')">☰</button>
+    <ul class="links">
+      <li><a href="our-story.html">Our Story</a></li>
+      <li><a href="legacy.html">Mrs. Miller's Legacy</a></li>
+      <li><a href="how-to-yam-jam.html">How to Yam Jam</a></li>
+      <li><a href="dc-table.html">Our D.C. Table</a></li>
+      <li><a href="shop.html" aria-current="page" class="btn btn-violet cart">Shop Yam Jam <span class="cart-count" id="cartCount">0</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- 06 SHOP -->
+<section class="shop" id="shop">
+  <div class="wrap">
+    <div class="howto-head">
+      <div class="eyebrow">Shop Yam Jam</div>
+      <h2>Bring YAM JAM to Your Table</h2>
+    </div>
+    <div class="shop-card">
+      <div class="shop-img"><img src="../images/bottles.jpg" alt="YAM JAM 12 oz bottle"></div>
+      <div class="shop-body">
+        <h2 style="margin-bottom:0.3rem">YAM JAM by Mrs. Miller</h2>
+        <div class="shop-sub">Sweet Citrus Glaze · 12 oz</div>
+        <p>YAM JAM is a sweet citrus glaze created from a Miller family recipe that dates back to the mid-1900s in Washington, D.C.</p>
+        <p>Originally served with sweet potatoes, the sauce has become a family favorite for a variety of foods. Enjoy it with chicken, ham, seafood, roasted vegetables, biscuits, pancakes and desserts.</p>
+        <p>Whether you're preparing a familiar family recipe or trying something new, YAM JAM is an easy addition to your kitchen.</p>
+        <div class="buy">
+          <span class="size">12 oz Jar</span>
+          <div class="price">$ —<small>Price to be confirmed</small></div>
+          <div class="qty"><button onclick="q(-1)">−</button><input id="qty" value="1" readonly><button onclick="q(1)">+</button></div>
+          <button class="btn btn-violet" onclick="addCart()">Add to Cart</button>
+        </div>
+        <div class="ship">✓ Nationwide shipping available</div>
+        <details>
+          <summary>View Ingredients &amp; Nutrition</summary>
+          <div class="nut">
+            <div><strong>30</strong><span>Calories</span></div>
+            <div><strong>0 g</strong><span>Sat Fat</span></div>
+            <div><strong>80 mg</strong><span>Sodium</span></div>
+            <div><strong>6 g</strong><span>Total Sugars</span></div>
+          </div>
+          <p class="note">Nutrition highlights per 1 Tbsp (15 mL), from the current label. Full ingredients, nutrition facts, allergens and storage information to be populated from the approved product label.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="signup" id="signup">
+  <div class="wrap">
+    <div class="eyebrow">Stay at the Family Table</div>
+    <h2>There's Always Room at the Table</h2>
+    <p>Join the Miller family mailing list for recipes, serving ideas, family stories, product announcements and news about YAM JAM.</p>
+    <form onsubmit="event.preventDefault(); this.closest('.signup').classList.add('done');">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <button class="btn btn-honey" type="submit">Save My Seat</button>
+    </form>
+    <div class="confirm">Welcome to the family table</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><div class="script">Yam Jam</div><div style="font-size:0.9rem;margin-top:0.4rem">YAM JAM by Mrs. Miller · A Washington, D.C. family recipe</div></div>
+      <ul class="foot-links">
+        <li><a href="our-story.html">Our Story</a></li><li><a href="legacy.html">Mrs. Miller's Legacy</a></li><li><a href="how-to-yam-jam.html">How to Yam Jam</a></li><li><a href="dc-table.html">Our D.C. Table</a></li><li><a href="shop.html">Shop Yam Jam</a></li><li><a href="#">FAQ</a></li><li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="foot-bottom"><em>From our table to yours</em><span>© 2026 YAM JAM by Mrs. Miller</span></div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lb" onclick="this.classList.remove('open')"><img id="lbImg" alt="Enlarged label"></div>
+<div class="toast" id="toast">Added to cart</div>
+
+<script>
+  let cart = 0;
+  try { cart = +localStorage.getItem('yamjamCart') || 0; } catch (e) {}
+  document.getElementById('cartCount').textContent = cart;
+  function q(d) { const i = document.getElementById('qty'); i.value = Math.max(1, +i.value + d); }
+  function addCart() {
+    const n = +document.getElementById('qty').value; cart += n;
+    document.getElementById('cartCount').textContent = cart;
+    try { localStorage.setItem('yamjamCart', cart); } catch (e) {}
+    const t = document.getElementById('toast'); t.textContent = n + ' × YAM JAM added to cart';
+    t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2200);
+  }
+  function openLB(src) { document.getElementById('lbImg').src = src; document.getElementById('lb').classList.add('open'); }
+  document.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => document.querySelector('.links').classList.remove('open')));
+</script>
+</body>
+</html>

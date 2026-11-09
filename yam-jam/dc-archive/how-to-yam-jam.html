@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Yam Jam — YAM JAM by Mrs. Miller</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --paper: #F4EFE6; --paper-2: #EAE2D4; --ink: #1C1915; --ink-2: #4A443C; --muted: #857C70;
+    --violet: #5E2F8C; --amber: #C9781A; --sepia: #8A6A48; --white: #FFFDF8;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter Tight', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; font-size: 17px; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; }
+  h1, h2, h3, .serif { font-family: 'Newsreader', serif; font-weight: 500; line-height: 1.08; letter-spacing: -0.015em; }
+  h2 { font-size: 3.6rem; margin-bottom: 1.6rem; }
+  h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .prose p { font-family: 'Newsreader', serif; font-size: 1.2rem; line-height: 1.75; color: var(--ink-2); }
+  .prose p + p { margin-top: 1.1rem; }
+  .dropcap p:first-child::first-letter { font-size: 3.6em; float: left; line-height: 0.85; margin: 0.08em 0.1em 0 0; color: var(--violet); font-weight: 500; }
+  .chapter { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.1rem; display: flex; gap: 0.8rem; }
+  .chapter b { color: var(--violet); }
+  .btn { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; padding: 1rem 1.7rem; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; transition: all 0.2s; cursor: pointer; border: none; font-family: inherit; }
+  .btn-ink { background: var(--ink); color: var(--paper); }
+  .btn-ink:hover { background: var(--violet); }
+  .btn-violet { background: var(--violet); color: #fff; }
+  .btn-violet:hover { background: #45206A; }
+  .btn-text { padding: 1rem 0; color: var(--ink); background: none; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+  .btn-text:hover { color: var(--violet); }
+  .actions { display: flex; gap: 1.4rem; flex-wrap: wrap; align-items: center; margin-top: 2.2rem; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(244,239,230,0.94); backdrop-filter: blur(8px); }
+  .nav-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 78px; }
+  .nav-l, .nav-r { display: flex; gap: 1.8rem; list-style: none; font-size: 0.88rem; font-weight: 500; }
+  .nav-r { justify-content: flex-end; align-items: center; }
+  .nav-l a, .nav-r a { text-decoration: none; }
+  .nav-l a:hover, .nav-r a:hover { color: var(--violet); }
+  .logo { text-decoration: none; text-align: center; line-height: 1; }
+  .logo .serif { font-size: 1.75rem; letter-spacing: 0.08em; font-weight: 600; }
+  .logo small { display: block; font-size: 0.62rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--muted); margin-top: 0.25rem; }
+  .bag { background: var(--ink); color: var(--paper) !important; padding: 0.55rem 1rem; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+  .menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+  .m-only { display: none; }
+
+  /* HERO */
+  .hero { padding: 3rem 0 6rem; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 4rem; align-items: stretch; }
+  .hero-top { font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; color: var(--violet); margin-bottom: 1.5rem; }
+  .hero h1 { font-size: 8rem; line-height: 0.88; margin-bottom: 1.6rem; }
+  .hero h1 i { color: var(--amber); }
+  .hero .tag { font-family: 'Newsreader', serif; font-style: italic; font-size: 2rem; color: var(--ink-2); margin-bottom: 2rem; }
+  .hero-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; font-size: 0.98rem; color: var(--ink-2); }
+  .hero-photo { position: relative; background: var(--paper-2); }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; min-height: 600px; }
+  .hero-buy { position: absolute; left: -2.5rem; bottom: 2.5rem; background: var(--white); padding: 1.3rem 1.5rem; box-shadow: 0 20px 50px rgba(28,25,21,0.15); display: flex; gap: 1.2rem; align-items: center; }
+  .hero-buy strong { display: block; font-family: 'Newsreader', serif; font-size: 1.25rem; font-weight: 500; }
+  .hero-buy span { font-size: 0.8rem; color: var(--muted); }
+
+  /* KITCHEN */
+  .kitchen { background: var(--ink); color: var(--paper); }
+  .kitchen-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .kitchen-grid img { width: 100%; height: 100%; object-fit: cover; min-height: 560px; }
+  .kitchen-copy { padding: 6rem 5rem; display: flex; flex-direction: column; justify-content: center; }
+  .kitchen-copy .chapter { color: #A99F91; }
+  .kitchen-copy .chapter b { color: #D4B3F0; }
+  .kitchen-copy p { color: #CFC6B8; font-family: 'Newsreader', serif; font-size: 1.2rem; }
+  .kitchen-copy p + p { margin-top: 1rem; }
+  .kitchen .btn-text { color: var(--paper); }
+
+  /* STORY */
+  .story { padding: 8rem 0; }
+  .story-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 5rem; }
+  .portrait { position: sticky; top: 110px; align-self: start; }
+  .portrait img { width: 100%; filter: grayscale(1) contrast(1.05); }
+  .portrait figcaption { font-size: 0.82rem; color: var(--muted); margin-top: 0.8rem; font-style: italic; font-family: 'Newsreader', serif; }
+  .bigquote { font-family: 'Newsreader', serif; font-style: italic; font-size: 2.3rem; line-height: 1.25; color: var(--violet); margin: 3.5rem 0; max-width: 680px; }
+  .bigquote cite { display: block; font-family: 'Inter Tight', sans-serif; font-style: normal; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 1rem; }
+  .recipe { background: var(--white); padding: 7rem 0; }
+  .recipe-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 5rem; align-items: center; }
+  .recipe-grid img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+
+  /* LEGACY */
+  .legacy { padding: 8rem 0; }
+  .legacy-head { max-width: 900px; margin-bottom: 5rem; }
+  .legacy-head .lead { font-family: 'Newsreader', serif; font-size: 1.7rem; line-height: 1.4; color: var(--ink-2); }
+  .tl { display: grid; grid-template-columns: 220px 1fr; gap: 1.2rem 4rem; max-width: 1050px; }
+  .tl-year { font-family: 'Newsreader', serif; font-size: 2.6rem; color: var(--amber); line-height: 1; padding-top: 0.2rem; text-align: right; }
+  .tl-year small { display: block; font-family: 'Inter Tight', sans-serif; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+  .tl-body { padding-bottom: 3rem; }
+  .tl-body p { font-family: 'Newsreader', serif; font-size: 1.18rem; color: var(--ink-2); }
+  .tl-body p + p { margin-top: 1rem; }
+  .commem { display: grid; grid-template-columns: 1.3fr 1fr; gap: 0; margin-top: 4rem; background: var(--violet); color: #fff; }
+  .commem img { width: 100%; height: 100%; object-fit: cover; min-height: 420px; }
+  .commem-copy { padding: 3.5rem; }
+  .commem-copy h3 { font-size: 2rem; }
+  .commem-copy p { color: #E4D6F2; font-family: 'Newsreader', serif; font-size: 1.1rem; }
+  .commem-copy p + p { margin-top: 0.9rem; }
+  .commem-copy h3 + p { margin-top: 0.6rem; }
+  .commem-copy .gap { margin-top: 2.2rem; }
+  .remember { margin-top: 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+
+  /* HOW TO */
+  .howto { background: var(--white); padding: 8rem 0 6rem; }
+  .howto-head { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 3rem; }
+  .howto-head p { color: var(--ink-2); }
+  .rail-ctrl { display: flex; gap: 0.6rem; margin-top: 1.4rem; }
+  .rail-ctrl button { width: 48px; height: 48px; border: 1.5px solid var(--ink); background: none; cursor: pointer; font-size: 1.1rem; }
+  .rail-ctrl button:hover { background: var(--ink); color: var(--paper); }
+  .rail { display: grid; grid-auto-flow: column; grid-auto-columns: 380px; gap: 1.6rem; overflow-x: auto; scroll-snap-type: x mandatory; --rail-pad: calc((100vw - 1280px) / 2 + 2.5rem); padding: 0 2.5rem 1.5rem var(--rail-pad); scroll-padding-left: var(--rail-pad); scrollbar-width: none; }
+  .rail::-webkit-scrollbar { display: none; }
+  .item { scroll-snap-align: start; }
+  .item .ph { aspect-ratio: 4/5; overflow: hidden; background: var(--paper-2); margin-bottom: 1.2rem; }
+  .item .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+  .item:hover .ph img { transform: scale(1.05); }
+  .item .ph.none { display: flex; align-items: center; justify-content: center; font-family: 'Newsreader', serif; font-style: italic; color: var(--muted); font-size: 1.2rem; }
+  .item .n { font-size: 0.72rem; letter-spacing: 0.2em; color: var(--muted); font-weight: 600; margin-bottom: 0.3rem; }
+  .item p { font-size: 0.95rem; color: var(--ink-2); }
+
+  /* DC */
+  .dc { padding: 8rem 0; }
+  .dc-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 5rem; align-items: start; }
+  .dc-side img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: 30% center; }
+  .label { margin-top: 7rem; background: var(--paper-2); padding: 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .labels { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .lab { position: relative; }
+  .lab img { width: 100%; cursor: zoom-in; }
+  .pin { position: absolute; width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: var(--paper); border: 2px solid var(--paper); font-weight: 700; font-size: 0.85rem; cursor: pointer; transform: translate(-50%, -50%); transition: all 0.2s; box-shadow: 0 0 0 0 rgba(94,47,140,0.5); animation: pulse 2.4s infinite; }
+  .pin.on, .pin:hover { background: var(--violet); transform: translate(-50%, -50%) scale(1.15); }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(94,47,140,0.45); } 70% { box-shadow: 0 0 0 14px rgba(94,47,140,0); } 100% { box-shadow: 0 0 0 0 rgba(94,47,140,0); } }
+  .lab-note { font-size: 0.8rem; color: var(--muted); margin-top: 1rem; grid-column: span 2; font-style: italic; font-family: 'Newsreader', serif; }
+  .dlist { margin: 2rem 0; display: grid; gap: 0.6rem; }
+  .d { padding: 1.1rem 1.3rem; background: transparent; transition: background 0.25s; cursor: pointer; }
+  .d.on { background: var(--white); }
+  .d h3 { font-size: 1.3rem; display: flex; gap: 0.8rem; align-items: baseline; }
+  .d h3 span { font-family: 'Inter Tight', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--violet); }
+  .d p { font-size: 0.95rem; color: var(--ink-2); display: none; }
+  .d.on p { display: block; }
+
+  /* SHOP */
+  .shop { background: var(--ink); color: var(--paper); padding: 8rem 0; }
+  .shop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .shop-grid > img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+  .shop .chapter { color: #A99F91; }
+  .shop .chapter b { color: #D4B3F0; }
+  .shop h3 { font-size: 2rem; margin-bottom: 0.2rem; }
+  .shop .sub { font-size: 0.82rem; letter-spacing: 0.16em; text-transform: uppercase; color: #D4B3F0; margin-bottom: 1.5rem; font-weight: 600; }
+  .shop p { color: #CFC6B8; font-family: 'Newsreader', serif; font-size: 1.15rem; }
+  .shop p + p { margin-top: 0.9rem; }
+  .order { margin-top: 2.4rem; display: grid; grid-template-columns: auto auto 1fr; gap: 1rem; align-items: center; }
+  .order .price { font-family: 'Newsreader', serif; font-size: 2.2rem; }
+  .order .price small { display: block; font-family: 'Inter Tight', sans-serif; font-size: 0.72rem; color: #A99F91; letter-spacing: 0.06em; }
+  .qty { display: inline-flex; border: 1.5px solid #5A534A; }
+  .qty button { background: none; border: none; color: var(--paper); width: 42px; height: 50px; cursor: pointer; font-size: 1.1rem; }
+  .qty input { width: 34px; background: none; border: none; color: var(--paper); text-align: center; font: inherit; font-weight: 600; }
+  .order .btn { justify-content: center; height: 50px; }
+  .shipnote { margin-top: 1rem; font-size: 0.88rem; color: #A99F91; }
+  .shop details { margin-top: 2rem; background: #27231E; padding: 1.1rem 1.4rem; }
+  .shop summary { cursor: pointer; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
+  .nut { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.2rem 0 0.8rem; }
+  .nut strong { display: block; font-family: 'Newsreader', serif; font-size: 1.8rem; font-weight: 500; color: #fff; }
+  .nut span { font-size: 0.75rem; color: #A99F91; }
+  .shop .note { font-size: 0.85rem; font-family: 'Inter Tight', sans-serif; color: #A99F91; }
+
+  /* SIGNUP */
+  .signup { padding: 7rem 0; text-align: center; }
+  .signup h2 { max-width: 800px; margin: 0 auto 1.2rem; }
+  .signup p { max-width: 560px; margin: 0 auto 2.4rem; color: var(--ink-2); font-family: 'Newsreader', serif; font-size: 1.2rem; }
+  .signup form { display: flex; justify-content: center; gap: 0; max-width: 760px; margin: 0 auto; flex-wrap: wrap; }
+  .signup input { flex: 1; min-width: 220px; padding: 1.05rem 1.2rem; border: 1.5px solid var(--ink); background: var(--white); font: inherit; margin-right: -1.5px; }
+  .confirm { display: none; font-family: 'Newsreader', serif; font-style: italic; font-size: 2.4rem; color: var(--violet); }
+  .signup.done form { display: none; }
+  .signup.done .confirm { display: block; }
+
+  footer { background: var(--paper-2); padding: 4.5rem 0 2.5rem; }
+  .foot { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .foot .serif { font-size: 2.4rem; font-weight: 600; letter-spacing: 0.06em; }
+  .foot-links { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; }
+  .foot-links a { text-decoration: none; }
+  .foot-links a:hover { color: var(--violet); }
+  .foot-bottom { margin-top: 4rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; color: var(--muted); }
+  .foot-bottom i { font-family: 'Newsreader', serif; font-size: 1.3rem; color: var(--ink); }
+
+  .lightbox { position: fixed; inset: 0; background: rgba(28,25,21,0.92); z-index: 200; display: none; align-items: center; justify-content: center; padding: 2rem; cursor: zoom-out; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-height: 92vh; }
+  .toast { position: fixed; bottom: 1.5rem; right: 1.5rem; background: var(--violet); color: #fff; padding: 1rem 1.4rem; font-size: 0.9rem; transform: translateY(160%); transition: transform 0.3s; z-index: 210; }
+  .toast.show { transform: translateY(0); }
+
+  @media (max-width: 1340px) { .rail { --rail-pad: 2.5rem; } }
+  @media (max-width: 1000px) {
+    .nav-inner { grid-template-columns: auto 1fr auto; }
+    .nav-l { display: none; position: absolute; top: 78px; left: 0; right: 0; background: var(--paper); flex-direction: column; padding: 1.5rem 2.5rem; gap: 1rem; }
+    .nav-l.open { display: flex; }
+    .m-only { display: list-item; }
+    .menu-btn { display: block; }
+    .nav-r li:not(:last-child) { display: none; }
+    .logo { text-align: left; padding-left: 1rem; }
+    .hero-grid, .kitchen-grid, .story-grid, .recipe-grid, .commem, .remember, .howto-head, .dc-grid, .label, .shop-grid, .foot { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero h1 { font-size: 5rem; }
+    h2 { font-size: 2.6rem; }
+    .portrait { position: static; }
+    .kitchen-copy { padding: 4rem 2.5rem; }
+    .tl { grid-template-columns: 1fr; gap: 0.6rem; }
+    .tl-year { text-align: left; }
+    .label { padding: 2.5rem; }
+    .hero-buy { left: 1rem; }
+    .hero-photo img { min-height: 420px; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 1rem; }
+    .rail { --rail-pad: 1rem; grid-auto-columns: 82vw; }
+    .hero h1 { font-size: 3.8rem; }
+    .hero-cols { grid-template-columns: 1fr; }
+    .order { grid-template-columns: 1fr 1fr; }
+    .order .btn { grid-column: span 2; }
+    .nut { grid-template-columns: 1fr 1fr; }
+    .commem-copy, .label { padding: 1.6rem; }
+    .bigquote { font-size: 1.7rem; }
+  }
+  :is(.links, .nav-l, .nav-r) a[aria-current="page"]:not(.btn):not(.cart-btn):not(.bag) { color: var(--violet); text-decoration: underline; text-underline-offset: 8px; text-decoration-thickness: 2px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <button class="menu-btn" aria-label="Menu" onclick="document.querySelector('.nav-l').classList.toggle('open')">☰</button>
+    <ul class="nav-l">
+      <li><a href="our-story.html">Our Story</a></li>
+      <li><a href="legacy.html">Mrs. Miller's Legacy</a></li>
+      <li><a href="how-to-yam-jam.html" aria-current="page">How to Yam Jam</a></li>
+      <li class="m-only"><a href="dc-table.html">Our D.C. Table</a></li>
+    </ul>
+    <a href="index.html" class="logo"><span class="serif">YAM JAM</span><small>by Mrs. Miller</small></a>
+    <ul class="nav-r">
+      <li><a href="dc-table.html">Our D.C. Table</a></li>
+      <li><a href="shop.html" class="bag">Shop Yam Jam (<span id="cartCount">0</span>)</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- 04 HOW TO -->
+<section class="howto" id="howto">
+  <div class="wrap howto-head">
+    <div>
+      <div class="chapter"><b>04</b> How to Yam Jam</div>
+      <h2 style="margin:0">One Sweet Citrus Glaze, So Many Ways to Enjoy It</h2>
+    </div>
+    <div>
+      <p>YAM JAM first became a family favorite as a glaze for sweet potatoes, but its sweet citrus flavor works with a surprising variety of foods. Whether you're preparing a holiday dinner, cooking on a weeknight or putting together something for breakfast, there are plenty of opportunities to bring YAM JAM to the table.</p>
+      <div class="rail-ctrl"><button onclick="rail(-1)" aria-label="Previous">←</button><button onclick="rail(1)" aria-label="Next">→</button></div>
+    </div>
+  </div>
+  <div class="rail" id="rail">
+    <div class="item"><div class="ph"><img src="../images/sweet-potato.jpg" alt="Sweet potatoes"></div><div class="n">01 · THE ORIGINAL</div><h3>Sweet Potatoes</h3><p>The original family favorite. Pour YAM JAM over warm sweet potatoes for the sweet citrus flavor that has been part of Miller family meals since the mid-1900s.</p></div>
+    <div class="item"><div class="ph"><img src="../images/ham.jpg" alt="Ham"></div><div class="n">02</div><h3>Ham &amp; Roasts</h3><p>Brush YAM JAM over ham or your favorite roast as it cooks, or add it toward the end for a glossy finish and a little citrus sweetness.</p></div>
+    <div class="item"><div class="ph"><img src="../images/chicken.jpg" alt="Chicken"></div><div class="n">03</div><h3>Chicken</h3><p>Use YAM JAM as a glaze, incorporate it into a marinade, or brush it over cooked chicken just before serving. Its sweetness works especially well with roasted or grilled dishes.</p></div>
+    <div class="item"><div class="ph"><img src="../images/shrimp.jpg" alt="Seafood"></div><div class="n">04</div><h3>Seafood</h3><p>Try YAM JAM with salmon, shrimp or your favorite fish. Its citrus flavor makes a wonderful complement to seafood, whether brushed on during cooking or added as a finishing glaze.</p></div>
+    <div class="item"><div class="ph none">Photograph coming soon</div><div class="n">05</div><h3>Vegetables</h3><p>Roasted carrots, Brussels sprouts, squash and other vegetables are delicious with a little YAM JAM. Add it toward the end of roasting or drizzle it over vegetables before serving.</p></div>
+    <div class="item"><div class="ph"><img src="../images/biscuits.jpg" alt="Biscuits"></div><div class="n">06</div><h3>Biscuits &amp; Breakfast</h3><p>Warm biscuits, pancakes, French toast and other breakfast favorites are an easy way to enjoy YAM JAM. Try a little in place of your usual syrup or fruit topping.</p></div>
+    <div class="item"><div class="ph"><img src="../images/pound-cake.jpg" alt="Pound cake"></div><div class="n">07</div><h3>Desserts</h3><p>Drizzle YAM JAM over pound cake, ice cream or a favorite dessert when you want to add a sweet citrus finish. It also pairs beautifully with simple desserts that allow its flavor to stand out.</p></div>
+  </div>
+  <div class="wrap"><div class="actions"><a href="shop.html" class="btn btn-ink">Shop Yam Jam</a></div></div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><div class="serif">YAM JAM</div><div style="color:var(--muted);margin-top:0.3rem">YAM JAM by Mrs. Miller · A Washington, D.C. family recipe</div></div>
+      <ul class="foot-links">
+        <li><a href="our-story.html">Our Story</a></li><li><a href="legacy.html">Mrs. Miller's Legacy</a></li><li><a href="how-to-yam-jam.html">How to Yam Jam</a></li><li><a href="dc-table.html">Our D.C. Table</a></li><li><a href="shop.html">Shop Yam Jam</a></li><li><a href="#">FAQ</a></li><li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="foot-bottom"><i>From our table to yours</i><span>© 2026 YAM JAM by Mrs. Miller</span></div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lb" onclick="this.classList.remove('open')"><img id="lbImg" alt="Enlarged label"></div>
+<div class="toast" id="toast">Added to cart</div>
+
+<script>
+  let cart = 0;
+  try { cart = +localStorage.getItem('yamjamCart') || 0; } catch (e) {}
+  document.getElementById('cartCount').textContent = cart;
+  function q(d) { const i = document.getElementById('qty'); i.value = Math.max(1, +i.value + d); }
+  function addCart() {
+    const n = +document.getElementById('qty').value; cart += n;
+    document.getElementById('cartCount').textContent = cart;
+    try { localStorage.setItem('yamjamCart', cart); } catch (e) {}
+    const t = document.getElementById('toast'); t.textContent = n + ' × YAM JAM added to your cart';
+    t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2200);
+  }
+  function openLB(src) { document.getElementById('lbImg').src = src; document.getElementById('lb').classList.add('open'); }
+  const pinMap = [0, 1, 3, 2];
+  function pick(i) {
+    document.querySelectorAll('.d').forEach((d, j) => d.classList.toggle('on', j === i));
+    document.querySelectorAll('.pin').forEach((p, j) => p.classList.toggle('on', pinMap[j] === i));
+  }
+  pick(0);
+  function rail(dir) { const r = document.getElementById('rail'); r.scrollBy({ left: dir * 400, behavior: 'smooth' }); }
+  document.querySelectorAll('.nav-l a').forEach(a => a.addEventListener('click', () => document.querySelector('.nav-l').classList.remove('open')));
+</script>
+</body>
+</html>
