@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Private Practice Law Group</title>
+<meta name="description" content="April N. Richardson, Esq. Business, real estate and food law attorney and entrepreneur. Book a consultation.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#121212;--text:#3D3D3D;--muted:#6F6F6F;--line:#E6E2DA;--bg:#F7F4EE;--white:#fff;--lime:#7CC243;--lime-d:#4D8A1F;--gold:#B8913F;
+  --s:"Libre Caslon Text",Georgia,serif;--f:"Figtree",system-ui,sans-serif;--w:1180px}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font:17px/1.7 var(--f);color:var(--text);background:var(--white)}
+img{max-width:100%;display:block} a{color:var(--lime-d)}
+h1,h2,h3{font-family:var(--s);color:var(--ink);font-weight:400;line-height:1.15;margin:0 0 .5em}
+h1{font-size:clamp(2.2rem,4.8vw,3.6rem)} h2{font-size:clamp(1.8rem,3.4vw,2.6rem)} h3{font-size:1.3rem}
+h1 i,h2 i{color:var(--lime-d)}
+p{margin:0 0 1em} .wrap{max-width:var(--w);margin:0 auto;padding:0 22px} section{padding:88px 0}
+.kick{font:700 .75rem/1 var(--f);letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 26px;background:var(--ink);color:#fff;font:600 .98rem var(--f);text-decoration:none;border:0;cursor:pointer;transition:.15s;border-radius:4px}
+.btn:hover{background:var(--lime-d)} .btn.lime{background:var(--lime);color:var(--ink)} .btn.lime:hover{background:#8fd456}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)} .btn.line:hover{background:var(--ink);color:#fff}
+.ph{background:#FFF3C4;color:#7A5B00;border-radius:3px;padding:0 5px}
+.call{font-weight:700;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--lime)}
+header.site{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;gap:20px;height:80px}
+.logo img{height:50px;width:auto}
+nav.main{display:flex;gap:2px;margin-left:auto}
+nav.main a{color:var(--text);text-decoration:none;font-weight:500;font-size:.93rem;padding:10px 12px}
+nav.main a:hover,nav.main a.active{color:var(--ink);box-shadow:inset 0 -2px 0 var(--lime)} nav.main a[data-nav=book]{display:none}
+.hright{display:flex;align-items:center;gap:16px}
+.hright .call{font-size:.95rem;white-space:nowrap}
+.menu-btn{display:none;margin-left:auto;background:none;border:1.5px solid var(--ink);padding:9px 14px;font:600 .85rem var(--f);cursor:pointer;border-radius:4px}
+@media (max-width:1100px){.hright .call{display:none}}
+@media (max-width:960px){.menu-btn{display:block}.hright{display:none}
+  nav.main{position:fixed;inset:80px 0 auto 0;background:#fff;flex-direction:column;padding:10px 18px 22px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:.25s;margin:0}
+  body.menu-open nav.main{transform:none} nav.main a{padding:14px 6px;font-size:1.05rem;box-shadow:none!important} nav.main a[data-nav=book]{display:block}}
+.mbar{display:none}
+@media (max-width:760px){.mbar{display:grid;grid-template-columns:1fr 1fr;position:fixed;bottom:0;left:0;right:0;z-index:70}
+  .mbar a{padding:16px;text-align:center;font-weight:700;text-decoration:none} .mbar .c{background:var(--ink);color:#fff} .mbar .b{background:var(--lime);color:var(--ink)} body{padding-bottom:56px}}
+/* hero */
+.hero{background:var(--bg);padding:0;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:0}.hero .port{order:-1;margin:0 -22px}}
+.hero .txt{padding:72px 0}
+.hero .sub{font-size:1.15rem;max-width:540px}
+.hero .actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:28px 0 22px}
+.hero .meta{display:flex;gap:22px;flex-wrap:wrap;font-size:.9rem;color:var(--muted)} .hero .meta b{color:var(--ink)}
+.port{position:relative;align-self:stretch;min-height:600px}
+.port img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.port .sig{position:absolute;left:24px;bottom:24px;background:#fff;padding:18px 22px;max-width:300px;border-left:4px solid var(--lime)}
+.port .sig b{font:400 1.25rem var(--s);color:var(--ink);display:block} .port .sig span{font-size:.85rem;color:var(--muted)}
+@media (max-width:900px){.port{min-height:440px}}
+/* credentials strip */
+.strip{background:var(--ink);color:#d4d4d4}
+.strip .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.strip div{padding:30px 22px;border-right:1px solid #2b2b2b} .strip div:last-child{border:0}
+.strip b{display:block;font:400 2.3rem/1 var(--s);color:#fff;margin-bottom:8px} .strip span{font-size:.86rem}
+@media (max-width:800px){.strip .wrap{grid-template-columns:1fr 1fr}.strip div:nth-child(2){border-right:0}}
+/* experience */
+.exp{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start} @media (max-width:880px){.exp{grid-template-columns:1fr;gap:28px}}
+.cred{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.cred li{padding:18px 0 18px 40px;border-bottom:1px solid var(--line);position:relative;color:var(--ink);font-weight:500}
+.cred li::before{content:"";position:absolute;left:0;top:24px;width:22px;height:2px;background:var(--lime)}
+.quote{font:italic 400 clamp(1.4rem,2.6vw,1.9rem)/1.45 var(--s);color:var(--ink);border-left:3px solid var(--lime);padding-left:26px;margin:0 0 26px}
+/* practice */
+.prac{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (max-width:760px){.prac{grid-template-columns:1fr}}
+.prac a{background:#fff;padding:36px;text-decoration:none;color:inherit;transition:.2s;display:flex;flex-direction:column}
+.prac a:hover{background:var(--bg)}
+.prac .n{font:italic 400 1rem var(--s);color:var(--gold)}
+.prac p{color:var(--muted);flex:1} .prac .go{font-weight:700;color:var(--ink)}
+.prac a.pp{background:var(--ink);color:#d4d4d4} .prac a.pp h3{color:#fff} .prac a.pp .go{color:var(--lime)} .prac a.pp:hover{background:#1f1f1f}
+.alt{background:var(--bg)} .center{text-align:center} .narrow{max-width:700px;margin-left:auto;margin-right:auto}
+/* testimonials */
+.tes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px} @media (max-width:860px){.tes{grid-template-columns:1fr}}
+.tes div{background:#fff;padding:30px;border-top:3px solid var(--lime)}
+.tes .st{color:var(--gold);letter-spacing:3px;margin-bottom:10px} .tes p{font:italic 400 1.08rem/1.55 var(--s);color:var(--ink)} .tes small{color:var(--muted)}
+/* consult section */
+.consult{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start} @media (max-width:880px){.consult{grid-template-columns:1fr}}
+.steps{list-style:none;counter-reset:s;padding:0;margin:22px 0}
+.steps li{counter-increment:s;padding:0 0 22px 56px;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:38px;height:38px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font:400 1.05rem var(--s);color:var(--ink)}
+.steps b{display:block;color:var(--ink)} .steps span{color:var(--muted);font-size:.95rem}
+.formbox{background:#fff;border:1px solid var(--line);padding:32px;box-shadow:0 24px 50px rgba(0,0,0,.06)}
+.formbox h3{margin-bottom:4px} .formbox .lead{color:var(--muted);font-size:.95rem}
+form.f{display:grid;grid-template-columns:1fr 1fr;gap:14px} form.f .full{grid-column:1/-1} @media (max-width:560px){form.f{grid-template-columns:1fr}}
+form.f label{display:flex;flex-direction:column;gap:6px;font-size:.82rem;font-weight:600;color:var(--ink)}
+input,select,textarea{font:inherit;padding:13px 14px;border:1px solid #cfc9bd;background:#fff;color:var(--ink);width:100%;border-radius:4px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--lime);border-color:var(--ink)}
+.sent{grid-column:1/-1;background:var(--bg);padding:22px;border-left:4px solid var(--lime)} .sent strong{font:400 1.3rem var(--s);display:block}
+.disc{font-size:.78rem;color:var(--muted);line-height:1.55;margin-top:12px}
+.fine{font-size:.86rem;color:var(--muted);text-align:center;margin-top:12px}
+/* pricing table */
+.ptable{width:100%;border-collapse:collapse;background:#fff}
+.ptable td{padding:18px 16px;border-bottom:1px solid var(--line);vertical-align:middle}
+.ptable td:first-child b{font:400 1.15rem var(--s);color:var(--ink);display:block} .ptable td:first-child span{color:var(--muted);font-size:.92rem;font-style:italic}
+.ptable .pr{font:400 1.5rem var(--s);color:var(--ink);white-space:nowrap;text-align:right}
+.ptable .bk{text-align:right;width:1%} .ptable .bk a{white-space:nowrap;font-weight:700;color:var(--lime-d);text-decoration:none}
+@media (max-width:600px){.ptable td{display:block;border:0;padding:4px 0}.ptable tr{display:block;padding:16px 0;border-bottom:1px solid var(--line)}.ptable .pr,.ptable .bk{text-align:left}}
+.faq details{border-bottom:1px solid var(--line)} .faq summary{cursor:pointer;font:400 1.15rem var(--s);color:var(--ink);padding:20px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";color:var(--lime-d);font-family:var(--f);font-size:1.4rem;line-height:1} .faq details[open] summary::after{content:"–"} .faq p{color:var(--muted);margin:0 0 18px}
+.phead{background:var(--bg);padding:64px 0 52px}
+.phead .sub{font-size:1.12rem;max-width:640px} .phead .actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:22px}
+.svc{padding:60px 0;border-bottom:1px solid var(--line);scroll-margin-top:96px}
+.svc .wrap{display:grid;grid-template-columns:1fr 1fr;gap:52px} @media (max-width:860px){.svc .wrap{grid-template-columns:1fr;gap:18px}}
+.cta-row{border:1px solid var(--line);padding:28px 32px;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-top:40px;background:#fff}
+.cta-row b{font:400 1.3rem var(--s);color:var(--ink)}
+footer.site{background:var(--ink);color:#a3a3a3;padding:60px 0 28px;font-size:.92rem}
+footer .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:28px} @media (max-width:860px){footer .cols{grid-template-columns:1fr 1fr}}
+footer h4{color:#fff;font:600 .78rem var(--f);letter-spacing:.14em;text-transform:uppercase;margin:0 0 12px}
+footer ul{list-style:none;padding:0;margin:0} footer li{margin-bottom:8px} footer a{color:#e5e5e5;text-decoration:none} footer a:hover{color:var(--lime)}
+footer .legal{border-top:1px solid #2b2b2b;margin-top:36px;padding-top:18px;font-size:.78rem;line-height:1.6}
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="logo" href="#/home"><img src="../assets/pplg-site.png" alt="The Private Practice Law Group"></a>
+  <nav class="main" id="nav" aria-label="Main"></nav>
+  <div class="hright"><a class="call" id="hcall"></a><a class="btn" href="#/book" style="padding:12px 18px">Schedule a Consultation</a></div>
+  <button class="menu-btn" data-menu-toggle aria-expanded="false">Menu</button>
+</div></header>
+<main id="app"></main>
+<footer class="site"><div class="wrap" id="footer"></div></footer>
+<div class="mbar"><a class="c" id="mcall">Call</a><a class="b" href="#/book">Schedule</a></div>
+
+<script src="../assets/content.js"></script>
+<script src="../assets/site.js"></script>
+<script>
+const D = PPLG, C = D.firm.contact, A = D.about.attorney;
+const call = () => `<a class="call" href="${C.phoneHref}">${ph(C.phone)}</a>`;
+document.getElementById("nav").innerHTML = D.nav.map(n=>`<a href="#/${n.id}" data-nav="${n.id}">${n.id==="consulting"?"Consulting & Fees":n.label}</a>`).join("");
+const hc=document.getElementById("hcall"); hc.href=C.phoneHref; hc.innerHTML=ph(C.phone);
+document.getElementById("mcall").href = C.phoneHref;
+document.getElementById("footer").innerHTML = `<div class="cols">
+  <div><img src="../assets/pplg-png2.png" alt="" style="height:54px;margin-bottom:14px"><p>${D.headline}. ${D.geo}.</p></div>
+  <div><h4>Practice</h4><ul>${D.services.map(s=>`<li><a href="#/services/${s.id}">${s.name}</a></li>`).join("")}<li><a href="#/consulting">Push Pull Consulting</a></li></ul></div>
+  <div><h4>Firm</h4><ul><li><a href="#/about">About April</a></li><li><a href="#/consulting">Consultation fees</a></li><li><a href="#/book">Schedule</a></li><li><a href="#/contact">Contact</a></li></ul></div>
+  <div><h4>Contact</h4><ul><li>${ph(C.phone)}</li><li>${ph(C.email)}</li><li>${D.geo}</li><li>${ph(C.hours)}</li></ul></div></div>
+  <div class="legal">© ${D.firm.year} ${D.firm.legal}. ${D.disclaimer} Attorney advertising.</div>`;
+
+const opts = `<option value="">Area of need</option>${D.services.map(s=>`<option>${s.name}</option>`).join("")}<option>Business consulting</option><option>Not sure yet</option>`;
+const consultForm = (t="Request a Consultation") => `<div class="formbox"><h3>${t}</h3><p class="lead">Reviewed personally. We’ll confirm a time with you.</p>
+  <form class="f" data-demo-form="lead"><label>Name<input name="name" required></label><label>Phone<input name="phone" type="tel" required></label>
+  <label class="full">Email<input name="email" type="email" required></label><label class="full">How can we help?<select name="topic">${opts}</select></label>
+  <div class="full"><button class="btn lime" style="width:100%" type="submit">Request My Consultation</button></div></form>
+  <p class="fine">Prefer to talk? Call ${call()}</p></div>`;
+const tes = d => `<div class="tes">${d.testimonials.map(t=>`<div><div class="st">★★★★★</div><p>${ph(t.q)}</p><small>${ph(t.who)}, ${ph(t.biz)}</small></div>`).join("")}</div>`;
+const faq = d => `<div class="faq narrow">${d.faq.map(f=>`<details><summary>${f.q}</summary><p>${f.a}</p></details>`).join("")}</div>`;
+const steps = d => `<ol class="steps">${d.steps.map(s=>`<li><b>${s.t}</b><span>${s.d}</span></li>`).join("")}</ol>`;
+const ctaRow = (t="Speak with April about your business.") => `<div class="cta-row"><b>${t}</b><div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><a class="btn" href="#/book">Schedule a Consultation</a>${call()}</div></div>`;
+const ptable = d => `<table class="ptable">${d.sessions.map(s=>`<tr><td><b>${s.name}</b><span>“${s.q}”</span></td><td class="pr">${money(s.price)}</td><td class="bk"><a href="#/book/${s.id}">Book →</a></td></tr>`).join("")}</table>`;
+
+window.VIEWS = {
+home: d => `
+  <section class="hero"><div class="wrap">
+    <div class="txt"><span class="kick">${d.geo} · Business, Real Estate & Food Law</span>
+      <h1>The attorney entrepreneurs call <i>when the stakes are real.</i></h1>
+      <p class="sub">${A.name} has spent two decades practicing business and real estate law, and fifteen years building food businesses of her own. You get counsel from someone who has signed the leases, hired the teams and scaled the products.</p>
+      <div class="actions"><a class="btn" href="#/book">Schedule a Consultation</a><span>or call ${call()}</span></div>
+      <div class="meta"><span><b>Flat-fee</b> consultations from $250</span><span><b>Virtual</b> or in person</span></div></div>
+    <div class="port"><img src="${A.photo}" alt="${A.name}"><div class="sig"><b>${A.name}</b><span>Founding Attorney, ${d.firm.name}</span></div></div>
+  </div></section>
+  <div class="strip"><div class="wrap">${d.proof.map(s=>`<div><b>${s.n}</b><span>${s.l}</span></div>`).join("")}</div></div>
+  <section><div class="wrap exp">
+    <div><span class="kick">Experience you can’t get from a textbook</span><h2>Legal counsel from a <i>business builder</i></h2><p>${d.home.notButtonUp}</p><a class="btn line" href="#/about">Read April’s story</a></div>
+    <div><p class="quote">“${d.home.insight}”</p><ul class="cred">${d.credentials.map(c=>`<li>${c}</li>`).join("")}</ul></div>
+  </div></section>
+  <section class="alt"><div class="wrap"><span class="kick">Practice areas</span><h2>How we help</h2>
+    <div class="prac" style="margin-top:30px">${d.services.map((s,i)=>`<a href="#/services/${s.id}"><span class="n">0${i+1}</span><h3>${s.name}</h3><p>${s.short}</p><span class="go">Explore ${s.name} →</span></a>`).join("")}
+      <a class="pp" href="#/consulting"><span class="n">04</span><h3>Push Pull Consulting</h3><p>${d.pushPull.intro}</p><span class="go">View consultation fees →</span></a></div>
+    ${ctaRow()}</div></section>
+  <section><div class="wrap"><div class="center narrow"><span class="kick">Client experiences</span><h2>In their words</h2></div><div style="margin-top:30px">${tes(d)}</div></div></section>
+  <section class="alt"><div class="wrap consult">
+    <div><span class="kick">Getting started</span><h2>Your first conversation, <i>simplified</i></h2>${steps(d)}<p>Consultations are flat-fee, from $250 to $350 for one hour. <a href="#/consulting">See all fees →</a></p></div>
+    ${consultForm()}</div></section>
+  <section><div class="wrap"><div class="center narrow"><span class="kick">Questions</span><h2>Before you call</h2></div><div style="margin-top:20px">${faq(d)}</div>
+    <div class="narrow">${ctaRow("Ready when you are.")}</div></div></section>`,
+
+about: d => `
+  <section class="hero"><div class="wrap"><div class="txt"><span class="kick">About the firm</span><h1>${A.name}</h1>${A.bio.map(p=>`<p>${p}</p>`).join("")}<div class="actions"><a class="btn" href="#/book">Schedule a Consultation</a><span>or call ${call()}</span></div></div>
+    <div class="port"><img src="${A.photo}" alt="${A.name}"></div></div></section>
+  <div class="strip"><div class="wrap">${d.proof.map(s=>`<div><b>${s.n}</b><span>${s.l}</span></div>`).join("")}</div></div>
+  <section><div class="wrap exp"><div><h2>Inspired by <i>entrepreneurs</i></h2><ul class="cred">${d.credentials.map(c=>`<li>${c}</li>`).join("")}</ul></div><div>${d.about.paragraphs.map(p=>`<p>${p}</p>`).join("")}</div></div></section>`,
+
+services: d => `
+  <div class="phead"><div class="wrap"><span class="kick">Practice areas · ${d.geo}</span><h1>Business, Real Estate & <i>Food Law</i></h1><p class="sub">Legal guidance and representation for entrepreneurs at every stage. No business legal matter is too small.</p><div class="actions"><a class="btn" href="#/book">Schedule a Consultation</a><span>or call ${call()}</span></div></div></div>
+  ${d.services.map(s=>`<div class="svc" id="${s.id}"><div class="wrap"><div><h2>${s.name}</h2><p>${s.intro}</p><a class="btn" href="#/book">Discuss Your ${s.name} Matter</a></div><ul class="cred">${s.items.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>`).join("")}
+  <section><div class="wrap">${faq(d)}<div class="narrow">${ctaRow()}</div></div></section>`,
+
+consulting: d => `
+  <div class="phead"><div class="wrap"><span class="kick">${d.firm.sister}</span><h1>Consultation <i>fees</i></h1><p class="sub">${d.pushPull.intro} ${d.sessionNote} Flat fee, shown before you book.</p></div></div>
+  <section><div class="wrap">${ptable(d)}${ctaRow("Not sure which fits? We’ll help you choose.")}</div></section>
+  <section class="alt"><div class="wrap exp"><div><h2>What Push Pull covers</h2><p>Non-legal business services: consulting, strategic development, marketing, branding, brokerage, and finance sourcing.</p></div><ul class="cred">${d.pushPull.items.map(x=>`<li>${x}</li>`).join("")}</ul></div></section>`,
+
+book: d => `
+  <div class="phead"><div class="wrap"><span class="kick">Schedule</span><h1>Schedule a <i>consultation</i></h1><p class="sub">${d.sessionNote} Choose your session; we’ll confirm your time and collect payment securely.</p></div></div>
+  <section><div class="wrap consult">
+    <div class="formbox"><form class="f" data-demo-form="book">
+      <label class="full">Session<select name="session" required><option value="">Choose a session…</option>${d.sessions.map(s=>`<option value="${s.id}">${s.name} · ${money(s.price)}</option>`).join("")}</select></label>
+      <label>Name<input name="name" required></label><label>Phone<input type="tel" name="phone" required></label>
+      <label class="full">Email<input type="email" name="email" required></label>
+      <label class="full">Briefly, what’s going on? (optional)<textarea name="msg" rows="3"></textarea></label>
+      <div class="full"><button class="btn lime" style="width:100%" type="submit">Continue to Secure Payment</button><p class="disc">${d.disclaimer}</p></div></form></div>
+    <div><span class="kick">Your session</span><div style="font:400 3.4rem/1 var(--s);color:var(--ink);margin-bottom:14px" data-price>—</div>${steps(d)}<p>Questions first? Call ${call()}</p></div>
+  </div></section>`,
+
+contact: d => `
+  <div class="phead"><div class="wrap"><span class="kick">Contact</span><h1>Let’s <i>talk</i></h1><p class="sub">Tell us a little about your business and we’ll be in touch to schedule.</p></div></div>
+  <section><div class="wrap consult">${consultForm("Send a Message")}
+    <div><h3>${d.firm.name}</h3><ul class="cred"><li>Phone: ${ph(C.phone)}</li><li>Email: ${ph(C.email)}</li><li>Serving: ${d.geo}</li><li>Hours: ${ph(C.hours)}</li></ul><p class="disc">${d.disclaimer}</p></div></div></section>`
+};
+</script>
+</body>
+</html>

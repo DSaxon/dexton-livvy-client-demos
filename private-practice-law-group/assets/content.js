@@ -152,6 +152,47 @@ window.PPLG = {
     "lMtaco.png", "RESTBG-LOGO-Recovered.png", "UC-logo.jpeg", "curated.png", "CP-logo-2.png"
   ],
 
+  /* ---------- Conversion content (v2 demos) ---------- */
+  // Service area is inferred from April's DC/MD businesses — client to confirm.
+  geo: "Washington, DC & Maryland",
+  headline: "Business, Real Estate & Food Law for Entrepreneurs",
+
+  // Specific credibility points (from April's public bio).
+  proof: [
+    { n: "20+", l: "Years practicing business & real estate law" },
+    { n: "15", l: "Years running food businesses" },
+    { n: "1st", l: "Black-owned food hall in the nation (2019)" },
+    { n: "$250", l: "Flat-fee strategy sessions start here" }
+  ],
+  credentials: [
+    "Owner of DC Sweet Potato Cake and Baked in Baltimore",
+    "Baked goods produced for Starbucks, Wegmans, Safeway & QVC",
+    "Developed Savor Food Hall, Prince George’s County",
+    "Advises developers and municipalities on food halls"
+  ],
+
+  steps: [
+    { t: "Pick your session", d: "Choose the 1-hour session that fits your situation. The flat fee is shown up front, with no surprises." },
+    { t: "Tell us the short version", d: "A few quick questions so we come prepared and use your hour well." },
+    { t: "Get a clear plan", d: "Walk away knowing whether you need legal work, business strategy, or both, and what to do next." }
+  ],
+
+  // Real reviews must be collected from clients. These are visible placeholders.
+  testimonials: [
+    { q: "[Client testimonial — business formation or contracts]", who: "[Client name]", biz: "[Business]" },
+    { q: "[Client testimonial — real estate or lease negotiation]", who: "[Client name]", biz: "[Business]" },
+    { q: "[Client testimonial — food / restaurant business]", who: "[Client name]", biz: "[Business]" }
+  ],
+
+  faq: [
+    { q: "Do I need a lawyer, or do I need business advice?", a: "Most entrepreneurs think they need legal help when they actually need business advice. Book a session and we’ll help you figure out which one you need, or whether you need both." },
+    { q: "How long is a session and what does it cost?", a: "Every consulting session is one hour, at a flat fee from $250 to $350 depending on the session. The price is shown before you book." },
+    { q: "What areas of law do you practice?", a: "Business law, real estate law, and food & restaurant law. Our sister company, Push Pull Consulting, handles non-legal business services like strategy, marketing, branding and finance sourcing." },
+    { q: "Do you work with food and restaurant businesses?", a: "Yes. Our attorneys run food businesses themselves, from commercial bakeries to food halls, so we advise from first-hand experience." },
+    { q: "Is a consulting session the same as hiring the firm?", a: "No. A consulting session is a one-time strategy hour. If you need ongoing legal representation, we’ll discuss an engagement separately. [Client to confirm wording.]" },
+    { q: "Where are you located?", a: "We serve clients in the Washington, DC and Maryland area, and sessions can be held virtually. [Client to confirm.]" }
+  ],
+
   disclaimer:
     "The information on this website is for general information purposes only and is not legal advice. Contacting the firm does not create an attorney-client relationship. Consulting sessions offered through Push Pull Consulting are business consulting, not legal representation."
 };
