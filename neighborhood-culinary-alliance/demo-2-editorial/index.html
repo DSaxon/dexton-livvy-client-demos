@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neighborhood Culinary Alliance</title>
+<meta name="description" content="Neighborhood Culinary Alliance develops food halls, culinary projects and The Mixing Bowl baking incubator.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F0E6; --paper2:#EFE6D6; --card:#FFFCF6; --ink:#2A211B; --muted:#6E6157; --line:#DCCFBC;
+  --terra:#C4561D; --terra-d:#9E4214; --sage:#3C8067; --sage-l:#DCE8DF;
+  --serif:"Fraunces",Georgia,serif; --sans:"DM Sans",system-ui,sans-serif; --w:1200px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.7 var(--sans)}
+img{max-width:100%;display:block} a{color:var(--terra)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08;margin:0 0 .45em;letter-spacing:-.01em}
+h1{font-size:clamp(2.6rem,7vw,5.6rem);font-weight:800;letter-spacing:-.03em}
+h2{font-size:clamp(2rem,4.2vw,3.4rem);letter-spacing:-.02em} h3{font-size:1.4rem}
+h1 em,h2 em{font-style:italic;font-weight:400;color:var(--terra)}
+p{margin:0 0 1em}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 28px}
+section{padding:96px 0}
+.kicker{font:700 .74rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--terra);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.kicker .num{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0;font-size:1rem;color:var(--ink);text-transform:none}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:700;font-size:.92rem;letter-spacing:.04em;border:1.5px solid var(--ink);transition:.2s}
+.btn:hover{background:var(--terra);border-color:var(--terra)}
+.btn.line{background:transparent;color:var(--ink)} .btn.line:hover{background:var(--ink);color:var(--paper)}
+.btn.terra{background:var(--terra);border-color:var(--terra);color:#fff} .btn.terra:hover{background:var(--terra-d)}
+.btn::after{content:"→"}
+
+/* masthead */
+.strip{border-bottom:1px solid var(--line);font-size:.82rem;color:var(--muted)}
+.strip .wrap{display:flex;justify-content:space-between;padding-top:10px;padding-bottom:10px;gap:16px;flex-wrap:wrap}
+.strip a{color:inherit;text-decoration:none} .strip a:hover{color:var(--terra)}
+header.mast{background:var(--paper);position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line)}
+header.mast .wrap{display:flex;flex-direction:column;align-items:center;padding-top:18px}
+.logo img{height:74px;width:auto;transition:height .25s}
+body.scrolled .logo img{height:46px}
+nav.main{display:flex;gap:6px;margin-top:10px}
+nav.main a{color:var(--ink);text-decoration:none;font-weight:500;font-size:.93rem;padding:12px 16px;position:relative}
+nav.main a:hover{color:var(--terra)}
+nav.main a.active{color:var(--terra)}
+nav.main a.active::after{content:"";position:absolute;left:16px;right:16px;bottom:-1px;height:3px;background:var(--terra)}
+nav.main a sup{font-size:.6rem;color:var(--sage);font-weight:700;letter-spacing:.05em;margin-left:3px}
+.menu-btn{display:none;position:absolute;right:20px;top:24px;background:none;border:1.5px solid var(--ink);padding:6px 12px;font:700 .8rem var(--sans);letter-spacing:.1em;cursor:pointer;color:var(--ink)}
+@media (max-width:980px){
+  header.mast .wrap{flex-direction:row;justify-content:space-between;padding-top:12px;padding-bottom:12px}
+  .logo img,body.scrolled .logo img{height:48px} .menu-btn{display:block;position:static}
+  nav.main{position:fixed;inset:73px 0 auto 0;flex-direction:column;background:var(--paper);margin:0;padding:8px 20px 24px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:.3s}
+  body.menu-open nav.main{transform:none}
+  nav.main a{border-bottom:1px solid var(--line);padding:16px 4px;font-family:var(--serif);font-size:1.3rem}
+  nav.main a.active::after{display:none}
+}
+
+/* home hero */
+.hero{padding:72px 0 0}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:end}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.hero .lead{font-size:1.2rem;color:var(--muted);max-width:560px}
+.collage{position:relative;height:540px}
+.collage img{position:absolute;object-fit:cover;box-shadow:0 24px 50px rgba(42,33,27,.18)}
+.collage .a{width:72%;height:78%;right:0;top:0}
+.collage .b{width:52%;height:46%;left:0;bottom:0;border:10px solid var(--paper)}
+.collage .stamp{position:absolute;right:6%;bottom:6%;width:130px;height:130px;border-radius:50%;background:var(--terra);color:#fff;display:grid;place-items:center;text-align:center;font:italic 600 1rem/1.15 var(--serif);padding:14px;transform:rotate(-8deg)}
+@media (max-width:600px){.collage{height:380px}}
+.marquee{margin-top:80px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);display:grid;grid-template-columns:repeat(4,1fr)}
+.marquee div{padding:24px 22px;border-right:1px solid var(--line)} .marquee div:last-child{border:0}
+.marquee b{display:block;font:800 2.6rem/1 var(--serif);letter-spacing:-.02em}
+.marquee span{font-size:.86rem;color:var(--muted)}
+@media (max-width:760px){.marquee{grid-template-columns:1fr 1fr}.marquee div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+
+.split{display:grid;grid-template-columns:.75fr 1.25fr;gap:72px}
+@media (max-width:900px){.split{grid-template-columns:1fr;gap:28px}}
+.dropcap::first-letter{font:800 4.4rem/.8 var(--serif);float:left;margin:8px 12px 0 0;color:var(--terra)}
+.pull{font:italic 400 1.6rem/1.35 var(--serif);border-left:3px solid var(--terra);padding-left:24px;margin:36px 0}
+
+/* program index */
+.index{border-top:1px solid var(--ink)}
+.index a{display:grid;grid-template-columns:80px 1fr 1.2fr 220px;gap:28px;align-items:center;padding:32px 0;border-bottom:1px solid var(--line);color:inherit;text-decoration:none;transition:.25s}
+.index a:hover{background:var(--card);padding-left:16px;padding-right:16px}
+.index .n{font:italic 400 1.6rem var(--serif);color:var(--terra)}
+.index h3{font-size:clamp(1.6rem,3vw,2.4rem);margin:0}
+.index p{margin:0;color:var(--muted);font-size:.96rem}
+.index img{width:220px;height:140px;object-fit:cover}
+@media (max-width:860px){.index a{grid-template-columns:50px 1fr}.index p{grid-column:2}.index img{grid-column:1/-1;width:100%;height:200px}}
+
+.dark{background:var(--ink);color:var(--paper)} .dark h2{color:var(--paper)} .dark .kicker{color:#E99A6A}
+.dark .btn{background:var(--paper);color:var(--ink);border-color:var(--paper)} .dark .btn:hover{background:var(--terra);color:#fff;border-color:var(--terra)}
+.logos{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.logos div{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px;display:grid;place-items:center;background:var(--card)}
+.logos img{height:70px;width:100%;object-fit:contain;mix-blend-mode:multiply}
+@media (max-width:760px){.logos{grid-template-columns:repeat(3,1fr)}}
+
+/* page header */
+.phead{padding:80px 0 56px;border-bottom:1px solid var(--line)}
+.phead .lead{font-size:1.2rem;color:var(--muted);max-width:640px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.chips a{border:1px solid var(--ink);padding:7px 16px;border-radius:999px;color:var(--ink);text-decoration:none;font-size:.88rem;font-weight:500} .chips a:hover{background:var(--ink);color:var(--paper)}
+
+/* projects */
+.proj{padding:88px 0;border-bottom:1px solid var(--line);scroll-margin-top:150px}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.proj:nth-child(even) .proj-grid > :first-child{order:2}
+@media (max-width:860px){.proj-grid{grid-template-columns:1fr;gap:32px}.proj:nth-child(even) .proj-grid > :first-child{order:0}}
+.proj .cover{aspect-ratio:4/5;object-fit:cover;width:100%}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--line);margin:22px 0}
+.facts div{padding:14px 12px 14px 0;font:600 1rem/1.25 var(--serif)}
+.strip-gal{display:flex;gap:10px;overflow-x:auto;padding-bottom:10px;margin-top:24px;scroll-snap-type:x mandatory}
+.strip-gal a{flex:0 0 150px;height:150px;scroll-snap-align:start} .strip-gal img{width:100%;height:100%;object-fit:cover;transition:.3s} .strip-gal a:hover img{opacity:.8}
+.ongo{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--paper)}
+.ongo article{padding:36px 32px 12px 0;border-right:1px solid rgba(246,240,230,.15);margin-right:32px}
+.ongo article:last-child{border:0}
+.ongo .n{font:italic 400 3.4rem/1 var(--serif);color:#E99A6A;margin-bottom:16px}
+.ongo p{color:#cbbfb2}
+@media (max-width:860px){.ongo{grid-template-columns:1fr}.ongo article{border:0;border-bottom:1px solid rgba(246,240,230,.15);margin:0;padding:32px 0}}
+
+/* incubator */
+.mb-head{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center}
+.mb-head img.mblogo{height:180px}
+@media (max-width:700px){.mb-head{grid-template-columns:1fr}.mb-head img.mblogo{height:130px}}
+.mb-hero-img{height:440px;background:url(../assets/mb-hero.jpg) center/cover;position:relative}
+.mb-hero-img .ticker{position:absolute;left:0;right:0;bottom:0;background:var(--terra);color:#fff;display:flex;justify-content:space-around;flex-wrap:wrap;gap:8px 24px;padding:16px 20px;font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase}
+.bbs{font:800 clamp(2.4rem,7vw,5rem)/1 var(--serif);letter-spacing:-.03em;color:var(--terra)}
+.lists{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+@media (max-width:860px){.lists{grid-template-columns:1fr}}
+.lists ul{list-style:none;padding:0;margin:0;border-top:1px solid var(--ink)}
+.lists li{padding:11px 0;border-bottom:1px solid var(--line)}
+.why{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink)}
+.why div{padding:28px 24px 28px 0} .why b{display:block;font:600 1.3rem/1.2 var(--serif);margin-bottom:8px}
+@media (max-width:860px){.why{grid-template-columns:1fr 1fr}}
+.equip{display:grid;grid-template-columns:repeat(2,1fr);gap:0 48px;counter-reset:e;list-style:none;padding:0;margin:0}
+.equip li{counter-increment:e;padding:13px 0;border-bottom:1px solid var(--line);display:flex;gap:16px}
+.equip li::before{content:counter(e,decimal-leading-zero);font:italic 400 .95rem var(--serif);color:var(--terra);min-width:26px}
+@media (max-width:700px){.equip{grid-template-columns:1fr}}
+/* menu-style price list */
+.menu{background:var(--card);border:1px solid var(--line);padding:56px clamp(22px,5vw,64px);position:relative}
+.menu::before{content:"";position:absolute;inset:10px;border:1px solid var(--line);pointer-events:none}
+.menu h2{text-align:center} .menu .intro{text-align:center;color:var(--muted);max-width:620px;margin:0 auto 40px}
+.item{padding:22px 0;border-bottom:1px dashed var(--line)} .item:last-of-type{border:0}
+.item .row{display:flex;align-items:baseline;gap:14px}
+.item h3{margin:0;font-size:1.45rem;white-space:nowrap}
+.item .dots{flex:1;border-bottom:2px dotted #bfae97;transform:translateY(-6px)}
+.item .price{font:800 1.5rem var(--serif);color:var(--terra);white-space:nowrap} .item .price small{font:400 .85rem var(--sans);color:var(--muted)}
+.item .meta{font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);margin:4px 0 6px}
+.item .incl{color:var(--muted);font-size:.95rem}
+.item.feat h3::after{content:"★ Most popular";font:700 .68rem var(--sans);letter-spacing:.08em;background:var(--sage);color:#fff;padding:3px 8px;margin-left:10px;vertical-align:middle;border-radius:3px}
+@media (max-width:600px){.item .row{flex-wrap:wrap}.item h3{white-space:normal}.item .dots{display:none}}
+.thanks{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:center;font:italic 400 1.35rem var(--serif);list-style:none;padding:0}
+.thanks li::after{content:"·";margin-left:32px;color:var(--terra)} .thanks li:last-child::after{content:""}
+.visit{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(246,240,230,.3);margin-top:40px}
+.visit div{padding:24px 24px 0 0} .visit b{display:block;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:#E99A6A;margin-bottom:6px}
+.visit a{color:var(--paper)}
+@media (max-width:760px){.visit{grid-template-columns:1fr}}
+
+/* boys & baking */
+.pending{display:inline-block;background:#FCEFC7;color:#7A5B00;border:1px dashed #C9A23A;font-size:.78rem;font-weight:700;padding:5px 12px;margin-bottom:18px;letter-spacing:.03em}
+.placeholder{color:#9C8355!important;font-style:italic}
+.bb{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--ink)}
+.bb div{padding:36px 36px 36px 0;border-bottom:1px solid var(--line)}
+.bb div:nth-child(odd){border-right:1px solid var(--line)} .bb div:nth-child(even){padding-left:36px}
+@media (max-width:760px){.bb{grid-template-columns:1fr}.bb div:nth-child(odd){border-right:0}.bb div:nth-child(even){padding-left:0}}
+.bb .n{font:italic 400 1.1rem var(--serif);color:var(--terra)}
+.dl{display:grid;grid-template-columns:repeat(4,1fr);background:var(--sage);color:#fff;margin-top:56px}
+.dl div{padding:22px 24px;border-right:1px solid rgba(255,255,255,.2)} .dl b{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;opacity:.75}
+@media (max-width:760px){.dl{grid-template-columns:1fr 1fr}}
+
+/* board */
+.boardlist{border-top:1px solid var(--ink)}
+.bm{display:grid;grid-template-columns:90px 1fr 1.6fr;gap:32px;padding:40px 0;border-bottom:1px solid var(--line)}
+.bm .n{font:italic 400 1.4rem var(--serif);color:var(--terra)}
+.bm h3{font-size:1.9rem;margin:0} .bm .role{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-top:8px}
+.bm p{color:var(--muted)}
+@media (max-width:760px){.bm{grid-template-columns:1fr;gap:8px}}
+
+/* connect */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:72px} @media (max-width:860px){.cgrid{grid-template-columns:1fr}}
+.cblock{border-top:1px solid var(--ink);padding-top:22px;margin-bottom:40px}
+.cblock b{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+.cblock a{color:var(--ink);font:400 1.3rem var(--serif);text-decoration:none;border-bottom:1px solid var(--terra)}
+form.contact{display:grid;gap:22px}
+form.contact label{display:flex;flex-direction:column;gap:4px;font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+input,select,textarea{font:400 1.1rem var(--sans);padding:10px 0;border:0;border-bottom:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:0}
+input:focus,select:focus,textarea:focus{outline:0;border-bottom-color:var(--terra)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:22px} @media (max-width:600px){.row2{grid-template-columns:1fr}}
+
+footer.site{background:var(--ink);color:#bfb3a6;padding:80px 0 30px;font-size:.92rem}
+footer .big{font:800 clamp(2rem,5vw,3.8rem)/1.05 var(--serif);color:var(--paper);letter-spacing:-.02em;margin-bottom:48px}
+footer .big a{color:#E99A6A;text-decoration:none;font-style:italic;font-weight:400}
+footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;border-top:1px solid rgba(246,240,230,.15);padding-top:36px}
+@media (max-width:860px){footer .cols{grid-template-columns:1fr 1fr}}
+footer h4{font:700 .72rem var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--paper);margin:0 0 14px}
+footer ul{list-style:none;padding:0;margin:0} footer li{margin-bottom:8px}
+footer a{color:#d9cdbf;text-decoration:none} footer a:hover{color:#fff}
+footer .legal{margin-top:48px;font-size:.8rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.lightbox{position:fixed;inset:0;background:rgba(42,33,27,.92);display:none;place-items:center;z-index:100;padding:24px}
+.lightbox.open{display:grid} .lightbox img{max-height:88vh}
+.lightbox button{position:absolute;top:16px;right:22px;background:none;border:0;color:#fff;font-size:2.4rem;cursor:pointer}
+.center{text-align:center}
+</style>
+</head>
+<body>
+<div class="strip"><div class="wrap" id="strip"></div></div>
+<header class="mast"><div class="wrap">
+  <a class="logo" href="#/home" aria-label="Neighborhood Culinary Alliance home"><img src="../assets/nca-logo-dark.png" alt="Neighborhood Culinary Alliance"></a>
+  <button class="menu-btn" data-menu-toggle aria-expanded="false">MENU</button>
+  <nav class="main" id="nav" aria-label="Main"></nav>
+</div></header>
+
+<main id="app"></main>
+<footer class="site"><div class="wrap" id="footer"></div></footer>
+
+<script src="../assets/content.js"></script>
+<script>
+const D = NCA, M = D.incubator;
+const two = n => String(n).padStart(2,"0");
+document.getElementById("strip").innerHTML = `<span>A Maryland non-profit · Food halls · Baking incubator · Youth programs</span>
+  <span><a href="mailto:${D.org.email}">${D.org.email}</a> &nbsp;·&nbsp; <a href="${D.org.phoneHref}">${D.org.phone}</a></span>`;
+document.getElementById("nav").innerHTML = D.nav.map(n =>
+  `<a href="#/${n.id}" data-nav="${n.id}">${n.label}${['incubator','boys-baking'].includes(n.id)?'<sup>NEW</sup>':''}</a>`).join("");
+document.getElementById("footer").innerHTML = `
+  <div class="big">Start your next project <a href="#/connect">with us.</a></div>
+  <div class="cols">
+    <div><h4>Neighborhood Culinary Alliance</h4><ul><li><a href="${D.org.phoneHref}">${D.org.phone}</a></li><li><a href="mailto:${D.org.email}">${D.org.email}</a></li></ul></div>
+    <div><h4>Pages</h4><ul>${D.nav.slice(0,3).map(n=>`<li><a href="#/${n.id}">${n.label}</a></li>`).join("")}</ul></div>
+    <div><h4>&nbsp;</h4><ul>${D.nav.slice(3).map(n=>`<li><a href="#/${n.id}">${n.label}</a></li>`).join("")}</ul></div>
+    <div><h4>The Mixing Bowl</h4><ul><li><a href="${M.contact.mapUrl}" target="_blank" rel="noopener">${M.contact.address}</a></li><li><a href="mailto:${M.contact.email}">${M.contact.email}</a></li><li>${M.contact.hours}</li></ul></div>
+  </div>
+  <div class="legal"><span>© ${D.org.year} Neighborhood Culinary Alliance Inc.</span><span>Baltimore · Washington, DC</span></div>`;
+addEventListener("scroll", () => document.body.classList.toggle("scrolled", scrollY > 60), {passive:true});
+
+window.VIEWS = {
+home: d => `
+  <section class="hero"><div class="wrap">
+    <div class="hero-grid">
+      <div><div class="kicker"><span class="num">Est. by April N. Richardson, Esq.</span></div>
+        <h1>Good food builds <em>good neighborhoods.</em></h1>
+        <p class="lead">Neighborhood Culinary Alliance develops food halls, curates culinary concepts and gives food entrepreneurs room to grow, with an emphasis on disenfranchised people and communities.</p>
+        <p style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px"><a class="btn" href="#/projects">See our projects</a><a class="btn line" href="#/incubator">Baking Incubator</a></p></div>
+      <div class="collage"><img class="a" src="../assets/savor-interior.jpg" alt="Savor Food Hall"><img class="b" src="../assets/gallery/dcspc-6.jpg" alt="Ninety Ten bakery café interior"><div class="stamp">The first Black-owned food hall in the nation</div></div>
+    </div>
+    <div class="marquee">${d.home.stats.map(s=>`<div><b>${s.n}</b><span>${s.l}</span></div>`).join("")}</div>
+  </div></section>
+  <section><div class="wrap split">
+    <div><div class="kicker"><span class="num">01</span> ${d.home.eyebrow}</div><h2>About <em>our company</em></h2></div>
+    <div><p class="dropcap">${d.home.mission}</p>${d.home.paragraphs.map(p=>`<p>${p}</p>`).join("")}
+      <div class="pull">“${d.home.cta}”</div><a class="btn terra" href="#/connect">Connect with us</a></div>
+  </div></section>
+  <section style="padding-top:0"><div class="wrap">
+    <div class="kicker"><span class="num">02</span> What we do</div><h2 style="margin-bottom:40px">Three ways we <em>feed communities</em></h2>
+    <div class="index">
+      <a href="#/projects"><span class="n">i.</span><h3>Our Projects</h3><p>Savor Food Hall, The Mill on North, Ninety Ten by DC Sweet Potato Cake, plus ongoing work in Baltimore and Chicago.</p><img src="../assets/savor.jpg" alt=""></a>
+      <a href="#/incubator"><span class="n">ii.</span><h3>Baking Incubator</h3><p>The Mixing Bowl: a 5,000 sq. ft. bakery-only, GMP-compliant shared kitchen in Northwest Baltimore.</p><img src="../assets/mb-hero.jpg" alt=""></a>
+      <a href="#/boys-baking"><span class="n">iii.</span><h3>Boys &amp; Baking</h3><p>${d.boysBaking.pending?"Our newest program. Details coming soon.":d.boysBaking.intro}</p><img src="${d.boysBaking.image}" alt=""></a>
+    </div></div></section>
+  <section style="padding-top:0"><div class="wrap"><div class="kicker"><span class="num">03</span> Concepts we’ve helped build</div>
+    <div class="logos">${d.partnerLogos.map(l=>`<div><img src="../assets/logos/${l}" alt="" loading="lazy"></div>`).join("")}</div></div></section>`,
+
+projects: d => `
+  <div class="phead"><div class="wrap"><div class="kicker">Explore projects</div><h1>Our <em>Projects</em></h1>
+    <p class="lead">Food halls and culinary destinations developed and curated by NCA.</p>
+    <div class="chips">${d.projects.map(p=>`<a href="#/projects/${p.id}">${p.name}</a>`).join("")}<a href="#/projects/ongoing">Ongoing Projects</a></div></div></div>
+  <div>${d.projects.map((p,i)=>`<article class="proj" id="${p.id}"><div class="wrap proj-grid">
+    <img class="cover" src="${p.image}" alt="${p.name}">
+    <div><div class="kicker"><span class="num">${two(i+1)}</span> ${p.kicker}</div><h2>${p.name}</h2>
+      <div class="facts">${p.facts.map(f=>`<div>${f}</div>`).join("")}</div><p>${p.text}</p>
+      <div class="strip-gal">${p.gallery.map(g=>`<a href="${gal(g)}" data-lightbox><img src="${gal(g)}" alt="${p.name} photo" loading="lazy"></a>`).join("")}</div></div>
+  </div></article>`).join("")}</div>
+  <section class="dark" id="ongoing" style="scroll-margin-top:140px"><div class="wrap"><div class="kicker">Future</div><h2>Ongoing <em style="color:#E99A6A">Projects</em></h2>
+    <div class="ongo" style="margin-top:40px">${d.ongoing.map(o=>`<article><div class="n">${o.n}</div><h3>${o.name}</h3><p>${o.text}</p></article>`).join("")}</div></div></section>`,
+
+incubator: d => { const m=d.incubator; return `
+  <div class="phead"><div class="wrap mb-head"><img class="mblogo" src="${m.logo}" alt="The Mixing Bowl Incubator">
+    <div><div class="kicker">Baking Incubator · An NCA initiative</div><h1 style="font-size:clamp(2.4rem,5.5vw,4.4rem)">${m.headline.replace("Baking Entrepreneurs.","<em>Baking Entrepreneurs.</em>")}</h1>
+      <p class="lead">${m.sub}</p><p style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn terra" href="${m.applyUrl}" target="_blank" rel="noopener">Apply for Membership</a><a class="btn line" href="${m.tourUrl}" target="_blank" rel="noopener">Book a Facility Tour</a></p></div></div></div>
+  <div class="mb-hero-img"><div class="ticker">${m.highlights.map(h=>`<span>✦ ${h}</span>`).join("")}</div></div>
+  <section><div class="wrap split">
+    <div><div class="bbs">Build.<br>Bake.<br>Scale.</div><p style="margin-top:18px;color:var(--muted)">${m.taglineSub}</p></div>
+    <div><div class="kicker">Our mission</div><h2>${m.aboutTitle}</h2><p style="font:italic 400 1.3rem/1.45 var(--serif)">${m.mission}</p>${m.about.map(p=>`<p>${p}</p>`).join("")}</div>
+  </div></section>
+  <section style="background:var(--paper2)"><div class="wrap">
+    <div class="kicker">Who we’re built for</div><h2 style="margin-bottom:40px">You’ve got demand. <em>We’ve got capacity.</em></h2>
+    <div class="lists">
+      <div><h3>What we have</h3><ul>${m.whatWeHave.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div><h3>You’re expanding into</h3><ul>${m.builtFor.expanding.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div><h3>You need</h3><ul>${m.builtFor.need.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+    </div>
+    <h3 style="margin:64px 0 0">Why The Mixing Bowl</h3>
+    <div class="why" style="margin-top:16px">${m.why.map(w=>`<div><b>${w.t}</b>${w.d}</div>`).join("")}</div>
+  </div></section>
+  <section><div class="wrap split"><div><div class="kicker">Equipment</div><h2>In the <em>kitchen</em></h2><p style="color:var(--muted)">Scale-ready equipment and cold storage, available to every member.</p></div>
+    <ol class="equip">${m.equipment.map(x=>`<li>${x}</li>`).join("")}</ol></div></section>
+  <section style="padding-top:0" id="memberships"><div class="wrap"><div class="menu">
+    <div class="kicker" style="justify-content:center">Membership packages</div><h2>Choose the Membership <em>That Fits Your Growth</em></h2><p class="intro">${m.membershipIntro}</p>
+    ${m.memberships.map(p=>`<div class="item ${p.featured?'feat':''}"><div class="row"><h3>${p.name}</h3><span class="dots"></span><span class="price">${p.price} <small>${p.per}</small></span></div>
+      <div class="meta">${p.meta}</div><div class="incl">${p.items.join(" · ")}</div></div>`).join("")}
+    <p class="center" style="margin:40px 0 0"><a class="btn terra" href="${m.applyUrl}" target="_blank" rel="noopener">Apply for Membership</a></p>
+  </div></div></section>
+  <section style="padding-top:0"><div class="wrap center"><div class="kicker" style="justify-content:center">Our partners</div><h2>From seed <em>to harvest</em></h2>
+    <p style="max-width:640px;margin:0 auto 30px;color:var(--muted)">${m.partnersIntro}</p><ul class="thanks">${m.partners.map(p=>`<li>${p}</li>`).join("")}</ul></div></section>
+  <section class="dark"><div class="wrap"><div class="kicker">Better yet, see us in person</div><h2>${m.cta.title.replace("The Mixing Bowl?","<em style='color:#E99A6A'>The Mixing Bowl?</em>")}</h2>
+    <p style="color:#cbbfb2">${m.cta.sub}</p><a class="btn" href="${m.applyUrl}" target="_blank" rel="noopener">Apply Now</a>
+    <div class="visit"><div><b>Address</b><a href="${m.contact.mapUrl}" target="_blank" rel="noopener">${m.contact.address}</a></div><div><b>Email</b><a href="mailto:${m.contact.email}">${m.contact.email}</a></div><div><b>Hours</b>${m.contact.hours}</div></div>
+  </div></section>`; },
+
+"boys-baking": d => { const b=d.boysBaking; return `
+  <div class="phead"><div class="wrap split" style="align-items:end">
+    <div>${pendingBadge()}<div class="kicker">An NCA program</div><h1>Boys <em>&amp;</em> Baking</h1></div>
+    <div><p class="lead ${b.pending?'placeholder':''}">${b.tagline}</p><p class="${b.pending?'placeholder':''}">${b.intro}</p><a class="btn terra" href="#/connect">${b.ctaLabel}</a></div></div></div>
+  <div style="height:380px;background:url(${b.image}) center/cover"></div>
+  <section><div class="wrap">
+    <div class="bb">${b.sections.map((s,i)=>`<div><span class="n">${two(i+1)}</span><h3>${s.t}</h3><p class="${b.pending?'placeholder':''}">${s.d}</p></div>`).join("")}</div>
+    <div class="dl">${b.details.map(x=>`<div><b>${x.k}</b>${x.v}</div>`).join("")}</div>
+  </div></section>`; },
+
+board: d => `
+  <div class="phead"><div class="wrap"><div class="kicker">Leadership</div><h1>Board of <em>Directors</em></h1>
+    <p class="lead">Leaders in law, real estate, food science, hospitality and entertainment, guiding NCA’s work.</p></div></div>
+  <section style="padding-top:40px"><div class="wrap boardlist">${d.board.map((m,i)=>`<div class="bm"><span class="n">${two(i+1)}</span>
+    <div><h3>${m.name}</h3>${m.role?`<div class="role">${m.role}</div>`:""}</div><div>${m.bio.map(p=>`<p>${p}</p>`).join("")}</div></div>`).join("")}</div></section>`,
+
+connect: d => `
+  <div class="phead"><div class="wrap"><div class="kicker">Contact us</div><h1>Let’s <em>talk.</em></h1>
+    <p class="lead">Planning a food hall, looking for bakery production space, or want to support Boys &amp; Baking? Email us today.</p></div></div>
+  <section><div class="wrap cgrid">
+    <div>
+      <div class="cblock"><h3>Neighborhood Culinary Alliance</h3><b>Phone</b><a href="${d.org.phoneHref}">${d.org.phone}</a><b>Email</b><a href="mailto:${d.org.email}">${d.org.email}</a></div>
+      <div class="cblock"><h3>The Mixing Bowl Incubator</h3><b>Visit</b><a href="${M.contact.mapUrl}" target="_blank" rel="noopener">${M.contact.address}</a><b>Email</b><a href="mailto:${M.contact.email}">${M.contact.email}</a><b>Hours</b><span>${M.contact.hours}</span></div>
+    </div>
+    <form class="contact" data-mailto-form><h3>Get in touch</h3>
+      <div class="row2"><label>Name<input name="name" required></label><label>Email<input name="email" type="email" required></label></div>
+      <div class="row2"><label>Phone<input name="phone" type="tel"></label>
+      <label>Topic<select name="topic"><option>Food hall / project development</option><option>Baking Incubator membership</option><option>Boys &amp; Baking</option><option>Partnership or sponsorship</option><option>Something else</option></select></label></div>
+      <label>Message<textarea name="message" rows="5" required></textarea></label>
+      <div><button class="btn" type="submit">Send Message</button></div></form>
+  </div></section>`
+};
+</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

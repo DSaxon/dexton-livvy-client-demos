@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neighborhood Culinary Alliance</title>
+<meta name="description" content="Neighborhood Culinary Alliance develops food halls, culinary projects and The Mixing Bowl baking incubator.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#3C8067; --green-d:#1F3D32; --green-dd:#152a22; --cream:#FAFBF6; --sand:#F1EEE6;
+  --ink:#1d2420; --muted:#5d6a63; --line:#dfe3dc; --orange:#D2691E; --orange-d:#B55612;
+  --serif:"Playfair Display",Georgia,serif; --sans:"Fira Sans",system-ui,sans-serif;
+  --w:1180px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font:17px/1.65 var(--sans)}
+img{max-width:100%;display:block}
+a{color:var(--green)}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.15;margin:0 0 .5em;color:var(--green-d)}
+h1{font-size:clamp(2.2rem,5vw,3.6rem)} h2{font-size:clamp(1.8rem,3.4vw,2.6rem)} h3{font-size:1.35rem}
+p{margin:0 0 1em}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 24px}
+.eyebrow{display:inline-block;font:600 .8rem/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+.eyebrow::before{content:"";display:inline-block;width:28px;height:2px;background:currentColor;vertical-align:middle;margin-right:10px}
+section{padding:88px 0}
+.btn{display:inline-block;padding:14px 28px;border-radius:999px;background:var(--green);color:#fff;text-decoration:none;font-weight:600;border:2px solid var(--green);transition:.2s}
+.btn:hover{background:var(--green-d);border-color:var(--green-d)}
+.btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)} .btn.ghost:hover{background:#fff;color:var(--green-d)}
+.btn.orange{background:var(--orange);border-color:var(--orange)} .btn.orange:hover{background:var(--orange-d);border-color:var(--orange-d)}
+.btn.outline{background:transparent;color:var(--green-d);border-color:var(--green-d)} .btn.outline:hover{background:var(--green-d);color:#fff}
+
+/* top bar + header */
+.topbar{background:var(--green-dd);color:#cfe0d7;font-size:.86rem}
+.topbar .wrap{display:flex;gap:24px;justify-content:flex-end;padding-top:8px;padding-bottom:8px}
+.topbar a{color:inherit;text-decoration:none} .topbar a:hover{color:#fff}
+header.site{background:var(--green-d);position:sticky;top:0;z-index:50;box-shadow:0 2px 14px rgba(0,0,0,.15)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:84px}
+.logo img{height:58px;width:auto}
+nav.main{display:flex;gap:4px;align-items:center}
+nav.main a{color:#e6efe9;text-decoration:none;font-weight:500;font-size:.95rem;padding:10px 14px;border-radius:6px;position:relative}
+nav.main a:hover{color:#fff;background:rgba(255,255,255,.07)}
+nav.main a.active{color:#fff}
+nav.main a.active::after{content:"";position:absolute;left:14px;right:14px;bottom:3px;height:2px;background:#9fd2b9}
+nav.main a.new::before{content:"New";position:absolute;top:-6px;right:-2px;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;background:var(--orange);color:#fff;padding:1px 6px;border-radius:999px}
+.menu-btn{display:none;background:none;border:0;color:#fff;font-size:1.8rem;cursor:pointer}
+@media (max-width:1020px){
+  .menu-btn{display:block}
+  nav.main{position:fixed;inset:84px 0 auto 0;background:var(--green-d);flex-direction:column;align-items:stretch;padding:12px 16px 24px;transform:translateY(-120%);transition:.3s;box-shadow:0 10px 20px rgba(0,0,0,.2)}
+  body.menu-open nav.main{transform:none}
+  nav.main a{padding:14px 12px;font-size:1.05rem} nav.main a.active::after{display:none}
+  nav.main a.new::before{position:static;margin-right:8px}
+}
+
+/* hero */
+.hero{position:relative;min-height:560px;display:flex;align-items:center;color:#fff;overflow:hidden;padding:0}
+.hero::before{content:"";position:absolute;inset:0;background:var(--bg) center/cover;z-index:-2}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(21,42,34,.92) 0%,rgba(21,42,34,.72) 45%,rgba(21,42,34,.25) 100%);z-index:-1}
+.hero .wrap{width:100%} .hero h1{color:#fff;max-width:720px} .hero p.lead{font-size:1.2rem;max-width:600px;color:#e1ece6}
+.hero .eyebrow{color:#9fd2b9}
+.hero .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.page-hero{min-height:360px}
+
+/* grids */
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+@media (max-width:860px){.two{grid-template-columns:1fr;gap:36px}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#fff;border:1px solid var(--line);border-radius:14px;margin-top:-64px;position:relative;box-shadow:0 18px 40px rgba(31,61,50,.08)}
+.stats div{padding:28px 24px;border-right:1px solid var(--line)} .stats div:last-child{border:0}
+.stats b{display:block;font:700 2.2rem/1 var(--serif);color:var(--green);margin-bottom:6px} .stats span{font-size:.9rem;color:var(--muted)}
+@media (max-width:760px){.stats{grid-template-columns:1fr 1fr}.stats div:nth-child(2){border-right:0}.stats div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+.photo{border-radius:16px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.12)} .photo img{width:100%;height:100%;object-fit:cover}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media (max-width:900px){.cards{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:.25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(31,61,50,.12)}
+.card .img{aspect-ratio:4/3;overflow:hidden} .card .img img{width:100%;height:100%;object-fit:cover}
+.card .body{padding:24px 26px 28px;flex:1;display:flex;flex-direction:column}
+.card .body p{color:var(--muted);font-size:.96rem;flex:1}
+.card .more{font-weight:600;color:var(--green)}
+.card.mb .more{color:var(--orange)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+
+.band{background:var(--green-d);color:#fff;text-align:center}
+.band h2{color:#fff;font-style:italic;font-weight:500} .band h2 b{font-style:normal;font-weight:700}
+.alt{background:var(--sand)}
+
+/* projects */
+.proj{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start;padding:72px 0;border-bottom:1px solid var(--line);scroll-margin-top:100px}
+.proj:nth-of-type(even){grid-template-columns:1.1fr .9fr} .proj:nth-of-type(even) .pimg{order:2}
+@media (max-width:860px){.proj,.proj:nth-of-type(even){grid-template-columns:1fr}.proj:nth-of-type(even) .pimg{order:0}}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;list-style:none}
+.facts li{background:#e7f1ec;color:var(--green-d);font-size:.85rem;font-weight:500;padding:5px 12px;border-radius:999px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-top:22px}
+.gallery a{aspect-ratio:1;overflow:hidden;border-radius:8px} .gallery img{width:100%;height:100%;object-fit:cover;transition:.3s} .gallery a:hover img{transform:scale(1.06)}
+.ongoing{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media (max-width:860px){.ongoing{grid-template-columns:1fr}}
+.ongoing article{background:#fff;padding:32px;border-radius:16px;border-top:4px solid var(--green)}
+.ongoing .n{font:700 2.6rem/1 var(--serif);color:#cfe3d9}
+.logos{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;align-items:center}
+.logos img{width:100%;height:90px;object-fit:contain;background:#fff;border-radius:10px;padding:10px;filter:grayscale(1);opacity:.85;transition:.2s} .logos img:hover{filter:none;opacity:1}
+@media (max-width:760px){.logos{grid-template-columns:repeat(3,1fr)}}
+.subnav{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.subnav a{color:#fff;border:1px solid rgba(255,255,255,.4);padding:8px 16px;border-radius:999px;text-decoration:none;font-size:.9rem} .subnav a:hover{background:#fff;color:var(--green-d)}
+
+/* incubator */
+.mb-hero::after{background:linear-gradient(100deg,rgba(43,24,12,.92) 0%,rgba(43,24,12,.7) 50%,rgba(43,24,12,.2) 100%)}
+.mb-hero .eyebrow{color:#f3b27d}
+.mb-brand{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+.mb-brand img{height:90px;background:#fff;border-radius:10px;padding:8px}
+.mb-brand small{font-size:.85rem;color:#f3d8c2;max-width:240px;line-height:1.4}
+.highlights{display:grid;grid-template-columns:repeat(4,1fr);background:var(--orange);color:#fff}
+.highlights div{padding:22px 24px;font-weight:600;border-right:1px solid rgba(255,255,255,.25);display:flex;gap:10px;align-items:center}
+.highlights div::before{content:"✓";font-weight:700}
+@media (max-width:860px){.highlights{grid-template-columns:1fr 1fr}}
+.mb .eyebrow{color:var(--orange)} .mb h2,.mb h3{color:#3a2416}
+.checks{list-style:none;padding:0;margin:0} .checks li{padding:8px 0 8px 30px;position:relative;border-bottom:1px dashed var(--line)}
+.checks li::before{content:"";position:absolute;left:0;top:15px;width:14px;height:14px;border-radius:50%;background:var(--orange);box-shadow:inset 0 0 0 4px #fbe3d1}
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media (max-width:860px){.why{grid-template-columns:1fr 1fr}} @media (max-width:520px){.why{grid-template-columns:1fr}}
+.why div{background:#fff;padding:26px;border-radius:14px;border:1px solid var(--line)} .why b{display:block;font-family:var(--serif);font-size:1.15rem;color:#3a2416;margin-bottom:6px}
+.equip{columns:3;column-gap:32px} @media (max-width:760px){.equip{columns:1}}
+.equip li{break-inside:avoid}
+.plans{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+@media (max-width:1100px){.plans{grid-template-columns:repeat(3,1fr)}} @media (max-width:700px){.plans{grid-template-columns:1fr}}
+.plan{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;position:relative}
+.plan.featured{border:2px solid var(--orange);box-shadow:0 16px 34px rgba(210,105,30,.15)}
+.plan.featured::before{content:"Most popular";position:absolute;top:-12px;left:22px;background:var(--orange);color:#fff;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:999px;letter-spacing:.05em}
+.plan h3{font-size:1.1rem;color:#3a2416}
+.plan .price{font:700 2rem/1 var(--serif);color:var(--orange)} .plan .price small{font:400 .85rem var(--sans);color:var(--muted)}
+.plan .meta{font-size:.82rem;font-weight:600;color:var(--muted);margin:10px 0 14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.plan ul{padding-left:18px;margin:0;font-size:.9rem;flex:1} .plan li{margin-bottom:6px}
+.partners{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:0;list-style:none}
+.partners li{background:#fff;border:1px solid var(--line);padding:10px 18px;border-radius:999px;font-weight:500}
+.visit{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center}
+@media (max-width:760px){.visit{grid-template-columns:1fr}}
+.visit div{padding:24px;background:rgba(255,255,255,.06);border-radius:14px} .visit b{display:block;color:#f3b27d;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.visit a{color:#fff}
+.mb-band{background:#3a2416}
+
+/* boys & baking */
+.pending{display:inline-block;background:#fff3cd;color:#7a5b00;border:1px dashed #d4a72c;font-size:.78rem;font-weight:600;padding:5px 12px;border-radius:999px;margin-bottom:16px}
+.bb-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px} @media (max-width:760px){.bb-grid{grid-template-columns:1fr}}
+.bb-grid div{background:#fff;padding:30px;border-radius:16px;border-left:4px solid var(--green)}
+.details{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px} @media (max-width:760px){.details{grid-template-columns:1fr 1fr}}
+.details div{background:var(--green-d);color:#fff;padding:20px;border-radius:12px} .details b{display:block;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#9fd2b9;margin-bottom:4px}
+.placeholder{color:#8a7a4a;font-style:italic}
+
+/* board */
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:28px} @media (max-width:900px){.board{grid-template-columns:1fr 1fr}} @media (max-width:600px){.board{grid-template-columns:1fr}}
+.member{background:#fff;border-radius:16px;padding:32px;border:1px solid var(--line)}
+.avatar{width:72px;height:72px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font:700 1.5rem var(--serif);margin-bottom:18px}
+.member .role{font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin:-6px 0 10px}
+.member p{font-size:.95rem;color:var(--muted)}
+
+/* connect */
+.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px} @media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+.info{background:var(--green-d);color:#e6efe9;border-radius:18px;padding:36px}
+.info h3{color:#fff} .info a{color:#fff} .info b{display:block;color:#9fd2b9;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin-top:20px}
+form.contact{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+form.contact label{display:flex;flex-direction:column;font-size:.85rem;font-weight:600;gap:6px;color:var(--green-d)}
+form.contact .full{grid-column:1/-1}
+input,select,textarea{font:inherit;padding:13px 14px;border:1px solid #cdd5cf;border-radius:10px;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--green);border-color:transparent}
+@media (max-width:600px){form.contact{grid-template-columns:1fr}}
+
+/* footer */
+footer.site{background:var(--green-dd);color:#b7c9bf;padding:64px 0 28px;font-size:.93rem}
+footer .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px}
+@media (max-width:860px){footer .cols{grid-template-columns:1fr 1fr}} @media (max-width:520px){footer .cols{grid-template-columns:1fr}}
+footer h4{color:#fff;font:600 .8rem var(--sans);letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px}
+footer a{color:#dce8e1;text-decoration:none} footer a:hover{color:#fff;text-decoration:underline}
+footer ul{list-style:none;padding:0;margin:0} footer li{margin-bottom:8px}
+footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:48px;padding-top:22px;font-size:.82rem}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;place-items:center;z-index:100;padding:24px}
+.lightbox.open{display:grid} .lightbox img{max-height:88vh;border-radius:8px}
+.lightbox button{position:absolute;top:16px;right:22px;background:none;border:0;color:#fff;font-size:2.4rem;cursor:pointer}
+.center{text-align:center} .narrow{max-width:760px;margin-left:auto;margin-right:auto}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a id="tb-mail"></a><a id="tb-phone"></a>
+</div></div>
+<header class="site"><div class="wrap">
+  <a class="logo" href="#/home" aria-label="Neighborhood Culinary Alliance home"><img src="../assets/nca-logo.png" alt="Neighborhood Culinary Alliance"></a>
+  <nav class="main" id="nav" aria-label="Main"></nav>
+  <button class="menu-btn" data-menu-toggle aria-label="Menu" aria-expanded="false">☰</button>
+</div></header>
+
+<main id="app"></main>
+
+<footer class="site"><div class="wrap" id="footer"></div></footer>
+
+<script src="../assets/content.js"></script>
+<script>
+const D = NCA;
+document.getElementById("tb-mail").outerHTML = `<a href="mailto:${D.org.email}">✉ ${D.org.email}</a>`;
+document.getElementById("tb-phone").outerHTML = `<a href="${D.org.phoneHref}">☎ ${D.org.phone}</a>`;
+document.getElementById("nav").innerHTML = D.nav.map(n =>
+  `<a href="#/${n.id}" data-nav="${n.id}" class="${['incubator','boys-baking'].includes(n.id)?'new':''}">${n.label}</a>`).join("");
+
+const M = D.incubator;
+document.getElementById("footer").innerHTML = `
+  <div class="cols">
+    <div><img src="../assets/nca-logo.png" alt="" style="height:64px;margin-bottom:16px">
+      <p>Developing food-centered real estate and creating opportunity for culinary entrepreneurs and communities.</p></div>
+    <div><h4>Explore</h4><ul>${D.nav.map(n=>`<li><a href="#/${n.id}">${n.label}</a></li>`).join("")}</ul></div>
+    <div><h4>NCA</h4><ul><li><a href="${D.org.phoneHref}">${D.org.phone}</a></li><li><a href="mailto:${D.org.email}">${D.org.email}</a></li></ul></div>
+    <div><h4>The Mixing Bowl</h4><ul><li><a href="${M.contact.mapUrl}" target="_blank" rel="noopener">${M.contact.address}</a></li><li><a href="mailto:${M.contact.email}">${M.contact.email}</a></li><li>${M.contact.hours}</li></ul></div>
+  </div>
+  <div class="legal">© ${D.org.year} Neighborhood Culinary Alliance Inc. All rights reserved.</div>`;
+
+window.VIEWS = {
+home: d => `
+  <section class="hero" style="--bg:url(${d.home.heroImage})"><div class="wrap">
+    <span class="eyebrow">Neighborhood Culinary Alliance</span>
+    <h1>Building food-centered places that build communities.</h1>
+    <p class="lead">We develop food halls, curate culinary concepts and grow food entrepreneurs, with an emphasis on disenfranchised people and communities.</p>
+    <div class="actions"><a class="btn" href="#/projects">Explore our projects</a><a class="btn ghost" href="#/connect">Connect with us</a></div>
+  </div></section>
+  <div class="wrap"><div class="stats">${d.home.stats.map(s=>`<div><b>${s.n}</b><span>${s.l}</span></div>`).join("")}</div></div>
+  <section><div class="wrap two">
+    <div><span class="eyebrow">${d.home.eyebrow}</span><h2>${d.home.title}</h2>
+      <p>${d.home.mission}</p>${d.home.paragraphs.map(p=>`<p>${p}</p>`).join("")}
+      <p><strong>${d.home.cta}</strong></p><a class="btn" href="#/connect">Contact Ms. Richardson</a></div>
+    <div class="photo" style="aspect-ratio:4/5"><img src="../assets/savor-interior.jpg" alt="Savor Food Hall storefront"></div>
+  </div></section>
+  <section class="alt"><div class="wrap">
+    <div class="center narrow"><span class="eyebrow">What we do</span><h2>Our work</h2><p>Food halls, a bakery-only production kitchen, and programs that grow the next generation of bakers.</p></div>
+    <div class="cards" style="margin-top:40px">
+      <a class="card" href="#/projects"><div class="img"><img src="../assets/savor.jpg" alt="Savor Food Hall"></div><div class="body"><span class="tag">Food halls</span><h3>Our Projects</h3><p>Savor Food Hall, The Mill on North, Ninety Ten by DC Sweet Potato Cake, and the projects coming next.</p><span class="more">View projects →</span></div></a>
+      <a class="card mb" href="#/incubator"><div class="img"><img src="${M.heroImage}" alt="Bread in a commercial rack oven"></div><div class="body"><span class="tag" style="color:var(--orange)">The Mixing Bowl</span><h3>Baking Incubator</h3><p>${M.mission}</p><span class="more">See memberships →</span></div></a>
+      <a class="card" href="#/boys-baking"><div class="img"><img src="${d.boysBaking.image}" alt=""></div><div class="body"><span class="tag">Youth program</span><h3>Boys &amp; Baking</h3><p>${d.boysBaking.pending ? "A new NCA program. Details coming soon." : d.boysBaking.intro}</p><span class="more">Learn more →</span></div></a>
+    </div></div></section>
+  <section><div class="wrap"><div class="center"><span class="eyebrow">Brands &amp; partners</span><h2>Concepts we’ve helped build</h2></div>
+    <div class="logos" style="margin-top:36px">${d.partnerLogos.map(l=>`<img src="../assets/logos/${l}" alt="" loading="lazy">`).join("")}</div></div></section>
+  <section class="band"><div class="wrap"><h2>${d.home.banner.line1} <b>${d.home.banner.line2}</b></h2><p style="color:#cfe0d7">${d.home.cta}</p><a class="btn ghost" href="#/connect">${d.home.banner.button}</a></div></section>`,
+
+projects: d => `
+  <section class="hero page-hero" style="--bg:url(../assets/savor-interior.jpg)"><div class="wrap">
+    <span class="eyebrow">Explore projects</span><h1>Our Projects</h1>
+    <p class="lead">Food halls and culinary destinations developed and curated by NCA.</p>
+    <div class="subnav">${d.projects.map(p=>`<a href="#/projects/${p.id}">${p.name}</a>`).join("")}<a href="#/projects/ongoing">Ongoing Projects</a></div>
+  </div></section>
+  <div class="wrap">${d.projects.map(p=>`
+    <article class="proj" id="${p.id}">
+      <div class="pimg photo" style="aspect-ratio:4/5"><img src="${p.image}" alt="${p.name}"></div>
+      <div><span class="eyebrow">${p.kicker}</span><h2>${p.name}</h2>
+        <ul class="facts">${p.facts.map(f=>`<li>${f}</li>`).join("")}</ul><p>${p.text}</p>
+        <div class="gallery">${p.gallery.map(g=>`<a href="${gal(g)}" data-lightbox><img src="${gal(g)}" alt="${p.name} photo" loading="lazy"></a>`).join("")}</div>
+      </div></article>`).join("")}
+  </div>
+  <section class="alt" id="ongoing" style="scroll-margin-top:90px"><div class="wrap">
+    <span class="eyebrow">Future</span><h2>Ongoing Projects</h2>
+    <div class="ongoing" style="margin-top:32px">${d.ongoing.map(o=>`<article><div class="n">${o.n}</div><h3>${o.name}</h3><p>${o.text}</p></article>`).join("")}</div>
+  </div></section>
+  <section class="band"><div class="wrap"><h2>${d.home.banner.line1} <b>${d.home.banner.line2}</b></h2><a class="btn ghost" href="#/connect">${d.home.banner.button}</a></div></section>`,
+
+incubator: d => { const m=d.incubator; return `
+  <section class="hero mb-hero" style="--bg:url(${m.heroImage})"><div class="wrap">
+    <div class="mb-brand"><img src="${m.logo}" alt="The Mixing Bowl Incubator"><small>A Neighborhood Culinary Alliance initiative</small></div>
+    <span class="eyebrow">Baking Incubator</span><h1>${m.headline}</h1><p class="lead">${m.sub} ${m.pitchSub}</p>
+    <div class="actions"><a class="btn orange" href="${m.applyUrl}" target="_blank" rel="noopener">Apply for Membership</a><a class="btn ghost" href="${m.tourUrl}" target="_blank" rel="noopener">Book a Facility Tour</a></div>
+  </div></section>
+  <div class="highlights">${m.highlights.map(h=>`<div>${h}</div>`).join("")}</div>
+  <div class="mb">
+  <section><div class="wrap two">
+    <div><span class="eyebrow">Our mission</span><h2>${m.aboutTitle}</h2><p><strong>${m.mission}</strong></p>${m.about.map(p=>`<p>${p}</p>`).join("")}</div>
+    <div><h3>${m.tagline}</h3><p>${m.taglineSub}</p><ul class="checks">${m.whatWeHave.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+  </div></section>
+  <section class="alt"><div class="wrap">
+    <div class="two" style="align-items:start">
+      <div><span class="eyebrow">Who we’re built for</span><h2>${m.pitchTitle}</h2></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
+        <div><h3>You’re expanding into</h3><ul class="checks">${m.builtFor.expanding.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+        <div><h3>You need</h3><ul class="checks">${m.builtFor.need.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      </div></div>
+    <h3 style="margin-top:56px">Why The Mixing Bowl</h3>
+    <div class="why">${m.why.map(w=>`<div><b>${w.t}</b>${w.d}</div>`).join("")}</div>
+  </div></section>
+  <section><div class="wrap"><span class="eyebrow">Equipment</span><h2>Everything you need to produce at scale</h2>
+    <ul class="checks equip" style="margin-top:24px">${m.equipment.map(x=>`<li>${x}</li>`).join("")}</ul></div></section>
+  <section class="alt" id="memberships"><div class="wrap">
+    <div class="center narrow"><span class="eyebrow">Membership packages</span><h2>Choose the Membership That Fits Your Growth</h2><p>${m.membershipIntro}</p></div>
+    <div class="plans" style="margin-top:44px">${m.memberships.map(p=>`<div class="plan ${p.featured?'featured':''}"><h3>${p.name}</h3>
+      <div class="price">${p.price} <small>${p.per}</small></div><div class="meta">${p.meta}</div><ul>${p.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("")}</div>
+    <p class="center" style="margin-top:32px"><a class="btn orange" href="${m.applyUrl}" target="_blank" rel="noopener">Apply for Membership</a></p>
+  </div></section>
+  <section><div class="wrap center narrow"><span class="eyebrow">Our partners</span><h2>From seed to harvest</h2><p>${m.partnersIntro}</p>
+    <ul class="partners" style="margin-top:24px">${m.partners.map(p=>`<li>${p}</li>`).join("")}</ul></div></section>
+  </div>
+  <section class="band mb-band"><div class="wrap">
+    <h2>${m.cta.title}</h2><p style="color:#f3d8c2">${m.cta.sub}</p>
+    <div class="visit" style="margin:36px 0">
+      <div><b>Visit</b><a href="${m.contact.mapUrl}" target="_blank" rel="noopener">${m.contact.address}</a></div>
+      <div><b>Email</b><a href="mailto:${m.contact.email}">${m.contact.email}</a></div>
+      <div><b>Hours</b>${m.contact.hours}</div></div>
+    <a class="btn orange" href="${m.applyUrl}" target="_blank" rel="noopener">Apply Now</a>
+  </div></section>`; },
+
+"boys-baking": d => { const b=d.boysBaking; return `
+  <section class="hero page-hero" style="--bg:url(${b.image})"><div class="wrap">
+    ${pendingBadge()}<span class="eyebrow" style="display:block">An NCA program</span><h1>${b.title}</h1><p class="lead ${b.pending?'placeholder':''}" style="${b.pending?'color:#f5e6b8':''}">${b.tagline}</p>
+    <div class="actions"><a class="btn" href="#/connect">${b.ctaLabel}</a></div>
+  </div></section>
+  <section><div class="wrap">
+    <p class="narrow center ${b.pending?'placeholder':''}" style="font-size:1.15rem">${b.intro}</p>
+    <div class="bb-grid" style="margin-top:44px">${b.sections.map(s=>`<div><h3>${s.t}</h3><p class="${b.pending?'placeholder':''}">${s.d}</p></div>`).join("")}</div>
+    <div class="details">${b.details.map(x=>`<div><b>${x.k}</b>${x.v}</div>`).join("")}</div>
+  </div></section>
+  <section class="band"><div class="wrap"><h2>Support <b>Boys &amp; Baking</b></h2><p style="color:#cfe0d7">Volunteer, sponsor, or enroll. We’d love to hear from you.</p><a class="btn ghost" href="#/connect">Get in touch</a></div></section>`; },
+
+board: d => `
+  <section class="hero page-hero" style="--bg:url(../assets/hero.jpg)"><div class="wrap"><span class="eyebrow">Leadership</span><h1>Board of Directors</h1>
+    <p class="lead">Leaders in law, real estate, food science, hospitality and entertainment, guiding NCA’s work.</p></div></section>
+  <section class="alt"><div class="wrap"><div class="board">${d.board.map(m=>`<div class="member">
+    <div class="avatar">${m.name.replace(/[“”"]/g,"").split(" ").filter(w=>/^[A-Z]/.test(w)).map(w=>w[0]).slice(0,1).join("")}${m.name.split(" ").slice(-1)[0][0]}</div>
+    <h3>${m.name}</h3>${m.role?`<div class="role">${m.role}</div>`:""}${m.bio.map(p=>`<p>${p}</p>`).join("")}</div>`).join("")}</div></div></section>`,
+
+connect: d => `
+  <section class="hero page-hero" style="--bg:url(../assets/mill.jpg)"><div class="wrap"><span class="eyebrow">Contact us</span><h1>Get in touch</h1>
+    <p class="lead">Planning a food hall, looking for kitchen space, or want to support our programs? Email us today.</p></div></section>
+  <section><div class="wrap contact-grid">
+    <div class="info"><h3>Neighborhood Culinary Alliance</h3>
+      <b>Phone</b><a href="${d.org.phoneHref}">${d.org.phone}</a><b>Email</b><a href="mailto:${d.org.email}">${d.org.email}</a>
+      <h3 style="margin-top:36px">The Mixing Bowl Incubator</h3>
+      <b>Address</b><a href="${M.contact.mapUrl}" target="_blank" rel="noopener">${M.contact.address}</a>
+      <b>Email</b><a href="mailto:${M.contact.email}">${M.contact.email}</a><b>Hours</b>${M.contact.hours}</div>
+    <form class="contact" data-mailto-form>
+      <label>Name<input name="name" required></label><label>Email<input name="email" type="email" required></label>
+      <label>Phone<input name="phone" type="tel"></label>
+      <label>I’m interested in<select name="topic"><option>Food hall / project development</option><option>Baking Incubator membership</option><option>Boys &amp; Baking</option><option>Partnership or sponsorship</option><option>Something else</option></select></label>
+      <label class="full">Message<textarea name="message" rows="6" required></textarea></label>
+      <div class="full"><button class="btn" type="submit">Send Message</button></div>
+    </form>
+  </div></section>`
+};
+</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>
