@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Private Practice Law Group</title>
+<meta name="description" content="Business, real estate and food law, plus Push Pull business consulting, for entrepreneurs.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B0C0B;--bg2:#141614;--card:#181A18;--line:#2A2D2A;--text:#F1F3EE;--muted:#9EA39C;--lime:#7CC243;--lime2:#A6E06F;
+  --display:"Archivo",system-ui,sans-serif;--mono:"Space Grotesk",system-ui,sans-serif;--w:1240px}
+*{box-sizing:border-box} html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--text);font:16.5px/1.65 var(--display);overflow-x:clip}
+img{max-width:100%;display:block} a{color:var(--lime)}
+h1,h2,h3{font-weight:900;line-height:.95;margin:0 0 .4em;letter-spacing:-.035em;text-transform:uppercase}
+h1{font-size:clamp(3rem,9vw,7.6rem)} h2{font-size:clamp(2.2rem,5.5vw,4.4rem)} h3{font-size:1.5rem;letter-spacing:-.02em;line-height:1.05}
+p{margin:0 0 1em} .wrap{max-width:var(--w);margin:0 auto;padding:0 24px} section{padding:100px 0}
+.lime{color:var(--lime)} .stroke{-webkit-text-stroke:2px var(--text);color:transparent}
+.tag{display:inline-block;font:700 .74rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--bg);background:var(--lime);padding:8px 12px;margin-bottom:22px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:17px 28px;background:var(--lime);color:var(--bg);font:800 .92rem var(--display);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:2px solid var(--lime);transition:.2s;cursor:pointer}
+.btn:hover{background:var(--text);border-color:var(--text)}
+.btn.ghost{background:transparent;color:var(--text);border-color:var(--text)} .btn.ghost:hover{background:var(--text);color:var(--bg)}
+.btn::after{content:"→"}
+.ph{background:rgba(242,193,78,.15);color:#F2C14E;border:1px dashed #F2C14E;padding:0 6px;font-style:normal}
+header.site{position:sticky;top:0;z-index:50;background:rgba(11,12,11,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:80px;gap:20px}
+.logo img{height:50px;width:auto}
+nav.main{display:flex;gap:4px;align-items:center}
+nav.main a{color:var(--muted);text-decoration:none;font:700 .82rem var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:10px 12px}
+nav.main a:hover,nav.main a.active{color:var(--text)} nav.main a.active{box-shadow:inset 0 -3px 0 var(--lime)}
+nav.main a[data-nav=book]{background:var(--lime);color:var(--bg);margin-left:8px;padding:12px 18px} nav.main a[data-nav=book].active{box-shadow:none}
+.menu-btn{display:none;background:var(--lime);border:0;color:var(--bg);font:800 .8rem var(--mono);letter-spacing:.1em;padding:12px 16px;cursor:pointer}
+@media (max-width:1060px){.menu-btn{display:block}
+  nav.main{position:fixed;inset:80px 0 auto 0;background:var(--bg);flex-direction:column;align-items:stretch;padding:10px 20px 26px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:.3s}
+  body.menu-open nav.main{transform:none} nav.main a{font:900 1.6rem var(--display);padding:14px 0;border-bottom:1px solid var(--line)} nav.main a.active{box-shadow:none;color:var(--lime)}
+  nav.main a[data-nav=book]{margin:16px 0 0;text-align:center;padding:16px;font-size:1.1rem}}
+/* hero */
+.hero{padding:80px 0 0;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:end}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.hero .lead{font-size:1.2rem;color:var(--muted);max-width:560px;margin-top:20px}
+.hero-photo{position:relative;aspect-ratio:3/4;overflow:hidden}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(1) contrast(1.05)}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(124,194,67,.55),transparent 55%);mix-blend-mode:multiply}
+.hero-photo .name{position:absolute;left:0;bottom:0;background:var(--lime);color:var(--bg);padding:14px 18px;font:800 .95rem var(--display);text-transform:uppercase;letter-spacing:.02em}
+.ticker{margin-top:80px;background:var(--lime);color:var(--bg);overflow:hidden;white-space:nowrap;padding:18px 0;transform:rotate(-1.2deg);margin-left:-20px;margin-right:-20px}
+.ticker .t{display:inline-flex;gap:40px;animation:scroll 28s linear infinite;font:900 1.5rem var(--display);text-transform:uppercase}
+.ticker .t span::after{content:"✦";margin-left:40px}
+@keyframes scroll{to{transform:translateX(-50%)}} @media (prefers-reduced-motion:reduce){.ticker .t{animation:none}}
+.big-quote{font:900 clamp(2rem,5vw,4rem)/1 var(--display);text-transform:uppercase;letter-spacing:-.03em}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.three > div{padding:36px 30px 30px 0;border-right:1px solid var(--line)} .three > div+div{padding-left:30px} .three > div:last-child{border:0}
+.three .n{font:700 .9rem var(--mono);color:var(--lime);margin-bottom:24px;display:block}
+.three p{color:var(--muted)}
+@media (max-width:860px){.three{grid-template-columns:1fr}.three>div,.three>div+div{padding:28px 0;border-right:0;border-bottom:1px solid var(--line)}}
+.areas a{display:grid;grid-template-columns:90px 1fr auto;gap:24px;align-items:center;padding:34px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--text);transition:.25s}
+.areas a:first-child{border-top:1px solid var(--line)}
+.areas .n{font:700 1rem var(--mono);color:var(--muted)}
+.areas h3{font-size:clamp(2rem,5vw,4rem);margin:0;transition:.25s}
+.areas .arrow{width:64px;height:64px;border:2px solid var(--line);display:grid;place-items:center;font-size:1.6rem;transition:.25s}
+.areas a:hover h3{color:var(--lime);transform:translateX(12px)} .areas a:hover .arrow{background:var(--lime);border-color:var(--lime);color:var(--bg);transform:rotate(-45deg)}
+.areas small{display:block;font:500 .95rem var(--display);color:var(--muted);text-transform:none;letter-spacing:0;margin-top:8px}
+@media (max-width:600px){.areas a{grid-template-columns:1fr auto}.areas .n{display:none}.areas .arrow{width:48px;height:48px}}
+.problems{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:900px){.problems{grid-template-columns:1fr 1fr}} @media (max-width:560px){.problems{grid-template-columns:1fr}}
+.prob{background:var(--card);border:1px solid var(--line);padding:28px;text-decoration:none;color:var(--text);display:flex;flex-direction:column;min-height:240px;transition:.2s;position:relative}
+.prob:hover{background:var(--lime);color:var(--bg);border-color:var(--lime);transform:translateY(-4px) rotate(-.6deg)}
+.prob .q{font:500 1.15rem/1.35 var(--display);flex:1;margin-bottom:20px}
+.prob .q::before{content:"“";font:900 3rem/0 var(--display);color:var(--lime);display:block;height:24px}
+.prob:hover .q::before{color:var(--bg)}
+.prob h3{font-size:1.2rem;margin:0 0 4px} .prob .row{display:flex;justify-content:space-between;align-items:end;gap:12px}
+.prob .price{font:900 1.8rem var(--display)}
+.prob .cta{font:700 .74rem var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.logos{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+.logos div{background:#fff;aspect-ratio:3/2;display:grid;place-items:center;padding:14px}
+.logos img{max-height:100%;object-fit:contain}
+@media (max-width:800px){.logos{grid-template-columns:repeat(4,1fr)}}
+.cta-band{background:var(--lime);color:var(--bg);padding:90px 0}
+.cta-band h2{margin:0 0 24px} .cta-band .btn{background:var(--bg);color:var(--lime);border-color:var(--bg)} .cta-band .btn:hover{background:#fff;color:var(--bg);border-color:#fff}
+/* page head */
+.phead{padding:90px 0 60px;border-bottom:1px solid var(--line)}
+.phead .lead{font-size:1.2rem;color:var(--muted);max-width:640px}
+.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.pills a{border:1.5px solid var(--line);color:var(--text);text-decoration:none;padding:10px 16px;font:700 .8rem var(--mono);letter-spacing:.08em;text-transform:uppercase} .pills a:hover{border-color:var(--lime);color:var(--lime)}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:64px} @media (max-width:860px){.cols2{grid-template-columns:1fr;gap:28px}}
+.cols2 p{color:#cfd3cc}
+.bio-photo{position:relative} .bio-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top}
+.bio-photo::before{content:"";position:absolute;inset:18px -18px -18px 18px;border:2px solid var(--lime);z-index:-1}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.stats div{background:var(--card);border:1px solid var(--line);padding:20px} .stats b{display:block;font:900 2.6rem/1 var(--display);color:var(--lime)} .stats span{font-size:.85rem;color:var(--muted)}
+@media (max-width:560px){.stats{grid-template-columns:1fr}}
+.svc{padding:90px 0;border-bottom:1px solid var(--line);scroll-margin-top:90px}
+.svc .num{font:900 clamp(5rem,14vw,11rem)/.8 var(--display);color:transparent;-webkit-text-stroke:2px var(--line);letter-spacing:-.05em}
+.list{display:flex;flex-wrap:wrap;gap:10px}
+.list span{border:1px solid var(--line);padding:11px 16px;font-weight:500;font-size:.95rem;background:var(--card)}
+/* forms */
+.fgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px} @media (max-width:860px){.fgrid{grid-template-columns:1fr}}
+form.f{background:var(--card);border:1px solid var(--line);padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:16px}
+form.f .full{grid-column:1/-1} @media (max-width:600px){form.f{grid-template-columns:1fr}}
+form.f label{display:flex;flex-direction:column;gap:6px;font:700 .74rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+input,select,textarea{font:500 1rem var(--display);background:var(--bg);color:var(--text);border:1.5px solid var(--line);padding:14px;border-radius:0}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--lime)}
+.side{background:var(--lime);color:var(--bg);padding:36px;align-self:start}
+.side .total{font:900 4.4rem/1 var(--display);letter-spacing:-.04em;margin:6px 0 14px}
+.side b{display:block;font:700 .72rem var(--mono);letter-spacing:.14em;text-transform:uppercase;margin-top:18px;opacity:.7}
+.side a{color:var(--bg)} .side .ph{color:var(--bg);border-color:var(--bg);background:rgba(0,0,0,.08)}
+.sent{grid-column:1/-1} .sent strong{font:900 2rem var(--display);text-transform:uppercase;color:var(--lime)}
+.disc{font-size:.8rem;color:var(--muted);margin-top:18px;line-height:1.6}
+footer.site{border-top:1px solid var(--line);padding:72px 0 28px;color:var(--muted);font-size:.92rem}
+footer .huge{font:900 clamp(2.6rem,9vw,8rem)/.9 var(--display);text-transform:uppercase;letter-spacing:-.04em;color:var(--text);margin-bottom:56px}
+footer .huge a{color:var(--lime);text-decoration:none}
+footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px} @media (max-width:860px){footer .cols{grid-template-columns:1fr 1fr}}
+footer h4{font:700 .74rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--text);margin:0 0 14px}
+footer ul{list-style:none;padding:0;margin:0} footer li{margin-bottom:8px} footer a{color:var(--muted);text-decoration:none} footer a:hover{color:var(--lime)}
+footer .legal{border-top:1px solid var(--line);margin-top:48px;padding-top:22px;font-size:.78rem;line-height:1.6}
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="logo" href="#/home"><img src="../assets/pplg-png2.png" alt="The Private Practice Law Group"></a>
+  <nav class="main" id="nav" aria-label="Main"></nav>
+  <button class="menu-btn" data-menu-toggle aria-expanded="false">MENU</button>
+</div></header>
+<main id="app"></main>
+<footer class="site"><div class="wrap" id="footer"></div></footer>
+
+<script src="../assets/content.js"></script>
+<script src="../assets/site.js"></script>
+<script>
+const D = PPLG, C = D.firm.contact;
+document.getElementById("nav").innerHTML = D.nav.map(n=>`<a href="#/${n.id}" data-nav="${n.id}">${n.id==="consulting"?"Push Pull":n.label}</a>`).join("");
+document.getElementById("footer").innerHTML = `
+  <div class="huge">Let’s get <a href="#/book">to work.</a></div>
+  <div class="cols">
+    <div><h4>The firm</h4><ul><li>${D.firm.legal}</li><li>${D.firm.sister}</li><li>${C.location}</li></ul></div>
+    <div><h4>Practice</h4><ul>${D.services.map(s=>`<li><a href="#/services/${s.id}">${s.name}</a></li>`).join("")}</ul></div>
+    <div><h4>Explore</h4><ul>${D.nav.filter(n=>n.id!=="services").map(n=>`<li><a href="#/${n.id}">${n.label}</a></li>`).join("")}</ul></div>
+    <div><h4>Contact</h4><ul><li>${ph(C.phone)}</li><li>${ph(C.email)}</li></ul></div></div>
+  <div class="legal">© ${D.firm.year} ${D.firm.legal}. ${D.disclaimer} Attorney advertising.</div>`;
+
+const prob = s => `<a class="prob" href="#/book/${s.id}"><div class="q">${s.q}</div><div class="row"><div><h3>${s.name}</h3><span class="cta">Book 1 hour →</span></div><div class="price">${money(s.price)}</div></div></a>`;
+const band = (t, b="Book a session", h="#/book") => `<section class="cta-band"><div class="wrap"><h2>${t}</h2><a class="btn" href="${h}">${b}</a></div></section>`;
+
+window.VIEWS = {
+home: d => `
+  <section class="hero"><div class="wrap hero-grid">
+    <div><span class="tag">Law firm for entrepreneurs</span>
+      <h1>Not your<br><span class="stroke">button-up</span><br><span class="lime">law firm.</span></h1>
+      <p class="lead">Business, real estate and food law, plus real-world business consulting, from Entrepreneur Attorneys who run businesses of their own.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px"><a class="btn" href="#/book">Book a session</a><a class="btn ghost" href="#/services">What we do</a></div></div>
+    <div class="hero-photo"><img src="${d.about.attorney.photo}" alt="${d.about.attorney.name}"><span class="name">${d.about.attorney.name}</span></div>
+  </div>
+  <div class="ticker"><div class="t">${Array(2).fill(["Business Law","Real Estate","Food & Restaurant Law","Push Pull Consulting","No lawyer code","Outside the box"].map(x=>`<span>${x}</span>`).join("")).join("")}</div></div></section>
+  <section><div class="wrap"><p class="big-quote" style="max-width:1000px">Our attorneys are smart as hell, creative, high energy, spirited, and <span class="lime">simply great to be around.</span></p>
+    <div class="three" style="margin-top:56px">${d.home.pillars.map((p,i)=>`<div><span class="n">0${i+1} /</span><h3>${p.t}</h3><p>${p.d}</p></div>`).join("")}</div></div></section>
+  <section style="padding-top:0"><div class="wrap"><span class="tag">What we do</span>
+    <div class="areas">${d.services.map((s,i)=>`<a href="#/services/${s.id}"><span class="n">0${i+1}</span><h3>${s.name}<small>${s.short}</small></h3><span class="arrow">→</span></a>`).join("")}
+      <a href="#/consulting"><span class="n">04</span><h3>Push Pull <span class="lime">Consulting</span><small>${d.pushPull.intro}</small></h3><span class="arrow">→</span></a></div></div></section>
+  <section style="padding-top:0"><div class="wrap"><span class="tag">Consulting sessions</span><h2>Pick your <span class="lime">problem.</span></h2>
+    <p style="color:var(--muted);max-width:560px">${d.home.insight}</p>
+    <div class="problems" style="margin-top:36px">${d.sessions.slice(0,6).map(prob).join("")}</div>
+    <p style="margin-top:28px"><a class="btn ghost" href="#/consulting">See all ${d.sessions.length} sessions</a></p></div></section>
+  <section style="padding-top:0"><div class="wrap"><span class="tag">They trust us</span><div class="logos">${d.clientLogos.slice(0,7).map(l=>`<div><img src="../assets/logos/${l}" alt="" loading="lazy"></div>`).join("")}</div></div></section>
+  ${band("Stop guessing.<br>Start growing.")}`,
+
+about: d => { const a=d.about.attorney; return `
+  <div class="phead"><div class="wrap"><span class="tag">About us</span><h1>Inspired by<br><span class="lime">entrepreneurs.</span></h1><p class="lead">Because we understand you the most.</p></div></div>
+  <section><div class="wrap cols2"><div><p class="big-quote" style="font-size:clamp(1.8rem,3.6vw,2.8rem)">We do not speak in <span class="lime">lawyer code.</span></p></div>
+    <div>${d.about.paragraphs.map(p=>`<p>${p}</p>`).join("")}</div></div></section>
+  <section style="padding-top:0"><div class="wrap cols2" style="align-items:center">
+    <div class="bio-photo"><img src="${a.photo}" alt="${a.name}"></div>
+    <div><span class="tag">${a.role}</span><h2>${a.name.replace(", Esq.","")}<span class="lime">, Esq.</span></h2>${a.bio.map(p=>`<p>${p}</p>`).join("")}
+      <div class="stats">${a.stats.map(s=>`<div><b>${s.n}</b><span>${s.l}</span></div>`).join("")}</div></div></div></section>
+  ${band("Been there.<br>Built that.","Work with April")}`; },
+
+services: d => `
+  <div class="phead"><div class="wrap"><span class="tag">Legal services</span><h1>What we<br><span class="lime">handle.</span></h1>
+    <p class="lead">Legal guidance and representation in business, real estate, and food & restaurant law. No business legal matter is too small.</p>
+    <div class="pills">${d.services.map(s=>`<a href="#/services/${s.id}">${s.name}</a>`).join("")}<a href="#/consulting">Push Pull</a></div></div></div>
+  ${d.services.map((s,i)=>`<div class="svc" id="${s.id}"><div class="wrap cols2">
+    <div><div class="num">0${i+1}</div><h2>${s.name}</h2><p style="color:#cfd3cc">${s.intro}</p><a class="btn" href="#/book">Book a consultation</a></div>
+    <div class="list" style="align-content:start">${s.items.map(x=>`<span>${x}</span>`).join("")}</div></div></div>`).join("")}
+  ${band("Got a legal question?")}`,
+
+consulting: d => `
+  <div class="phead"><div class="wrap"><span class="tag">${d.firm.sister}</span><h1>Let’s grow<br><span class="lime">your business.</span></h1><p class="lead">${d.pushPull.intro}</p></div></div>
+  <section><div class="wrap cols2"><div><h2>What Push Pull <span class="lime">does</span></h2><p>Non-legal business services: consulting, strategic development, marketing, branding, brokerage, and finance sourcing.</p></div>
+    <div class="list" style="align-content:start">${d.pushPull.items.map(x=>`<span>${x}</span>`).join("")}</div></div></section>
+  <section style="padding-top:0" id="sessions"><div class="wrap"><span class="tag">1-hour sessions</span><h2>Pick your <span class="lime">problem.</span></h2><p style="color:var(--muted)">${d.sessionNote} Schedule online today.</p>
+    <div class="problems" style="margin-top:36px">${d.sessions.map(prob).join("")}</div></div></section>`,
+
+book: d => `
+  <div class="phead"><div class="wrap"><span class="tag">Schedule online</span><h1>Book a<br><span class="lime">session.</span></h1><p class="lead">${d.sessionNote} Pick yours, tell us about your business, and we’ll take it from there.</p></div></div>
+  <section><div class="wrap fgrid">
+    <form class="f" data-demo-form="book">
+      <label class="full">Session<select name="session" required><option value="">Choose your problem…</option>${d.sessions.map(s=>`<option value="${s.id}">${s.name} · ${money(s.price)}</option>`).join("")}</select></label>
+      <label>Name<input name="name" required></label><label>Email<input type="email" name="email" required></label>
+      <label>Phone<input type="tel" name="phone"></label><label>Business<input name="biz"></label>
+      <label>Preferred date<input type="date" name="date"></label><label>Time of day<select name="time"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label>
+      <label class="full">Give us the short version<textarea name="msg" rows="4"></textarea></label>
+      <div class="full"><button class="btn" type="submit">Continue to payment</button><p class="disc">${d.disclaimer}</p></div></form>
+    <aside class="side"><b style="margin-top:0">Your session</b><div class="total" data-price>—</div><p>One hour, one-on-one. Paid securely when you confirm.</p>
+      <b>Questions first?</b><a href="#/contact">Send us a message →</a></aside>
+  </div></section>`,
+
+contact: d => `
+  <div class="phead"><div class="wrap"><span class="tag">Contact</span><h1>Say<br><span class="lime">hello.</span></h1><p class="lead">Give us a call or drop us an email so we can start the conversation about keeping your business legally sound.</p></div></div>
+  <section><div class="wrap fgrid">
+    <form class="f" data-demo-form="contact">
+      <label>Name<input name="name" required></label><label>Email<input type="email" name="email" required></label>
+      <label>Phone<input type="tel" name="phone"></label>
+      <label>Topic<select name="topic">${d.services.map(s=>`<option>${s.name}</option>`).join("")}<option>Push Pull consulting</option><option>Not sure yet</option></select></label>
+      <label class="full">Message<textarea name="msg" rows="6" required></textarea></label>
+      <div class="full"><button class="btn" type="submit">Send it</button><p class="disc">${d.disclaimer}</p></div></form>
+    <aside class="side"><b style="margin-top:0">Phone</b>${ph(C.phone)}<b>Email</b>${ph(C.email)}<b>Location</b>${C.location}<b>Hours</b>${ph(C.hours)}
+      <p style="margin-top:26px"><a class="btn" style="background:var(--bg);color:var(--lime);border-color:var(--bg)" href="#/book">Book online</a></p></aside>
+  </div></section>`
+};
+</script>
+</body>
+</html>

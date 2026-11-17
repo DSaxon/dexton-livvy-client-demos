@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Private Practice Law Group</title>
+<meta name="description" content="Business, real estate and food law, plus Push Pull business consulting, for entrepreneurs.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14171C;--ink2:#2B3038;--muted:#626a75;--line:#E3E5E8;--paper:#FFFFFF;--ivory:#F7F6F2;
+  --lime:#7CC243;--green:#3F7A1C;--serif:"Cormorant Garamond",Georgia,serif;--sans:"Inter",system-ui,sans-serif;--w:1180px}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16.5px/1.7 var(--sans)}
+img{max-width:100%;display:block} a{color:var(--green)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1;margin:0 0 .5em;letter-spacing:-.005em}
+h1{font-size:clamp(2.6rem,6vw,4.6rem)} h2{font-size:clamp(2rem,4vw,3rem)} h3{font-size:1.6rem}
+h1 em,h2 em{font-style:italic;color:var(--green)}
+p{margin:0 0 1em} .wrap{max-width:var(--w);margin:0 auto;padding:0 24px} section{padding:96px 0}
+.over{font:600 .74rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:16px;display:block}
+.bar{width:56px;height:3px;background:var(--lime);margin:0 0 26px}
+.btn{display:inline-block;padding:15px 28px;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;letter-spacing:.04em;border:1.5px solid var(--ink);transition:.2s;cursor:pointer;font-family:var(--sans)}
+.btn:hover{background:var(--green);border-color:var(--green)}
+.btn.line{background:transparent;color:var(--ink)} .btn.line:hover{background:var(--ink);color:#fff}
+.btn.lime{background:var(--lime);border-color:var(--lime);color:var(--ink)} .btn.lime:hover{background:#fff;border-color:#fff}
+.ph{background:#FFF4C2;color:#7a5b00;padding:0 6px;border-radius:3px;font-style:normal}
+/* header */
+.util{background:var(--ink);color:#aab1ba;font-size:.82rem}
+.util .wrap{display:flex;justify-content:space-between;gap:12px;padding-top:9px;padding-bottom:9px;flex-wrap:wrap}
+.util a{color:#fff;text-decoration:none}
+header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:86px;gap:20px}
+.logo img{height:56px;width:auto}
+nav.main{display:flex;align-items:center;gap:2px}
+nav.main a{color:var(--ink2);text-decoration:none;font-weight:500;font-size:.92rem;padding:10px 14px;position:relative}
+nav.main a:hover{color:var(--green)} nav.main a.active{color:var(--ink)}
+nav.main a.active::after{content:"";position:absolute;left:14px;right:14px;bottom:2px;height:2px;background:var(--lime)}
+nav.main a[data-nav=book]{background:var(--ink);color:#fff;margin-left:10px;padding:11px 18px} nav.main a[data-nav=book]::after{display:none} nav.main a[data-nav=book]:hover{background:var(--green)}
+.menu-btn{display:none;background:none;border:1.5px solid var(--ink);padding:8px 12px;font:600 .8rem var(--sans);letter-spacing:.1em;cursor:pointer}
+@media (max-width:1000px){.menu-btn{display:block}
+  nav.main{position:fixed;inset:86px 0 auto 0;background:#fff;flex-direction:column;align-items:stretch;padding:10px 20px 24px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:.3s}
+  body.menu-open nav.main{transform:none} nav.main a{padding:15px 4px;border-bottom:1px solid var(--line);font-size:1.05rem} nav.main a.active::after{display:none}
+  nav.main a[data-nav=book]{margin:14px 0 0;text-align:center}}
+/* hero */
+.hero{background:var(--ivory);padding:0;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;min-height:620px}
+.hero h1 .line{display:block}
+.hero p.lead{font-size:1.15rem;color:var(--muted);max-width:520px}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.portrait{position:relative;align-self:end;height:100%;min-height:560px}
+.portrait img{position:absolute;bottom:0;right:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.portrait .card{position:absolute;left:-30px;bottom:40px;background:#fff;padding:20px 24px;box-shadow:0 20px 40px rgba(20,23,28,.12);border-left:4px solid var(--lime)}
+.portrait .card b{display:block;font:600 1.3rem var(--serif)} .portrait .card span{font-size:.85rem;color:var(--muted)}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;min-height:0;padding-top:60px}.portrait{min-height:420px}.portrait .card{left:0}}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pillars div{padding:40px 36px 36px 0;border-right:1px solid var(--line)} .pillars div+div{padding-left:36px} .pillars div:last-child{border-right:0}
+.pillars .n{font:italic 600 1.2rem var(--serif);color:var(--green)}
+@media (max-width:860px){.pillars{grid-template-columns:1fr}.pillars div,.pillars div+div{padding:28px 0;border-right:0;border-bottom:1px solid var(--line)}}
+.practice{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media (max-width:900px){.practice{grid-template-columns:1fr}}
+.pcard{border:1px solid var(--line);padding:36px 32px;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:.25s;background:#fff}
+.pcard:hover{border-color:var(--ink);transform:translateY(-3px);box-shadow:0 18px 36px rgba(20,23,28,.08)}
+.pcard .ico{width:48px;height:48px;border:1.5px solid var(--ink);display:grid;place-items:center;font:600 1.3rem var(--serif);margin-bottom:22px}
+.pcard p{color:var(--muted);flex:1} .pcard .more{font-weight:600;font-size:.9rem;color:var(--ink)} .pcard:hover .more{color:var(--green)}
+.quote{background:var(--ink);color:#fff;text-align:center}
+.quote blockquote{font:italic 500 clamp(1.6rem,3.4vw,2.5rem)/1.35 var(--serif);margin:0 auto 30px;max-width:900px}
+.quote blockquote::before{content:"“";display:block;font-size:4.5rem;line-height:.6;color:var(--lime);margin-bottom:10px}
+.logos{display:grid;grid-template-columns:repeat(7,1fr);gap:28px;align-items:center}
+.logos img{height:64px;width:100%;object-fit:contain;filter:grayscale(1);opacity:.7;transition:.2s} .logos img:hover{filter:none;opacity:1}
+@media (max-width:800px){.logos{grid-template-columns:repeat(4,1fr)}}
+.ivory{background:var(--ivory)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center} @media (max-width:860px){.split{grid-template-columns:1fr;gap:36px}}
+.sessions-teaser{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.sessions-teaser a{background:#fff;padding:22px;text-decoration:none;color:inherit} .sessions-teaser a:hover{background:var(--ivory)}
+.sessions-teaser b{display:block;font:600 1.15rem var(--serif)} .sessions-teaser span{color:var(--green);font-weight:600;font-size:.9rem}
+@media (max-width:600px){.sessions-teaser{grid-template-columns:1fr 1fr}}
+/* page head */
+.phead{background:var(--ivory);padding:84px 0 64px;border-bottom:1px solid var(--line)}
+.phead p.lead{font-size:1.15rem;color:var(--muted);max-width:640px}
+.jump{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.jump a{border:1px solid var(--ink);color:var(--ink);text-decoration:none;padding:8px 16px;font-size:.88rem;font-weight:500} .jump a:hover{background:var(--ink);color:#fff}
+/* about */
+.bio{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:start} @media (max-width:860px){.bio{grid-template-columns:1fr}}
+.bio img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);margin-top:28px}
+.stats div{padding:18px 16px 0 0} .stats b{display:block;font:600 2.4rem/1 var(--serif);color:var(--green)} .stats span{font-size:.85rem;color:var(--muted)}
+/* services */
+.svc{padding:80px 0;border-bottom:1px solid var(--line);scroll-margin-top:100px}
+.svc .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px} @media (max-width:860px){.svc .wrap{grid-template-columns:1fr;gap:24px}}
+.ticks{list-style:none;padding:0;margin:0;columns:2;column-gap:36px} @media (max-width:600px){.ticks{columns:1}}
+.ticks li{break-inside:avoid;padding:10px 0 10px 26px;position:relative;border-bottom:1px solid var(--line)}
+.ticks li::before{content:"";position:absolute;left:0;top:19px;width:12px;height:2px;background:var(--lime)}
+/* sessions */
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px} @media (max-width:900px){.sgrid{grid-template-columns:1fr 1fr}} @media (max-width:600px){.sgrid{grid-template-columns:1fr}}
+.sess{border:1px solid var(--line);padding:30px 28px;display:flex;flex-direction:column;background:#fff;transition:.2s}
+.sess:hover{border-color:var(--ink)}
+.sess .price{font:600 2.2rem/1 var(--serif);margin-bottom:14px} .sess .price small{font:500 .82rem var(--sans);color:var(--muted)}
+.sess h3{font-size:1.45rem;margin-bottom:6px} .sess p{color:var(--muted);flex:1;font-style:italic}
+.sess .btn{text-align:center;margin-top:8px}
+/* forms */
+.fgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px} @media (max-width:860px){.fgrid{grid-template-columns:1fr}}
+form.f{display:grid;grid-template-columns:1fr 1fr;gap:18px} form.f .full{grid-column:1/-1} @media (max-width:600px){form.f{grid-template-columns:1fr}}
+form.f label{display:flex;flex-direction:column;gap:6px;font-size:.8rem;font-weight:600;letter-spacing:.04em;color:var(--ink2)}
+input,select,textarea{font:inherit;padding:13px 14px;border:1px solid #cfd3d8;background:#fff;color:var(--ink);border-radius:0}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--lime);border-color:var(--ink)}
+.summary{background:var(--ivory);padding:32px;border-top:4px solid var(--lime)}
+.summary .total{font:600 3rem/1 var(--serif);margin:8px 0 14px}
+.sent{grid-column:1/-1;background:var(--ivory);padding:32px;border-left:4px solid var(--lime)}
+.info{background:var(--ink);color:#c9ced5;padding:36px} .info h3{color:#fff} .info b{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin-top:18px}
+.info a{color:#fff}
+.disc{font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);padding-top:18px;margin-top:28px}
+/* footer */
+footer.site{background:var(--ink);color:#9aa2ad;padding:72px 0 28px;font-size:.92rem}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px} @media (max-width:860px){footer .cols{grid-template-columns:1fr 1fr}}
+footer h4{color:#fff;font:600 .74rem var(--sans);letter-spacing:.18em;text-transform:uppercase;margin:0 0 14px}
+footer ul{list-style:none;padding:0;margin:0} footer li{margin-bottom:8px} footer a{color:#d3d8de;text-decoration:none} footer a:hover{color:var(--lime)}
+footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:48px;padding-top:22px;font-size:.78rem;line-height:1.6}
+.center{text-align:center}
+</style>
+</head>
+<body>
+<div class="util"><div class="wrap" id="util"></div></div>
+<header class="site"><div class="wrap">
+  <a class="logo" href="#/home"><img src="../assets/pplg-site.png" alt="The Private Practice Law Group"></a>
+  <nav class="main" id="nav" aria-label="Main"></nav>
+  <button class="menu-btn" data-menu-toggle aria-expanded="false">MENU</button>
+</div></header>
+<main id="app"></main>
+<footer class="site"><div class="wrap" id="footer"></div></footer>
+
+<script src="../assets/content.js"></script>
+<script src="../assets/site.js"></script>
+<script>
+const D = PPLG, C = D.firm.contact;
+document.getElementById("util").innerHTML = `<span>Business · Real Estate · Food Law &nbsp;|&nbsp; ${D.firm.sister}</span><span><a href="${C.phoneHref}">${ph(C.phone)}</a> &nbsp;·&nbsp; <a href="${C.emailHref}">${ph(C.email)}</a></span>`;
+document.getElementById("nav").innerHTML = D.nav.map(n=>`<a href="#/${n.id}" data-nav="${n.id}">${n.label}</a>`).join("");
+document.getElementById("footer").innerHTML = `<div class="cols">
+  <div><img src="../assets/pplg-png2.png" alt="" style="height:60px;margin-bottom:16px"><p>A law firm inspired by entrepreneurs. Business, real estate and food law, plus business consulting through ${D.firm.sister}.</p></div>
+  <div><h4>Practice areas</h4><ul>${D.services.map(s=>`<li><a href="#/services/${s.id}">${s.name}</a></li>`).join("")}<li><a href="#/consulting">Push Pull Consulting</a></li></ul></div>
+  <div><h4>Firm</h4><ul>${D.nav.filter(n=>!["home","services"].includes(n.id)).map(n=>`<li><a href="#/${n.id}">${n.label}</a></li>`).join("")}</ul></div>
+  <div><h4>Contact</h4><ul><li>${ph(C.phone)}</li><li>${ph(C.email)}</li><li>${C.location}</li></ul></div></div>
+  <div class="legal">© ${D.firm.year} ${D.firm.legal}. All rights reserved.<br>${D.disclaimer} Attorney advertising.</div>`;
+
+const sessionCard = s => `<div class="sess"><div class="price">${money(s.price)} <small>/ 1 hour</small></div><h3>${s.name}</h3><p>“${s.q}”</p><a class="btn line" href="#/book/${s.id}">Book this session</a></div>`;
+
+window.VIEWS = {
+home: d => `
+  <section class="hero"><div class="wrap">
+    <div><span class="over">The Private Practice Law Group</span><div class="bar"></div>
+      <h1>${d.home.taglines.map((t,i)=>`<span class="line">${i===2?`<em>${t}</em>`:t}</span>`).join("")}</h1>
+      <p class="lead">${d.home.lead} If you’re looking for a “button up” attorney, we’re not the firm for you.</p>
+      <div class="actions"><a class="btn" href="#/book">Book a consultation</a><a class="btn line" href="#/services">Our practice areas</a></div></div>
+    <div class="portrait"><img src="${d.about.attorney.photo}" alt="${d.about.attorney.name}"><div class="card"><b>${d.about.attorney.name}</b><span>Entrepreneur · Attorney · Founder</span></div></div>
+  </div></section>
+  <section style="padding-bottom:0"><div class="wrap"><div class="pillars">${d.home.pillars.map((p,i)=>`<div><span class="n">0${i+1}</span><h3>${p.t}</h3><p style="color:var(--muted)">${p.d}</p></div>`).join("")}</div></div></section>
+  <section><div class="wrap"><span class="over">What we offer</span><h2>Practice areas</h2>
+    <div class="practice" style="margin-top:36px">
+      ${d.services.map((s,i)=>`<a class="pcard" href="#/services/${s.id}"><div class="ico">${["B","R","F"][i]}</div><h3>${s.name}</h3><p>${s.short}</p><span class="more">Learn more →</span></a>`).join("")}
+    </div>
+    <a class="pcard" href="#/consulting" style="margin-top:24px;flex-direction:row;align-items:center;gap:28px;flex-wrap:wrap;background:var(--ivory)"><div class="ico" style="margin:0;background:var(--lime);border-color:var(--lime)">P</div><div style="flex:1;min-width:240px"><h3 style="margin:0">${d.pushPull.name}</h3><p style="margin:0">${d.pushPull.intro}</p></div><span class="more">Explore consulting →</span></a>
+  </div></section>
+  <section class="quote"><div class="wrap"><blockquote>${d.home.insight}</blockquote><a class="btn lime" href="#/book">Schedule your consultation</a></div></section>
+  <section class="ivory"><div class="wrap split">
+    <div><span class="over">Consulting sessions</span><h2>Not sure what you need? <em>Start with an hour.</em></h2><p style="color:var(--muted)">Pick the session that sounds like you. ${d.sessionNote}</p><a class="btn" href="#/consulting">See all sessions</a></div>
+    <div class="sessions-teaser">${d.sessions.slice(0,6).map(s=>`<a href="#/book/${s.id}"><b>${s.name}</b><span>${money(s.price)}</span></a>`).join("")}</div>
+  </div></section>
+  <section><div class="wrap"><p class="over center">They trust us</p><div class="logos" style="margin-top:26px">${d.clientLogos.slice(0,7).map(l=>`<img src="../assets/logos/${l}" alt="" loading="lazy">`).join("")}</div></div></section>`,
+
+about: d => { const a=d.about.attorney; return `
+  <div class="phead"><div class="wrap"><span class="over">Welcome</span><h1>About <em>us</em></h1><p class="lead">${d.home.lead}</p></div></div>
+  <section><div class="wrap split" style="align-items:start"><div><div class="bar"></div><h2>Inspired by entrepreneurs, <em>because we are entrepreneurs.</em></h2></div>
+    <div>${d.about.paragraphs.map(p=>`<p>${p}</p>`).join("")}</div></div></section>
+  <section class="ivory"><div class="wrap bio"><img src="${a.photo}" alt="${a.name}">
+    <div><span class="over">${a.role}</span><h2>${a.name}</h2>${a.bio.map(p=>`<p>${p}</p>`).join("")}
+      <div class="stats">${a.stats.map(s=>`<div><b>${s.n}</b><span>${s.l}</span></div>`).join("")}</div>
+      <p style="margin-top:32px"><a class="btn" href="#/book">Book time with April</a></p></div></div></section>`; },
+
+services: d => `
+  <div class="phead"><div class="wrap"><span class="over">What we offer</span><h1>Legal <em>services</em></h1>
+    <p class="lead">The Private Practice Law Group provides legal guidance and representation in business, real estate, and food & restaurant law.</p>
+    <div class="jump">${d.services.map(s=>`<a href="#/services/${s.id}">${s.name}</a>`).join("")}<a href="#/consulting">Push Pull Consulting</a></div></div></div>
+  ${d.services.map((s,i)=>`<div class="svc" id="${s.id}"><div class="wrap">
+    <div><span class="over">0${i+1}</span><h2>${s.name}</h2><p style="color:var(--muted)">${s.intro}</p><a class="btn" href="#/book">Book a consultation</a></div>
+    <ul class="ticks">${s.items.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>`).join("")}
+  <section class="quote"><div class="wrap"><blockquote>No business legal matter is too small for us.</blockquote><a class="btn lime" href="#/contact">Start the conversation</a></div></section>`,
+
+consulting: d => `
+  <div class="phead"><div class="wrap"><span class="over">${d.firm.sister}</span><h1>${d.pushPull.headline.replace("Business!","<em>Business!</em>")}</h1><p class="lead">${d.pushPull.intro}</p></div></div>
+  <section><div class="wrap split" style="align-items:start"><div><div class="bar"></div><h2>${d.pushPull.name}</h2><p style="color:var(--muted)">Non-legal business services: consulting, strategic development, marketing, branding, brokerage, and finance sourcing.</p></div>
+    <ul class="ticks">${d.pushPull.items.map(x=>`<li>${x}</li>`).join("")}</ul></div></section>
+  <section class="ivory" id="sessions"><div class="wrap"><div class="center" style="max-width:640px;margin:0 auto 44px"><span class="over">Schedule online today</span><h2>Consulting <em>sessions</em></h2><p style="color:var(--muted)">${d.sessionNote} Choose the one that sounds like you.</p></div>
+    <div class="sgrid">${d.sessions.map(sessionCard).join("")}</div></div></section>`,
+
+book: d => `
+  <div class="phead"><div class="wrap"><span class="over">Schedule online</span><h1>Book a <em>session</em></h1><p class="lead">Choose a consulting session and tell us a little about your business. ${d.sessionNote}</p></div></div>
+  <section><div class="wrap fgrid">
+    <form class="f" data-demo-form="book">
+      <label class="full">Session<select name="session" required><option value="">Choose a session…</option>${d.sessions.map(s=>`<option value="${s.id}">${s.name} · ${money(s.price)}</option>`).join("")}</select></label>
+      <label>Name<input name="name" required></label><label>Email<input type="email" name="email" required></label>
+      <label>Phone<input type="tel" name="phone"></label><label>Business name<input name="biz"></label>
+      <label>Preferred date<input type="date" name="date"></label><label>Preferred time<select name="time"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label>
+      <label class="full">What would you like to cover?<textarea name="msg" rows="4"></textarea></label>
+      <div class="full"><button class="btn" type="submit">Continue to payment</button></div></form>
+    <aside class="summary"><span class="over">Your session</span><div class="total" data-price>—</div><p style="color:var(--muted)">One hour, one-on-one. Payment is collected securely when you confirm.</p>
+      <p class="disc">${d.disclaimer}</p></aside>
+  </div></section>`,
+
+contact: d => `
+  <div class="phead"><div class="wrap"><span class="over">Contact</span><h1>Let’s <em>talk.</em></h1><p class="lead">Give us a call or drop us an email so we can start the conversation about keeping your business legally sound.</p></div></div>
+  <section><div class="wrap fgrid">
+    <form class="f" data-demo-form="contact">
+      <label>Name<input name="name" required></label><label>Email<input type="email" name="email" required></label>
+      <label>Phone<input type="tel" name="phone"></label>
+      <label>I need help with<select name="topic">${d.services.map(s=>`<option>${s.name}</option>`).join("")}<option>Push Pull business consulting</option><option>Not sure yet</option></select></label>
+      <label class="full">Message<textarea name="msg" rows="6" required></textarea></label>
+      <div class="full"><button class="btn" type="submit">Send message</button><p class="disc">${d.disclaimer}</p></div></form>
+    <aside class="info"><h3>${d.firm.name}</h3><b>Phone</b>${ph(C.phone)}<b>Email</b>${ph(C.email)}<b>Location</b>${C.location}<b>Hours</b>${ph(C.hours)}
+      <p style="margin-top:28px"><a class="btn lime" href="#/book">Book a session online</a></p></aside>
+  </div></section>`
+};
+</script>
+</body>
+</html>
