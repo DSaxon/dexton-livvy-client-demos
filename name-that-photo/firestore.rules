@@ -1,0 +1,24 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function hostDoc() { return /databases/$(database)/documents/config/host; }
+    function isHost() { return signedIn() && exists(hostDoc()) && get(hostDoc()).data.uid == request.auth.uid; }
+
+    // The first person to open the page with ?host claims the host seat.
+    match /config/host {
+      allow read: if true;
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if isHost();
+    }
+    // Show state, episodes and photos: everyone reads, only the host writes.
+    match /show/{doc}     { allow read: if true; allow write: if isHost(); }
+    match /episodes/{doc} { allow read: if true; allow write: if isHost(); }
+    match /photos/{doc}   { allow read: if true; allow write: if isHost(); }
+    // Answer keys: host only.
+    match /secret/{doc}   { allow read, write: if isHost(); }
+    // Each player writes only their own entry and answers; the host can tidy up.
+    match /players/{pid}  { allow read: if true; allow write: if signedIn() && (request.auth.uid == pid || isHost()); }
+    match /answers/{pid}  { allow read: if true; allow write: if signedIn() && (request.auth.uid == pid || isHost()); }
+  }
+}

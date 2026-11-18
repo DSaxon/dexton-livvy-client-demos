@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0f22">
+<meta name="robots" content="noindex">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Name That Photo">
+<title>Name That Photo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Figtree:wght@400;600;800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+/* Layout: a single game-show stage column — marquee header, the photo shown as an album print, answer box, scoreboard; the host console stacks the same way. One committed look: a late-night studio in plum, with dahlia and marquee gold. */
+:root{
+  --bg:#1a0f22; --bg2:#231430; --panel:#2c1a39; --panel2:#362246; --line:#4b3259;
+  --fg:#f8eee2; --muted:#c3adc9; --faint:#8e7798;
+  --gold:#f5c25b; --gold-ink:#2a1a05; --dahlia:#e4572e; --green:#62d07a; --red:#ef5d43;
+  --paper:#efe3cb; --paper-ink:#3a2a1c;
+  --display:"Bungee", Impact, "Arial Black", sans-serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"DM Mono", ui-monospace, Menlo, monospace;
+  --r:14px;
+  color-scheme:dark;
+}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:var(--body);font-size:16px;line-height:1.5;
+  background:radial-gradient(1200px 500px at 50% -120px, #3a1f4a 0%, transparent 70%), var(--bg);
+  min-height:100%}
+.wrap{max-width:760px;margin:0 auto;padding-block:20px 64px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* Marquee */
+.marquee{position:relative;text-align:center;padding:22px 16px 18px;border-radius:20px;
+  background:linear-gradient(180deg,#3b2050,#2a1738);border:2px solid #5a3a6c;overflow:hidden}
+.bulbs{position:absolute;inset:7px;border-radius:15px;pointer-events:none;
+  background-image:radial-gradient(circle, var(--gold) 0 2.6px, transparent 3.2px);
+  background-size:18px 18px;
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;padding:6px;opacity:.9;animation:blink 1.4s steps(2) infinite}
+@keyframes blink{50%{opacity:.45}}
+.marquee h1{font-family:var(--display);font-weight:400;font-size:clamp(30px,8vw,54px);line-height:1;
+  color:var(--gold);letter-spacing:.01em;text-shadow:0 3px 0 #8a4a12, 0 0 24px rgba(245,194,91,.35)}
+.marquee .sub{margin-top:8px;font-size:13px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);font-weight:600}
+
+/* Generic */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card.quiet{background:transparent}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:700}
+.h2{font-family:var(--display);font-weight:400;font-size:clamp(20px,5vw,26px);line-height:1.15;color:var(--fg)}
+.big{font-size:clamp(20px,4.6vw,26px);font-weight:800;line-height:1.25}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.spread{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.stack{display:flex;flex-direction:column;gap:10px}
+.btn{appearance:none;border:0;border-radius:999px;padding:11px 18px;font-weight:800;cursor:pointer;
+  background:var(--panel2);color:var(--fg);border:1px solid var(--line);line-height:1.2}
+.btn:hover{border-color:var(--faint)}
+.btn.gold{background:var(--gold);color:var(--gold-ink);border-color:transparent}
+.btn.gold:hover{filter:brightness(1.06)}
+.btn.dahlia{background:var(--dahlia);color:#fff;border-color:transparent}
+.btn.ghost{background:transparent}
+.btn.sm{padding:7px 12px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label{font-size:13px;font-weight:700;color:var(--muted)}
+input[type=text],input[type=number],input[type=datetime-local],textarea,select{
+  width:100%;box-sizing:border-box;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:11px 12px;color:var(--fg)}
+textarea{min-height:64px;resize:vertical}
+.answer-input{font-size:18px;padding:14px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;
+  letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.chip.ok{color:#0d2a14;background:var(--green);border-color:transparent}
+.chip.no{color:#fff;background:var(--red);border-color:transparent}
+.chip.council{color:var(--gold);border-color:#6d5323}
+.chip.wait{color:var(--muted)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* The photo, shown as an album print with corners */
+.print{margin:0;align-self:center;position:relative;background:var(--paper);padding:12px 12px 40px;border-radius:4px;
+  box-shadow:0 18px 40px rgba(0,0,0,.45);transform:rotate(-1.2deg);max-width:100%;box-sizing:border-box}
+.print img{display:block;max-width:100%;max-height:62vh;width:auto;margin:0 auto;border-radius:2px;background:#cdbfa3}
+.print .ph{width:min(520px,80vw);aspect-ratio:4/3;max-width:100%;display:grid;place-items:center;background:#d9cbb0;color:var(--paper-ink);font-weight:700}
+.print figcaption{position:absolute;left:0;right:0;bottom:10px;text-align:center;color:var(--paper-ink);
+  font-family:var(--mono);font-size:13px;letter-spacing:.04em}
+.corner{position:absolute;width:26px;height:26px;background:#2b1d14;opacity:.85}
+.corner.tl{top:4px;left:4px;clip-path:polygon(0 0,100% 0,0 100%)}
+.corner.tr{top:4px;right:4px;clip-path:polygon(0 0,100% 0,100% 100%)}
+.corner.bl{bottom:4px;left:4px;clip-path:polygon(0 0,0 100%,100% 100%)}
+.corner.br{bottom:4px;right:4px;clip-path:polygon(100% 0,100% 100%,0 100%)}
+.qhead{display:flex;flex-direction:column;gap:6px;text-align:center;align-items:center}
+.qnum{font-family:var(--display);color:var(--gold);font-size:15px;letter-spacing:.06em}
+
+/* Scoreboard */
+.board{display:flex;flex-direction:column;gap:6px}
+.brow{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:9px 12px;border-radius:10px;background:var(--bg2)}
+.brow.lead{background:linear-gradient(90deg,rgba(245,194,91,.22),var(--bg2));outline:1px solid #6d5323}
+.brow .rank{font-family:var(--display);color:var(--gold);text-align:center}
+.brow .nm{font-weight:700;min-width:0;overflow-wrap:anywhere}
+.brow .pts{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums}
+.brow.me .nm::after{content:" (you)";color:var(--muted);font-weight:400}
+
+/* Answer feed */
+.feed{display:flex;flex-direction:column;gap:8px}
+.ans{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:start;padding:10px 12px;border-radius:10px;background:var(--bg2);border:1px solid transparent}
+.ans.first{border-color:var(--green)}
+.ans .who{font-weight:800;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ans .txt{grid-column:1/-1;overflow-wrap:anywhere}
+.ans .t{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.ans .acts{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap}
+
+.banner{border-radius:var(--r);padding:14px 16px;font-weight:800;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.banner.council{background:#3d2c0c;border:1px solid #806024;color:var(--gold)}
+.banner.veto{background:var(--dahlia);color:#fff;font-family:var(--display);font-weight:400;letter-spacing:.03em}
+.banner.reveal{background:#173823;border:1px solid #2f7a45;color:#bff0cb}
+
+.tabs{display:flex;gap:6px;background:var(--bg2);padding:5px;border-radius:999px;border:1px solid var(--line);align-self:center;flex-wrap:wrap;justify-content:center}
+.tabs button{border:0;background:transparent;border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;color:var(--muted)}
+.tabs button[aria-pressed=true]{background:var(--gold);color:var(--gold-ink)}
+
+.rules{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.rules li{max-width:62ch}
+.rules b{color:var(--gold)}
+.countdown{font-family:var(--mono);font-size:clamp(26px,7vw,40px);color:var(--gold);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.fame{display:flex;flex-direction:column;gap:10px}
+.fame .ep{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:12px 14px;border-radius:10px;background:var(--bg2)}
+.fame .medal{grid-row:span 2;font-family:var(--display);color:var(--gold);font-size:22px;align-self:center}
+.qedit{border:1px dashed var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.qedit .thumb{width:120px;max-width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;background:var(--bg2);display:grid;place-items:center;color:var(--faint);font-size:12px;text-align:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:520px){.grid2{grid-template-columns:1fr}}
+.secret{background:#123222;border:1px solid #2f7a45;border-radius:10px;padding:10px 12px}
+.secret .eyebrow{color:#9fe0b2}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom, 0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:700;z-index:20;max-width:calc(100% - 32px);text-align:center}
+.line{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;padding:9px 12px;border-radius:10px;background:var(--bg2)}
+.who-list{display:flex;flex-wrap:wrap;gap:6px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--green);display:inline-block}
+.footer{text-align:center;color:var(--faint);font-size:13px}
+@media (prefers-reduced-motion:reduce){.bulbs{animation:none}.print{transform:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="app">
+  <header class="marquee"><div class="bulbs"></div><h1>Name That Photo</h1><p class="sub">Family Edition · Tuesdays 7 PM ET</p></header>
+  <section class="card"><p class="big">Getting the studio lights on…</p><p class="muted">Connecting to tonight's show.</p></section>
+</div>
+<div id="toast" class="toast" hidden></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script>
+(() => {
+const RULES = [
+  'The host shares <b>one photo at a time</b>. The first person to name everyone in it, <b>left to right</b>, wins <b>100 points</b>, redeemable absolutely nowhere.',
+  'Get it right and you can choose to play a <b>bonus question for 1,000 points</b>. You also can use those nowhere.',
+  'The <b>Elder Auntie Council</b> can answer every question. Their points don’t matter, but they can <b>steal</b> when nobody gets it right.',
+  'The Council has the <b>final ruling on disputed answers</b> and the super power to <b>veto</b> any ruling the host makes.',
+  'Each episode has <b>five photos</b>. They start easy and gradually get harder.'
+];
+const LEVELS = ['Warm-up','Easy','Medium','Tricky','Hardest'];
+const DEFAULT_PROMPT = 'Name the people in this photo from left to right';
+const DEFAULT_PRIZE = 'Last episode’s champ has graciously agreed to Cash App tonight’s winner an undisclosed amount.';
+
+const S = {
+  status:'connecting', db:null, user:null, pid:null, isHost:false, view:'play', hostTab:'run',
+  live:{}, ledger:{marks:{}, adjust:[]}, episodes:[], players:{}, answers:{}, secrets:{},
+  photos:{}, photoLoading:{}, inputs:{}, draft:null, draftSecret:null, pickEp:'', stale:false, busy:false
+};
+const app = document.getElementById('app');
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtET = ms => new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(new Date(ms));
+const fmtDay = ms => new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric'}).format(new Date(ms));
+const fmtClock = ms => new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'}).format(new Date(ms));
+const num = n => Number(n||0).toLocaleString('en-US');
+const uid = () => Math.random().toString(36).slice(2,10) + Date.now().toString(36).slice(-4);
+
+/* ---------- sound (starts after the first tap) ---------- */
+let ac = null;
+function tone(kind){
+  if(!ac) return;
+  try{
+    const seq = kind==='ok' ? [[660,0],[880,.12],[1320,.24]] : kind==='no' ? [[180,0],[140,.18]] : [[523,0],[784,.14]];
+    seq.forEach(([f,t]) => {
+      const o = ac.createOscillator(), g = ac.createGain();
+      o.type = kind==='no' ? 'sawtooth' : 'triangle'; o.frequency.value = f;
+      g.gain.setValueAtTime(.0001, ac.currentTime+t); g.gain.exponentialRampToValueAtTime(.18, ac.currentTime+t+.02);
+      g.gain.exponentialRampToValueAtTime(.0001, ac.currentTime+t+.22);
+      o.connect(g).connect(ac.destination); o.start(ac.currentTime+t); o.stop(ac.currentTime+t+.25);
+    });
+  }catch(e){}
+}
+document.addEventListener('pointerdown', () => { if(!ac){ try{ ac = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } }, {once:true});
+
+/* ---------- toast ---------- */
+let toastTimer;
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.hidden=false; clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.hidden=true, 3200); }
+function errText(e){
+  const c = e && e.code;
+  if(c==='permission-denied') return 'That change wasn\u2019t allowed. Reload the page and try again.';
+  if(c==='quota_exceeded') return 'The show’s storage is full. The host should delete an old episode.';
+  if(c==='resource_exhausted') return 'Too many changes at once. Wait a moment and try again.';
+  return 'Couldn’t save just now. Check your connection and try again.';
+}
+
+/* ---------- writes: one at a time per document ---------- */
+const queues = {};
+function writeDoc(path, data){
+  const run = () => S.db.doc(path).set(JSON.parse(JSON.stringify(data)));
+  const p = (queues[path] || Promise.resolve()).then(run, run);
+  queues[path] = p.catch(()=>{});
+  return p.catch(e => { toast(errText(e)); throw e; });
+}
+function setLive(patch){ S.live = {...S.live, ...patch}; render(); return writeDoc('show/live', S.live).catch(()=>{}); }
+function setLedger(next){ S.ledger = next; render(); return writeDoc('show/ledger', next).catch(()=>{}); }
+function mine(){ return S.answers[S.pid] || {}; }
+function saveMine(mutator){
+  const d = JSON.parse(JSON.stringify(mine()));
+  mutator(d);
+  S.answers = {...S.answers, [S.pid]: d}; render();
+  return writeDoc('answers/'+S.pid, d).catch(()=>{});
+}
+
+/* ---------- derived game state ---------- */
+const curEp = () => S.episodes.find(e => e.id === S.live.episodeId) || null;
+const keyOf = (ep,i) => ep.id + ':' + i;
+const role = pid => (S.players[pid] && S.players[pid].role === 'council') ? 'council' : 'contestant';
+const nameOf = pid => (S.players[pid] && S.players[pid].name) || 'Someone';
+const markOf = (key,pid) => (S.ledger.marks || {})[key+'|'+pid];
+function answersFor(key){
+  return Object.entries(S.answers).map(([pid,d]) => ({pid, ...(((d||{}).byKey||{})[key]||{})}))
+    .filter(a => a.text).sort((a,b) => (a.at||0)-(b.at||0));
+}
+function questionResult(ep,i){
+  const key = keyOf(ep,i), q = ep.questions[i] || {};
+  const correct = answersFor(key).filter(a => markOf(key,a.pid)==='correct');
+  const winner = correct.find(a => role(a.pid)==='contestant') || null;
+  const steal = winner ? null : (correct.find(a => role(a.pid)==='council') || null);
+  const bkey = key+':b';
+  const bcorrect = answersFor(bkey).filter(a => markOf(bkey,a.pid)==='correct');
+  const bonusWin = winner ? (bcorrect.find(a => a.pid===winner.pid) || null) : null;
+  const bonusSteal = (winner && !bonusWin) ? (bcorrect.find(a => role(a.pid)==='council') || null) : null;
+  return {key, bkey, q, winner, steal, bonusWin, bonusSteal};
+}
+function scoreEpisode(ep){
+  const pts = {}, hon = {};
+  const add = (m,p,v) => { m[p] = (m[p]||0) + v; };
+  (ep.questions||[]).forEach((q,i) => {
+    const r = questionResult(ep,i);
+    if(r.winner) add(pts, r.winner.pid, +q.points||100);
+    if(r.steal) add(hon, r.steal.pid, +q.points||100);
+    if(r.bonusWin) add(pts, r.bonusWin.pid, +q.bonusPoints||1000);
+    if(r.bonusSteal) add(hon, r.bonusSteal.pid, +q.bonusPoints||1000);
+  });
+  (S.ledger.adjust||[]).filter(a => a.ep===ep.id).forEach(a => add(role(a.pid)==='council'?hon:pts, a.pid, +a.pts||0));
+  return {pts, hon};
+}
+function standings(ep){
+  const {pts, hon} = scoreEpisode(ep);
+  const ids = Object.keys(S.players);
+  const c = ids.filter(p => role(p)==='contestant').map(p => ({pid:p, name:nameOf(p), points:pts[p]||0}));
+  Object.keys(pts).forEach(p => { if(!ids.includes(p)) c.push({pid:p, name:'Someone', points:pts[p]}); });
+  const k = ids.filter(p => role(p)==='council').map(p => ({pid:p, name:nameOf(p), points:hon[p]||0}));
+  c.sort((a,b) => b.points-a.points || a.name.localeCompare(b.name));
+  k.sort((a,b) => b.points-a.points || a.name.localeCompare(b.name));
+  return {contestants:c, council:k};
+}
+function latestVeto(){
+  const ep = curEp(); if(!ep) return null;
+  let best = null;
+  Object.entries(S.answers).forEach(([pid,d]) => {
+    const v = d && d.veto;
+    if(v && v.ep===ep.id && v.at > (S.live.vetoAckAt||0) && role(pid)==='council' && (!best || v.at > best.at)) best = {pid, at:v.at};
+  });
+  return best;
+}
+function councilVotes(){
+  const c = S.live.council; if(!c) return {yes:[], no:[]};
+  const id = c.key+'|'+c.pid+'|'+c.openedAt, yes=[], no=[];
+  Object.entries(S.answers).forEach(([pid,d]) => {
+    const v = d && d.votes && d.votes[id];
+    if(role(pid)!=='council') return;
+    if(v==='correct') yes.push(pid); else if(v==='wrong') no.push(pid);
+  });
+  return {yes, no, id};
+}
+
+/* ---------- photos (stored as compressed images in the show's database) ---------- */
+function photoSrc(id){
+  if(!id) return '';
+  if(S.photos[id]) return S.photos[id];
+  if(!S.photoLoading[id] && S.db){
+    S.photoLoading[id] = true;
+    S.db.doc('photos/'+id).get().then(s => { if(s.exists){ S.photos[id] = s.data().data; render(); } })
+      .catch(()=>{}).finally(() => { setTimeout(()=>{ if(!S.photos[id]) S.photoLoading[id]=false; }, 8000); });
+  }
+  return '';
+}
+function loadImage(file){
+  return new Promise((res,rej) => { const u = URL.createObjectURL(file), im = new Image();
+    im.onload = () => { res(im); URL.revokeObjectURL(u); }; im.onerror = () => { rej(new Error('bad image')); URL.revokeObjectURL(u); }; im.src = u; });
+}
+async function compress(file){
+  const im = await loadImage(file);
+  let max = 1200, q = .78, out = '';
+  for(let i=0;i<8;i++){
+    const s = Math.min(1, max/Math.max(im.naturalWidth, im.naturalHeight));
+    const c = document.createElement('canvas'); c.width = Math.round(im.naturalWidth*s); c.height = Math.round(im.naturalHeight*s);
+    c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+    out = c.toDataURL('image/jpeg', q);
+    if(out.length < 200000) return out;
+    max = Math.round(max*.82); q = Math.max(.5, q-.06);
+  }
+  return out;
+}
+
+/* ---------- building blocks ---------- */
+function header(){
+  const ep = curEp();
+  const sub = ep && S.live.phase && S.live.phase!=='idle' ? `Family Edition · ${esc(ep.title||'Tonight’s episode')}` : 'Family Edition · Tuesdays 7 PM ET';
+  return `<header class="marquee"><div class="bulbs"></div><h1>Name That Photo</h1><p class="sub">${sub}</p></header>`;
+}
+function rulesCard(open){
+  return `<details class="card quiet" ${open?'open':''}><summary class="eyebrow" style="cursor:pointer">House rules</summary>
+    <ol class="rules">${RULES.map(r=>`<li>${r}</li>`).join('')}</ol></details>`;
+}
+function countdownHTML(ms){
+  return `<div class="stack" style="gap:4px"><span class="eyebrow">Next episode</span>
+    <span class="big">${esc(fmtET(ms))}</span><span class="countdown" data-countdown="${ms}">${cd(ms)}</span></div>`;
+}
+function cd(ms){
+  let d = Math.max(0, ms - Date.now()); if(d===0) return 'Showtime!';
+  const days = Math.floor(d/864e5); d%=864e5; const h=Math.floor(d/36e5); d%=36e5; const m=Math.floor(d/6e4); const s=Math.floor(d%6e4/1e3);
+  return (days?days+'d ':'') + String(h).padStart(2,'0')+'h '+String(m).padStart(2,'0')+'m '+String(s).padStart(2,'0')+'s';
+}
+function board(rows, title, unitNote){
+  if(!rows.length) return '';
+  const top = rows[0].points;
+  return `<div class="stack"><div class="spread"><span class="eyebrow">${title}</span>${unitNote?`<span class="small muted">${unitNote}</span>`:''}</div>
+    <div class="board">${rows.map((r,i)=>`<div class="brow ${r.points>0&&r.points===top?'lead':''} ${r.pid===S.pid?'me':''}">
+      <span class="rank">${i+1}</span><span class="nm">${esc(r.name)}</span><span class="pts">${num(r.points)}</span></div>`).join('')}</div></div>`;
+}
+function scoreCard(ep){
+  const st = standings(ep);
+  return `<section class="card">${board(st.contestants,'Scoreboard','points redeemable nowhere')}
+    ${st.council.length?board(st.council,'Elder Auntie Council','honorary, they don’t matter'):''}
+    ${!st.contestants.length&&!st.council.length?'<p class="muted">Nobody has joined yet.</p>':''}</section>`;
+}
+function photoFigure(ep,i){
+  const q = ep.questions[i]||{}, n = ep.questions.length, src = photoSrc(q.photoId);
+  const lvl = LEVELS[Math.min(4, Math.round(i*(4/Math.max(1,n-1))))] || '';
+  return `<figure class="print"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+    ${src?`<img src="${esc(src)}" alt="Photo ${i+1} of ${n}">`:`<div class="ph">${q.photoId?'Loading photo…':'No photo yet'}</div>`}
+    <figcaption>PHOTO ${i+1} OF ${n} · ${lvl.toUpperCase()}</figcaption></figure>`;
+}
+function markChip(key,pid){
+  const m = markOf(key,pid);
+  return m==='correct' ? '<span class="chip ok">✓ Correct</span>' : m==='wrong' ? '<span class="chip no">✗ Incorrect</span>' : '<span class="chip wait">Waiting on the host</span>';
+}
+function feedHTML(key, openedAt, opts={}){
+  const list = answersFor(key);
+  if(!list.length) return `<p class="muted">No answers yet.</p>`;
+  const ep = curEp();
+  let firstCorrect = null;
+  const correct = list.filter(a=>markOf(key,a.pid)==='correct');
+  firstCorrect = (correct.find(a=>role(a.pid)==='contestant')||{}).pid;
+  return `<div class="feed">${list.map(a=>{
+    const dt = openedAt && a.at ? '+'+((a.at-openedAt)/1000).toFixed(1)+'s' : (a.at?fmtClock(a.at):'');
+    return `<div class="ans ${a.pid===firstCorrect?'first':''}">
+      <span class="who">${esc(nameOf(a.pid))}${role(a.pid)==='council'?'<span class="chip council">Council</span>':''}${a.pid===firstCorrect?'<span class="chip ok">First correct</span>':''}</span>
+      <span class="t">${esc(dt)}</span>
+      <span class="txt">${esc(a.text)}</span>
+      ${opts.host?`<span class="acts">
+        <button class="btn sm" data-act="mark" data-key="${esc(key)}" data-pid="${esc(a.pid)}" data-v="correct" aria-pressed="${markOf(key,a.pid)==='correct'}">✓ Correct</button>
+        <button class="btn sm" data-act="mark" data-key="${esc(key)}" data-pid="${esc(a.pid)}" data-v="wrong">✗ Incorrect</button>
+        <button class="btn sm ghost" data-act="mark" data-key="${esc(key)}" data-pid="${esc(a.pid)}" data-v="">Clear</button>
+        <button class="btn sm ghost" data-act="refer" data-key="${esc(key)}" data-pid="${esc(a.pid)}">Refer to the Council</button>
+        ${markOf(key,a.pid)?markChip(key,a.pid):''}</span>`:`<span class="acts">${markOf(key,a.pid)?markChip(key,a.pid):''}</span>`}
+    </div>`;}).join('')}</div>`;
+}
+function bannersHTML(){
+  let out = '';
+  const v = latestVeto();
+  if(v) out += `<div class="banner veto"><span>VETO! ${esc(nameOf(v.pid))} has overruled the host</span>${S.isHost&&S.view==='host'?'<button class="btn sm" data-act="ackVeto">Acknowledge</button>':''}</div>`;
+  const c = S.live.council;
+  if(c){
+    const tv = councilVotes(), a = ((S.answers[c.pid]||{}).byKey||{})[c.key];
+    out += `<div class="banner council"><div class="stack" style="gap:4px">
+      <span>⚖ Referred to the Elder Auntie Council</span>
+      <span style="font-weight:600;color:var(--fg)">${esc(nameOf(c.pid))} answered: “${esc(a?a.text:'')}”</span>
+      <span class="small">Council says correct: ${tv.yes.length} · incorrect: ${tv.no.length}</span></div>
+      ${role(S.pid)==='council'&&S.players[S.pid]&&S.view!=='host'?`<div class="row">
+        <button class="btn sm gold" data-act="vote" data-v="correct">Correct</button>
+        <button class="btn sm" data-act="vote" data-v="wrong">Incorrect</button></div>`:''}</div>`;
+  }
+  if(S.live.revealText && ['question','bonus-offer','bonus'].includes(S.live.phase)) out += `<div class="banner reveal"><span>Answer: ${esc(S.live.revealText)}</span></div>`;
+  if(S.live.revealBonus && S.live.phase==='bonus') out += `<div class="banner reveal"><span>Bonus answer: ${esc(S.live.revealBonus)}</span></div>`;
+  return out;
+}
+function fameHTML(){
+  const fin = S.episodes.filter(e=>e.status==='final').sort((a,b)=>(b.airAt||0)-(a.airAt||0));
+  if(!fin.length) return '';
+  const season = {};
+  fin.forEach(e => (e.standings||[]).forEach(s => { season[s.name] = (season[s.name]||0) + (+s.points||0); }));
+  const wins = {}; fin.forEach(e => { if(e.winnerName) wins[e.winnerName] = (wins[e.winnerName]||0)+1; });
+  const rows = Object.entries(season).map(([name,points])=>({name,points})).sort((a,b)=>b.points-a.points);
+  return `<section class="card"><span class="eyebrow">Hall of Champions</span><div class="fame">${fin.map(e=>`
+    <div class="ep"><span class="medal">★</span><span><b>${esc(e.winnerName||'No winner')}</b> <span class="muted">· ${esc(e.title||'Episode')}</span></span>
+    <span class="small muted">${e.airAt?esc(fmtDay(e.airAt)):''}${e.note?' · '+esc(e.note):''}${(e.standings||[]).length?' · '+e.standings.map(s=>esc(s.name)+' '+num(s.points)).join(', '):''}</span></div>`).join('')}</div>
+    ${rows.length?board(rows.map(r=>({...r,name:r.name+(wins[r.name]?` · ${wins[r.name]} win${wins[r.name]>1?'s':''}`:'')})),'Season totals',''):''}</section>`;
+}
+
+/* ---------- player view ---------- */
+function joinCard(){
+  const can = S.canWrite !== false;
+  return `<section class="card"><span class="eyebrow">Join the show</span>
+    <p class="big">Who’s playing tonight?</p>
+    <div class="field"><label for="joinName">Your name, as the family knows you</label>
+      <input type="text" id="joinName" data-in="joinName" maxlength="32" placeholder="Auntie Carla, Ayana, Mom…" value="${esc(S.inputs.joinName||'')}"></div>
+    <div class="field"><label for="joinRole">I’m playing as</label>
+      <select id="joinRole" data-in="joinRole">
+        <option value="contestant" ${S.inputs.joinRole!=='council'?'selected':''}>Contestant</option>
+        <option value="council" ${S.inputs.joinRole==='council'?'selected':''}>Elder Auntie Council member</option></select></div>
+    <div class="row"><button class="btn gold" data-act="join" ${can?'':'disabled'}>I’m ready to rumble</button></div>
+    ${can?'':'<p class="small muted">Joining didn\u2019t work. Reload the page and try again.</p>'}</section>`;
+}
+function answerBox(key, allowed, placeholder){
+  const my = ((mine().byKey)||{})[key];
+  if(my) return `<div class="stack"><span class="eyebrow">Your answer</span><p class="big">${esc(my.text)}</p>
+    <div class="row"><span class="small muted mono">Locked in at ${esc(fmtClock(my.at))}</span>${markChip(key,S.pid)}</div></div>`;
+  if(!allowed) return '';
+  const id = 'ans-'+key.replace(/[^a-z0-9]/gi,'-');
+  return `<form class="stack" data-form="answer" data-key="${esc(key)}"><label class="eyebrow" for="${id}">Your answer</label>
+    <input type="text" class="answer-input" id="${id}" data-in="${id}" maxlength="300" autocomplete="off" placeholder="${esc(placeholder)}" value="${esc(S.inputs[id]||'')}">
+    <div class="row"><button class="btn gold" type="submit">Lock it in</button><span class="small muted">First correct answer wins. You get one shot.</span></div></form>`;
+}
+function playerStage(){
+  const ep = curEp(), L = S.live, ph = L.phase || 'idle';
+  const me = S.players[S.pid], council = me && me.role==='council';
+  let html = '';
+  if(!ep || ph==='idle'){
+    html += `<section class="card">${L.nextEpisodeAt?countdownHTML(L.nextEpisodeAt):'<p class="big">No episode scheduled yet.</p>'}
+      <p class="muted">Put it on your calendar and we’ll see you then. Love you, FAMILY.</p></section>`;
+    html += fameHTML();
+    return html;
+  }
+  html += bannersHTML();
+  if(ph==='lobby'){
+    const ids = Object.keys(S.players);
+    html += `<section class="card"><span class="eyebrow">Tonight’s episode</span><p class="big">Gooood evening, tonight’s participants!</p>
+      <p>Tonight we have <b>${ep.questions.length} photo${ep.questions.length===1?'':'s'}</b>. They begin easy and gradually get harder. Let’s start in 3…2…1</p>
+      ${ep.prizeNote?`<p class="muted">🎁 ${esc(ep.prizeNote)}</p>`:''}
+      <div class="stack" style="gap:6px"><span class="eyebrow">In the studio</span><div class="who-list">${ids.map(p=>`<span class="chip ${role(p)==='council'?'council':''}"><span class="dot"></span>${esc(nameOf(p))}</span>`).join('')||'<span class="muted">Nobody yet</span>'}</div></div></section>`;
+    html += rulesCard(true);
+  }
+  if(['question','bonus-offer','bonus'].includes(ph)){
+    const i = L.q||0, r = questionResult(ep,i), q = r.q;
+    html += `<section class="card"><div class="qhead"><span class="qnum">QUESTION ${i+1}</span><h2 class="h2">${esc(q.prompt||DEFAULT_PROMPT)}</h2></div>${photoFigure(ep,i)}`;
+    if(ph==='question'){
+      html += answerBox(r.key, true, council?'Steal attempt: names left to right':'Names, left to right');
+      const n = answersFor(r.key).length;
+      html += `<p class="small muted">${n} answer${n===1?'':'s'} in${L.showFeed?'':'. Everyone’s answers appear once the host reveals them.'}</p>`;
+    }
+    html += `</section>`;
+    if(ph==='bonus-offer'){
+      const bp = L.bonusPlayerId, choice = ((S.answers[bp]||{}).bonusChoice||{})[r.key];
+      html += `<section class="card"><span class="eyebrow">Bonus round · ${num(q.bonusPoints||1000)} points</span>`;
+      if(bp===S.pid){
+        html += choice ? `<p class="big">${choice==='yes'?'You’re playing for the bonus. Stand by…':'You passed on the bonus. Sharing the wealth.'}</p>`
+          : `<p class="big">${esc(nameOf(bp))}, would you like to play for the bonus question?</p><p class="muted">${num(q.bonusPoints||1000)} points that you will also be able to use nowhere.</p>
+            <div class="row"><button class="btn gold" data-act="bonusChoice" data-v="yes">Yes, let’s go</button><button class="btn" data-act="bonusChoice" data-v="no">Nope, I’ll share the wealth</button></div>`;
+      } else {
+        html += `<p class="big">${esc(nameOf(bp))} got it! ${choice==='yes'?'They’re playing for the bonus.':choice==='no'?'They passed on the bonus.':'Will they play for the bonus?'}</p>`;
+      }
+      html += `</section>`;
+    }
+    if(ph==='bonus'){
+      const bp = L.bonusPlayerId, canAns = bp===S.pid || council;
+      html += `<section class="card"><span class="eyebrow">Bonus question for ${esc(nameOf(bp))} · ${num(q.bonusPoints||1000)} points</span>
+        <p class="big">${esc(q.bonusPrompt||'')}</p><p class="small muted">The clock is ticking.</p>
+        ${answerBox(r.bkey, canAns, bp===S.pid?'Your bonus answer':'Council steal attempt')}
+        ${!canAns?'<p class="muted">This one is for '+esc(nameOf(bp))+' only.</p>':''}
+        ${L.showFeed?`<div class="stack"><span class="eyebrow">Bonus answers</span>${feedHTML(r.bkey, L.bonusOpenedAt)}</div>`:''}</section>`;
+    }
+    if(L.showFeed) html += `<section class="card"><span class="eyebrow">Everyone’s answers</span>${feedHTML(r.key, L.openedAt)}</section>`;
+  }
+  if(ph==='final'){
+    const st = standings(ep), champ = st.contestants[0];
+    html += `<section class="card" style="text-align:center;align-items:center"><span class="eyebrow">That’s the show</span>
+      <p class="h2" style="color:var(--gold)">${champ&&champ.points>0?esc(champ.name)+' is tonight’s champion!':'Great game, everyone!'}</p>
+      ${champ&&champ.points>0?`<p class="countdown">${num(champ.points)} pts</p>`:''}
+      ${ep.prizeNote?`<p class="muted">🎁 ${esc(ep.prizeNote)}</p>`:''}</section>`;
+    if(L.nextEpisodeAt) html += `<section class="card">${countdownHTML(L.nextEpisodeAt)}<p class="muted">Put it on your calendar and we will see you then! Love you, FAMILY.</p></section>`;
+  }
+  if(council && ph!=='final') html += `<section class="card quiet"><div class="spread"><span class="small muted">Council super power: overrule the host’s last ruling.</span>
+    <button class="btn dahlia sm" data-act="veto">Veto</button></div></section>`;
+  html += scoreCard(ep);
+  return html;
+}
+
+/* ---------- host console ---------- */
+function hostRun(){
+  const L = S.live, ph = L.phase||'idle', ep = curEp();
+  let html = bannersHTML();
+  const playable = S.episodes.filter(e=>!e.legacy).sort((a,b)=>(a.airAt||0)-(b.airAt||0));
+  if(!ep || ph==='idle' || ph==='final'){
+    const pick = S.pickEp || (playable.find(e=>e.status!=='final')||{}).id || '';
+    html += `<section class="card"><span class="eyebrow">Start a show</span>
+      ${playable.length?`<div class="field"><label for="pickEp">Episode</label><select id="pickEp" data-in="pickEp">${playable.map(e=>`<option value="${esc(e.id)}" ${e.id===pick?'selected':''}>${esc(e.title||'Untitled')} · ${e.questions.length} photo${e.questions.length===1?'':'s'}${e.status==='final'?' · aired':''}</option>`).join('')}</select></div>
+      <div class="row"><button class="btn gold" data-act="openLobby">Open the lobby</button>${ph==='final'?'<button class="btn" data-act="toIdle">Back to between-episodes screen</button>':''}</div>`
+      :`<p>No episodes yet. Build one with your photos first.</p><div class="row"><button class="btn gold" data-act="hostTab" data-v="build">Build an episode</button></div>`}</section>`;
+    if(ph==='final' && ep) html += scoreCard(ep);
+    return html;
+  }
+  const i = L.q||0, n = ep.questions.length, r = questionResult(ep,i), sec = (S.secrets[ep.id]||{}).answers||[], key = sec[i]||{};
+  html += `<section class="card"><div class="spread"><span class="eyebrow">${esc(ep.title)} · ${ph==='lobby'?'Lobby':'Question '+(i+1)+' of '+n}</span><span class="chip">${esc(ph.replace('-',' '))}</span></div>`;
+  if(ph==='lobby'){
+    html += `<p>${Object.keys(S.players).length} people in the studio.</p><div class="row"><button class="btn gold" data-act="showQ" data-v="0" ${n?'':'disabled'}>Show Question 1</button><button class="btn ghost" data-act="toIdle">Cancel</button></div>`;
+  } else {
+    html += `<p class="big">${esc(r.q.prompt||DEFAULT_PROMPT)}</p>
+      <div class="secret"><span class="eyebrow">Answer key · only you see this</span><p>${esc(key.answer||'No answer saved')}</p>${r.q.bonusPrompt?`<p class="small" style="margin-top:6px"><b>Bonus:</b> ${esc(r.q.bonusPrompt)} → ${esc(key.bonusAnswer||'no answer saved')}</p>`:''}</div>
+      <div class="row">`;
+    if(ph==='question'){
+      html += `<button class="btn" data-act="reveal">${L.showFeed?'Answers are showing':'Reveal everyone’s answers'}</button>`;
+      html += `<button class="btn" data-act="revealKey" ${key.answer?'':'disabled'}>${L.revealText?'Hide the correct answer':'Announce the correct answer'}</button>`;
+      if(r.winner && r.q.bonusPrompt) html += `<button class="btn gold" data-act="offerBonus" data-pid="${esc(r.winner.pid)}">Offer bonus to ${esc(nameOf(r.winner.pid))}</button>`;
+    }
+    if(ph==='bonus-offer'){
+      const ch = ((S.answers[L.bonusPlayerId]||{}).bonusChoice||{})[r.key];
+      html += `<span class="chip ${ch==='yes'?'ok':ch==='no'?'no':''}">${esc(nameOf(L.bonusPlayerId))}: ${ch?ch==='yes'?'Yes':'No':'deciding…'}</span>
+        <button class="btn gold" data-act="askBonus">Ask the bonus question</button><button class="btn" data-act="skipBonus">Skip the bonus</button>`;
+    }
+    if(ph==='bonus') html += `<button class="btn" data-act="revealBonus" ${key.bonusAnswer?'':'disabled'}>${L.revealBonus?'Hide bonus answer':'Announce bonus answer'}</button>`;
+    html += i+1<n ? `<button class="btn gold" data-act="showQ" data-v="${i+1}">Next: Question ${i+2} →</button>` : `<button class="btn dahlia" data-act="endEp">End the episode</button>`;
+    html += `</div>`;
+  }
+  html += `</section>`;
+  if(L.council){
+    const tv = councilVotes();
+    html += `<section class="card"><span class="eyebrow">Council ruling</span><p>Correct: ${tv.yes.map(nameOf).map(esc).join(', ')||'none'} · Incorrect: ${tv.no.map(nameOf).map(esc).join(', ')||'none'}</p>
+      <div class="row"><button class="btn gold" data-act="councilRule" data-v="correct">Council rules correct</button><button class="btn" data-act="councilRule" data-v="wrong">Council rules incorrect</button><button class="btn ghost" data-act="councilRule" data-v="">Withdraw</button></div></section>`;
+  }
+  if(ph!=='lobby'){
+    html += `<section class="card"><span class="eyebrow">Answers for Question ${i+1}</span>${feedHTML(r.key, L.openedAt, {host:true})}</section>`;
+    if(ph==='bonus') html += `<section class="card"><span class="eyebrow">Bonus answers</span>${feedHTML(r.bkey, L.bonusOpenedAt, {host:true})}</section>`;
+  }
+  const st = standings(ep);
+  html += `<section class="card"><span class="eyebrow">Scoreboard · adjust by hand</span><div class="board">${st.contestants.concat(st.council).map(p=>`
+    <div class="brow"><span class="rank">${role(p.pid)==='council'?'⚖':''}</span><span class="nm">${esc(p.name)}</span>
+    <span class="row" style="gap:6px"><span class="pts">${num(p.points)}</span>
+      <button class="btn sm ghost" data-act="adjust" data-pid="${esc(p.pid)}" data-v="-100" aria-label="Take 100 from ${esc(p.name)}">−100</button>
+      <button class="btn sm ghost" data-act="adjust" data-pid="${esc(p.pid)}" data-v="100" aria-label="Give 100 to ${esc(p.name)}">+100</button></span></div>`).join('')||'<p class="muted">Nobody has joined yet.</p>'}</div></section>`;
+  return html;
+}
+function hostBuild(){
+  if(!S.draft){
+    const eps = S.episodes.filter(e=>!e.legacy).sort((a,b)=>(b.airAt||0)-(a.airAt||0));
+    return `<section class="card"><div class="spread"><span class="eyebrow">Episodes</span><button class="btn gold sm" data-act="newEp">New episode</button></div>
+      ${eps.length?`<div class="stack">${eps.map(e=>`<div class="line"><span><b>${esc(e.title||'Untitled')}</b> <span class="small muted">· ${e.questions.length} photo${e.questions.length===1?'':'s'}${e.airAt?' · '+esc(fmtDay(e.airAt)):''}${e.status==='final'?' · aired':''}</span></span>
+        <span class="row"><button class="btn sm" data-act="editEp" data-id="${esc(e.id)}">Edit</button><button class="btn sm ghost" data-act="delEp" data-id="${esc(e.id)}">${S.confirmDel===e.id?'Tap again to delete':'Delete'}</button></span></div>`).join('')}</div>`
+      :'<p class="muted">Build an episode: upload five family photos, type who’s in each one, and add a bonus question for each.</p>'}</section>`;
+  }
+  const d = S.draft, sc = S.draftSecret;
+  return `<section class="card"><div class="spread"><span class="eyebrow">${d._new?'New episode':'Edit episode'}</span><button class="btn sm ghost" data-act="closeDraft">Close</button></div>
+    <div class="grid2"><div class="field"><label for="d-title">Title</label><input type="text" id="d-title" data-bind="title" value="${esc(d.title)}"></div>
+    <div class="field"><label for="d-air">Airs</label><input type="datetime-local" id="d-air" data-bind="airAt" value="${esc(toLocalInput(d.airAt))}"></div></div>
+    <div class="field"><label for="d-prize">Prize note (shown to everyone)</label><input type="text" id="d-prize" data-bind="prizeNote" value="${esc(d.prizeNote||'')}"></div></section>
+    ${d.questions.map((q,i)=>`<section class="card qedit"><div class="spread"><span class="eyebrow">Photo ${i+1} · ${LEVELS[Math.min(4, Math.round(i*(4/Math.max(1,d.questions.length-1))))]}</span>
+      <span class="row"><button class="btn sm ghost" data-act="moveQ" data-i="${i}" data-v="-1" ${i?'':'disabled'} aria-label="Move up">↑</button><button class="btn sm ghost" data-act="moveQ" data-i="${i}" data-v="1" ${i<d.questions.length-1?'':'disabled'} aria-label="Move down">↓</button><button class="btn sm ghost" data-act="delQ" data-i="${i}">Remove</button></span></div>
+      <div class="row" style="align-items:flex-start">${photoSrc(q.photoId)?`<img class="thumb" src="${esc(photoSrc(q.photoId))}" alt="Photo ${i+1}">`:`<div class="thumb">${q.photoId?'Loading…':'No photo'}</div>`}
+        <div class="field" style="flex:1"><label for="d-file-${i}">${q.photoId?'Replace photo':'Upload photo'}</label><input type="file" id="d-file-${i}" accept="image/*" data-file="${i}"><span class="small muted">${S.uploading===i?'Uploading…':'Photos are resized so they load fast on phones.'}</span></div></div>
+      <div class="field"><label for="d-p-${i}">Question</label><input type="text" id="d-p-${i}" data-bind="q.${i}.prompt" value="${esc(q.prompt)}"></div>
+      <div class="field"><label for="d-a-${i}">Correct answer (only you see this)</label><input type="text" id="d-a-${i}" data-bind="s.${i}.answer" value="${esc((sc.answers[i]||{}).answer||'')}" placeholder="Grandma Evelyn, Granddaddy David"></div>
+      <div class="grid2"><div class="field"><label for="d-pt-${i}">Points</label><input type="number" id="d-pt-${i}" data-bind="q.${i}.points" value="${esc(q.points)}"></div>
+      <div class="field"><label for="d-bpt-${i}">Bonus points</label><input type="number" id="d-bpt-${i}" data-bind="q.${i}.bonusPoints" value="${esc(q.bonusPoints)}"></div></div>
+      <div class="field"><label for="d-bp-${i}">Bonus question</label><input type="text" id="d-bp-${i}" data-bind="q.${i}.bonusPrompt" value="${esc(q.bonusPrompt)}" placeholder="What month and year did our grandparents get married?"></div>
+      <div class="field"><label for="d-ba-${i}">Bonus answer (only you see this)</label><input type="text" id="d-ba-${i}" data-bind="s.${i}.bonusAnswer" value="${esc((sc.answers[i]||{}).bonusAnswer||'')}"></div>
+    </section>`).join('')}
+    <div class="row"><button class="btn" data-act="addQ">Add a photo</button><button class="btn gold" data-act="saveEp" ${S.busy?'disabled':''}>Save episode</button></div>`;
+}
+function hostSchedule(){
+  return `<section class="card"><span class="eyebrow">Next episode</span>
+    <div class="field"><label for="nextAt">Date and time (your local time)</label><input type="datetime-local" id="nextAt" data-in="nextAt" value="${esc(S.inputs.nextAt ?? toLocalInput(S.live.nextEpisodeAt))}"></div>
+    <div class="row"><button class="btn gold" data-act="saveNext">Save</button>${S.live.nextEpisodeAt?`<span class="small muted">Everyone sees: ${esc(fmtET(S.live.nextEpisodeAt))}</span>`:''}</div></section>
+    <section class="card"><span class="eyebrow">Who’s joined</span><div class="board">${Object.keys(S.players).map(p=>`<div class="line"><span>${esc(nameOf(p))} ${role(p)==='council'?'<span class="chip council">Council</span>':''}</span>
+      <span class="row"><button class="btn sm ghost" data-act="toggleRole" data-pid="${esc(p)}">Make ${role(p)==='council'?'contestant':'Council'}</button><button class="btn sm ghost" data-act="kick" data-pid="${esc(p)}">Remove</button></span></div>`).join('')||'<p class="muted">Nobody yet.</p>'}</div></section>`;
+}
+function toLocalInput(ms){ if(!ms) return ''; const d=new Date(ms); const p=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`; }
+
+/* ---------- render ---------- */
+function render(){
+  const a = document.activeElement, aid = a && a.id; let sel = null; try{ if(a && typeof a.selectionStart==='number') sel = [a.selectionStart, a.selectionEnd]; }catch(e){}
+  let html = header();
+  if(S.status==='connecting'){
+    html += `<section class="card"><p class="big">Getting the studio lights on…</p><p class="muted">${S.stale?'Still connecting. Check your internet connection.':'Connecting to tonight’s show.'}</p></section>` + rulesCard(true);
+  } else if(S.status==='offline'){
+    html += `<section class="card"><p class="big">${esc(S.offlineTitle||'The studio is closed')}</p><p class="muted">${esc(S.offlineMsg||'Check your internet connection and reload the page.')}</p></section>` + rulesCard(true);
+  } else {
+    if(S.isHost) html += `<div class="tabs" role="group" aria-label="View"><button data-act="view" data-v="host" aria-pressed="${S.view==='host'}">Host console</button><button data-act="view" data-v="play" aria-pressed="${S.view==='play'}">Player view</button></div>`;
+    if(S.isHost && S.view==='host'){
+      html += `<div class="tabs" role="group" aria-label="Host tools">${[['run','Run the show'],['build','Episodes'],['schedule','Schedule & players']].map(([k,l])=>`<button data-act="hostTab" data-v="${k}" aria-pressed="${S.hostTab===k}">${l}</button>`).join('')}</div>`;
+      html += S.hostTab==='build' ? hostBuild() : S.hostTab==='schedule' ? hostSchedule() : hostRun();
+    } else if(!S.players[S.pid]){
+      html += joinCard();
+      const ep = curEp();
+      if(ep && S.live.phase && S.live.phase!=='idle') html += scoreCard(ep);
+      else { if(S.live.nextEpisodeAt) html += `<section class="card">${countdownHTML(S.live.nextEpisodeAt)}</section>`; html += fameHTML(); }
+      html += rulesCard(false);
+    } else {
+      html += playerStage();
+      const me = S.players[S.pid];
+      html += `<div class="footer">Playing as <b>${esc(me.name)}</b> · ${me.role==='council'?'Elder Auntie Council':'Contestant'} · <button class="btn sm ghost" data-act="rename">Change</button></div>`;
+      html += rulesCard(false);
+    }
+    if(S.stale) html += `<p class="footer">Scores may be out of date. Reconnecting\u2026</p>`;
+    if(S.isHost) html += `<p class="footer">Share this link with the family: <span class="mono">${esc(location.origin+location.pathname)}</span></p>`;
+  }
+  app.innerHTML = html;
+  if(aid){ const el = document.getElementById(aid); if(el){ el.focus({preventScroll:true}); if(sel && el.setSelectionRange) try{ el.setSelectionRange(sel[0], sel[1]); }catch(e){} } }
+}
+setInterval(() => document.querySelectorAll('[data-countdown]').forEach(el => el.textContent = cd(+el.dataset.countdown)), 1000);
+
+/* ---------- events ---------- */
+app.addEventListener('input', e => {
+  const t = e.target;
+  if(t.dataset.in) S.inputs[t.dataset.in] = t.value;
+  if(t.dataset.in==='pickEp') S.pickEp = t.value;
+  if(t.dataset.bind && S.draft){
+    const parts = t.dataset.bind.split('.');
+    if(parts[0]==='q'){ const q = S.draft.questions[+parts[1]]; q[parts[2]] = /points/i.test(parts[2]) ? Number(t.value) : t.value; }
+    else if(parts[0]==='s'){ const i=+parts[1]; S.draftSecret.answers[i] = {...(S.draftSecret.answers[i]||{}), [parts[2]]: t.value}; }
+    else if(parts[0]==='airAt'){ S.draft.airAt = t.value ? new Date(t.value).getTime() : null; }
+    else S.draft[parts[0]] = t.value;
+  }
+});
+app.addEventListener('change', async e => {
+  const t = e.target;
+  if(t.dataset.in==='joinRole' || t.dataset.in==='pickEp'){ S.inputs[t.dataset.in]=t.value; if(t.dataset.in==='pickEp') S.pickEp=t.value; }
+  if(t.dataset.file != null && t.files && t.files[0] && S.draft){
+    const i = +t.dataset.file; S.uploading = i; render();
+    try{
+      const data = await compress(t.files[0]);
+      const id = 'p' + uid();
+      await writeDoc('photos/'+id, {data, at:Date.now()});
+      S.photos[id] = data; S.draft.questions[i].photoId = id; toast('Photo added');
+    }catch(err){ if(!err || !err.code) toast('That file couldn’t be read as a photo. Try a JPG or PNG.'); }
+    S.uploading = null; render();
+  }
+});
+app.addEventListener('submit', e => {
+  const f = e.target; if(f.dataset.form!=='answer') return;
+  e.preventDefault();
+  const key = f.dataset.key, input = f.querySelector('input'), text = (input.value||'').trim();
+  if(!text){ toast('Type your answer first.'); return; }
+  if(((mine().byKey)||{})[key]) return;
+  delete S.inputs[input.dataset.in];
+  saveMine(d => { d.byKey = d.byKey || {}; d.byKey[key] = {text, at:Date.now()}; });
+});
+app.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if(!b) return;
+  const act = b.dataset.act, v = b.dataset.v, L = S.live, ep = curEp();
+  const H = {
+    view(){ S.view = v; render(); },
+    hostTab(){ S.view='host'; S.hostTab = v; render(); },
+    join(){
+      const name = (S.inputs.joinName||'').trim();
+      if(!name){ toast('Add your name first.'); return; }
+      const doc = {name, role: S.inputs.joinRole==='council'?'council':'contestant', joinedAt: Date.now()};
+      S.players = {...S.players, [S.pid]: doc}; render();
+      writeDoc('players/'+S.pid, doc).catch(() => { const p={...S.players}; delete p[S.pid]; S.players=p; S.canWrite=false; render(); });
+    },
+    rename(){ const p = S.players[S.pid]; S.inputs.joinName = p.name; S.inputs.joinRole = p.role; const x={...S.players}; delete x[S.pid]; S.players=x; render(); },
+    bonusChoice(){ const k = keyOf(ep, L.q||0); saveMine(d => { d.bonusChoice = d.bonusChoice||{}; d.bonusChoice[k] = v; }); },
+    vote(){ const id = councilVotes().id; saveMine(d => { d.votes = d.votes||{}; d.votes[id] = v; }); toast('Your vote is in'); },
+    veto(){ saveMine(d => { d.veto = {at:Date.now(), ep: ep && ep.id}; }); },
+    /* host */
+    ackVeto(){ setLive({vetoAckAt: Date.now()}); },
+    openLobby(){
+      const id = S.pickEp || (S.episodes.filter(e=>!e.legacy&&e.status!=='final')[0]||{}).id || (S.episodes.find(e=>!e.legacy)||{}).id;
+      if(!id) return;
+      setLive({episodeId:id, phase:'lobby', q:0, openedAt:null, bonusPlayerId:null, council:null, showFeed:false, revealText:'', revealBonus:'', vetoAckAt:Date.now()});
+    },
+    showQ(){ setLive({phase:'question', q:+v, openedAt:Date.now(), bonusPlayerId:null, bonusOpenedAt:null, council:null, showFeed:false, revealText:'', revealBonus:''}); },
+    reveal(){ setLive({showFeed: !L.showFeed}); },
+    revealKey(){ const k = ((S.secrets[ep.id]||{}).answers||[])[L.q||0]||{}; setLive({revealText: L.revealText ? '' : (k.answer||''), showFeed:true}); },
+    revealBonus(){ const k = ((S.secrets[ep.id]||{}).answers||[])[L.q||0]||{}; setLive({revealBonus: L.revealBonus ? '' : (k.bonusAnswer||''), showFeed:true}); },
+    offerBonus(){ setLive({phase:'bonus-offer', bonusPlayerId: b.dataset.pid, showFeed:true}); },
+    askBonus(){ setLive({phase:'bonus', bonusOpenedAt: Date.now(), showFeed:false}); },
+    skipBonus(){ setLive({phase:'question', bonusPlayerId:null, showFeed:true}); },
+    mark(){
+      const marks = {...(S.ledger.marks||{})}, k = b.dataset.key+'|'+b.dataset.pid;
+      if(v) marks[k] = v; else delete marks[k];
+      setLedger({...S.ledger, marks});
+    },
+    refer(){ setLive({council:{key:b.dataset.key, pid:b.dataset.pid, openedAt:Date.now()}}); },
+    councilRule(){
+      const c = L.council; if(!c) return;
+      if(v){ const marks = {...(S.ledger.marks||{})}; marks[c.key+'|'+c.pid] = v; setLedger({...S.ledger, marks}); }
+      setLive({council:null});
+    },
+    adjust(){ setLedger({...S.ledger, adjust:[...(S.ledger.adjust||[]), {ep: ep.id, pid: b.dataset.pid, pts: +v, at: Date.now()}]}); },
+    endEp(){
+      const st = standings(ep), champ = st.contestants[0];
+      const doc = JSON.parse(JSON.stringify(ep)); delete doc.id;
+      Object.assign(doc, {status:'final', endedAt:Date.now(), standings: st.contestants.map(r=>({name:r.name, points:r.points})),
+        councilStandings: st.council.map(r=>({name:r.name, points:r.points})), winnerName: champ && champ.points>0 ? champ.name : ''});
+      writeDoc('episodes/'+ep.id, doc).catch(()=>{});
+      setLive({phase:'final', council:null});
+    },
+    toIdle(){ setLive({phase:'idle', council:null}); },
+    newEp(){
+      const n = S.episodes.length + 1;
+      S.draft = {_new:true, id:'ep'+uid(), title:'Episode '+n, airAt: S.live.nextEpisodeAt || null, prizeNote: DEFAULT_PRIZE, status:'draft',
+        questions: Array.from({length:5}, () => ({photoId:'', prompt:DEFAULT_PROMPT, points:100, bonusPrompt:'', bonusPoints:1000}))};
+      S.draftSecret = {answers: Array.from({length:5}, () => ({answer:'', bonusAnswer:''}))};
+      render();
+    },
+    editEp(){
+      const e = S.episodes.find(x => x.id===b.dataset.id); if(!e) return;
+      S.draft = JSON.parse(JSON.stringify(e));
+      S.draftSecret = JSON.parse(JSON.stringify(S.secrets[e.id] || {answers:[]}));
+      while(S.draftSecret.answers.length < S.draft.questions.length) S.draftSecret.answers.push({answer:'', bonusAnswer:''});
+      render();
+    },
+    delEp(){
+      const id = b.dataset.id;
+      if(S.confirmDel !== id){ S.confirmDel = id; render(); return; }
+      S.confirmDel = null;
+      const e = S.episodes.find(x=>x.id===id);
+      (e && e.questions || []).forEach(q => { if(q.photoId) S.db.doc('photos/'+q.photoId).delete().catch(()=>{}); });
+      S.db.doc('episodes/'+id).delete().catch(err=>toast(errText(err)));
+      S.db.doc('secret/'+id).delete().catch(()=>{});
+      if(L.episodeId===id) setLive({phase:'idle', episodeId:null});
+    },
+    closeDraft(){ S.draft = null; S.draftSecret = null; render(); },
+    addQ(){ S.draft.questions.push({photoId:'', prompt:DEFAULT_PROMPT, points:100, bonusPrompt:'', bonusPoints:1000}); S.draftSecret.answers.push({answer:'', bonusAnswer:''}); render(); },
+    delQ(){ const i=+b.dataset.i; S.draft.questions.splice(i,1); S.draftSecret.answers.splice(i,1); render(); },
+    moveQ(){
+      const i=+b.dataset.i, j=i+(+v), Q=S.draft.questions, A=S.draftSecret.answers;
+      [Q[i],Q[j]]=[Q[j],Q[i]]; [A[i],A[j]]=[A[j],A[i]]; render();
+    },
+    async saveEp(){
+      const d = JSON.parse(JSON.stringify(S.draft)), id = d.id; delete d.id; delete d._new;
+      if(!d.questions.length){ toast('Add at least one photo.'); return; }
+      S.busy = true; render();
+      try{
+        await writeDoc('episodes/'+id, d);
+        await writeDoc('secret/'+id, S.draftSecret);
+        S.draft = null; S.draftSecret = null; toast('Episode saved');
+      }catch(err){}
+      S.busy = false; render();
+    },
+    saveNext(){
+      const val = S.inputs.nextAt ?? toLocalInput(L.nextEpisodeAt);
+      const ms = val ? new Date(val).getTime() : null;
+      delete S.inputs.nextAt; setLive({nextEpisodeAt: ms}); toast('Schedule saved');
+    },
+    toggleRole(){ const p = b.dataset.pid, doc = {...S.players[p], role: role(p)==='council'?'contestant':'council'}; S.players={...S.players,[p]:doc}; render(); writeDoc('players/'+p, doc).catch(()=>{}); },
+    kick(){ const p=b.dataset.pid; const x={...S.players}; delete x[p]; S.players=x; render(); S.db.doc('players/'+p).delete().catch(err=>toast(errText(err))); },
+  };
+  if(H[act]) H[act]();
+});
+
+/* ---------- boot (Firebase) ---------- */
+function wrapSnap(s){ return {id:s.id, exists:s.exists, data:()=>s.data(), metadata:{fromCache:s.metadata.fromCache, hasPendingWrites:s.metadata.hasPendingWrites}}; }
+function wrapErr(e){ return {code:(e&&e.code)||'unavailable', message:(e&&e.message)||''}; }
+function makeDb(fs){
+  const doc = path => { const r = fs.doc(path); return {
+    get: () => r.get().then(wrapSnap),
+    set: d => r.set(d).catch(e => { throw wrapErr(e); }),
+    delete: () => r.delete().catch(e => { throw wrapErr(e); }),
+    onSnapshot: (n, er) => r.onSnapshot(s => n(wrapSnap(s)), e => er && er(wrapErr(e)))
+  }; };
+  const collection = path => { const r = fs.collection(path); return {
+    onSnapshot: (n, er) => r.onSnapshot(q => n({docs:q.docs.map(wrapSnap), size:q.size, empty:q.empty, metadata:{fromCache:q.metadata.fromCache}}), e => er && er(wrapErr(e)))
+  }; };
+  return {doc, collection};
+}
+async function boot(){
+  render();
+  const cfg = window.NTP_FIREBASE;
+  if(!window.firebase || !cfg || !cfg.apiKey){
+    S.status = 'offline';
+    S.offlineTitle = 'The studio is still being built';
+    S.offlineMsg = window.firebase ? 'The host is finishing setting up the show. Check back soon.' : 'Couldn’t load the game. Check your internet connection and reload.';
+    render(); return;
+  }
+  firebase.initializeApp(cfg);
+  const auth = firebase.auth(), fs = firebase.firestore();
+  let u;
+  try{ u = (await auth.signInAnonymously()).user; }
+  catch(e){ S.status='offline'; S.offlineTitle='Couldn’t get you into the studio'; S.offlineMsg='Reload the page to try again.'; render(); return; }
+  const db = makeDb(fs);
+  S.db = db; S.pid = u.uid; S.status = 'live'; render();
+
+  // The host is whoever first opens the link with ?host on the end. That browser becomes the host key.
+  const wantsHost = new URLSearchParams(location.search).has('host');
+  let claimTried = false, secretsOn = false;
+  db.doc('config/host').onSnapshot(async s => {
+    const hostUid = s.exists ? s.data().uid : null;
+    const was = S.isHost;
+    S.isHost = hostUid === S.pid;
+    if(!hostUid && wantsHost && !claimTried){
+      claimTried = true;
+      try{ await db.doc('config/host').set({uid:S.pid, at:Date.now()}); toast('You’re the host. This browser is your host key.'); }
+      catch(e){ toast('Couldn’t claim the host seat.'); }
+    }
+    if(S.isHost && !was) S.view = 'host';
+    if(S.isHost && !secretsOn){
+      secretsOn = true;
+      db.collection('secret').onSnapshot(q => { const m={}; q.docs.forEach(d => m[d.id]=d.data()); S.secrets = m; render(); }, ()=>{});
+    }
+    render();
+  }, ()=>{});
+
+  const stale = setTimeout(() => { S.stale = true; render(); }, 10000);
+  const fresh = m => { if(m && !m.fromCache){ clearTimeout(stale); S.stale = false; } };
+  const onErr = () => { clearTimeout(stale); S.stale = true; render(); };
+  let lastPhaseKey = '', lastMarks = null;
+  db.doc('show/live').onSnapshot(s => {
+    fresh(s.metadata); S.live = s.exists ? s.data() : {};
+    const pk = (S.live.phase||'')+':'+(S.live.q||0);
+    if(lastPhaseKey && pk!==lastPhaseKey && S.live.phase==='question') tone('open');
+    lastPhaseKey = pk; render();
+  }, onErr);
+  db.doc('show/ledger').onSnapshot(s => {
+    fresh(s.metadata); const d = s.exists ? s.data() : {};
+    S.ledger = {marks: d.marks||{}, adjust: d.adjust||[]};
+    const my = {}; Object.entries(S.ledger.marks).forEach(([k,v]) => { if(k.endsWith('|'+S.pid)) my[k]=v; });
+    if(lastMarks && !S.isHost){ const ch = Object.keys(my).find(k => my[k]!==lastMarks[k]); if(ch) tone(my[ch]==='correct'?'ok':'no'); }
+    lastMarks = my; render();
+  }, onErr);
+  db.collection('episodes').onSnapshot(q => { fresh(q.metadata); S.episodes = q.docs.map(d => ({id:d.id, questions:[], ...d.data()})); render(); }, onErr);
+  db.collection('players').onSnapshot(q => { fresh(q.metadata); const m={}; q.docs.forEach(d => m[d.id]=d.data()); S.players = m; render(); }, onErr);
+  db.collection('answers').onSnapshot(q => { fresh(q.metadata); const m={}; q.docs.forEach(d => m[d.id]=d.data()); S.answers = m; render(); }, onErr);
+}
+boot();
+})();
+</script>
+</body>
+</html>
