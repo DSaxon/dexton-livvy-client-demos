@@ -154,7 +154,7 @@ textarea{min-height:64px;resize:vertical}
 <body>
 
 <div class="wrap" id="app">
-  <header class="marquee"><div class="bulbs"></div><h1>Name That Photo</h1><p class="sub">Family Edition · Tuesdays 7 PM ET</p></header>
+  <header class="marquee"><div class="bulbs"></div><h1>Name That Photo</h1><p class="sub">Baumgardner Family Edition · Tuesdays 7 PM ET</p></header>
   <section class="card"><p class="big">Getting the studio lights on…</p><p class="muted">Connecting to tonight's show.</p></section>
 </div>
 <div id="toast" class="toast" hidden></div>
@@ -331,7 +331,7 @@ async function compress(file){
 /* ---------- building blocks ---------- */
 function header(){
   const ep = curEp();
-  const sub = ep && S.live.phase && S.live.phase!=='idle' ? `Family Edition · ${esc(ep.title||'Tonight’s episode')}` : 'Family Edition · Tuesdays 7 PM ET';
+  const sub = ep && S.live.phase && S.live.phase!=='idle' ? `Baumgardner Family Edition · ${esc(ep.title||'Tonight’s episode')}` : 'Baumgardner Family Edition · Tuesdays 7 PM ET';
   return `<header class="marquee"><div class="bulbs"></div><h1>Name That Photo</h1><p class="sub">${sub}</p></header>`;
 }
 function rulesCard(open){
