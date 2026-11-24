@@ -357,7 +357,7 @@ function board(rows, title, unitNote){
   const top = rows[0].points;
   return `<div class="stack"><div class="spread"><span class="eyebrow">${title}</span>${unitNote?`<span class="small muted">${unitNote}</span>`:''}</div>
     <div class="board">${rows.map((r,i)=>`<div class="brow ${r.points>0&&r.points===top?'lead':''} ${r.pid===S.pid?'me':''}">
-      <span class="rank">${i+1}</span><span class="nm">${esc(r.name)}</span><span class="pts">${num(r.points)}</span></div>`).join('')}</div></div>`;
+      <span class="rank">${i+1}</span><span class="nm">${esc(r.name)}${r.pid&&S.players[r.pid]&&role(r.pid)==='council'?' <span class="chip council">⚖ Council</span>':''}</span><span class="pts">${num(r.points)}</span></div>`).join('')}</div></div>`;
 }
 function scoreCard(ep){
   const st = standings(ep);
