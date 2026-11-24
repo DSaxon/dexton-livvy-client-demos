@@ -172,7 +172,7 @@ textarea{min-height:64px;resize:vertical}
 const RULES = [
   'The host shares <b>one photo at a time</b>. The first person to name everyone in it, <b>left to right</b>, wins <b>100 points</b>, redeemable absolutely nowhere.',
   'Get it right and you can choose to play a <b>bonus question for 1,000 points</b>. You also can use those nowhere.',
-  'The <b>Elder Auntie Council</b> can answer every question. Their points don’t matter, but they can <b>steal</b> when nobody gets it right.',
+  'The <b>Elder Auntie/Uncle Council</b> can answer every question. Their points don’t matter, but they can <b>steal</b> when nobody gets it right.',
   'The Council has the <b>final ruling on disputed answers</b> and the super power to <b>veto</b> any ruling the host makes.',
   'Each episode has <b>five photos</b>. They start easy and gradually get harder.'
 ];
@@ -362,7 +362,7 @@ function board(rows, title, unitNote){
 function scoreCard(ep){
   const st = standings(ep);
   return `<section class="card">${board(st.contestants,'Scoreboard','points redeemable nowhere')}
-    ${st.council.length?board(st.council,'Elder Auntie Council','honorary, they don’t matter'):''}
+    ${st.council.length?board(st.council,'Elder Auntie/Uncle Council','honorary, they don’t matter'):''}
     ${!st.contestants.length&&!st.council.length?'<p class="muted">Nobody has joined yet.</p>':''}</section>`;
 }
 function photoFigure(ep,i){
@@ -405,7 +405,7 @@ function bannersHTML(){
   if(c){
     const tv = councilVotes(), a = ((S.answers[c.pid]||{}).byKey||{})[c.key];
     out += `<div class="banner council"><div class="stack" style="gap:4px">
-      <span>⚖ Referred to the Elder Auntie Council</span>
+      <span>⚖ Referred to the Elder Auntie/Uncle Council</span>
       <span style="font-weight:600;color:var(--fg)">${esc(nameOf(c.pid))} answered: “${esc(a?a.text:'')}”</span>
       <span class="small">Council says correct: ${tv.yes.length} · incorrect: ${tv.no.length}</span></div>
       ${role(S.pid)==='council'&&S.players[S.pid]&&S.view!=='host'?`<div class="row">
@@ -482,7 +482,7 @@ function joinCard(){
     <div class="field"><label for="joinRole">I’m playing as</label>
       <select id="joinRole" data-in="joinRole">
         <option value="contestant" ${S.inputs.joinRole!=='council'?'selected':''}>Contestant</option>
-        <option value="council" ${S.inputs.joinRole==='council'?'selected':''}>Elder Auntie Council member</option></select></div>
+        <option value="council" ${S.inputs.joinRole==='council'?'selected':''}>Elder Auntie/Uncle Council member</option></select></div>
     <div class="row"><button class="btn gold" data-act="join" ${can?'':'disabled'}>I’m ready to rumble</button></div>
     ${can?'':'<p class="small muted">Joining didn\u2019t work. Reload the page and try again.</p>'}</section>`;
 }
@@ -675,7 +675,7 @@ function render(){
     } else {
       html += playerStage();
       const me = S.players[S.pid];
-      html += `<div class="footer">Playing as <b>${esc(me.name)}</b> · ${me.role==='council'?'Elder Auntie Council':'Contestant'} · <button class="btn sm ghost" data-act="rename">Change</button></div>`;
+      html += `<div class="footer">Playing as <b>${esc(me.name)}</b> · ${me.role==='council'?'Elder Auntie/Uncle Council':'Contestant'} · <button class="btn sm ghost" data-act="rename">Change</button></div>`;
       html += rulesCard(false);
     }
     if(S.stale) html += `<p class="footer">Scores may be out of date. Reconnecting\u2026</p>`;
