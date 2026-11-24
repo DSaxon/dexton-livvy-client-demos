@@ -457,17 +457,35 @@ function allSubs(){
   Object.entries(S.subs).forEach(([pid,s]) => Object.entries(s.items||{}).forEach(([id,d]) => out.push({...d, pid, id, from:(s.index||{}).name||nameOf(pid)})));
   return out.sort((a,b) => (a.used?1:0)-(b.used?1:0) || (b.at||0)-(a.at||0));
 }
+function inboxTargets(){
+  const eps = S.episodes.filter(e => !e.legacy && e.status!=='final').sort((a,b)=>(a.airAt||0)-(b.airAt||0));
+  const filled = qs => (qs||[]).filter(q=>q.photoId).length;
+  const list = eps.map(e => (S.draft && S.draft.id===e.id)
+    ? {id:e.id, label:(S.draft.title||'Untitled')+' (open, unsaved changes)', n:filled(S.draft.questions), total:S.draft.questions.length}
+    : {id:e.id, label:e.title||'Untitled', n:filled(e.questions), total:(e.questions||[]).length});
+  if(S.draft && !eps.some(e=>e.id===S.draft.id)) list.unshift({id:S.draft.id, label:(S.draft.title||'Untitled')+' (new, not saved yet)', n:filled(S.draft.questions), total:S.draft.questions.length});
+  return list;
+}
+function inboxTarget(){
+  const l = inboxTargets();
+  if(S.inboxTarget==='new' || l.some(x=>x.id===S.inboxTarget)) return S.inboxTarget;
+  return S.draft ? S.draft.id : ((l[0]||{}).id || 'new');
+}
 function hostInbox(){
-  const list = allSubs();
+  const list = allSubs(), targets = inboxTargets(), tgt = inboxTarget(), cur = targets.find(x=>x.id===tgt);
   return `<section class="card"><span class="eyebrow">Photo inbox</span>
-    <p class="muted">Photos the family sent in. Adding one to an episode brings its names and bonus question along. ${S.draft?`It goes into the episode you have open (${esc(S.draft.title||'Untitled')}).`:'With no episode open, adding a photo starts a new one. Open an episode under Episodes first to add to it instead.'}</p></section>
+    <p class="muted">Photos the family sent in. Pick an episode, then tap <b>Add to episode</b> on each photo you want. Its names and bonus question come along.</p>
+    <div class="field"><label for="inboxTarget">Add photos to</label><select id="inboxTarget" data-in="inboxTarget">
+      ${targets.map(t=>`<option value="${esc(t.id)}" ${t.id===tgt?'selected':''}>${esc(t.label)} · ${t.n} of ${t.total} photos</option>`).join('')}
+      <option value="new" ${tgt==='new'?'selected':''}>+ Start a new episode</option></select>
+      <span class="small muted">${tgt==='new'?'The first photo you add starts a new episode.':cur&&S.draft&&S.draft.id===tgt?'This episode is open in Episodes. Photos go into the open slots, then click Save episode there.':'Photos fill the next empty slot and save to this episode right away.'}</span></div></section>
     ${list.length?list.map(d=>`<section class="card"><div class="subitem" style="background:transparent;padding:0"><img class="sthumb" style="width:160px" src="${esc(d.data)}" alt="Sent by ${esc(d.from)}">
       <div class="meta"><span class="row" style="gap:8px"><b>From ${esc(d.from)}</b>${d.used?'<span class="chip ok">Used</span>':'<span class="chip">New</span>'}</span>
       <span class="small muted">${d.at?esc(fmtDay(d.at)):''}</span>
       <span><span class="muted small">Left to right:</span> ${esc(d.who)}</span>
       ${d.bonusPrompt?`<span><span class="muted small">Bonus:</span> ${esc(d.bonusPrompt)} → ${esc(d.bonusAnswer||'no answer given')}</span>`:''}
       ${d.note?`<span class="small muted">“${esc(d.note)}”</span>`:''}</div></div>
-      <div class="row"><button class="btn gold sm" data-act="useSub" data-pid="${esc(d.pid)}" data-id="${esc(d.id)}">${d.used?'Add again':'Add to episode'}</button>
+      <div class="row"><button class="btn gold sm" data-act="useSub" data-pid="${esc(d.pid)}" data-id="${esc(d.id)}">${S.busy?'Adding…':d.used?'Add again':'Add to episode'}</button>
       <button class="btn sm ghost" data-act="delSub" data-pid="${esc(d.pid)}" data-id="${esc(d.id)}">${S.confirmSub===d.id?'Tap again to delete':'Delete'}</button></div></section>`).join('')
     :'<section class="card quiet"><p class="muted">No photos yet. Once family members join the show, they’ll see a “Send a photo” button between episodes.</p></section>'}`;
 }
@@ -691,6 +709,7 @@ app.addEventListener('input', e => {
   const t = e.target;
   if(t.dataset.in) S.inputs[t.dataset.in] = t.value;
   if(t.dataset.in==='pickEp') S.pickEp = t.value;
+  if(t.dataset.in==='inboxTarget'){ S.inboxTarget = t.value; render(); }
   if(t.dataset.bind && S.draft){
     const parts = t.dataset.bind.split('.');
     if(parts[0]==='q'){ const q = S.draft.questions[+parts[1]]; q[parts[2]] = /points/i.test(parts[2]) ? Number(t.value) : t.value; }
@@ -776,20 +795,36 @@ app.addEventListener('click', e => {
     },
     async useSub(){
       const pid = b.dataset.pid, id = b.dataset.id, it = ((S.subs[pid]||{}).items||{})[id];
-      if(!it) return;
-      if(!S.draft) H.newEp();
-      let i = S.draft.questions.findIndex(q => !q.photoId);
-      if(i < 0){ S.draft.questions.push({photoId:'', prompt:DEFAULT_PROMPT, points:100, bonusPrompt:'', bonusPoints:1000}); S.draftSecret.answers.push({answer:'', bonusAnswer:''}); i = S.draft.questions.length-1; }
+      if(!it || S.busy) return;
+      let target = inboxTarget();
+      if(target === 'new'){ H.newEp(); target = S.draft.id; S.inboxTarget = target; }
+      const intoDraft = S.draft && S.draft.id === target;
+      const saved = intoDraft ? null : S.episodes.find(e => e.id === target);
+      if(!intoDraft && !saved){ toast('Pick an episode first.'); return; }
+      const ep = intoDraft ? S.draft : JSON.parse(JSON.stringify(saved));
+      const sec = intoDraft ? S.draftSecret : JSON.parse(JSON.stringify(S.secrets[target] || {answers:[]}));
+      ep.questions = ep.questions || []; sec.answers = sec.answers || [];
+      while(sec.answers.length < ep.questions.length) sec.answers.push({answer:'', bonusAnswer:''});
+      let i = ep.questions.findIndex(q => !q.photoId);
+      if(i < 0){ ep.questions.push({photoId:'', prompt:DEFAULT_PROMPT, points:100, bonusPrompt:'', bonusPoints:1000}); sec.answers.push({answer:'', bonusAnswer:''}); i = ep.questions.length-1; }
+      S.busy = true; render();
       const photoId = 'p'+uid();
-      try{ await writeDoc('photos/'+photoId, {data: it.data, at: Date.now()}); }catch(err){ return; }
-      S.photos[photoId] = it.data;
-      const q = S.draft.questions[i]; q.photoId = photoId;
-      if(it.bonusPrompt) q.bonusPrompt = it.bonusPrompt;
-      const prev = S.draftSecret.answers[i] || {};
-      S.draftSecret.answers[i] = {answer: it.who||'', bonusAnswer: it.bonusPrompt ? (it.bonusAnswer||'') : (prev.bonusAnswer||'')};
-      if(!it.used) S.db.doc('submissions/'+pid+'/items/'+id).update({used:true, usedAt:Date.now()}).catch(()=>{});
-      S.hostTab = 'build'; render();
-      toast(`Added as Photo ${i+1}. Save the episode when you’re ready.`);
+      try{
+        await writeDoc('photos/'+photoId, {data: it.data, at: Date.now()});
+        S.photos[photoId] = it.data;
+        const q = ep.questions[i]; q.photoId = photoId;
+        if(it.bonusPrompt) q.bonusPrompt = it.bonusPrompt;
+        const prev = sec.answers[i] || {};
+        sec.answers[i] = {answer: it.who||'', bonusAnswer: it.bonusPrompt ? (it.bonusAnswer||'') : (prev.bonusAnswer||'')};
+        if(!intoDraft){
+          const doc = JSON.parse(JSON.stringify(ep)); delete doc.id;
+          await writeDoc('episodes/'+target, doc);
+          await writeDoc('secret/'+target, sec);
+        }
+        if(!it.used) S.db.doc('submissions/'+pid+'/items/'+id).update({used:true, usedAt:Date.now()}).catch(()=>{});
+        toast(intoDraft ? `Added to ${ep.title||'the episode'} as Photo ${i+1}. Save the episode when you’re done.` : `Added to ${ep.title||'the episode'} as Photo ${i+1}. Saved.`);
+      }catch(err){}
+      S.busy = false; render();
     },
     /* host */
     ackVeto(){ setLive({vetoAckAt: Date.now()}); },
