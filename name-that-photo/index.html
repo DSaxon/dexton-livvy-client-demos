@@ -173,7 +173,7 @@ const RULES = [
   'The host shares <b>one photo at a time</b>. The first person to name everyone in it, <b>left to right</b>, wins <b>100 points</b>, redeemable absolutely nowhere.',
   'Get it right and you can choose to play a <b>bonus question for 1,000 points</b>. You also can use those nowhere.',
   'The <b>Elder Auntie/Uncle Council</b> plays for points just like everyone else, and any of them can win the episode.',
-  'The Council has the <b>final ruling on disputed answers</b> and the super power to <b>veto</b> any ruling the host makes.',
+  'The Council can <b>object</b> to any answer and give the correct one. Once a <b>majority of the Council</b> agrees, the host makes the ruling. The Council also has the super power to <b>veto</b> any ruling the host makes.',
   'Each episode has <b>five photos</b>. They start easy and gradually get harder.'
 ];
 const LEVELS = ['Warm-up','Easy','Medium','Tricky','Hardest'];
@@ -304,6 +304,69 @@ function councilVotes(){
   return {yes, no, id};
 }
 
+/* ---------- Council objections ---------- */
+const councilIds = () => Object.keys(S.players).filter(p => role(p)==='council');
+function motions(){
+  const ep = curEp(); if(!ep) return [];
+  const m = {};
+  Object.entries(S.answers).forEach(([by,d]) => {
+    if(role(by)!=='council') return;
+    Object.entries((d && d.objections) || {}).forEach(([oid,o]) => {
+      if(!o || !o.key || String(o.key).indexOf(ep.id+':')!==0) return;
+      if(!m[oid] || (o.at||0) < (m[oid].at||0)) m[oid] = {...o, id:oid, by};
+    });
+  });
+  const ids = councilIds(), need = Math.floor(ids.length/2) + 1;
+  return Object.values(m).map(o => {
+    const agree = [], disagree = [];
+    ids.forEach(p => { const v = p===o.by ? 'agree' : (((S.answers[p]||{}).objVotes)||{})[o.id]; if(v==='agree') agree.push(p); else if(v==='disagree') disagree.push(p); });
+    return {...o, agree, disagree, need, total: ids.length, passed: agree.length>=need, failed: disagree.length>=need, res: ((S.ledger.objections)||{})[o.id] || null};
+  }).sort((a,b) => (a.at||0)-(b.at||0));
+}
+const motionFor = (key,pid) => motions().find(o => o.id===key+'|'+pid) || null;
+const verdictWord = v => v==='correct' ? 'correct' : 'incorrect';
+function objChip(key,pid){
+  const o = motionFor(key,pid); if(!o) return '';
+  if(o.res) return `<span class="chip council">⚖ ${o.res.status==='accepted'?'Council ruled '+verdictWord(o.verdict):'Objection dismissed'}</span>`;
+  return `<span class="chip council">⚖ Objection · ${o.agree.length} of ${o.need} needed</span>`;
+}
+function objButton(key,pid){
+  if(role(S.pid)!=='council' || !S.players[S.pid] || pid===S.pid || S.isHost&&S.view==='host') return '';
+  if(motionFor(key,pid) || S.objecting===key+'|'+pid) return '';
+  return `<button class="btn sm ghost" data-act="objOpen" data-key="${esc(key)}" data-pid="${esc(pid)}">⚖ Object</button>`;
+}
+function objForm(key,pid){
+  if(S.objecting!==key+'|'+pid || motionFor(key,pid)) return '';
+  const v = S.inputs['obj-verdict'] || 'correct';
+  return `<form class="stack" style="grid-column:1/-1;border-top:1px solid var(--line);padding-top:10px" data-form="object" data-key="${esc(key)}" data-pid="${esc(pid)}">
+    <span class="eyebrow" style="color:var(--gold)">Council objection</span>
+    <div class="field"><label for="obj-verdict">${esc(nameOf(pid))}’s answer should be marked</label><select id="obj-verdict" data-in="obj-verdict">
+      <option value="correct" ${v==='correct'?'selected':''}>Correct</option><option value="wrong" ${v==='wrong'?'selected':''}>Incorrect</option></select></div>
+    <div class="field"><label for="obj-correct">The correct answer is</label><input type="text" id="obj-correct" data-in="obj-correct" maxlength="300" autocomplete="off" placeholder="Names, left to right" value="${esc(S.inputs['obj-correct']||'')}"></div>
+    <div class="row"><button class="btn gold sm" type="submit">Send objection to the Council</button><button class="btn sm ghost" type="button" data-act="objCancel">Cancel</button></div>
+    <span class="small muted">The rest of the Council votes. Once a majority agrees, the host makes the ruling.</span></form>`;
+}
+function objectionBanners(){
+  return motions().filter(o => !o.res).map(o => {
+    const a = (((S.answers[o.pid]||{}).byKey)||{})[o.key] || {};
+    const isBonus = /:b$/.test(o.key);
+    const mine = (((S.answers[S.pid]||{}).objVotes)||{})[o.id];
+    const canVote = role(S.pid)==='council' && S.players[S.pid] && o.by!==S.pid && !(S.isHost && S.view==='host');
+    const hostView = S.isHost && S.view==='host';
+    const status = o.passed ? `Majority reached: the Council says ${verdictWord(o.verdict)}.` : o.failed ? 'A majority of the Council disagrees with this objection.' : `Waiting for a majority: ${o.agree.length} of ${o.need} needed.`;
+    return `<div class="banner council"><div class="stack" style="gap:4px;min-width:0">
+      <span>⚖ ${esc(nameOf(o.by))} objects to ${esc(nameOf(o.pid))}’s ${isBonus?'bonus ':''}answer</span>
+      <span style="font-weight:600;color:var(--fg)">“${esc(a.text||'')}” should be marked ${verdictWord(o.verdict)}</span>
+      ${o.correct?`<span style="font-weight:600;color:var(--fg)">Council’s correct answer: ${esc(o.correct)}</span>`:''}
+      <span class="small">Agree: ${o.agree.map(nameOf).map(esc).join(', ')||'none'} · Disagree: ${o.disagree.map(nameOf).map(esc).join(', ')||'none'} · ${o.total} on the Council</span>
+      <span class="small">${status}</span></div>
+      ${canVote?`<div class="row"><button class="btn sm ${mine==='agree'?'gold':''}" data-act="objVote" data-id="${esc(o.id)}" data-v="agree" aria-pressed="${mine==='agree'}">Agree</button>
+        <button class="btn sm ${mine==='disagree'?'gold':''}" data-act="objVote" data-id="${esc(o.id)}" data-v="disagree" aria-pressed="${mine==='disagree'}">Disagree</button></div>`:''}
+      ${hostView?`<div class="row">${o.passed?`<button class="btn sm gold" data-act="objRule" data-id="${esc(o.id)}">Rule it ${verdictWord(o.verdict)}</button>`:`<button class="btn sm" disabled>Waiting on the Council</button>`}
+        <button class="btn sm ghost" data-act="objDismiss" data-id="${esc(o.id)}">Dismiss</button></div>`:''}</div>`;
+  }).join('');
+}
+
 /* ---------- photos (stored as compressed images in the show's database) ---------- */
 function photoSrc(id){
   if(!id) return '';
@@ -394,7 +457,7 @@ function feedHTML(key, openedAt, opts={}){
         <button class="btn sm" data-act="mark" data-key="${esc(key)}" data-pid="${esc(a.pid)}" data-v="wrong">✗ Incorrect</button>
         <button class="btn sm ghost" data-act="mark" data-key="${esc(key)}" data-pid="${esc(a.pid)}" data-v="">Clear</button>
         <button class="btn sm ghost" data-act="refer" data-key="${esc(key)}" data-pid="${esc(a.pid)}">Refer to the Council</button>
-        ${markOf(key,a.pid)?markChip(key,a.pid):''}</span>`:`<span class="acts">${markOf(key,a.pid)?markChip(key,a.pid):''}</span>`}
+        ${markOf(key,a.pid)?markChip(key,a.pid):''}${objChip(key,a.pid)}</span>`:`<span class="acts">${markOf(key,a.pid)?markChip(key,a.pid):''}${objChip(key,a.pid)}${objButton(key,a.pid)}</span>${objForm(key,a.pid)}`}
     </div>`;}).join('')}</div>`;
 }
 function bannersHTML(){
@@ -412,6 +475,7 @@ function bannersHTML(){
         <button class="btn sm gold" data-act="vote" data-v="correct">Correct</button>
         <button class="btn sm" data-act="vote" data-v="wrong">Incorrect</button></div>`:''}</div>`;
   }
+  out += objectionBanners();
   if(S.live.revealText && ['question','bonus-offer','bonus'].includes(S.live.phase)) out += `<div class="banner reveal"><span>Answer: ${esc(S.live.revealText)}</span></div>`;
   if(S.live.revealBonus && S.live.phase==='bonus') out += `<div class="banner reveal"><span>Bonus answer: ${esc(S.live.revealBonus)}</span></div>`;
   return out;
@@ -738,7 +802,18 @@ app.addEventListener('change', async e => {
   }
 });
 app.addEventListener('submit', e => {
-  const f = e.target; if(f.dataset.form!=='answer') return;
+  const f = e.target;
+  if(f.dataset.form==='object'){
+    e.preventDefault();
+    const key = f.dataset.key, pid = f.dataset.pid, id = key+'|'+pid;
+    const correct = (S.inputs['obj-correct']||'').trim(), verdict = S.inputs['obj-verdict']==='wrong' ? 'wrong' : 'correct';
+    if(motionFor(key,pid)){ S.objecting = null; render(); return; }
+    S.objecting = null; delete S.inputs['obj-correct']; delete S.inputs['obj-verdict'];
+    saveMine(d => { d.objections = d.objections || {}; d.objections[id] = {key, pid, verdict, correct, at: Date.now()}; });
+    toast('Objection sent. The Council votes next.');
+    return;
+  }
+  if(f.dataset.form!=='answer') return;
   e.preventDefault();
   const key = f.dataset.key, input = f.querySelector('input'), text = (input.value||'').trim();
   if(!text){ toast('Type your answer first.'); return; }
@@ -828,6 +903,20 @@ app.addEventListener('click', e => {
     },
     /* host */
     ackVeto(){ setLive({vetoAckAt: Date.now()}); },
+    objOpen(){
+      const key = b.dataset.key, pid = b.dataset.pid;
+      S.objecting = key+'|'+pid; S.inputs['obj-verdict'] = markOf(key,pid)==='correct' ? 'wrong' : 'correct'; S.inputs['obj-correct'] = '';
+      render(); const el = document.getElementById('obj-correct'); if(el) el.focus();
+    },
+    objCancel(){ S.objecting = null; render(); },
+    objVote(){ const id = b.dataset.id; saveMine(d => { d.objVotes = d.objVotes || {}; d.objVotes[id] = v; }); },
+    objRule(){
+      const o = motions().find(x => x.id===b.dataset.id); if(!o || !o.passed) return;
+      const marks = {...(S.ledger.marks||{})}; marks[o.key+'|'+o.pid] = o.verdict;
+      setLedger({...S.ledger, marks, objections: {...(S.ledger.objections||{}), [o.id]: {status:'accepted', at: Date.now()}}});
+      toast(`Ruled ${verdictWord(o.verdict)} on ${nameOf(o.pid)}’s answer.`);
+    },
+    objDismiss(){ const id = b.dataset.id; setLedger({...S.ledger, objections: {...(S.ledger.objections||{}), [id]: {status:'dismissed', at: Date.now()}}}); },
     openLobby(){
       const id = S.pickEp || (S.episodes.filter(e=>!e.legacy&&e.status!=='final')[0]||{}).id || (S.episodes.find(e=>!e.legacy)||{}).id;
       if(!id) return;
@@ -989,7 +1078,7 @@ async function boot(){
   }, onErr);
   db.doc('show/ledger').onSnapshot(s => {
     fresh(s.metadata); const d = s.exists ? s.data() : {};
-    S.ledger = {marks: d.marks||{}, adjust: d.adjust||[]};
+    S.ledger = {marks: d.marks||{}, adjust: d.adjust||[], objections: d.objections||{}};
     const my = {}; Object.entries(S.ledger.marks).forEach(([k,v]) => { if(k.endsWith('|'+S.pid)) my[k]=v; });
     if(lastMarks && !S.isHost){ const ch = Object.keys(my).find(k => my[k]!==lastMarks[k]); if(ch) tone(my[ch]==='correct'?'ok':'no'); }
     lastMarks = my; render();
