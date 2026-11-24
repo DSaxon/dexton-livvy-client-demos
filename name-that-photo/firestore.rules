@@ -20,5 +20,10 @@ service cloud.firestore {
     // Each player writes only their own entry and answers; the host can tidy up.
     match /players/{pid}  { allow read: if true; allow write: if signedIn() && (request.auth.uid == pid || isHost()); }
     match /answers/{pid}  { allow read: if true; allow write: if signedIn() && (request.auth.uid == pid || isHost()); }
+    // Family photo submissions: each person reads and writes only their own; only the host sees everyone's.
+    match /submissions/{pid} {
+      allow read, write: if signedIn() && (request.auth.uid == pid || isHost());
+      match /items/{item} { allow read, write: if signedIn() && (request.auth.uid == pid || isHost()); }
+    }
   }
 }

@@ -148,6 +148,10 @@ textarea{min-height:64px;resize:vertical}
 .who-list{display:flex;flex-wrap:wrap;gap:6px}
 .dot{width:9px;height:9px;border-radius:50%;background:var(--green);display:inline-block}
 .footer{text-align:center;color:var(--faint);font-size:13px}
+.sthumb{width:110px;aspect-ratio:4/3;object-fit:cover;border-radius:6px;background:var(--bg2);flex:none}
+.subitem{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;padding:12px;border-radius:10px;background:var(--bg2)}
+.subitem .meta{flex:1;min-width:180px;display:flex;flex-direction:column;gap:4px;overflow-wrap:anywhere}
+.subprev{max-width:240px;border-radius:8px;display:block}
 @media (prefers-reduced-motion:reduce){.bulbs{animation:none}.print{transform:none}}
 </style>
 </head>
@@ -179,7 +183,8 @@ const DEFAULT_PRIZE = 'Last episode’s champ has graciously agreed to Cash App 
 const S = {
   status:'connecting', db:null, user:null, pid:null, isHost:false, view:'play', hostTab:'run',
   live:{}, ledger:{marks:{}, adjust:[]}, episodes:[], players:{}, answers:{}, secrets:{},
-  photos:{}, photoLoading:{}, inputs:{}, draft:null, draftSecret:null, pickEp:'', stale:false, busy:false
+  photos:{}, photoLoading:{}, inputs:{}, draft:null, draftSecret:null, pickEp:'', stale:false, busy:false,
+  subs:{}, mySubs:{}, subOpen:false, subPreview:null, subReading:false, subBusy:false, confirmSub:null
 };
 const app = document.getElementById('app');
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -424,6 +429,49 @@ function fameHTML(){
     ${rows.length?board(rows.map(r=>({...r,name:r.name+(wins[r.name]?` · ${wins[r.name]} win${wins[r.name]>1?'s':''}`:'')})),'Season totals',''):''}</section>`;
 }
 
+/* ---------- family photo submissions ---------- */
+function submitCard(){
+  const joined = !!S.players[S.pid];
+  if(S.canWrite===false) return `<section class="card"><span class="eyebrow">Send the host a photo</span><p class="muted">Sending photos isn\u2019t working right now. Reload the page and try again.</p></section>`;
+  const items = Object.entries(S.mySubs).sort((a,b)=>(b[1].at||0)-(a[1].at||0));
+  if(!S.subOpen) return `<section class="card"><div class="spread"><div class="stack" style="gap:2px"><span class="eyebrow">Send the host a photo</span>
+    <span class="muted small">Got a great family photo? Send it in for a future episode.${items.length?` You’ve sent ${items.length}.`:''}</span></div>
+    <button class="btn gold sm" data-act="subToggle">Send a photo</button></div></section>`;
+  return `<section class="card"><div class="spread"><span class="eyebrow">Send the host a photo</span><button class="btn sm ghost" data-act="subToggle">Close</button></div>
+    <p class="muted">Only the host sees what you send. If it makes the show, you’ll already know the answer, so sit that one out.</p>
+    <div class="field"><label for="sub-file">Photo</label><input type="file" id="sub-file" accept="image/*" data-subfile>
+      <span class="small muted">${S.subReading?'Getting your photo ready…':'Old prints photographed on your phone work great.'}</span></div>
+    ${S.subPreview?`<img class="subprev" src="${esc(S.subPreview)}" alt="Your photo">`:''}
+    ${joined?'':`<div class="field"><label for="sub-name">Your name</label><input type="text" id="sub-name" data-in="sub-name" maxlength="32" placeholder="Auntie Carla, Ayana, Mom…" value="${esc(S.inputs['sub-name']||S.inputs.joinName||'')}"></div>`}
+    <div class="field"><label for="sub-who">Who’s in it, left to right</label><input type="text" id="sub-who" data-in="sub-who" maxlength="300" placeholder="Grandma Evelyn, Uncle Ray, baby Ayana" value="${esc(S.inputs['sub-who']||'')}"></div>
+    <div class="grid2"><div class="field"><label for="sub-bp">Bonus question idea (optional)</label><input type="text" id="sub-bp" data-in="sub-bp" maxlength="300" placeholder="What year was this taken?" value="${esc(S.inputs['sub-bp']||'')}"></div>
+    <div class="field"><label for="sub-ba">Bonus answer</label><input type="text" id="sub-ba" data-in="sub-ba" maxlength="300" value="${esc(S.inputs['sub-ba']||'')}"></div></div>
+    <div class="field"><label for="sub-note">Note for the host (optional)</label><input type="text" id="sub-note" data-in="sub-note" maxlength="300" placeholder="Christmas 1994 at Grandma’s house" value="${esc(S.inputs['sub-note']||'')}"></div>
+    <div class="row"><button class="btn gold" data-act="sendSub" ${S.subBusy||S.subReading?'disabled':''}>${S.subBusy?'Sending…':'Send to the host'}</button></div>
+    ${items.length?`<div class="stack"><span class="eyebrow">Photos you’ve sent</span>${items.map(([id,d])=>`<div class="subitem"><img class="sthumb" src="${esc(d.data)}" alt="">
+      <div class="meta"><span>${esc(d.who)}</span><span>${d.used?'<span class="chip ok">Picked for a show</span>':'<span class="chip wait">In the host’s inbox</span>'}</span>
+      ${d.used?'':`<span><button class="btn sm ghost" data-act="delMySub" data-id="${esc(id)}">${S.confirmSub===id?'Tap again to remove':'Remove'}</button></span>`}</div></div>`).join('')}</div>`:''}</section>`;
+}
+function allSubs(){
+  const out = [];
+  Object.entries(S.subs).forEach(([pid,s]) => Object.entries(s.items||{}).forEach(([id,d]) => out.push({...d, pid, id, from:(s.index||{}).name||nameOf(pid)})));
+  return out.sort((a,b) => (a.used?1:0)-(b.used?1:0) || (b.at||0)-(a.at||0));
+}
+function hostInbox(){
+  const list = allSubs();
+  return `<section class="card"><span class="eyebrow">Photo inbox</span>
+    <p class="muted">Photos the family sent in. Adding one to an episode brings its names and bonus question along. ${S.draft?`It goes into the episode you have open (${esc(S.draft.title||'Untitled')}).`:'With no episode open, adding a photo starts a new one. Open an episode under Episodes first to add to it instead.'}</p></section>
+    ${list.length?list.map(d=>`<section class="card"><div class="subitem" style="background:transparent;padding:0"><img class="sthumb" style="width:160px" src="${esc(d.data)}" alt="Sent by ${esc(d.from)}">
+      <div class="meta"><span class="row" style="gap:8px"><b>From ${esc(d.from)}</b>${d.used?'<span class="chip ok">Used</span>':'<span class="chip">New</span>'}</span>
+      <span class="small muted">${d.at?esc(fmtDay(d.at)):''}</span>
+      <span><span class="muted small">Left to right:</span> ${esc(d.who)}</span>
+      ${d.bonusPrompt?`<span><span class="muted small">Bonus:</span> ${esc(d.bonusPrompt)} → ${esc(d.bonusAnswer||'no answer given')}</span>`:''}
+      ${d.note?`<span class="small muted">“${esc(d.note)}”</span>`:''}</div></div>
+      <div class="row"><button class="btn gold sm" data-act="useSub" data-pid="${esc(d.pid)}" data-id="${esc(d.id)}">${d.used?'Add again':'Add to episode'}</button>
+      <button class="btn sm ghost" data-act="delSub" data-pid="${esc(d.pid)}" data-id="${esc(d.id)}">${S.confirmSub===d.id?'Tap again to delete':'Delete'}</button></div></section>`).join('')
+    :'<section class="card quiet"><p class="muted">No photos yet. Once family members join the show, they’ll see a “Send a photo” button between episodes.</p></section>'}`;
+}
+
 /* ---------- player view ---------- */
 function joinCard(){
   const can = S.canWrite !== false;
@@ -455,6 +503,7 @@ function playerStage(){
   if(!ep || ph==='idle'){
     html += `<section class="card">${L.nextEpisodeAt?countdownHTML(L.nextEpisodeAt):'<p class="big">No episode scheduled yet.</p>'}
       <p class="muted">Put it on your calendar and we’ll see you then. Love you, FAMILY.</p></section>`;
+    html += submitCard();
     html += fameHTML();
     return html;
   }
@@ -465,6 +514,7 @@ function playerStage(){
       <p>Tonight we have <b>${ep.questions.length} photo${ep.questions.length===1?'':'s'}</b>. They begin easy and gradually get harder. Let’s start in 3…2…1</p>
       ${ep.prizeNote?`<p class="muted">🎁 ${esc(ep.prizeNote)}</p>`:''}
       <div class="stack" style="gap:6px"><span class="eyebrow">In the studio</span><div class="who-list">${ids.map(p=>`<span class="chip ${role(p)==='council'?'council':''}"><span class="dot"></span>${esc(nameOf(p))}</span>`).join('')||'<span class="muted">Nobody yet</span>'}</div></div></section>`;
+    html += submitCard();
     html += rulesCard(true);
   }
   if(['question','bonus-offer','bonus'].includes(ph)){
@@ -505,6 +555,7 @@ function playerStage(){
       ${champ&&champ.points>0?`<p class="countdown">${num(champ.points)} pts</p>`:''}
       ${ep.prizeNote?`<p class="muted">🎁 ${esc(ep.prizeNote)}</p>`:''}</section>`;
     if(L.nextEpisodeAt) html += `<section class="card">${countdownHTML(L.nextEpisodeAt)}<p class="muted">Put it on your calendar and we will see you then! Love you, FAMILY.</p></section>`;
+    html += submitCard();
   }
   if(council && ph!=='final') html += `<section class="card quiet"><div class="spread"><span class="small muted">Council super power: overrule the host’s last ruling.</span>
     <button class="btn dahlia sm" data-act="veto">Veto</button></div></section>`;
@@ -612,10 +663,11 @@ function render(){
   } else {
     if(S.isHost) html += `<div class="tabs" role="group" aria-label="View"><button data-act="view" data-v="host" aria-pressed="${S.view==='host'}">Host console</button><button data-act="view" data-v="play" aria-pressed="${S.view==='play'}">Player view</button></div>`;
     if(S.isHost && S.view==='host'){
-      html += `<div class="tabs" role="group" aria-label="Host tools">${[['run','Run the show'],['build','Episodes'],['schedule','Schedule & players']].map(([k,l])=>`<button data-act="hostTab" data-v="${k}" aria-pressed="${S.hostTab===k}">${l}</button>`).join('')}</div>`;
-      html += S.hostTab==='build' ? hostBuild() : S.hostTab==='schedule' ? hostSchedule() : hostRun();
+      html += `<div class="tabs" role="group" aria-label="Host tools">${[['run','Run the show'],['build','Episodes'],['inbox','Photo inbox'+(allSubs().filter(d=>!d.used).length?' ('+allSubs().filter(d=>!d.used).length+')':'')],['schedule','Schedule & players']].map(([k,l])=>`<button data-act="hostTab" data-v="${k}" aria-pressed="${S.hostTab===k}">${l}</button>`).join('')}</div>`;
+      html += S.hostTab==='build' ? hostBuild() : S.hostTab==='inbox' ? hostInbox() : S.hostTab==='schedule' ? hostSchedule() : hostRun();
     } else if(!S.players[S.pid]){
       html += joinCard();
+      if(!['question','bonus-offer','bonus'].includes(S.live.phase)) html += submitCard();
       const ep = curEp();
       if(ep && S.live.phase && S.live.phase!=='idle') html += scoreCard(ep);
       else { if(S.live.nextEpisodeAt) html += `<section class="card">${countdownHTML(S.live.nextEpisodeAt)}</section>`; html += fameHTML(); }
@@ -660,6 +712,11 @@ app.addEventListener('change', async e => {
     }catch(err){ if(!err || !err.code) toast('That file couldn’t be read as a photo. Try a JPG or PNG.'); }
     S.uploading = null; render();
   }
+  if(t.dataset.subfile != null && t.files && t.files[0]){
+    S.subReading = true; render();
+    try{ S.subPreview = await compress(t.files[0]); }catch(err){ toast('That file couldn’t be read as a photo. Try a JPG or PNG.'); }
+    S.subReading = false; render();
+  }
 });
 app.addEventListener('submit', e => {
   const f = e.target; if(f.dataset.form!=='answer') return;
@@ -687,6 +744,53 @@ app.addEventListener('click', e => {
     bonusChoice(){ const k = keyOf(ep, L.q||0); saveMine(d => { d.bonusChoice = d.bonusChoice||{}; d.bonusChoice[k] = v; }); },
     vote(){ const id = councilVotes().id; saveMine(d => { d.votes = d.votes||{}; d.votes[id] = v; }); toast('Your vote is in'); },
     veto(){ saveMine(d => { d.veto = {at:Date.now(), ep: ep && ep.id}; }); },
+    subToggle(){ S.subOpen = !S.subOpen; render(); },
+    async sendSub(){
+      const who = (S.inputs['sub-who']||'').trim();
+      if(!S.subPreview){ toast('Pick a photo first.'); return; }
+      if(!who){ toast('Tell the host who’s in it, left to right.'); return; }
+      const sender = S.players[S.pid] ? nameOf(S.pid) : (S.inputs['sub-name']||S.inputs.joinName||'').trim();
+      if(!sender){ toast('Add your name so the host knows who sent it.'); return; }
+      S.subBusy = true; render();
+      const id = 's'+uid(), doc = {data:S.subPreview, who, bonusPrompt:(S.inputs['sub-bp']||'').trim(), bonusAnswer:(S.inputs['sub-ba']||'').trim(), note:(S.inputs['sub-note']||'').trim(), at:Date.now(), used:false};
+      try{
+        await writeDoc('submissions/'+S.pid, {name: sender, at: Date.now()});
+        await writeDoc('submissions/'+S.pid+'/items/'+id, doc);
+        S.mySubs = {...S.mySubs, [id]: doc}; S.subPreview = null;
+        ['sub-who','sub-bp','sub-ba','sub-note'].forEach(k => delete S.inputs[k]);
+        toast('Sent! Thanks for the photo.');
+      }catch(err){}
+      S.subBusy = false; render();
+    },
+    delMySub(){
+      const id = b.dataset.id;
+      if(S.confirmSub !== id){ S.confirmSub = id; render(); return; }
+      S.confirmSub = null; const m = {...S.mySubs}; delete m[id]; S.mySubs = m; render();
+      S.db.doc('submissions/'+S.pid+'/items/'+id).delete().catch(err=>toast(errText(err)));
+    },
+    delSub(){
+      const id = b.dataset.id, pid = b.dataset.pid;
+      if(S.confirmSub !== id){ S.confirmSub = id; render(); return; }
+      S.confirmSub = null;
+      S.db.doc('submissions/'+pid+'/items/'+id).delete().catch(err=>toast(errText(err)));
+    },
+    async useSub(){
+      const pid = b.dataset.pid, id = b.dataset.id, it = ((S.subs[pid]||{}).items||{})[id];
+      if(!it) return;
+      if(!S.draft) H.newEp();
+      let i = S.draft.questions.findIndex(q => !q.photoId);
+      if(i < 0){ S.draft.questions.push({photoId:'', prompt:DEFAULT_PROMPT, points:100, bonusPrompt:'', bonusPoints:1000}); S.draftSecret.answers.push({answer:'', bonusAnswer:''}); i = S.draft.questions.length-1; }
+      const photoId = 'p'+uid();
+      try{ await writeDoc('photos/'+photoId, {data: it.data, at: Date.now()}); }catch(err){ return; }
+      S.photos[photoId] = it.data;
+      const q = S.draft.questions[i]; q.photoId = photoId;
+      if(it.bonusPrompt) q.bonusPrompt = it.bonusPrompt;
+      const prev = S.draftSecret.answers[i] || {};
+      S.draftSecret.answers[i] = {answer: it.who||'', bonusAnswer: it.bonusPrompt ? (it.bonusAnswer||'') : (prev.bonusAnswer||'')};
+      if(!it.used) S.db.doc('submissions/'+pid+'/items/'+id).update({used:true, usedAt:Date.now()}).catch(()=>{});
+      S.hostTab = 'build'; render();
+      toast(`Added as Photo ${i+1}. Save the episode when you’re ready.`);
+    },
     /* host */
     ackVeto(){ setLive({vetoAckAt: Date.now()}); },
     openLobby(){
@@ -782,6 +886,7 @@ function makeDb(fs){
   const doc = path => { const r = fs.doc(path); return {
     get: () => r.get().then(wrapSnap),
     set: d => r.set(d).catch(e => { throw wrapErr(e); }),
+    update: d => r.update(d).catch(e => { throw wrapErr(e); }),
     delete: () => r.delete().catch(e => { throw wrapErr(e); }),
     onSnapshot: (n, er) => r.onSnapshot(s => n(wrapSnap(s)), e => er && er(wrapErr(e)))
   }; };
@@ -823,6 +928,16 @@ async function boot(){
     if(S.isHost && !secretsOn){
       secretsOn = true;
       db.collection('secret').onSnapshot(q => { const m={}; q.docs.forEach(d => m[d.id]=d.data()); S.secrets = m; render(); }, ()=>{});
+      const subWatch = {};
+      db.collection('submissions').onSnapshot(q => {
+        q.docs.forEach(d => {
+          const p = d.id; S.subs[p] = {...(S.subs[p]||{}), index: d.data()};
+          if(!subWatch[p]) subWatch[p] = db.collection('submissions/'+p+'/items').onSnapshot(qq => {
+            const m={}; qq.docs.forEach(x => m[x.id]=x.data()); S.subs[p] = {...(S.subs[p]||{}), items:m}; render();
+          }, ()=>{});
+        });
+        render();
+      }, ()=>{});
     }
     render();
   }, ()=>{});
@@ -847,6 +962,7 @@ async function boot(){
   db.collection('episodes').onSnapshot(q => { fresh(q.metadata); S.episodes = q.docs.map(d => ({id:d.id, questions:[], ...d.data()})); render(); }, onErr);
   db.collection('players').onSnapshot(q => { fresh(q.metadata); const m={}; q.docs.forEach(d => m[d.id]=d.data()); S.players = m; render(); }, onErr);
   db.collection('answers').onSnapshot(q => { fresh(q.metadata); const m={}; q.docs.forEach(d => m[d.id]=d.data()); S.answers = m; render(); }, onErr);
+  db.collection('submissions/'+S.pid+'/items').onSnapshot(q => { const m={}; q.docs.forEach(d => m[d.id]=d.data()); S.mySubs = m; render(); }, ()=>{});
 }
 boot();
 })();
