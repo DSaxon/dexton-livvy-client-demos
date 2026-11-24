@@ -494,6 +494,18 @@ function fameHTML(){
 }
 
 /* ---------- family photo submissions ---------- */
+const SHARE_URL = location.origin+location.pathname;
+function inviteText(){ return 'You’re invited to Name That Photo – Baumgardner Family Edition!'+(S.live.nextEpisodeAt?' Next episode: '+fmtET(S.live.nextEpisodeAt)+'.':'')+' Join here: '; }
+function castCard(withList){
+  const ids = Object.keys(S.players);
+  const list = withList ? `<span class="eyebrow">Who’s signed up (${ids.length})</span>
+    <div class="who-list">${ids.map(p=>`<span class="chip ${role(p)==='council'?'council':''}"><span class="dot"></span>${esc(nameOf(p))}${role(p)==='council'?' · Council':''}</span>`).join('')||'<span class="muted">Nobody yet. Be the first!</span>'}</div>` : '';
+  return `<section class="card stack">${list}
+    <span class="eyebrow">Invite the family</span>
+    <p class="muted">Know someone who should be playing? Send them the link.</p>
+    <input type="text" readonly id="shareLink" value="${esc(SHARE_URL)}" aria-label="Game link">
+    <div class="row"><button class="btn gold" data-act="invite">Invite someone</button><button class="btn" data-act="copyLink">Copy link</button></div></section>`;
+}
 function submitCard(){
   const joined = !!S.players[S.pid];
   if(S.canWrite===false) return `<section class="card"><span class="eyebrow">Send the host a photo</span><p class="muted">Sending photos isn\u2019t working right now. Reload the page and try again.</p></section>`;
@@ -585,6 +597,7 @@ function playerStage(){
   if(!ep || ph==='idle'){
     html += `<section class="card">${L.nextEpisodeAt?countdownHTML(L.nextEpisodeAt):'<p class="big">No episode scheduled yet.</p>'}
       <p class="muted">Put it on your calendar and we’ll see you then. Love you, FAMILY.</p></section>`;
+    html += castCard(true);
     html += submitCard();
     html += fameHTML();
     return html;
@@ -596,6 +609,7 @@ function playerStage(){
       <p>Tonight we have <b>${ep.questions.length} photo${ep.questions.length===1?'':'s'}</b>. They begin easy and gradually get harder. Let’s start in 3…2…1</p>
       ${ep.prizeNote?`<p class="muted">🎁 ${esc(ep.prizeNote)}</p>`:''}
       <div class="stack" style="gap:6px"><span class="eyebrow">In the studio</span><div class="who-list">${ids.map(p=>`<span class="chip ${role(p)==='council'?'council':''}"><span class="dot"></span>${esc(nameOf(p))}</span>`).join('')||'<span class="muted">Nobody yet</span>'}</div></div></section>`;
+    html += castCard(false);
     html += submitCard();
     html += rulesCard(true);
   }
@@ -637,6 +651,7 @@ function playerStage(){
       ${champ&&champ.points>0?`<p class="countdown">${num(champ.points)} pts</p>`:''}
       ${ep.prizeNote?`<p class="muted">🎁 ${esc(ep.prizeNote)}</p>`:''}</section>`;
     if(L.nextEpisodeAt) html += `<section class="card">${countdownHTML(L.nextEpisodeAt)}<p class="muted">Put it on your calendar and we will see you then! Love you, FAMILY.</p></section>`;
+    html += castCard(true);
     html += submitCard();
   }
   if(council && ph!=='final') html += `<section class="card quiet"><div class="spread"><span class="small muted">Council super power: overrule the host’s last ruling.</span>
@@ -749,6 +764,7 @@ function render(){
       html += S.hostTab==='build' ? hostBuild() : S.hostTab==='inbox' ? hostInbox() : S.hostTab==='schedule' ? hostSchedule() : hostRun();
     } else if(!S.players[S.pid]){
       html += joinCard();
+      if(!['question','bonus-offer','bonus'].includes(S.live.phase)) html += castCard(true);
       if(!['question','bonus-offer','bonus'].includes(S.live.phase)) html += submitCard();
       const ep = curEp();
       if(ep && S.live.phase && S.live.phase!=='idle') html += scoreCard(ep);
@@ -825,6 +841,12 @@ app.addEventListener('click', e => {
   const b = e.target.closest('[data-act]'); if(!b) return;
   const act = b.dataset.act, v = b.dataset.v, L = S.live, ep = curEp();
   const H = {
+    invite(){ if(navigator.share){ navigator.share({title:'Name That Photo', text:inviteText(), url:SHARE_URL}).catch(e=>{ if(!e||e.name!=='AbortError') H.copyLink(); }); } else H.copyLink(); },
+    copyLink(){
+      const done = () => toast('Link copied. Paste it into a text or email.');
+      const fallback = () => { const el = document.getElementById('shareLink'); if(el){ el.focus(); el.select(); try{ if(document.execCommand('copy')){ done(); return; } }catch(e){} } toast('Press and hold the link to copy it.'); };
+      if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(inviteText()+SHARE_URL).then(done, fallback); else fallback();
+    },
     view(){ S.view = v; render(); },
     hostTab(){ S.view='host'; S.hostTab = v; render(); },
     join(){
