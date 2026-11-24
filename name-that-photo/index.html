@@ -172,7 +172,7 @@ textarea{min-height:64px;resize:vertical}
 const RULES = [
   'The host shares <b>one photo at a time</b>. The first person to name everyone in it, <b>left to right</b>, wins <b>100 points</b>, redeemable absolutely nowhere.',
   'Get it right and you can choose to play a <b>bonus question for 1,000 points</b>. You also can use those nowhere.',
-  'The <b>Elder Auntie/Uncle Council</b> can answer every question. Their points don’t matter, but they can <b>steal</b> when nobody gets it right.',
+  'The <b>Elder Auntie/Uncle Council</b> plays for points just like everyone else, and any of them can win the episode.',
   'The Council has the <b>final ruling on disputed answers</b> and the super power to <b>veto</b> any ruling the host makes.',
   'Each episode has <b>five photos</b>. They start easy and gradually get harder.'
 ];
@@ -253,12 +253,12 @@ function answersFor(key){
 function questionResult(ep,i){
   const key = keyOf(ep,i), q = ep.questions[i] || {};
   const correct = answersFor(key).filter(a => markOf(key,a.pid)==='correct');
-  const winner = correct.find(a => role(a.pid)==='contestant') || null;
-  const steal = winner ? null : (correct.find(a => role(a.pid)==='council') || null);
+  const winner = correct[0] || null;
+  const steal = null;
   const bkey = key+':b';
   const bcorrect = answersFor(bkey).filter(a => markOf(bkey,a.pid)==='correct');
   const bonusWin = winner ? (bcorrect.find(a => a.pid===winner.pid) || null) : null;
-  const bonusSteal = (winner && !bonusWin) ? (bcorrect.find(a => role(a.pid)==='council') || null) : null;
+  const bonusSteal = null;
   return {key, bkey, q, winner, steal, bonusWin, bonusSteal};
 }
 function scoreEpisode(ep){
@@ -271,15 +271,15 @@ function scoreEpisode(ep){
     if(r.bonusWin) add(pts, r.bonusWin.pid, +q.bonusPoints||1000);
     if(r.bonusSteal) add(hon, r.bonusSteal.pid, +q.bonusPoints||1000);
   });
-  (S.ledger.adjust||[]).filter(a => a.ep===ep.id).forEach(a => add(role(a.pid)==='council'?hon:pts, a.pid, +a.pts||0));
+  (S.ledger.adjust||[]).filter(a => a.ep===ep.id).forEach(a => add(pts, a.pid, +a.pts||0));
   return {pts, hon};
 }
 function standings(ep){
   const {pts, hon} = scoreEpisode(ep);
   const ids = Object.keys(S.players);
-  const c = ids.filter(p => role(p)==='contestant').map(p => ({pid:p, name:nameOf(p), points:pts[p]||0}));
+  const c = ids.map(p => ({pid:p, name:nameOf(p), points:pts[p]||0}));
   Object.keys(pts).forEach(p => { if(!ids.includes(p)) c.push({pid:p, name:'Someone', points:pts[p]}); });
-  const k = ids.filter(p => role(p)==='council').map(p => ({pid:p, name:nameOf(p), points:hon[p]||0}));
+  const k = [];
   c.sort((a,b) => b.points-a.points || a.name.localeCompare(b.name));
   k.sort((a,b) => b.points-a.points || a.name.localeCompare(b.name));
   return {contestants:c, council:k};
@@ -382,7 +382,7 @@ function feedHTML(key, openedAt, opts={}){
   const ep = curEp();
   let firstCorrect = null;
   const correct = list.filter(a=>markOf(key,a.pid)==='correct');
-  firstCorrect = (correct.find(a=>role(a.pid)==='contestant')||{}).pid;
+  firstCorrect = (correct[0]||{}).pid;
   return `<div class="feed">${list.map(a=>{
     const dt = openedAt && a.at ? '+'+((a.at-openedAt)/1000).toFixed(1)+'s' : (a.at?fmtClock(a.at):'');
     return `<div class="ans ${a.pid===firstCorrect?'first':''}">
@@ -521,7 +521,7 @@ function playerStage(){
     const i = L.q||0, r = questionResult(ep,i), q = r.q;
     html += `<section class="card"><div class="qhead"><span class="qnum">QUESTION ${i+1}</span><h2 class="h2">${esc(q.prompt||DEFAULT_PROMPT)}</h2></div>${photoFigure(ep,i)}`;
     if(ph==='question'){
-      html += answerBox(r.key, true, council?'Steal attempt: names left to right':'Names, left to right');
+      html += answerBox(r.key, true, 'Names, left to right');
       const n = answersFor(r.key).length;
       html += `<p class="small muted">${n} answer${n===1?'':'s'} in${L.showFeed?'':'. Everyone’s answers appear once the host reveals them.'}</p>`;
     }
@@ -539,10 +539,10 @@ function playerStage(){
       html += `</section>`;
     }
     if(ph==='bonus'){
-      const bp = L.bonusPlayerId, canAns = bp===S.pid || council;
+      const bp = L.bonusPlayerId, canAns = bp===S.pid;
       html += `<section class="card"><span class="eyebrow">Bonus question for ${esc(nameOf(bp))} · ${num(q.bonusPoints||1000)} points</span>
         <p class="big">${esc(q.bonusPrompt||'')}</p><p class="small muted">The clock is ticking.</p>
-        ${answerBox(r.bkey, canAns, bp===S.pid?'Your bonus answer':'Council steal attempt')}
+        ${answerBox(r.bkey, canAns, 'Your bonus answer')}
         ${!canAns?'<p class="muted">This one is for '+esc(nameOf(bp))+' only.</p>':''}
         ${L.showFeed?`<div class="stack"><span class="eyebrow">Bonus answers</span>${feedHTML(r.bkey, L.bonusOpenedAt)}</div>`:''}</section>`;
     }
