@@ -410,6 +410,15 @@ function countdownHTML(ms){
   return `<div class="stack" style="gap:4px"><span class="eyebrow">Next episode</span>
     <span class="big">${esc(fmtET(ms))}</span><span class="countdown" data-countdown="${ms}">${cd(ms)}</span></div>`;
 }
+// Next show: the earliest unaired episode's air date (6-hour grace for a late start), else the date on the Schedule tab.
+const GRACE = 6*36e5;
+function nextEp(){ return S.episodes.filter(e => !e.legacy && e.status!=='final' && e.airAt && e.airAt > Date.now()-GRACE).sort((a,b)=>a.airAt-b.airAt)[0] || null; }
+function nextShowAt(){
+  const e = nextEp(); if(e) return e.airAt;
+  const t = S.live.nextEpisodeAt;
+  if(!t || t < Date.now()-GRACE || S.episodes.some(x => x.status==='final' && x.endedAt && x.endedAt > t-36e5)) return null;
+  return t;
+}
 function cd(ms){
   let d = Math.max(0, ms - Date.now()); if(d===0) return 'Showtime!';
   const days = Math.floor(d/864e5); d%=864e5; const h=Math.floor(d/36e5); d%=36e5; const m=Math.floor(d/6e4); const s=Math.floor(d%6e4/1e3);
@@ -552,7 +561,7 @@ function fameHTML(){
 
 /* ---------- family photo submissions ---------- */
 const SHARE_URL = location.origin+location.pathname;
-function inviteText(){ return 'You’re invited to Name That Photo – Baumgardner Family Edition!'+(S.live.nextEpisodeAt?' Next episode: '+fmtET(S.live.nextEpisodeAt)+'.':'')+' Join here: '; }
+function inviteText(){ return 'You’re invited to Name That Photo – Baumgardner Family Edition!'+(nextShowAt()?' Next episode: '+fmtET(nextShowAt())+'.':'')+' Join here: '; }
 function castCard(withList){
   const ids = Object.keys(S.players);
   const list = withList ? `<span class="eyebrow">Who’s signed up (${ids.length})</span>
@@ -652,7 +661,7 @@ function playerStage(){
   const me = S.players[S.pid], council = me && me.role==='council';
   let html = '';
   if(!ep || ph==='idle'){
-    html += `<section class="card">${L.nextEpisodeAt?countdownHTML(L.nextEpisodeAt):'<p class="big">No episode scheduled yet.</p>'}
+    html += `<section class="card">${nextShowAt()?countdownHTML(nextShowAt()):'<p class="big">No episode scheduled yet.</p>'}
       <p class="muted">Put it on your calendar and we’ll see you then. Love you, FAMILY.</p></section>`;
     html += castCard(true);
     html += submitCard();
@@ -708,7 +717,7 @@ function playerStage(){
       <p class="h2" style="color:var(--gold)">${champ&&champ.points>0?esc(champ.name)+' is tonight’s champion!':'Great game, everyone!'}</p>
       ${champ&&champ.points>0?`<p class="countdown">${num(champ.points)} pts</p>`:''}
       ${ep.prizeNote?`<p class="muted">🎁 ${esc(ep.prizeNote)}</p>`:''}</section>`;
-    if(L.nextEpisodeAt) html += `<section class="card">${countdownHTML(L.nextEpisodeAt)}<p class="muted">Put it on your calendar and we will see you then! Love you, FAMILY.</p></section>`;
+    if(nextShowAt()) html += `<section class="card">${countdownHTML(nextShowAt())}<p class="muted">Put it on your calendar and we will see you then! Love you, FAMILY.</p></section>`;
     html += castCard(true);
     html += submitCard();
     html += pastHTML();
@@ -802,8 +811,8 @@ function hostBuild(){
 }
 function hostSchedule(){
   return `<section class="card"><span class="eyebrow">Next episode</span>
-    <div class="field"><label for="nextAt">Date and time (your local time)</label><input type="datetime-local" id="nextAt" data-in="nextAt" value="${esc(S.inputs.nextAt ?? toLocalInput(S.live.nextEpisodeAt))}"></div>
-    <div class="row"><button class="btn gold" data-act="saveNext">Save</button>${S.live.nextEpisodeAt?`<span class="small muted">Everyone sees: ${esc(fmtET(S.live.nextEpisodeAt))}</span>`:''}</div></section>
+    <div class="field"><label for="nextAt">Date and time (your local time)</label><input type="datetime-local" id="nextAt" data-in="nextAt" value="${esc(S.inputs.nextAt ?? toLocalInput(nextShowAt()))}"></div>
+    <div class="row"><button class="btn gold" data-act="saveNext">Save</button>${nextShowAt()?`<span class="small muted">Everyone sees: ${esc(fmtET(nextShowAt()))}${nextEp()?' · '+esc(nextEp().title||'Episode'):''}</span>`:''}</div></section>
     <section class="card"><span class="eyebrow">Who’s joined</span><div class="board">${Object.keys(S.players).map(p=>`<div class="line"><span>${esc(nameOf(p))} ${role(p)==='council'?'<span class="chip council">Council</span>':''}</span>
       <span class="row"><button class="btn sm ghost" data-act="toggleRole" data-pid="${esc(p)}">Make ${role(p)==='council'?'contestant':'Council'}</button><button class="btn sm ghost" data-act="kick" data-pid="${esc(p)}">Remove</button></span></div>`).join('')||'<p class="muted">Nobody yet.</p>'}</div></section>`;
 }
@@ -829,7 +838,7 @@ function render(){
       if(!['question','bonus-offer','bonus'].includes(S.live.phase)) html += submitCard();
       const ep = curEp();
       if(ep && S.live.phase && S.live.phase!=='idle'){ html += scoreCard(ep); if(S.live.phase==='final') html += pastHTML(); }
-      else { if(S.live.nextEpisodeAt) html += `<section class="card">${countdownHTML(S.live.nextEpisodeAt)}</section>`; html += fameHTML(); html += pastHTML(); }
+      else { if(nextShowAt()) html += `<section class="card">${countdownHTML(nextShowAt())}</section>`; html += fameHTML(); html += pastHTML(); }
       html += rulesCard(false);
     } else {
       html += playerStage();
@@ -1051,7 +1060,7 @@ app.addEventListener('click', e => {
     toIdle(){ setLive({phase:'idle', council:null}); },
     newEp(){
       const n = S.episodes.length + 1;
-      S.draft = {_new:true, id:'ep'+uid(), title:'Episode '+n, airAt: S.live.nextEpisodeAt || null, prizeNote: DEFAULT_PRIZE, status:'draft',
+      S.draft = {_new:true, id:'ep'+uid(), title:'Episode '+n, airAt: nextEp() ? null : nextShowAt(), prizeNote: DEFAULT_PRIZE, status:'draft',
         questions: Array.from({length:5}, () => ({photoId:'', prompt:DEFAULT_PROMPT, points:100, bonusPrompt:'', bonusPoints:1000}))};
       S.draftSecret = {answers: Array.from({length:5}, () => ({answer:'', bonusAnswer:''}))};
       render();
@@ -1092,8 +1101,14 @@ app.addEventListener('click', e => {
       S.busy = false; render();
     },
     saveNext(){
-      const val = S.inputs.nextAt ?? toLocalInput(L.nextEpisodeAt);
+      const val = S.inputs.nextAt ?? toLocalInput(nextShowAt());
       const ms = val ? new Date(val).getTime() : null;
+      const ne = nextEp();
+      if(ne){ // the next episode's own air date drives the countdown, so move it too
+        const doc = JSON.parse(JSON.stringify(ne)); delete doc.id; doc.airAt = ms;
+        if(S.draft && S.draft.id===ne.id) S.draft.airAt = ms;
+        writeDoc('episodes/'+ne.id, doc).catch(()=>{});
+      }
       delete S.inputs.nextAt; setLive({nextEpisodeAt: ms}); toast('Schedule saved');
     },
     toggleRole(){ const p = b.dataset.pid, doc = {...S.players[p], role: role(p)==='council'?'contestant':'council'}; S.players={...S.players,[p]:doc}; render(); writeDoc('players/'+p, doc).catch(()=>{}); },
