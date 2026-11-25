@@ -510,7 +510,7 @@ function pastHTML(){
   if(!eps.length) return '';
   return `<section class="card"><span class="eyebrow">Past episodes</span><p class="muted">Look back at the photos and see who was in them.</p>
     <div class="stack">${eps.map(e => { const open = S.pastOpen===e.id, n = e.questions.length;
-      return `<button class="btn ${open?'gold':''}" data-act="pastToggle" data-v="${esc(e.id)}" aria-expanded="${open}" style="justify-content:space-between;text-align:left">
+      return `<button class="btn ${open?'gold':''}" data-act="pastToggle" data-v="${esc(e.id)}" aria-expanded="${open}" style="display:flex;width:100%;justify-content:space-between;gap:10px;text-align:left">
         <span>${esc(e.title||'Episode')}${e.airAt?' · '+esc(fmtDay(e.airAt)):''}</span><span class="small">${n} photo${n===1?'':'s'} ${open?'▲':'▼'}</span></button>
       ${open ? e.questions.map((q,i) => { const a = (e.revealed||[])[i]||{};
         return `<div class="stack" style="margin:6px 0 18px">${photoFigure(e,i)}
