@@ -480,6 +480,44 @@ function bannersHTML(){
   if(S.live.revealBonus && S.live.phase==='bonus') out += `<div class="banner reveal"><span>Bonus answer: ${esc(S.live.revealBonus)}</span></div>`;
   return out;
 }
+/* ---------- past episodes: photos + answers ---------- */
+function liveEpId(){ const L = S.live; return L.phase && !['idle','final'].includes(L.phase) ? L.episodeId : null; }
+const normRev = list => (list||[]).map(a => ({answer:(a&&a.answer)||'', bonusAnswer:(a&&a.bonusAnswer)||''}));
+const revSent = {};
+// Host only: copy the answer key onto aired episodes so the family can look back. Pulled back off while an aired episode is being replayed.
+function syncReveals(){
+  if(!S.isHost || !S.db || !S.secretsLoaded) return;
+  const liveId = liveEpId();
+  S.episodes.forEach(e => {
+    if(e.legacy || !(e.questions||[]).length) return;
+    const sec = S.secrets[e.id];
+    const want = e.status==='final' && e.id!==liveId ? (sec ? normRev(sec.answers) : undefined) : null;
+    if(want===undefined) return;
+    const have = e.revealed ? normRev(e.revealed) : null;
+    const key = JSON.stringify(want);
+    if(key===JSON.stringify(have)) { delete revSent[e.id]; return; }
+    if(revSent[e.id]===key) return;
+    revSent[e.id] = key;
+    const doc = JSON.parse(JSON.stringify(e)); delete doc.id;
+    if(want) doc.revealed = want; else delete doc.revealed;
+    writeDoc('episodes/'+e.id, doc).catch(()=>{ delete revSent[e.id]; });
+  });
+}
+function pastHTML(){
+  const liveId = liveEpId();
+  const eps = S.episodes.filter(e => !e.legacy && e.status==='final' && e.id!==liveId && (e.questions||[]).length)
+    .sort((a,b)=>(b.airAt||b.endedAt||0)-(a.airAt||a.endedAt||0));
+  if(!eps.length) return '';
+  return `<section class="card"><span class="eyebrow">Past episodes</span><p class="muted">Look back at the photos and see who was in them.</p>
+    <div class="stack">${eps.map(e => { const open = S.pastOpen===e.id, n = e.questions.length;
+      return `<button class="btn ${open?'gold':''}" data-act="pastToggle" data-v="${esc(e.id)}" aria-expanded="${open}" style="justify-content:space-between;text-align:left">
+        <span>${esc(e.title||'Episode')}${e.airAt?' · '+esc(fmtDay(e.airAt)):''}</span><span class="small">${n} photo${n===1?'':'s'} ${open?'▲':'▼'}</span></button>
+      ${open ? e.questions.map((q,i) => { const a = (e.revealed||[])[i]||{};
+        return `<div class="stack" style="margin:6px 0 18px">${photoFigure(e,i)}
+          <span class="eyebrow">${esc(q.prompt||DEFAULT_PROMPT)}</span>
+          <p class="big">${a.answer?esc(a.answer):'<span class="muted">The host hasn’t posted this answer yet.</span>'}</p>
+          ${q.bonusPrompt?`<p class="small"><b>Bonus:</b> ${esc(q.bonusPrompt)} → ${a.bonusAnswer?esc(a.bonusAnswer):'<span class="muted">not posted yet</span>'}</p>`:''}</div>`; }).join('') : ''}`; }).join('')}</div></section>`;
+}
 function fameHTML(){
   const fin = S.episodes.filter(e=>e.status==='final').sort((a,b)=>(b.airAt||0)-(a.airAt||0));
   if(!fin.length) return '';
@@ -600,6 +638,7 @@ function playerStage(){
     html += castCard(true);
     html += submitCard();
     html += fameHTML();
+    html += pastHTML();
     return html;
   }
   html += bannersHTML();
@@ -653,6 +692,7 @@ function playerStage(){
     if(L.nextEpisodeAt) html += `<section class="card">${countdownHTML(L.nextEpisodeAt)}<p class="muted">Put it on your calendar and we will see you then! Love you, FAMILY.</p></section>`;
     html += castCard(true);
     html += submitCard();
+    html += pastHTML();
   }
   if(council && ph!=='final') html += `<section class="card quiet"><div class="spread"><span class="small muted">Council super power: overrule the host’s last ruling.</span>
     <button class="btn dahlia sm" data-act="veto">Veto</button></div></section>`;
@@ -752,6 +792,7 @@ function toLocalInput(ms){ if(!ms) return ''; const d=new Date(ms); const p=n=>S
 
 /* ---------- render ---------- */
 function render(){
+  try{ syncReveals(); }catch(e){}
   const a = document.activeElement, aid = a && a.id; let sel = null; try{ if(a && typeof a.selectionStart==='number') sel = [a.selectionStart, a.selectionEnd]; }catch(e){}
   let html = header();
   if(S.status==='connecting'){
@@ -769,7 +810,7 @@ function render(){
       if(!['question','bonus-offer','bonus'].includes(S.live.phase)) html += submitCard();
       const ep = curEp();
       if(ep && S.live.phase && S.live.phase!=='idle') html += scoreCard(ep);
-      else { if(S.live.nextEpisodeAt) html += `<section class="card">${countdownHTML(S.live.nextEpisodeAt)}</section>`; html += fameHTML(); }
+      else { if(S.live.nextEpisodeAt) html += `<section class="card">${countdownHTML(S.live.nextEpisodeAt)}</section>`; html += fameHTML(); html += pastHTML(); }
       html += rulesCard(false);
     } else {
       html += playerStage();
@@ -842,6 +883,7 @@ app.addEventListener('click', e => {
   const b = e.target.closest('[data-act]'); if(!b) return;
   const act = b.dataset.act, v = b.dataset.v, L = S.live, ep = curEp();
   const H = {
+    pastToggle(){ S.pastOpen = S.pastOpen===v ? null : v; render(); },
     invite(){ if(navigator.share){ navigator.share({title:'Name That Photo', text:inviteText(), url:SHARE_URL}).catch(e=>{ if(!e||e.name!=='AbortError') H.copyLink(); }); } else H.copyLink(); },
     copyLink(){
       const done = () => toast('Link copied. Paste it into a text or email.');
@@ -1074,7 +1116,7 @@ async function boot(){
     if(S.isHost && !was) S.view = 'host';
     if(S.isHost && !secretsOn){
       secretsOn = true;
-      db.collection('secret').onSnapshot(q => { const m={}; q.docs.forEach(d => m[d.id]=d.data()); S.secrets = m; render(); }, ()=>{});
+      db.collection('secret').onSnapshot(q => { const m={}; q.docs.forEach(d => m[d.id]=d.data()); S.secrets = m; S.secretsLoaded = true; render(); }, ()=>{});
       const subWatch = {};
       db.collection('submissions').onSnapshot(q => {
         q.docs.forEach(d => {
