@@ -503,6 +503,24 @@ function syncReveals(){
     writeDoc('episodes/'+e.id, doc).catch(()=>{ delete revSent[e.id]; });
   });
 }
+// What the game settled on: the Council's accepted correction first, then every answer the host marked correct.
+function gameAnswers(key){
+  const out = [], seen = {};
+  const add = (text, who) => { const t = String(text||'').trim(), k = t.toLowerCase(); if(!t) return; if(seen[k]){ if(who) seen[k].who.push(who); return; } out.push(seen[k] = {text:t, who:who?[who]:[]}); };
+  Object.values(S.answers).forEach(d => Object.entries((d && d.objections) || {}).forEach(([oid,o]) => {
+    const res = (S.ledger.objections||{})[oid];
+    if(o && o.key===key && o.correct && res && res.status==='accepted') add(o.correct, 'the Council');
+  }));
+  answersFor(key).filter(a => markOf(key,a.pid)==='correct').forEach(a => add(a.text, S.players[a.pid] ? nameOf(a.pid) : ''));
+  return out;
+}
+function pastAnswerHTML(e, i, bonus){
+  let list = gameAnswers(keyOf(e,i)+(bonus?':b':''));
+  if(!list.length) list = (((e.results||[])[i])||{})[bonus?'bonus':'answers'] || [];
+  if(!list.length){ const a = (e.revealed||[])[i]||{}, t = bonus ? a.bonusAnswer : a.answer; if(t) list = [{text:t, who:[]}]; }
+  if(!list.length) return '<span class="muted">No correct answer in the game.</span>';
+  return list.map(a => `${esc(a.text)}${(a.who||[]).length?` <span class="small muted">answered by ${esc(a.who.join(', '))}</span>`:''}`).join('<br>');
+}
 function pastHTML(){
   const liveId = liveEpId();
   const eps = S.episodes.filter(e => !e.legacy && e.status==='final' && e.id!==liveId && (e.questions||[]).length)
@@ -512,11 +530,12 @@ function pastHTML(){
     <div class="stack">${eps.map(e => { const open = S.pastOpen===e.id, n = e.questions.length;
       return `<button class="btn ${open?'gold':''}" data-act="pastToggle" data-v="${esc(e.id)}" aria-expanded="${open}" style="display:flex;width:100%;justify-content:space-between;gap:10px;text-align:left">
         <span>${esc(e.title||'Episode')}${e.airAt?' · '+esc(fmtDay(e.airAt)):''}</span><span class="small">${n} photo${n===1?'':'s'} ${open?'▲':'▼'}</span></button>
-      ${open ? e.questions.map((q,i) => { const a = (e.revealed||[])[i]||{};
+      ${open ? e.questions.map((q,i) => {
         return `<div class="stack" style="margin:6px 0 18px">${photoFigure(e,i)}
           <span class="eyebrow">${esc(q.prompt||DEFAULT_PROMPT)}</span>
-          <p class="big">${a.answer?esc(a.answer):'<span class="muted">The host hasn’t posted this answer yet.</span>'}</p>
-          ${q.bonusPrompt?`<p class="small"><b>Bonus:</b> ${esc(q.bonusPrompt)} → ${a.bonusAnswer?esc(a.bonusAnswer):'<span class="muted">not posted yet</span>'}</p>`:''}</div>`; }).join('') : ''}`; }).join('')}</div></section>`;
+          <p class="big">${pastAnswerHTML(e,i,false)}</p>
+          ${q.bonusPrompt?`<p class="small"><b>Bonus:</b> ${esc(q.bonusPrompt)} → ${pastAnswerHTML(e,i,true)}</p>`:''}
+          ${photoSrc(q.photoId)?`<div class="row"><button class="btn sm" data-act="savePhoto" data-v="${esc(q.photoId)}" data-name="${esc((e.title||'Episode')+' photo '+(i+1))}">Download photo</button></div>`:''}</div>`; }).join('') : ''}`; }).join('')}</div></section>`;
 }
 function fameHTML(){
   const fin = S.episodes.filter(e=>e.status==='final').sort((a,b)=>(b.airAt||0)-(a.airAt||0));
@@ -809,7 +828,7 @@ function render(){
       if(!['question','bonus-offer','bonus'].includes(S.live.phase)) html += castCard(true);
       if(!['question','bonus-offer','bonus'].includes(S.live.phase)) html += submitCard();
       const ep = curEp();
-      if(ep && S.live.phase && S.live.phase!=='idle') html += scoreCard(ep);
+      if(ep && S.live.phase && S.live.phase!=='idle'){ html += scoreCard(ep); if(S.live.phase==='final') html += pastHTML(); }
       else { if(S.live.nextEpisodeAt) html += `<section class="card">${countdownHTML(S.live.nextEpisodeAt)}</section>`; html += fameHTML(); html += pastHTML(); }
       html += rulesCard(false);
     } else {
@@ -883,6 +902,20 @@ app.addEventListener('click', e => {
   const b = e.target.closest('[data-act]'); if(!b) return;
   const act = b.dataset.act, v = b.dataset.v, L = S.live, ep = curEp();
   const H = {
+    savePhoto(){
+      const src = photoSrc(v); if(!src) return;
+      const name = (b.dataset.name||'photo').replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.jpg';
+      let blob;
+      try{ const [h,d] = src.split(','), bin = atob(d), u = new Uint8Array(bin.length); for(let n=0;n<bin.length;n++) u[n]=bin.charCodeAt(n); blob = new Blob([u], {type:(h.match(/data:([^;]+)/)||[])[1]||'image/jpeg'}); }
+      catch(e){ toast('Couldn’t download that photo. Reload and try again.'); return; }
+      const save = () => { const a = document.createElement('a'), url = URL.createObjectURL(blob); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url), 10000); };
+      // Phones: the share sheet offers "Save Image" to the photo library.
+      try{
+        const file = new File([blob], name, {type:blob.type});
+        if(matchMedia('(pointer:coarse)').matches && navigator.canShare && navigator.canShare({files:[file]})){ navigator.share({files:[file]}).catch(e => { if(!e || e.name!=='AbortError') save(); }); return; }
+      }catch(e){}
+      save();
+    },
     pastToggle(){ S.pastOpen = S.pastOpen===v ? null : v; render(); },
     invite(){ if(navigator.share){ navigator.share({title:'Name That Photo', text:inviteText(), url:SHARE_URL}).catch(e=>{ if(!e||e.name!=='AbortError') H.copyLink(); }); } else H.copyLink(); },
     copyLink(){
@@ -1010,7 +1043,8 @@ app.addEventListener('click', e => {
       const st = standings(ep), champ = st.contestants[0];
       const doc = JSON.parse(JSON.stringify(ep)); delete doc.id;
       Object.assign(doc, {status:'final', endedAt:Date.now(), standings: st.contestants.map(r=>({name:r.name, points:r.points})),
-        councilStandings: st.council.map(r=>({name:r.name, points:r.points})), winnerName: champ && champ.points>0 ? champ.name : ''});
+        councilStandings: st.council.map(r=>({name:r.name, points:r.points})), winnerName: champ && champ.points>0 ? champ.name : '',
+        results: ep.questions.map((q,i) => ({answers: gameAnswers(keyOf(ep,i)), bonus: gameAnswers(keyOf(ep,i)+':b')}))});
       writeDoc('episodes/'+ep.id, doc).catch(()=>{});
       setLive({phase:'final', council:null});
     },
