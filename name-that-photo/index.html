@@ -677,9 +677,10 @@ function hostRun(){
   const i = L.q||0, n = ep.questions.length, r = questionResult(ep,i), sec = (S.secrets[ep.id]||{}).answers||[], key = sec[i]||{};
   html += `<section class="card"><div class="spread"><span class="eyebrow">${esc(ep.title)} · ${ph==='lobby'?'Lobby':'Question '+(i+1)+' of '+n}</span><span class="chip">${esc(ph.replace('-',' '))}</span></div>`;
   if(ph==='lobby'){
-    html += `<p>${Object.keys(S.players).length} people in the studio.</p><div class="row"><button class="btn gold" data-act="showQ" data-v="0" ${n?'':'disabled'}>Show Question 1</button><button class="btn ghost" data-act="toIdle">Cancel</button></div>`;
+    html += `<p>${Object.keys(S.players).length} people in the studio.</p>${n?`<span class="eyebrow">Up first · only you see this until you show it</span>${photoFigure(ep,0)}`:''}<div class="row"><button class="btn gold" data-act="showQ" data-v="0" ${n?'':'disabled'}>Show Question 1</button><button class="btn ghost" data-act="toIdle">Cancel</button></div>`;
   } else {
     html += `<p class="big">${esc(r.q.prompt||DEFAULT_PROMPT)}</p>
+      ${photoFigure(ep,i)}
       <div class="secret"><span class="eyebrow">Answer key · only you see this</span><p>${esc(key.answer||'No answer saved')}</p>${r.q.bonusPrompt?`<p class="small" style="margin-top:6px"><b>Bonus:</b> ${esc(r.q.bonusPrompt)} → ${esc(key.bonusAnswer||'no answer saved')}</p>`:''}</div>
       <div class="row">`;
     if(ph==='question'){
